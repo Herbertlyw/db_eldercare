@@ -1,0 +1,10 @@
+{
+  "time": "2026-11-12T10:38:34.759Z",
+  "mockedPost": true,
+  "actualDatabaseMutations": false,
+  "numericAndEnumPayload": true,
+  "jsonPayload": true,
+  "malformedJsonMessage": true,
+  "businessErrorTranslation": true,
+  "pageErrors": []
+}

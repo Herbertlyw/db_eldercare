@@ -1,3 +1,24 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>邻安社区养老服务平台</title><link rel="stylesheet" href="style.css"><body>
-<section id="login"><div class="intro"><p class="eyebrow">社区居家养老智慧服务平台</p><h1>每一次服务<br>都有据可查。</h1><p>连接老人照护、护工服务与社区监管。</p><p class="note">课程演示环境 · 全部业务数据均为虚构</p></div><form id="login-form"><h2>登录工作台</h2><label>账号<input name="username" autocomplete="username" placeholder="例如 admin1" required></label><label>密码<input name="password" type="password" autocomplete="current-password" required></label><button>登录</button><p id="login-error" role="alert"></p><small>演示账号按角色区分：社区管理员、家属、护工、机构负责人、街道审核、民政监管。账号及密码见本地演示说明。</small></form></section>
-<div id="workspace" hidden><aside><div class="brand">邻安 <span>养老服务</span></div><p id="identity"></p><nav id="nav"></nav><button id="logout" class="secondary">退出登录</button></aside><main><header><div><p class="eyebrow">社区服务工作台</p><h1 id="title">老人档案</h1></div><span class="tag">课程演示</span></header><p id="description"></p><div class="toolbar"><span id="total"></span><button id="refresh" class="secondary">刷新数据</button></div><div class="table-wrap"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div><div class="pager"><button id="prev" class="secondary">上一页</button><span id="page"></span><button id="next" class="secondary">下一页</button></div><section class="operation"><h2>业务操作</h2><p>选择操作后填写信息。系统会校验权限、服务资格、时间范围和数据状态。</p><label>操作类型<select id="action"></select></label><form id="action-form"><div id="fields"></div><button>提交操作</button></form><p id="result" role="status"></p></section></main></div><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>邻安 · 社区养老服务</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<section id="login">
+  <header class="login-header"><a class="wordmark" href="/" aria-label="邻安首页"><span class="brand-mark">邻</span><span>邻安<small>社区养老服务</small></span></a><span class="header-note">社区居家养老智慧服务平台</span></header>
+  <div class="login-layout">
+    <div class="intro"><p class="section-label">社区服务 · 日常照护</p><h1>社区居家养老<br>服务工作台</h1><p class="intro-copy">在这里管理老人档案、服务预约和日常照护记录。</p>
+      <img class="neighborhood" src="neighborhood.svg" alt="社区住宅、树木与步行小路的线条插画">
+      <div class="service-index"><span><b>01</b>老人档案</span><span><b>02</b>上门服务</span><span><b>03</b>照护记录</span></div>
+    </div>
+    <div class="login-panel"><form id="login-form"><p class="section-label">账号登录</p><h2>登录工作台</h2><p class="form-description">使用已分配的账号访问对应业务。</p><label for="username">账号</label><input id="username" name="username" autocomplete="username" placeholder="请输入账号" required><label for="password">密码</label><div class="password-field"><input id="password" name="password" type="password" autocomplete="current-password" placeholder="请输入密码" required><button id="show-password" type="button" aria-label="显示密码" aria-pressed="false">显示</button></div><p id="login-error" role="alert"></p><button class="login-submit" type="submit">登录</button><p class="account-help">账号或密码有疑问，请联系社区管理员。</p></form><div class="demo-note"><span>课程演示</span><p>本系统使用虚构业务数据。演示账号及密码见运行包内的账号说明。</p></div></div>
+  </div>
+  <footer class="login-footer"><span>邻安社区养老服务</span><span>档案管理 / 服务调度 / 业务查询</span></footer>
+</section>
+<div id="workspace" hidden>
+  <aside><div class="wordmark"><span class="brand-mark">邻</span><span>邻安<small>社区养老服务</small></span></div><div class="user-panel"><span class="user-avatar" aria-hidden="true">用</span><div><strong id="role-name"></strong><p id="identity"></p></div></div><nav id="nav" aria-label="业务导航"></nav><button id="logout" class="secondary logout-button">退出登录</button></aside>
+  <main><div class="workspace-topline"><span>社区服务工作台</span><span class="demo-label">演示环境</span></div><header class="page-header"><div><h1 id="title">老人档案</h1><p id="description"></p></div><button id="refresh" class="secondary">刷新</button></header>
+    <section class="records" aria-label="业务记录"><div class="toolbar"><h2>档案列表</h2><span id="total"></span></div><div class="table-wrap"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div><div class="pager"><span id="page"></span><div><button id="prev" class="secondary">上一页</button><button id="next" class="secondary">下一页</button></div></div></section>
+    <section class="operation"><div class="operation-heading"><h2>办理业务</h2><span>带 * 的项目为必填项</span></div><label class="action-label" for="action">选择业务<select id="action"></select></label><form id="action-form"><div id="fields"></div><div class="form-footer"><button type="submit">确认提交</button><p id="result" role="status" aria-live="polite"></p></div></form></section>
+    <footer class="workspace-footer">邻安 · 社区居家养老服务</footer>
+  </main>
+</div><script src="app.js"></script>
+</body></html>
