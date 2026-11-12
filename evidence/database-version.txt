@@ -1,0 +1,2 @@
+VERSION()	@@transaction_isolation	@@time_zone
+8.4.11	REPEATABLE-READ	+08:00

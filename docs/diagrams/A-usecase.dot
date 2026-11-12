@@ -1,0 +1,5 @@
+digraph G { graph [rankdir=LR, bgcolor="white",nodesep=0.35,ranksep=0.7]; node [fontname="Noto Sans CJK SC",fontsize=14,color="#31574e"]; edge [fontname="Noto Sans CJK SC",fontsize=10,color="#719087",arrowsize=0.6];
+a0 [shape=plaintext,label="«actor»\n社区管理员"];
+a1 [shape=plaintext,label="«actor»\n家属"];
+subgraph cluster_system { label="档案与评估";color="#9cae9f";u0 [shape=ellipse,label="建立档案与家属关联"];u1 [shape=ellipse,label="登记能力评估"];u2 [shape=ellipse,label="制定照护计划"];u3 [shape=ellipse,label="查询评估与计划"];}
+a0->u0 [arrowhead=none];a0->u1 [arrowhead=none];a0->u2 [arrowhead=none];a1->u3 [arrowhead=none];}

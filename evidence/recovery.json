@@ -1,0 +1,187 @@
+{
+  "time": "2026-11-12T18:22:09.830445",
+  "backup_sha256": "f713c2f12109924e3ef902d87ed208ffe915b8035dba1c062d7f035dff247828",
+  "binlog": "mysql-bin.000001",
+  "start_position": 2535854,
+  "end_position": 2536210,
+  "base_service_items": 20,
+  "incremental_marker_recovered": true,
+  "counts": [
+    {
+      "table": "account",
+      "source": 120,
+      "restored": 120
+    },
+    {
+      "table": "assessment",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "attendance",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "audit_log",
+      "source": 380,
+      "restored": 380
+    },
+    {
+      "table": "bundle_item",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "care_bundle",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "care_plan",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "caregiver",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "caregiver_area",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "claim",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "claim_item",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "claim_review",
+      "source": 40,
+      "restored": 40
+    },
+    {
+      "table": "community",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "complaint",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "credential",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "device",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "device_binding",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "dispatch",
+      "source": 40,
+      "restored": 40
+    },
+    {
+      "table": "elder",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "elder_tag",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "emergency",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "emergency_log",
+      "source": 60,
+      "restored": 60
+    },
+    {
+      "table": "guardian",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "inspection",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "metric_rule",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "notification",
+      "source": 100,
+      "restored": 100
+    },
+    {
+      "table": "organization",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "payment",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "plan_item",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "policy",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "service_item",
+      "source": 21,
+      "restored": 21
+    },
+    {
+      "table": "service_order",
+      "source": 40,
+      "restored": 40
+    },
+    {
+      "table": "service_record",
+      "source": 20,
+      "restored": 20
+    },
+    {
+      "table": "shift",
+      "source": 40,
+      "restored": 40
+    },
+    {
+      "table": "vital",
+      "source": 20,
+      "restored": 20
+    }
+  ],
+  "scope": "full SQL plus one actual binlog insert; restored in separate database"
+}

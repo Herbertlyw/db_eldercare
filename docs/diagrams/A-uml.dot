@@ -1,0 +1,20 @@
+digraph G { graph [rankdir=LR, bgcolor="white",nodesep=0.35,ranksep=0.7]; node [fontname="Noto Sans CJK SC",fontsize=14,color="#31574e"]; edge [fontname="Noto Sans CJK SC",fontsize=10,color="#719087",arrowsize=0.6];
+elder [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="187"><B>老人档案</B><BR/>elder</TD></TR><TR><TD ALIGN="LEFT" WIDTH="187">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="187">identity_hash  UQ</TD></TR><TR><TD ALIGN="LEFT" WIDTH="187">community_id  FK</TD></TR></TABLE>>];
+elder_tag [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="150"><B>老人标签</B><BR/>elder_tag</TD></TR><TR><TD ALIGN="LEFT" WIDTH="150">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="150">elder_id  FK</TD></TR></TABLE>>];
+guardian [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="159"><B>家属关联</B><BR/>guardian</TD></TR><TR><TD ALIGN="LEFT" WIDTH="159">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="159">elder_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="159">account_id  FK</TD></TR></TABLE>>];
+assessment [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="169"><B>能力评估</B><BR/>assessment</TD></TR><TR><TD ALIGN="LEFT" WIDTH="169">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="169">elder_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="169">assessor_id  FK</TD></TR></TABLE>>];
+care_bundle [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="150"><B>照护服务包</B><BR/>care_bundle</TD></TR><TR><TD ALIGN="LEFT" WIDTH="150">id  PK</TD></TR></TABLE>>];
+bundle_item [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="150"><B>服务包明细</B><BR/>bundle_item</TD></TR><TR><TD ALIGN="LEFT" WIDTH="150">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="150">bundle_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="150">item_id  FK</TD></TR></TABLE>>];
+care_plan [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="187"><B>照护计划</B><BR/>care_plan</TD></TR><TR><TD ALIGN="LEFT" WIDTH="187">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="187">assessment_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="187">bundle_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="187">caregiver_id  FK</TD></TR></TABLE>>];
+plan_item [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="150"><B>计划明细</B><BR/>plan_item</TD></TR><TR><TD ALIGN="LEFT" WIDTH="150">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="150">plan_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="150">item_id  FK</TD></TR></TABLE>>];
+account [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="206"><B>账号</B><BR/>account</TD></TR><TR><TD ALIGN="LEFT" WIDTH="206">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="206">username  UQ</TD></TR><TR><TD ALIGN="LEFT" WIDTH="206">community_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="206">organization_id  FK</TD></TR></TABLE>>];
+account -> assessment [arrowhead=none,taillabel="1",headlabel="0..*"];
+elder -> assessment [arrowhead=none,taillabel="1",headlabel="0..*"];
+care_bundle -> bundle_item [arrowhead=none,taillabel="1",headlabel="0..*"];
+assessment -> care_plan [arrowhead=none,taillabel="1",headlabel="0..*"];
+care_bundle -> care_plan [arrowhead=none,taillabel="1",headlabel="0..*"];
+elder -> elder_tag [arrowhead=none,taillabel="1",headlabel="0..*"];
+account -> guardian [arrowhead=none,taillabel="1",headlabel="0..*"];
+elder -> guardian [arrowhead=none,taillabel="1",headlabel="0..*"];
+care_plan -> plan_item [arrowhead=none,taillabel="1",headlabel="0..*"];
+}

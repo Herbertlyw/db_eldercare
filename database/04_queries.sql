@@ -1,9 +1,9 @@
 -- A1 有效评估与计划的重度失能老人
 -- 连接去重与 EXISTS 半连接比较，避免一人多记录重复输出。
 -- 实现 A
-SELECT DISTINCT e.id,e.name FROM elder e JOIN assessment a ON a.elder_id=e.id JOIN care_plan p ON p.assessment_id=a.id WHERE a.ability_level='SEVERE' AND p.status='ACTIVE' AND a.valid_until>NOW();
+SELECT DISTINCT e.id,e.name FROM elder e JOIN assessment a ON a.elder_id=e.id JOIN v_plan_context p ON p.assessment_id=a.id WHERE a.ability_level='SEVERE' AND p.status='ACTIVE' AND a.valid_until>NOW();
 -- 实现 B
-SELECT e.id,e.name FROM elder e WHERE EXISTS(SELECT 1 FROM assessment a JOIN care_plan p ON p.assessment_id=a.id WHERE a.elder_id=e.id AND a.ability_level='SEVERE' AND p.status='ACTIVE' AND a.valid_until>NOW());
+SELECT e.id,e.name FROM elder e WHERE EXISTS(SELECT 1 FROM assessment a JOIN v_plan_context p ON p.assessment_id=a.id WHERE a.elder_id=e.id AND a.ability_level='SEVERE' AND p.status='ACTIVE' AND a.valid_until>NOW());
 
 -- A2 每个老人的评估次数
 -- 左连接聚合与相关子查询；保留零次评估老人。
@@ -15,16 +15,16 @@ SELECT e.id,(SELECT COUNT(*) FROM assessment a WHERE a.elder_id=e.id) n FROM eld
 -- A3 没有生效计划的老人
 -- 反连接与 NOT EXISTS，不使用含 NULL 风险的 NOT IN。
 -- 实现 A
-SELECT e.id FROM elder e LEFT JOIN care_plan p ON p.elder_id=e.id AND p.status='ACTIVE' WHERE p.id IS NULL;
+SELECT e.id FROM elder e LEFT JOIN v_plan_context p ON p.elder_id=e.id AND p.status='ACTIVE' WHERE p.id IS NULL;
 -- 实现 B
-SELECT e.id FROM elder e WHERE NOT EXISTS(SELECT 1 FROM care_plan p WHERE p.elder_id=e.id AND p.status='ACTIVE');
+SELECT e.id FROM elder e WHERE NOT EXISTS(SELECT 1 FROM v_plan_context p WHERE p.elder_id=e.id AND p.status='ACTIVE');
 
 -- B1 有改派历史的订单
 -- 多表连接去重与 EXISTS，结果粒度为订单。
 -- 实现 A
-SELECT DISTINCT o.id,e.name FROM service_order o JOIN elder e ON e.id=o.elder_id JOIN dispatch d ON d.order_id=o.id WHERE d.status='REASSIGNED';
+SELECT DISTINCT o.id,e.name FROM service_order o JOIN elder e ON e.id=o.elder_id JOIN v_dispatch_context d ON d.order_id=o.id WHERE d.status='REASSIGNED';
 -- 实现 B
-SELECT o.id,e.name FROM service_order o JOIN elder e ON e.id=o.elder_id WHERE EXISTS(SELECT 1 FROM dispatch d WHERE d.order_id=o.id AND d.status='REASSIGNED');
+SELECT o.id,e.name FROM service_order o JOIN elder e ON e.id=o.elder_id WHERE EXISTS(SELECT 1 FROM v_dispatch_context d WHERE d.order_id=o.id AND d.status='REASSIGNED');
 
 -- B2 各社区订单金额
 -- 聚合与相关子查询，空集合显式转零。
@@ -36,16 +36,16 @@ SELECT c.id,COALESCE((SELECT SUM(o.amount) FROM service_order o WHERE o.communit
 -- B3 待确认订单
 -- 保留订单粒度，防止多次派单重复统计。
 -- 实现 A
-SELECT DISTINCT o.id FROM service_order o JOIN dispatch d ON d.order_id=o.id JOIN service_record r ON r.dispatch_id=d.id WHERE o.status='CONFIRM' AND r.confirmed_at IS NULL;
+SELECT DISTINCT o.id FROM service_order o JOIN v_dispatch_context d ON d.order_id=o.id JOIN service_record r ON r.dispatch_id=d.id WHERE o.status='CONFIRM' AND r.confirmed_at IS NULL;
 -- 实现 B
-SELECT o.id FROM service_order o WHERE o.status='CONFIRM' AND EXISTS(SELECT 1 FROM dispatch d JOIN service_record r ON r.dispatch_id=d.id WHERE d.order_id=o.id AND r.confirmed_at IS NULL);
+SELECT o.id FROM service_order o WHERE o.status='CONFIRM' AND EXISTS(SELECT 1 FROM v_dispatch_context d JOIN service_record r ON r.dispatch_id=d.id WHERE d.order_id=o.id AND r.confirmed_at IS NULL);
 
 -- C1 护工有效工时
 -- 三表聚合与子查询。未服务护工仍返回零。
 -- 实现 A
-SELECT c.id,COALESCE(SUM(a.effective_minutes),0) minutes FROM caregiver c LEFT JOIN dispatch d ON d.caregiver_id=c.id LEFT JOIN attendance a ON a.dispatch_id=d.id AND a.status='VALID' GROUP BY c.id;
+SELECT c.id,COALESCE(SUM(a.effective_minutes),0) minutes FROM caregiver c LEFT JOIN v_dispatch_context d ON d.caregiver_id=c.id LEFT JOIN attendance a ON a.dispatch_id=d.id AND a.status='VALID' GROUP BY c.id;
 -- 实现 B
-SELECT c.id,COALESCE((SELECT SUM(a.effective_minutes) FROM dispatch d JOIN attendance a ON a.dispatch_id=d.id WHERE d.caregiver_id=c.id AND a.status='VALID'),0) minutes FROM caregiver c;
+SELECT c.id,COALESCE((SELECT SUM(a.effective_minutes) FROM v_dispatch_context d JOIN attendance a ON a.dispatch_id=d.id WHERE d.caregiver_id=c.id AND a.status='VALID'),0) minutes FROM caregiver c;
 
 -- C2 有空余名额的护工
 -- 该查询只检查容量，不等同于完整派单资格推荐。

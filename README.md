@@ -22,6 +22,11 @@ python3 scripts/run.py
 
 若数据库服务停止，使用 `.local` 中的已有数据启动实例，不要重新执行初始化。原有实验用 MySQL 和其他数据库不属于本项目，不应停止或清理。
 
+```sh
+python3 scripts/start-local-db.py
+python3 scripts/run.py
+```
+
 ## 从源码部署到任意 MySQL
 
 数据库管理员创建空库及专用用户，然后依次执行 `database/01_schema.sql`、`02_routines.sql`、`03_views.sql`。连接需支持触发器、存储过程和 CHECK 约束，不能使用 SQLite 或 H2 代替验收数据库。
@@ -50,6 +55,10 @@ java -jar eldercare.jar
 本机 `python3 scripts/test.py` 会重新建立独立的 `eldercare_test` 数据库并运行 Maven 测试，绝不重置 `eldercare`。该辅助脚本依赖本机 `.local/config.json`，其他机器可用自己的测试库与环境变量执行 `mvn test`。
 
 `python3 scripts/recovery_drill.py` 在独立恢复库演练全量加实际 binlog 增量恢复。`python3 scripts/capture_evidence.py` 重新采集表结构、行数、视图和查询对比结果。
+
+恢复演练需先停止本项目应用和其他写入，保证本次受控实验中的全量备份与 binlog 起点之间没有并发写入。真实生产备份应从一致性快照直接取得日志位置，不能照搬这个小型演示脚本作为灾备系统。
+
+管理员界面的“批量上传模拟体征”接受 JSON 数组，例如 `[{"bindingId":1,"metricId":1,"sampleKey":"demo-001","collectedAt":"2026-11-12T18:30:00","value":80}]`。请将绑定编号、指标编号和采样时间改成当前库中有效的值；同一绑定下的采样键不得重复。
 
 ## 业务口径
 

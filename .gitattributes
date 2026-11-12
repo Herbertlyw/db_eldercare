@@ -1,0 +1,2 @@
+# A final tab represents an empty TSV field and is part of the exported evidence.
+*.tsv whitespace=-blank-at-eol

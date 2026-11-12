@@ -1,0 +1,6 @@
+digraph G { graph [rankdir=LR, bgcolor="white",nodesep=0.35,ranksep=0.7]; node [fontname="Noto Sans CJK SC",fontsize=14,color="#31574e"]; edge [fontname="Noto Sans CJK SC",fontsize=10,color="#719087",arrowsize=0.6];
+a0 [shape=plaintext,label="«actor»\n社区管理员"];
+a1 [shape=plaintext,label="«actor»\n街道审核人员"];
+a2 [shape=plaintext,label="«actor»\n民政监管人员"];
+subgraph cluster_system { label="补贴与监管";color="#9cae9f";u0 [shape=ellipse,label="提交补贴申报"];u1 [shape=ellipse,label="街道初审"];u2 [shape=ellipse,label="民政审核与拨付"];u3 [shape=ellipse,label="质量抽查与整改"];}
+a0->u0 [arrowhead=none];a1->u1 [arrowhead=none];a2->u2 [arrowhead=none];a2->u3 [arrowhead=none];}

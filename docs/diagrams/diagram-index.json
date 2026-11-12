@@ -1,0 +1,173 @@
+{
+  "tables": {
+    "community": "社区",
+    "organization": "服务机构",
+    "account": "账号",
+    "elder": "老人档案",
+    "elder_tag": "老人标签",
+    "guardian": "家属关联",
+    "assessment": "能力评估",
+    "service_item": "服务项目",
+    "care_bundle": "照护服务包",
+    "bundle_item": "服务包明细",
+    "caregiver": "护工",
+    "credential": "项目资质",
+    "caregiver_area": "护工服务区域",
+    "care_plan": "照护计划",
+    "plan_item": "计划明细",
+    "shift": "排班",
+    "service_order": "服务订单",
+    "dispatch": "派单记录",
+    "service_record": "服务与确认",
+    "attendance": "工时记录",
+    "device": "设备",
+    "device_binding": "绑定历史",
+    "metric_rule": "指标规则",
+    "vital": "体征数据",
+    "emergency": "应急事件",
+    "emergency_log": "升级记录",
+    "notification": "通知",
+    "policy": "补贴政策",
+    "claim": "补贴申报",
+    "claim_item": "申报明细",
+    "claim_review": "审核记录",
+    "payment": "拨付",
+    "inspection": "质量抽查",
+    "complaint": "评价投诉",
+    "audit_log": "操作审计"
+  },
+  "groups": {
+    "A": [
+      "档案与评估",
+      [
+        "elder",
+        "elder_tag",
+        "guardian",
+        "assessment",
+        "care_bundle",
+        "bundle_item",
+        "care_plan",
+        "plan_item",
+        "account"
+      ]
+    ],
+    "B": [
+      "下单与派单",
+      [
+        "elder",
+        "service_item",
+        "service_order",
+        "dispatch",
+        "service_record",
+        "complaint",
+        "shift"
+      ]
+    ],
+    "C": [
+      "护工与排班",
+      [
+        "organization",
+        "account",
+        "caregiver",
+        "credential",
+        "caregiver_area",
+        "community",
+        "shift",
+        "attendance",
+        "dispatch"
+      ]
+    ],
+    "D": [
+      "监测与应急",
+      [
+        "elder",
+        "device",
+        "device_binding",
+        "metric_rule",
+        "vital",
+        "emergency",
+        "emergency_log",
+        "notification"
+      ]
+    ],
+    "E": [
+      "补贴与监管",
+      [
+        "elder",
+        "service_order",
+        "policy",
+        "claim",
+        "claim_item",
+        "claim_review",
+        "payment",
+        "inspection",
+        "account"
+      ]
+    ]
+  },
+  "usecases": {
+    "A": [
+      [
+        "社区管理员",
+        "家属"
+      ],
+      [
+        "建立档案与家属关联",
+        "登记能力评估",
+        "制定照护计划",
+        "查询评估与计划"
+      ]
+    ],
+    "B": [
+      [
+        "社区管理员",
+        "家属",
+        "护工"
+      ],
+      [
+        "预约服务",
+        "派单与改派",
+        "接单与服务记录",
+        "确认服务及评价"
+      ]
+    ],
+    "C": [
+      [
+        "机构负责人",
+        "护工"
+      ],
+      [
+        "登记职业资质",
+        "安排班次",
+        "签到签退",
+        "复核异常工时"
+      ]
+    ],
+    "D": [
+      [
+        "社区管理员",
+        "护工",
+        "家属"
+      ],
+      [
+        "绑定设备与上传数据",
+        "查看异常信息",
+        "响应应急事件",
+        "回填处置结果"
+      ]
+    ],
+    "E": [
+      [
+        "社区管理员",
+        "街道审核人员",
+        "民政监管人员"
+      ],
+      [
+        "提交补贴申报",
+        "街道初审",
+        "民政审核与拨付",
+        "质量抽查与整改"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "time": "2026-11-12T10:26:56.674Z",
+  "login": true,
+  "scopedTable": true,
+  "roles": [
+    {
+      "role": "admin1",
+      "title": "老人档案",
+      "count": "共 1 条记录"
+    },
+    {
+      "role": "family1",
+      "title": "老人档案",
+      "count": "共 1 条记录"
+    },
+    {
+      "role": "caregiver1",
+      "title": "服务订单",
+      "count": "共 1 条记录"
+    },
+    {
+      "role": "manager1",
+      "title": "护工档案",
+      "count": "共 1 条记录"
+    },
+    {
+      "role": "street1",
+      "title": "补贴申报",
+      "count": "共 1 条记录"
+    },
+    {
+      "role": "regulator1",
+      "title": "补贴申报",
+      "count": "共 1 条记录"
+    }
+  ],
+  "pageErrors": []
+}

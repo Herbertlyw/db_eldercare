@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;import org.springframework.http
  String sql;List<Object> params=new ArrayList<>();
  switch(kind){
  case "elders":sql="SELECT e.id,e.name,e.birth_date,e.address,e.community_id,e.status FROM elder e WHERE "+elderFilter(u,params);break;
- case "orders":sql="SELECT o.*,e.name elder_name FROM service_order o JOIN elder e ON e.id=o.elder_id WHERE "+elderFilter(u,params);if(u.role().equals("CAREGIVER")){sql+=" AND EXISTS(SELECT 1 FROM dispatch d JOIN caregiver c ON c.id=d.caregiver_id WHERE d.order_id=o.id AND c.account_id=?)";params.add(u.id());}break;
- case "plans":sql="SELECT p.*,e.name elder_name FROM care_plan p JOIN elder e ON e.id=p.elder_id WHERE "+elderFilter(u,params);break;
+ case "orders":sql="SELECT o.*,e.name elder_name FROM service_order o JOIN elder e ON e.id=o.elder_id WHERE "+elderFilter(u,params);if(u.role().equals("CAREGIVER")){sql+=" AND EXISTS(SELECT 1 FROM v_dispatch_context d JOIN caregiver c ON c.id=d.caregiver_id WHERE d.order_id=o.id AND c.account_id=?)";params.add(u.id());}break;
+ case "plans":sql="SELECT p.*,e.name elder_name FROM v_plan_context p JOIN elder e ON e.id=p.elder_id WHERE "+elderFilter(u,params);break;
  case "assessments":sql="SELECT a.*,e.name elder_name FROM assessment a JOIN elder e ON e.id=a.elder_id WHERE "+elderFilter(u,params);break;
  case "events":sql="SELECT x.*,e.name elder_name FROM emergency x JOIN elder e ON e.id=x.elder_id WHERE "+elderFilter(u,params);break;
  case "claims":Auth.role(u,"ADMIN","FAMILY","STREET","REGULATOR");sql="SELECT c.*,e.name elder_name FROM claim c JOIN elder e ON e.id=c.elder_id WHERE "+elderFilter(u,params);break;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;import org.springframework.http
  case "caregivers":Auth.role(u,"ADMIN","MANAGER","CAREGIVER","REGULATOR");sql="SELECT c.*,a.community_id FROM caregiver c JOIN account a ON a.id=c.account_id WHERE "+workerFilter(u,params);break;
  case "shifts":Auth.role(u,"ADMIN","MANAGER","CAREGIVER");sql="SELECT s.*,c.name caregiver_name FROM shift s JOIN caregiver c ON c.id=s.caregiver_id JOIN account a ON a.id=c.account_id WHERE "+workerFilter(u,params);break;
  case "credentials":Auth.role(u,"ADMIN","MANAGER","CAREGIVER");sql="SELECT x.*,c.name caregiver_name FROM credential x JOIN caregiver c ON c.id=x.caregiver_id JOIN account a ON a.id=c.account_id WHERE "+workerFilter(u,params);break;
- case "hours":Auth.role(u,"ADMIN","MANAGER","CAREGIVER");sql="SELECT h.*,d.order_id,c.name caregiver_name FROM attendance h JOIN dispatch d ON d.id=h.dispatch_id JOIN caregiver c ON c.id=d.caregiver_id JOIN account a ON a.id=c.account_id WHERE "+workerFilter(u,params);break;
+ case "hours":Auth.role(u,"ADMIN","MANAGER","CAREGIVER");sql="SELECT h.*,d.order_id,c.name caregiver_name FROM attendance h JOIN v_dispatch_context d ON d.id=h.dispatch_id JOIN caregiver c ON c.id=d.caregiver_id JOIN account a ON a.id=c.account_id WHERE "+workerFilter(u,params);break;
  case "inspections":Auth.role(u,"REGULATOR","MANAGER","ADMIN");sql="SELECT i.* FROM inspection i JOIN account a ON a.id=i.inspector_id WHERE a.community_id=?";params.add(u.community());if(u.role().equals("MANAGER")){sql+=" AND i.caregiver_id IN(SELECT id FROM caregiver WHERE organization_id=?)";params.add(u.organization());}break;
  case "catalog":sql="SELECT * FROM service_item WHERE 1=1";break;
  case "bundles":sql="SELECT * FROM care_bundle WHERE 1=1";break;
@@ -34,8 +34,8 @@ import org.springframework.web.bind.annotation.*;import org.springframework.http
  }
  private String elderFilter(Auth.User u,List<Object> p){return switch(u.role()){
  case "FAMILY"->{p.add(u.id());yield "EXISTS(SELECT 1 FROM guardian g WHERE g.elder_id=e.id AND g.account_id=?)";}
- case "CAREGIVER"->{p.add(u.id());yield "EXISTS(SELECT 1 FROM service_order z JOIN dispatch d ON d.order_id=z.id JOIN caregiver c ON c.id=d.caregiver_id WHERE z.elder_id=e.id AND c.account_id=?)";}
- case "MANAGER"->{p.add(u.organization());yield "EXISTS(SELECT 1 FROM service_order z JOIN dispatch d ON d.order_id=z.id JOIN caregiver c ON c.id=d.caregiver_id WHERE z.elder_id=e.id AND c.organization_id=?)";}
+ case "CAREGIVER"->{p.add(u.id());yield "EXISTS(SELECT 1 FROM service_order z JOIN v_dispatch_context d ON d.order_id=z.id JOIN caregiver c ON c.id=d.caregiver_id WHERE z.elder_id=e.id AND c.account_id=?)";}
+ case "MANAGER"->{p.add(u.organization());yield "EXISTS(SELECT 1 FROM service_order z JOIN v_dispatch_context d ON d.order_id=z.id JOIN caregiver c ON c.id=d.caregiver_id WHERE z.elder_id=e.id AND c.organization_id=?)";}
  default->{p.add(u.community());yield "e.community_id=?";}};}
  private String workerFilter(Auth.User u,List<Object>p){if(u.role().equals("MANAGER")){p.add(u.organization());return "c.organization_id=?";}if(u.role().equals("CAREGIVER")){p.add(u.id());return "c.account_id=?";}p.add(u.community());return "a.community_id=?";}
 }

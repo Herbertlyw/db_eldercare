@@ -24,13 +24,13 @@ public class Seed implements CommandLineRunner{
   d.update("INSERT INTO caregiver(id,account_id,organization_id,name) VALUES(?,?,?,?)",i,worker,i,"演示护工"+i);
   d.update("INSERT INTO credential(caregiver_id,item_id,certificate_no,certificate_level,valid_from,valid_until) VALUES(?,?,?,'课程模拟资格',?,?)",i,i,"DEMO-CERT-"+i,now.minusDays(365),now.plusDays(365));
   d.update("INSERT INTO caregiver_area(caregiver_id,community_id) VALUES(?,?)",i,i);
-  d.update("INSERT INTO care_plan(id,elder_id,assessment_id,bundle_id,caregiver_id,starts_at,ends_at) VALUES(?,?,?,?,?,?,?)",i,i,i,i,i,now.minusDays(90),now.plusDays(90));
+  d.update("INSERT INTO care_plan(id,assessment_id,bundle_id,caregiver_id,starts_at,ends_at) VALUES(?,?,?,?,?,?)",i,i,i,i,now.minusDays(90),now.plusDays(90));
   d.update("INSERT INTO plan_item(plan_id,item_id,weekly_frequency) VALUES(?,?,2)",i,i);
   long shift=d.insert("INSERT INTO shift(caregiver_id,starts_at,ends_at,capacity,used_count) VALUES(?,?,?,3,1)",i,past.minusHours(2),past.plusHours(8));
   d.insert("INSERT INTO shift(caregiver_id,starts_at,ends_at,capacity) VALUES(?,?,?,3)",i,future.minusHours(2),future.plusHours(8));
   long order=d.insert("INSERT INTO service_order(elder_id,item_id,community_id,starts_at,ends_at,address,channel,amount,created_by) VALUES(?,?,?,?,?,?,'COMMUNITY',80,?)",i,i,i,past,past.plusHours(1),"演示地址"+i,admin);
-  long old=d.insert("INSERT INTO dispatch(order_id,caregiver_id,shift_id) VALUES(?,?,?)",order,i,shift);d.update("UPDATE dispatch SET status='REASSIGNED',reason='演示历史改派后重新安排' WHERE id=?",old);
-  long dispatch=d.insert("INSERT INTO dispatch(order_id,caregiver_id,shift_id,status,accepted_at) VALUES(?,?,?,'ACCEPTED',?)",order,i,shift,past.minusHours(1));
+  long old=d.insert("INSERT INTO dispatch(order_id,shift_id) VALUES(?,?)",order,shift);d.update("UPDATE dispatch SET status='REASSIGNED',reason='演示历史改派后重新安排' WHERE id=?",old);
+  long dispatch=d.insert("INSERT INTO dispatch(order_id,shift_id,status,accepted_at) VALUES(?,?,'ACCEPTED',?)",order,shift,past.minusHours(1));
   d.insert("INSERT INTO attendance(dispatch_id,check_in,check_out,location_note,fence_ok) VALUES(?,?,?,'模拟地址围栏内',1)",dispatch,past,past.plusHours(1));d.call("verify_hours",dispatch);
   d.insert("INSERT INTO service_record(dispatch_id,notes,confirmed_by,confirmed_at,confirmation) VALUES(?,'模拟服务记录',?,?,'演示家属确认')",dispatch,family,past.plusHours(1));
   d.update("UPDATE dispatch SET status='FINISHED' WHERE id=?",dispatch);d.update("UPDATE service_order SET status='COMPLETED' WHERE id=?",order);

@@ -1,0 +1,5 @@
+digraph G { graph [rankdir=LR, bgcolor="white",nodesep=0.35,ranksep=0.7]; node [fontname="Noto Sans CJK SC",fontsize=14,color="#31574e"]; edge [fontname="Noto Sans CJK SC",fontsize=10,color="#719087",arrowsize=0.6];
+a0 [shape=plaintext,label="«actor»\n机构负责人"];
+a1 [shape=plaintext,label="«actor»\n护工"];
+subgraph cluster_system { label="护工与排班";color="#9cae9f";u0 [shape=ellipse,label="登记职业资质"];u1 [shape=ellipse,label="安排班次"];u2 [shape=ellipse,label="签到签退"];u3 [shape=ellipse,label="复核异常工时"];}
+a0->u0 [arrowhead=none];a0->u1 [arrowhead=none];a0->u3 [arrowhead=none];a1->u2 [arrowhead=none];}

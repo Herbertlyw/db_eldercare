@@ -1,0 +1,15 @@
+digraph G { graph [rankdir=LR, bgcolor="white",nodesep=0.35,ranksep=0.7]; node [fontname="Noto Sans CJK SC",fontsize=14,color="#31574e"]; edge [fontname="Noto Sans CJK SC",fontsize=10,color="#719087",arrowsize=0.6];
+elder [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="187"><B>老人档案</B><BR/>elder</TD></TR><TR><TD ALIGN="LEFT" WIDTH="187">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="187">identity_hash  UQ</TD></TR><TR><TD ALIGN="LEFT" WIDTH="187">community_id  FK</TD></TR></TABLE>>];
+service_item [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="150"><B>服务项目</B><BR/>service_item</TD></TR><TR><TD ALIGN="LEFT" WIDTH="150">id  PK</TD></TR></TABLE>>];
+service_order [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="178"><B>服务订单</B><BR/>service_order</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">elder_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">item_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">community_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">created_by  FK</TD></TR></TABLE>>];
+dispatch [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="178"><B>派单记录</B><BR/>dispatch</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">order_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">shift_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">active_order  UQ</TD></TR></TABLE>>];
+service_record [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="178"><B>服务与确认</B><BR/>service_record</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">dispatch_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">confirmed_by  FK</TD></TR></TABLE>>];
+complaint [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="159"><B>评价投诉</B><BR/>complaint</TD></TR><TR><TD ALIGN="LEFT" WIDTH="159">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="159">order_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="159">account_id  FK</TD></TR></TABLE>>];
+shift [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="178"><B>排班</B><BR/>shift</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">caregiver_id  FK</TD></TR></TABLE>>];
+service_order -> complaint [arrowhead=none,taillabel="1",headlabel="0..*"];
+service_order -> dispatch [arrowhead=none,taillabel="1",headlabel="0..*"];
+shift -> dispatch [arrowhead=none,taillabel="1",headlabel="0..*"];
+elder -> service_order [arrowhead=none,taillabel="1",headlabel="0..*"];
+service_item -> service_order [arrowhead=none,taillabel="1",headlabel="0..*"];
+dispatch -> service_record [arrowhead=none,taillabel="1",headlabel="0..1"];
+}

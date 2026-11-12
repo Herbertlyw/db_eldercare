@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 $Root = Split-Path $PSScriptRoot -Parent
 Set-Location $Root
 $Config = Get-Content '.local/windows-config.json' -Raw -Encoding UTF8 | ConvertFrom-Json

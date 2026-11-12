@@ -1,0 +1,6 @@
+digraph G { graph [rankdir=LR, bgcolor="white",nodesep=0.35,ranksep=0.7]; node [fontname="Noto Sans CJK SC",fontsize=14,color="#31574e"]; edge [fontname="Noto Sans CJK SC",fontsize=10,color="#719087",arrowsize=0.6];
+a0 [shape=plaintext,label="«actor»\n社区管理员"];
+a1 [shape=plaintext,label="«actor»\n家属"];
+a2 [shape=plaintext,label="«actor»\n护工"];
+subgraph cluster_system { label="下单与派单";color="#9cae9f";u0 [shape=ellipse,label="预约服务"];u1 [shape=ellipse,label="派单与改派"];u2 [shape=ellipse,label="接单与服务记录"];u3 [shape=ellipse,label="确认服务及评价"];}
+a0->u0 [arrowhead=none];a0->u1 [arrowhead=none];a1->u0 [arrowhead=none];a1->u3 [arrowhead=none];a2->u2 [arrowhead=none];}

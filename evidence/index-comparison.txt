@@ -1,0 +1,7 @@
+Baseline ignoring target index
+id	select_type	table	partitions	type	possible_keys	key	key_len	ref	rows	filtered	Extra
+1	SIMPLE	service_order	NULL	ALL	NULL	NULL	NULL	NULL	40	5.55	Using where
+
+Indexed execution
+id	select_type	table	partitions	type	possible_keys	key	key_len	ref	rows	filtered	Extra
+1	SIMPLE	service_order	NULL	range	idx_order_status_time	idx_order_status_time	6	NULL	20	100.00	Using where; Using index

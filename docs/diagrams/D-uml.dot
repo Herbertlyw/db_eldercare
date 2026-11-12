@@ -1,0 +1,18 @@
+digraph G { graph [rankdir=LR, bgcolor="white",nodesep=0.35,ranksep=0.7]; node [fontname="Noto Sans CJK SC",fontsize=14,color="#31574e"]; edge [fontname="Noto Sans CJK SC",fontsize=10,color="#719087",arrowsize=0.6];
+elder [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="187"><B>老人档案</B><BR/>elder</TD></TR><TR><TD ALIGN="LEFT" WIDTH="187">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="187">identity_hash  UQ</TD></TR><TR><TD ALIGN="LEFT" WIDTH="187">community_id  FK</TD></TR></TABLE>>];
+device [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="150"><B>设备</B><BR/>device</TD></TR><TR><TD ALIGN="LEFT" WIDTH="150">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="150">serial_no  UQ</TD></TR></TABLE>>];
+device_binding [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="187"><B>绑定历史</B><BR/>device_binding</TD></TR><TR><TD ALIGN="LEFT" WIDTH="187">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="187">device_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="187">elder_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="187">active_device  UQ</TD></TR></TABLE>>];
+metric_rule [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="150"><B>指标规则</B><BR/>metric_rule</TD></TR><TR><TD ALIGN="LEFT" WIDTH="150">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="150">metric  UQ</TD></TR></TABLE>>];
+vital [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="197"><B>体征数据</B><BR/>vital</TD></TR><TR><TD ALIGN="LEFT" WIDTH="197">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="197">binding_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="197">metric_rule_id  FK</TD></TR></TABLE>>];
+emergency [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="178"><B>应急事件</B><BR/>emergency</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">elder_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">vital_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="178">responded_by  FK</TD></TR></TABLE>>];
+emergency_log [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="150"><B>升级记录</B><BR/>emergency_log</TD></TR><TR><TD ALIGN="LEFT" WIDTH="150">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="150">event_id  FK</TD></TR></TABLE>>];
+notification [shape=plain,label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#e7efea" WIDTH="159"><B>通知</B><BR/>notification</TD></TR><TR><TD ALIGN="LEFT" WIDTH="159">id  PK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="159">event_id  FK</TD></TR><TR><TD ALIGN="LEFT" WIDTH="159">account_id  FK</TD></TR></TABLE>>];
+device -> device_binding [arrowhead=none,taillabel="1",headlabel="0..*"];
+elder -> device_binding [arrowhead=none,taillabel="1",headlabel="0..*"];
+elder -> emergency [arrowhead=none,taillabel="1",headlabel="0..*"];
+vital -> emergency [arrowhead=none,taillabel="0..1",headlabel="0..1"];
+emergency -> emergency_log [arrowhead=none,taillabel="1",headlabel="0..*"];
+emergency -> notification [arrowhead=none,taillabel="1",headlabel="0..*"];
+device_binding -> vital [arrowhead=none,taillabel="1",headlabel="0..*"];
+metric_rule -> vital [arrowhead=none,taillabel="1",headlabel="0..*"];
+}
