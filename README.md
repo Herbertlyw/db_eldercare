@@ -46,10 +46,10 @@ java -jar eldercare.jar
 
 ## 目录
 
-- `src/main/java/edu/bjfu/eldercare`：应用、JDBC DAO、业务事务、身份验证、接口和定时任务。
+- `src/main/java/edu/bjfu/eldercare`：按 interfaces、application、domain、infrastructure 分层的 Java 单体，持久化仍为 Spring JDBC。
 - `src/main/resources/static`：本地演示界面，无外部 CDN 依赖。
 - `database`：建表、过程和触发器、15 个视图、15 组双实现查询。
-- `src/test`：真实 MySQL 集成测试，含权限、边界、回滚和并发案例。
+- `src/test`：领域规则、分层依赖和路由测试，以及真实 MySQL 权限、边界、回滚和并发案例。
 - `evidence`：测试日志、数据数量、SQL 等价验证、执行计划与备份恢复证据。
 - `docs`：需求、设计、数据字典、运维、图件和答辩讲解材料。
 - `outputs`：按教师模板生成的报告与提交材料。
@@ -88,3 +88,11 @@ java -jar eldercare.jar
 ## 已有数据库升级
 
 v1.0.1 补齐历史记录保护，并明确复评、设备迁移和应急通知规则。已有 v1.0.0 的 47 表数据库，先停止应用、做全量备份，再执行 `database/migrations/20261113_history_rules.sql` 并更换 JAR。脚本仅替换存储对象，不重建业务表；新安装不需要执行迁移。当前 125 项真实 MySQL 集成测试通过，详细规则和验证范围见 `docs/运行维护与验收.md` 与 `docs/功能验收清单.md`。
+
+## Java 代码结构与开发
+
+业务操作按七个模块拆分，状态与计算规则放在领域层，SQL 放在 JDBC 仓储和查询适配器。`CareService.execute` 保留统一事务边界。项目没有改用 ORM，数据库中的过程、触发器和并发约束继续生效。具体目录、调用过程和开发约定见 [Java 架构与开发约定](docs/Java架构与开发约定.md)，初学者可先看 [从零讲解与代码导读](docs/从零讲解与代码导读.md)。
+
+运行 `mvn spotless:apply` 统一 Java 格式；构建会自动检查格式。测试可通过 `TEST_DATABASE=eldercare_<名称>_test` 选择独立可重建测试库，浏览器测试通过 `TEST_PORT` 选择 18081—18089 的独立端口。不要复用其他正在运行的任务所用的测试库。
+
+当前源码的重构不包含重新发布 Release，下载页中的旧运行包与当前源码结构可能不同。

@@ -1,0 +1,54 @@
+{
+  "time": "2026-11-13T13:42:10.746586",
+  "baseline": "1d2ab72d7e382ad0d80f05669f4a7b120db14b30",
+  "architecture": "DDD-style layered monolith; Java 17 + Spring JDBC + MySQL",
+  "database": "eldercare_refactor_test",
+  "tests": {
+    "tests": 163,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "existing_mysql_business_tests": 125,
+  "new_route_contract_test": 1,
+  "unit_and_architecture_tests": 37,
+  "contract": {
+    "actions": 71,
+    "queries": 49,
+    "details": 15
+  },
+  "unchanged_existing_test_and_helper_method_bodies": 158,
+  "removed_unreachable_duplicate_action_branches": [
+    "complaint.create",
+    "device.create",
+    "elder.create",
+    "elder.transfer",
+    "elder.update",
+    "event.close",
+    "event.respond",
+    "inspection.close",
+    "inspection.create",
+    "inspection.order",
+    "order.checkin",
+    "order.finish",
+    "plan.create"
+  ],
+  "browser": {
+    "port": 18082,
+    "roles": 6,
+    "read_routes": 109,
+    "successful_form_submissions": 26,
+    "page_errors": [],
+    "mobile_overflow": false,
+    "public_notices_without_login": true
+  },
+  "database_scripts_changed": false,
+  "frontend_files_changed": false,
+  "format_check": "Spotless check bound to Maven validate; passed in clean build and test",
+  "jar_sha256": "54ed57dc8ed3bfdc22cc05a5f78666a2fd2b52f84713f1c5656c4bbbee611a06",
+  "limits": [
+    "Windows not tested on a physical Windows computer",
+    "Existing DOCX/PPTX and Release artifacts were not regenerated in this source-code refactor",
+    "Request and query projections still use maps; this is not a full aggregate-model rewrite"
+  ]
+}
