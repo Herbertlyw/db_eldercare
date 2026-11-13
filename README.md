@@ -2,6 +2,8 @@
 
 数据库系统课程设计，Java 17、Spring Boot 3.4.4、Spring JDBC、MySQL 8.0.16 及以上。已在本机原生 MySQL 8.4.11 运行，Docker 不是运行依赖。业务、政策、设备和体征数据均为课程虚构示例。
 
+小组成员及 Agent 修改项目之前，请先阅读 [协作规范 AGENTS.md](AGENTS.md)。每项任务使用独立分支，完成测试后创建 PR，由另一位成员检查后合并到 main。
+
 源码、SQL、报告和 PPT 保存在本仓库。直接运行请到 [Releases 下载完整运行包](https://github.com/Herbertlyw/db_eldercare/releases/latest)，选择“左邻右舍养老平台_运行与课程材料.zip”；GitHub 自动生成的 Source code 压缩包不包含编译好的 JAR。
 
 ## Windows 运行
