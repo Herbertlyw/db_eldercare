@@ -1,8 +1,8 @@
 {
-  "time": "2026-11-13T10:17:58.253785",
+  "time": "2026-11-13T12:08:05.391885",
   "platform": "macOS",
   "packaged_jar_started": true,
-  "jar_sha256": "8ac3a7f580348e9875737b726531e70475028d5a83c8c57dc994dfd740f11592",
+  "jar_sha256": "29ba75e40bbf0e4e9b4190c85f10e055179f30401edb8a372913f660796f4f09",
   "database": "eldercare_test",
   "port": 18081,
   "login": true,

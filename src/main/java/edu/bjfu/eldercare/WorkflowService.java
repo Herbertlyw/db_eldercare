@@ -47,6 +47,7 @@ public class WorkflowService {
             case "elder.update": case "elder.transfer": {
                 Auth.role(u,"ADMIN");x=number(m,"elderId");scope.elder(u,x);db.one("SELECT id FROM elder WHERE id=? FOR UPDATE",x);noPendingOrders(x);
                 long community=action.endsWith("transfer")?number(m,"communityId"):u.community();BigDecimal px=decimal(m,"x"),py=decimal(m,"y");coordinates(community,px,py);
+                if(community!=u.community() && db.count("SELECT COUNT(*) FROM device_binding WHERE elder_id=? AND unbound_at IS NULL",x)>0)throw new Rule("请先在设备管理中解绑原社区设备，再迁移老人档案");
                 if(action.endsWith("transfer"))db.update("UPDATE care_plan p JOIN assessment a ON a.id=p.assessment_id SET p.status='PAUSED' WHERE a.elder_id=? AND p.status='ACTIVE'",x);
                 return db.update("UPDATE elder SET address=?,community_id=?,position_x=?,position_y=? WHERE id=?",text(m,"address"),community,px,py,x);
             }

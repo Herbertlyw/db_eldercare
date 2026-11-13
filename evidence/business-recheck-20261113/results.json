@@ -1,0 +1,727 @@
+{
+  "checked_at": "2026-11-13T11:31:47.437099+08:00",
+  "commit": "945517ed3a1e1b0b6b5da160dd4b1ce300855e88",
+  "database": "eldercare_reaudit_20261113",
+  "application_database_untouched": true,
+  "baseline_exit": 0,
+  "additional_exit": 1,
+  "suites": [
+    {
+      "suite": "edu.bjfu.eldercare.BusinessRequirementAuditTest",
+      "tests": 5,
+      "failures": 5,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "scopedRegulatorMustReceiveEscalationFromOtherCoveredCommunity",
+          "failure": "监管员可查询辖区事件，却收不到升级通知 ==> expected: <true> but was: <false>",
+          "error": null
+        },
+        {
+          "name": "escalationHistoryMustNotBeDeletable",
+          "failure": "应急上报和升级日志可被应用数据库账户直接删除 ==> Expected java.lang.RuntimeException to be thrown, but nothing was thrown.",
+          "error": null
+        },
+        {
+          "name": "transferredElderMustNotRetainUnmanageableDeviceBinding",
+          "failure": "迁入管理员无法处理仍绑定在迁入老人身上的设备 ==> Unexpected exception thrown: edu.bjfu.eldercare.Forbidden",
+          "error": null
+        },
+        {
+          "name": "reassessmentMustNotLeaveContradictoryServiceEligibility",
+          "failure": "新评估已变为 SELF，旧 SEVERE 服务包仍可下单 ==> Expected java.lang.RuntimeException to be thrown, but nothing was thrown.",
+          "error": null
+        },
+        {
+          "name": "finishedDispatchMustNotLoseHistoricalCompletion",
+          "failure": "已完成订单的派单可被改回拒接，服务证据链被破坏 ==> Expected java.lang.RuntimeException to be thrown, but nothing was thrown.",
+          "error": null
+        }
+      ]
+    },
+    {
+      "suite": "edu.bjfu.eldercare.DatabaseIntegrationTest",
+      "tests": 66,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "everyTableHasTwentyRows",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "mixedBatchUnauthorizedRollsBack",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "recommendationAppliesQualificationAndRectification",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "shiftCapacityCheck",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "unusedShiftCanBeDeleted",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "claimRollsBackAfterWritingFirstValidItem",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "confirmationRequired",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "thresholdCreatesPendingEvent",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "paymentIsImmutable",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "futureSampleRejected",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "fifteenQueryPairsAreEquivalent",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "danglingForeignKeyRejected",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "maliciousLoginDoesNotBypass",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "expiredAssessmentPreventsCheckin",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "fifteenViewsExecute",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "sessionRequired",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "sampleOutsideBindingRejected",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "allBusinessViewRoutesExecuteWithTheirIntendedRoles",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "subsidyReviewAndPaymentPreserveEvidence",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "duplicateSampleRejected",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "overlappingPlanRejected",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "databaseRejectsAcceptWithExpiredCertificate",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "claimInvalidOrderRollsBack",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "validDispatchAndHistory",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "duplicateIdentityRejected",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "familyRowsAreScopedAndNoSensitiveFields",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "familyConfirmationCannotBeForgedByManager",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "expiredCredentialRejected",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "regulatorCannotCreateOrder",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "familyCannotReadDispatchPool",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "orderInspectionBlocksItsResponsibleWorker",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "deviceHistoryCannotBeReassignedToAnotherElder",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "duplicateClaimRejectedAcrossPolicy",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "serviceCompletionRequiresReviewAndConfirmation",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "assessmentCannotBelongToAnotherElder",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "hourlyOrderPriceUsesDuration",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "overlappingShiftRejected",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "newRectificationPreventsAccept",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "closedBindingIntervalsCannotOverlap",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "escalationIsIdempotent",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "expiredAssessmentStopsDispatch",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "wrongAreaOrCertificateRejected",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "malformedBatchIsClientError",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "familyCannotReportEmergencyForAnotherElder",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "immutableCompletedOrder",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "assignedButUnacceptedOrderEntersPool",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "changedRoleInvalidatesSession",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "alertImmediatelyNotifiesFamilyWorkerAndCommunity",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "nullClaimOrdersAreRejected",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "historicalDeleteForbidden",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "rectificationBlocksDispatch",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "familyCannotReadOtherElder",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "identityNormalizationPreventsDuplicate",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "invalidDateIsClientError",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "loginFailureLockPersists",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "leaveAfterAssignmentPreventsAccept",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "logoutRevokesSession",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "deviceRebindPreservesOldOwner",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "disabledAccountRevokesExistingSession",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "rapidDeviceRebindPreservesBothIntervals",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "unapprovedPaymentRejected",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "managerDoesNotReadAnotherInstitutionsOrders",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "concurrentOverlappingOrdersCannotShareWorker",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "failedReassignmentRestoresPriorDispatch",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "concurrentPlanCreationSerializes",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "concurrentLastSlotOnlyOneSucceeds",
+          "failure": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "suite": "edu.bjfu.eldercare.WorkflowIntegrationTest",
+      "tests": 43,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "deviceUnbindRetainsHistoricalSamplesAndBlocksRetirementUntilUnbound",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "rejectedAssignmentReleasesCapacityAndKeepsReason",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "tooShortServiceRequiresReviewAndZeroMinutesCannotPass",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "complaintCompletesWithFourAppendOnlySteps",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "complaintBeforeDispatchCanBeHandledByCommunity",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "publicNoticeEndpointNeverIncludesSourcePersonalColumns",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "caregiverSamplingAndRatioBoundaries",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "latestAssessmentOnlyProducesOneReminder",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "recruitmentRejectionCreatesNoAccount",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "tagAndContactMaintenanceIsScopedAndEncrypted",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "supplementalReadRoutesAndDetailsReturnRealData",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "planRevisionPreservesOldVersionAndFrequency",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "pendingOrdersPreventChangingTheirPlan",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "trainingScoreBelowThresholdCannotBeSilentlyOverwritten",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "scheduledSimulatorCanStartStopAndAvoidDuplicateTicks",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "streetAndDistrictScopesContainTwoAndFourCommunities",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "rectificationReturnResubmitAndApproveKeepsBothAttempts",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "finalizedAssessmentAndAttendanceCannotBeRewritten",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "failedRecruitmentHireRollsBackCreatedAccountAndWorker",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "policyAreaCannotExceedRegulatorsScope",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "policyConditionsAndPeriodFormatAreActuallyEnforced",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "ordinaryReviewIsClosedAndRequiresCompletedOrder",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "sampleResultCanPassDirectlyOrEnterRectification",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "passedInspectionDoesNotBlockWorkerAndPublicNoticeHidesPrivateDetails",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "recruitmentHireCreatesAccountAndDefaultAreaOnce",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "inactiveFamilyRelationIsExcludedFromCareSummary",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "complaintCannotSkipStepsOrBeHandledByForeignInstitution",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "manualSimulationImmediatelyAfterRebindUsesMicrosecondTime",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "inactiveGuardianLosesAccess",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "monthQuarterAndYearPoliciesUseTheirOwnPeriodAndCapAtPrice",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "institutionReportCanBeReturnedAndResubmittedWithHistory",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "ratioSamplingStoresPopulationAndAllSelectedIds",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "futureTrainingAndForeignEnrollmentAreRejected",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "signedLocationCannotBeReplacedByCallerFenceFlag",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "addressCoordinatesAreCheckedAndCopiedToOrder",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "annualAndMonthlyApplicationsCannotOverlapForSameItem",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "untrainedWorkerCannotBeAssignedDespiteCertificate",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "simulatorRequiresBoundActiveDeviceAndValidMetric",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "familyCanReadClaimEvidenceButCannotChangeIt",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "falseAlarmRequiresReasonAndCannotBeReopened",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "claimRejectionResubmissionKeepsItemsAndPriorReview",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "trainingEnrollResultAndQualificationAreIndependent",
+          "failure": null,
+          "error": null
+        },
+        {
+          "name": "responsibilityWorkerReadsAndCompletesEventWithSeparateArrival",
+          "failure": null,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "scope": "对照任务书、教师讲解、评分标准核查技术与业务完整性；按用户要求暂不处理成员分工。",
+  "business_code_modified": false,
+  "findings": [
+    {
+      "id": "R1",
+      "type": "cross_module_rule_gap",
+      "test": "reassessmentMustNotLeaveContradictoryServiceEligibility",
+      "summary": "新复评为 SELF 后，旧 SEVERE 计划仍可下单；下单使用计划绑定评估，补贴采用服务时点最新评估，规则未统一。",
+      "source": [
+        "database/02_routines.sql:24",
+        "database/02_routines.sql:123",
+        "src/main/java/edu/bjfu/eldercare/CareService.java:48"
+      ],
+      "requirement": "任务书 §2.1.1、§2.1.5；教师 11:38—15:27。原文未规定复评后旧计划的具体自动处置方式，需明确一致的项目规则。",
+      "classification": "design_rule_to_clarify_not_explicit_teacher_requirement"
+    },
+    {
+      "id": "R2",
+      "type": "workflow_handoff_gap",
+      "test": "transferredElderMustNotRetainUnmanageableDeviceBinding",
+      "summary": "老人迁移成功后旧社区设备仍保持绑定，迁入社区管理员不能管理该设备。迁移未要求先解绑，也没有设备移交步骤。",
+      "source": [
+        "src/main/java/edu/bjfu/eldercare/WorkflowService.java:47",
+        "src/main/java/edu/bjfu/eldercare/WorkflowService.java:96"
+      ],
+      "requirement": "任务书 §2.1.1、§2.1.4；教师 11:08—11:38、24:49。原文未规定设备必须随迁；应明确先解绑或受控移交，不能擅自给新社区旧设备资产权限。 原社区已有解绑操作可以构成迁移流程，需说明衔接而非假定必须自动移交。",
+      "classification": "design_rule_to_clarify_not_explicit_teacher_requirement"
+    },
+    {
+      "id": "R3",
+      "type": "authorization_notification_mismatch",
+      "test": "scopedRegulatorMustReceiveEscalationFromOtherCoveredCommunity",
+      "summary": "regulator1 有社区 2 授权并能查看事件，但社区 2 应急事件升级后该账号没有通知；通知按 account.community_id 筛选，未使用 account_scope。",
+      "source": [
+        "database/02_routines.sql:87",
+        "database/02_routines.sql:203",
+        "src/main/java/edu/bjfu/eldercare/Scope.java:12"
+      ],
+      "requirement": "任务书 §2.1.4、§2.2.5；教师 25:31、31:06。 教师 25:31 举的是升级至社区主管领导；原文未要求每个具有辖区查询权的监管员都收到通知，不能单凭该检查失败断定漏做强制功能。",
+      "classification": "design_rule_to_clarify_not_explicit_teacher_requirement"
+    },
+    {
+      "id": "R4",
+      "type": "database_history_protection_gap",
+      "test": "finishedDispatchMustNotLoseHistoricalCompletion",
+      "summary": "应用数据库账号可将已完成订单的 FINISHED 派单改为 REJECTED；完成订单的历史服务链路因此不再一致。",
+      "source": [
+        "database/02_routines.sql:194"
+      ],
+      "requirement": "任务书 §2.1.2；教师 06:51、18:20—18:58。这是直接 SQL 层缺口，不表示普通页面提供该操作。",
+      "classification": "confirmed_implementation_or_evidence_gap"
+    },
+    {
+      "id": "R5",
+      "type": "database_history_protection_gap",
+      "test": "escalationHistoryMustNotBeDeletable",
+      "summary": "应用数据库账号可删除 emergency_log 的应急上报、升级日志；现有不可删除触发器没有覆盖该表。",
+      "source": [
+        "database/02_routines.sql:158",
+        "database/01_schema.sql:28"
+      ],
+      "requirement": "任务书 §2.1.4；教师 06:51、26:13。这是直接 SQL 层缺口，不表示普通页面提供删除按钮。",
+      "classification": "confirmed_implementation_or_evidence_gap"
+    },
+    {
+      "id": "R6",
+      "type": "evidence_export_error",
+      "summary": "查询证据 A3、B3、C3、D3、E2 空结果的 rows 字段为 -1；capture_evidence.py 未区分 mysql 空输出和带表头输出。",
+      "source": [
+        "scripts/capture_evidence.py:16",
+        "evidence/query-comparison.json"
+      ],
+      "requirement": "任务书 §3.2、§4.3；评分标准中的实现正确性及报告材料准确性。SQL 等价测试通过不受此计数错误直接影响。",
+      "classification": "confirmed_implementation_or_evidence_gap"
+    }
+  ],
+  "database_objects": {
+    "base_tables": 47,
+    "business_views": 15,
+    "internal_views": 2,
+    "procedures": 10,
+    "triggers": 69
+  },
+  "grading_review": {
+    "weights": {
+      "basic_labs": 40,
+      "group_report_materials": 20,
+      "individual_report": 20,
+      "group_demonstration_defense": 20
+    },
+    "deferred_by_user": [
+      "真实成员与分工核验"
+    ],
+    "technical_strengths": [
+      "五条业务线主要操作已存在",
+      "47 表、15 业务视图、15 组双实现查询、五条业务线均有过程和触发器",
+      "原有 109 项真实 MySQL 测试本轮复跑通过",
+      "设计图、数据字典、DDL、DAO、索引说明和备份恢复证据已提供"
+    ],
+    "unresolved": [
+      "R4、R5 两项数据库历史保护检查失败",
+      "R6 空查询证据行数错误",
+      "R1—R3 为待明确设计口径，不能直接作为任务书不达标项",
+      "本轮不评定真实团队分工和个人贡献"
+    ],
+    "limits": [
+      "本轮重跑后端测试，没有重新做全量浏览器和 Windows 实机验证",
+      "设备、定位与拨付属于课程模拟，不是接入真实外部服务",
+      "原报告与 PPT 尚未反映本轮新增缺口；不得对外称全部需求已验收"
+    ]
+  },
+  "source_sha256": {
+    "database/01_schema.sql": "1caf1ab983f12025703b3205de873135288419784f3549d17595035238c725e4",
+    "database/02_routines.sql": "0e5faad063ac647c7eae3748fa90aea8861be260953ed8b3b62ed0258375ccd4",
+    "src/main/java/edu/bjfu/eldercare/WorkflowService.java": "2b3bcc3e2326a9a60c7ab4c603459b3c5193df260c42963890505c4776dff508",
+    "src/main/java/edu/bjfu/eldercare/CareService.java": "4825eb98d6d5d1e6d32a69580d14b157ddf0341c28176a3ee6d812a996583ada",
+    "src/main/java/edu/bjfu/eldercare/Scope.java": "f49af6408c2c49717b4283a47282934569f655f83a5965a446e246b120027e36",
+    "scripts/capture_evidence.py": "a2ccbc7c919eb38a7a16fd62fde8dcf5b50810e58cbe805e74af3b744e888cae"
+  },
+  "interpretation_correction": "5 项探索检查失败不等于 5 项教师硬性要求未满足。R1—R3 的预期包含需先确认的项目设计假设，R4—R5 为数据库历史保护缺口，R6 为证据导出错误。"
+}

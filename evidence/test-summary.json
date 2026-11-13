@@ -1,5 +1,5 @@
 {
-  "time": "2026-11-13T09:56:20.579656",
+  "time": "2026-11-13T11:51:51.312042",
   "database": "eldercare_test",
   "engine": "native MySQL 8.4.11",
   "suites": [
@@ -53,6 +53,31 @@
         "claimRejectionResubmissionKeepsItemsAndPriorReview",
         "trainingEnrollResultAndQualificationAreIndependent",
         "responsibilityWorkerReadsAndCompletesEventWithSeparateArrival"
+      ]
+    },
+    {
+      "suite": "edu.bjfu.eldercare.HistoryRulesIntegrationTest",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "unboundTransferKeepsOldDeviceOwnershipAndSampleHistory",
+        "emergencyLogCannotBeUpdated",
+        "historicalAssessmentImportDoesNotPauseLatestPlan",
+        "latestAssessmentCanCreateRevisedPlanAfterPendingOrdersHandled",
+        "directBindingCannotReconnectOldCommunityDeviceAfterTransfer",
+        "emergencyLogCannotBeDeleted",
+        "finishedDispatchCannotChangeStatusReasonOrTimes",
+        "localDutyStaffReceiveEscalationsWithoutBroadcastToAllJurisdictionReaders",
+        "reassignedAndRejectedDispatchesAreAlsoImmutable",
+        "dispatchCannotSkipAcceptanceOrRewindAcceptedState",
+        "transferRequiresUnbindingBeforeAnyMutation",
+        "reassessmentPausesPreviousPlanAndBlocksNewOrder",
+        "futureAssessmentPausesOnlyWhenItBecomesEffective",
+        "activeDispatchCannotRewriteOriginalAssignmentOrAcceptanceTime",
+        "obsoleteAssessmentCannotBeReusedForNewOrResumedPlan",
+        "reassessmentPreservesCompletedServicesAndPaidClaims"
       ]
     },
     {
@@ -131,7 +156,7 @@
       ]
     }
   ],
-  "tests": 109,
+  "tests": 125,
   "failures": 0,
   "errors": 0,
   "skipped": 0

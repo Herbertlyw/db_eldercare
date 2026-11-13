@@ -13,7 +13,7 @@ qs=json.loads((ROOT/'database/queries.json').read_text());report=[]
 for q in qs:
  a=sql(q['a']+';').stdout;b=sql(q['b']+';').stdout
  assert sorted(a.splitlines()[1:])==sorted(b.splitlines()[1:]),q['id']
- report.append({'id':q['id'],'title':q['title'],'equal':True,'rows':len(a.splitlines())-1,'A':a,'B':b,'planA':sql('EXPLAIN '+q['a']+';').stdout,'planB':sql('EXPLAIN '+q['b']+';').stdout})
+ report.append({'id':q['id'],'title':q['title'],'equal':True,'rows':len(a.splitlines()[1:]),'A':a,'B':b,'planA':sql('EXPLAIN '+q['a']+';').stdout,'planB':sql('EXPLAIN '+q['b']+';').stdout})
 (out/'query-comparison.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
 # Capture index use without claiming significant timings from a small fixture.
 q="SELECT id FROM service_order WHERE status='PENDING' AND starts_at>=NOW() AND starts_at<NOW()+INTERVAL 2 DAY"

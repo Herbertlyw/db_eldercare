@@ -1,5 +1,5 @@
-09:56:13.465 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [edu.bjfu.eldercare.DatabaseIntegrationTest]: DatabaseIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-09:56:13.511 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration edu.bjfu.eldercare.Application for test class edu.bjfu.eldercare.DatabaseIntegrationTest
+11:51:42.677 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [edu.bjfu.eldercare.DatabaseIntegrationTest]: DatabaseIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+11:51:42.751 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration edu.bjfu.eldercare.Application for test class edu.bjfu.eldercare.DatabaseIntegrationTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -10,16 +10,35 @@
 
  :: Spring Boot ::                (v3.4.4)
 
-2026-11-13T09:56:13.632+08:00  INFO 53880 --- [           main] e.b.eldercare.DatabaseIntegrationTest    : Starting DatabaseIntegrationTest using Java 17.0.15 with PID 53880 (started by herbert in /Users/herbert/Developer/db_project)
-2026-11-13T09:56:13.633+08:00  INFO 53880 --- [           main] e.b.eldercare.DatabaseIntegrationTest    : No active profile set, falling back to 1 default profile: "default"
-2026-11-13T09:56:13.953+08:00  INFO 53880 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2026-11-13T09:56:14.024+08:00  INFO 53880 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-11-13T09:56:14.024+08:00  INFO 53880 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-11-13T09:56:14.025+08:00  INFO 53880 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-11-13T09:56:14.034+08:00  INFO 53880 --- [           main] e.b.eldercare.DatabaseIntegrationTest    : Started DatabaseIntegrationTest in 0.485 seconds (process running for 0.799)
+2026-11-13T11:51:42.937+08:00  INFO 66770 --- [           main] e.b.eldercare.DatabaseIntegrationTest    : Starting DatabaseIntegrationTest using Java 17.0.15 with PID 66770 (started by herbert in /Users/herbert/Developer/db_project)
+2026-11-13T11:51:42.938+08:00  INFO 66770 --- [           main] e.b.eldercare.DatabaseIntegrationTest    : No active profile set, falling back to 1 default profile: "default"
+2026-11-13T11:51:43.560+08:00  INFO 66770 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2026-11-13T11:51:43.676+08:00  INFO 66770 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-11-13T11:51:43.676+08:00  INFO 66770 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-13T11:51:43.677+08:00  INFO 66770 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-11-13T11:51:43.691+08:00  INFO 66770 --- [           main] e.b.eldercare.DatabaseIntegrationTest    : Started DatabaseIntegrationTest in 0.889 seconds (process running for 1.33)
 OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
-2026-11-13T09:56:14.342+08:00  INFO 53880 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-11-13T09:56:14.453+08:00  INFO 53880 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@eb91027
-2026-11-13T09:56:14.454+08:00  INFO 53880 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-11-13T09:56:18.567+08:00  INFO 53880 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [edu.bjfu.eldercare.WorkflowIntegrationTest]: WorkflowIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2026-11-13T09:56:18.568+08:00  INFO 53880 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration edu.bjfu.eldercare.Application for test class edu.bjfu.eldercare.WorkflowIntegrationTest
+2026-11-13T11:51:44.063+08:00  INFO 66770 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-13T11:51:44.210+08:00  INFO 66770 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6d9428f3
+2026-11-13T11:51:44.211+08:00  INFO 66770 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-13T11:51:48.833+08:00  INFO 66770 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [edu.bjfu.eldercare.WorkflowIntegrationTest]: WorkflowIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-13T11:51:48.835+08:00  INFO 66770 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration edu.bjfu.eldercare.Application for test class edu.bjfu.eldercare.WorkflowIntegrationTest
+2026-11-13T11:51:50.992+08:00  INFO 66770 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [edu.bjfu.eldercare.HistoryRulesIntegrationTest]: HistoryRulesIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-13T11:51:50.993+08:00  INFO 66770 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration edu.bjfu.eldercare.Application for test class edu.bjfu.eldercare.HistoryRulesIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.4)
+
+2026-11-13T11:51:51.002+08:00  INFO 66770 --- [           main] e.b.e.HistoryRulesIntegrationTest        : Starting HistoryRulesIntegrationTest using Java 17.0.15 with PID 66770 (started by herbert in /Users/herbert/Developer/db_project)
+2026-11-13T11:51:51.002+08:00  INFO 66770 --- [           main] e.b.e.HistoryRulesIntegrationTest        : No active profile set, falling back to 1 default profile: "default"
+2026-11-13T11:51:51.075+08:00  INFO 66770 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2026-11-13T11:51:51.099+08:00  INFO 66770 --- [           main] e.b.e.HistoryRulesIntegrationTest        : Started HistoryRulesIntegrationTest in 0.105 seconds (process running for 8.738)
+2026-11-13T11:51:51.100+08:00  INFO 66770 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-11-13T11:51:51.107+08:00  INFO 66770 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1e7113f8
+2026-11-13T11:51:51.107+08:00  INFO 66770 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.

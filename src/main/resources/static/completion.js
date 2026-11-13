@@ -92,3 +92,17 @@ async function refreshNoticeCount(){if(!user||$('workspace').hidden)return;try{c
 const baseEnter=enter;enter=async function(){await baseEnter();await refreshNoticeCount();};setInterval(refreshNoticeCount,30000);
 
 Object.assign(columns,{rating:'家属评分',updated_at:'更新时间',complaint_id:'投诉编号',actor_id:'经办账号',recorded_by:'成绩登记人',submitted_by:'提交账号',publisher_id:'发布账号',withdrawn_at:'撤回时间',withdraw_reason:'撤回原因',inspection_id:'抽查编号',content_sha256:'材料摘要',action:'操作',reviewed_at:'复核时间',period:'周期',paid_subsidy:'本月已拨付（元）'});
+
+Object.assign(errors,{
+ PLAN_ASSESSMENT_SUPERSEDED:'已有新的能力评估，请根据最新评估调整照护计划。',
+ TRANSFER_DEVICE_BOUND:'请先解绑原社区设备，再迁移老人档案。',
+ BINDING_COMMUNITY_INVALID:'当前绑定要求设备和老人在同一社区，且老人档案有效。',
+ HISTORICAL_FACT_IMMUTABLE:'已归档的业务记录不能改写。',
+ DISPATCH_STATE_INVALID:'当前派单状态不支持此操作。',
+ ORDER_PLAN_INVALID:'请检查预约时间和照护计划。老人复评后，需要根据最新评估调整计划。'
+});
+const workflowFields=fields;fields=function(){workflowFields();const hint={
+ 'assessment.create':'复评登记后，旧评估对应的照护计划会暂停。请先处理未完成订单，再按最新评估调整计划。',
+ 'elder.transfer':'迁移前请处理未完成订单，并解绑原社区设备。迁移后重新安排照护计划和设备，历史记录保留。'
+}[$('action').value];if(hint){const p=node('p',hint);p.className='wide-field muted';$('fields').append(p);}};
+$('action').onchange=fields;

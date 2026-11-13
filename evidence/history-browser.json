@@ -1,0 +1,11 @@
+{
+  "time": "2026-11-13T04:00:29.825Z",
+  "database": "eldercare_test",
+  "mainAppReadOnlyReachable": true,
+  "transferHint": true,
+  "transferBlockedWhileBound": true,
+  "assessmentHint": true,
+  "newAssessmentBlocksOldPlanOrder": true,
+  "chineseError": true,
+  "pageErrors": []
+}

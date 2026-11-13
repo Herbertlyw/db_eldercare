@@ -26,6 +26,8 @@ PROCEDURE	expire_plans
 PROCEDURE	remind_assessments
 PROCEDURE	submit_claim
 PROCEDURE	verify_hours
+TRIGGER	assessment_before_insert
+TRIGGER	assessment_pause_old_plans
 TRIGGER	assessment_immutable
 TRIGGER	keep_assessment
 TRIGGER	audit_attendance_insert
@@ -60,12 +62,15 @@ TRIGGER	audit_dispatch_update
 TRIGGER	keep_dispatch
 TRIGGER	elder_coordinates_insert
 TRIGGER	elder_coordinates_update
+TRIGGER	elder_transfer_binding_check
 TRIGGER	elder_audit_update
 TRIGGER	event_initial_deadline
 TRIGGER	audit_emergency_insert
 TRIGGER	emergency_notify
 TRIGGER	event_history_guard
 TRIGGER	audit_emergency_update
+TRIGGER	immutable_emergency_log
+TRIGGER	keep_emergency_log
 TRIGGER	immutable_event_step
 TRIGGER	keep_event_step
 TRIGGER	guardian_audit_update

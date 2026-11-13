@@ -27,7 +27,7 @@ class DatabaseIntegrationTest {
  @Test void rectificationBlocksDispatch(){rollback(()->{d.update("UPDATE inspection SET status='OPEN' WHERE id=1");assertThrows(RuntimeException.class,()->d.call("assign_order",2,2,"整改测试"));});}
  @Test void immutableCompletedOrder(){reject(()->d.update("UPDATE service_order SET amount=0 WHERE id=1"));}
  @Test void historicalDeleteForbidden(){reject(()->d.update("DELETE FROM attendance WHERE id=1"));}
- @Test void deviceRebindPreservesOldOwner(){rollback(()->{d.update("UPDATE device_binding SET unbound_at=NOW() WHERE id=1");d.insert("INSERT INTO device_binding(device_id,elder_id,bound_at) VALUES(1,2,NOW())");assertEquals(1,d.count("SELECT b.elder_id FROM vital v JOIN device_binding b ON b.id=v.binding_id WHERE v.id=1"));});}
+ @Test void deviceRebindPreservesOldOwner(){rollback(()->{long next=d.insert("INSERT INTO elder(name,identity_hash,identity_cipher,birth_date,address,community_id,position_x) SELECT name,UUID(),identity_cipher,birth_date,address,community_id,position_x FROM elder WHERE id=1");d.update("UPDATE device_binding SET unbound_at=NOW(6) WHERE id=1");d.insert("INSERT INTO device_binding(device_id,elder_id,bound_at) VALUES(1,?,NOW(6))",next);assertEquals(next,d.count("SELECT elder_id FROM device_binding WHERE device_id=1 AND unbound_at IS NULL"));assertEquals(1,d.count("SELECT b.elder_id FROM vital v JOIN device_binding b ON b.id=v.binding_id WHERE v.id=1"));});}
  @Test void sampleOutsideBindingRejected(){reject(()->d.update("INSERT INTO vital(binding_id,metric_rule_id,sample_key,collected_at,metric_value,source) VALUES(1,1,'before-bind',NOW()-INTERVAL 365 DAY,50,'TEST')"));}
  @Test void duplicateSampleRejected(){reject(()->d.update("INSERT INTO vital(binding_id,metric_rule_id,sample_key,collected_at,metric_value,source) SELECT binding_id,metric_rule_id,sample_key,collected_at,metric_value,source FROM vital WHERE id=1"));}
  @Test void thresholdCreatesPendingEvent(){rollback(()->{long n=d.count("SELECT COUNT(*) FROM emergency");d.insert("INSERT INTO vital(binding_id,metric_rule_id,sample_key,collected_at,metric_value,source) VALUES(1,1,'abnormal-test',NOW(),100,'TEST')");assertEquals(n+1,d.count("SELECT COUNT(*) FROM emergency"));});}
@@ -74,8 +74,9 @@ class DatabaseIntegrationTest {
  });}
  @Test void assignedButUnacceptedOrderEntersPool(){rollback(()->{
   service.execute(admin,"order.assign",Map.of("orderId",2,"shiftId",2,"reason","超时调度"));
-  d.update("UPDATE dispatch SET assigned_at=NOW()-INTERVAL 16 MINUTE WHERE active_order=2");
-  assertEquals(1,d.count("SELECT COUNT(*) FROM v_dispatch_overdue WHERE id=2"));
+  long after=d.count("SELECT UNIX_TIMESTAMP(assigned_at)+16*60 FROM dispatch WHERE active_order=2");
+  d.update("SET timestamp=?",after);
+  try{assertEquals(1,d.count("SELECT COUNT(*) FROM v_dispatch_overdue WHERE id=2"));}finally{d.update("SET timestamp=0");}
  });}
  @Test void deviceHistoryCannotBeReassignedToAnotherElder(){rollback(()->{
   assertThrows(RuntimeException.class,()->d.update("UPDATE device_binding SET elder_id=2 WHERE id=1"));

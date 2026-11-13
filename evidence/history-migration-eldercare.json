@@ -1,0 +1,209 @@
+{
+  "time": "2026-11-13T11:52:58.624593",
+  "database": "eldercare",
+  "business_rows_unchanged": true,
+  "tables": {
+    "account": {
+      "rows": 120,
+      "sha256": "74208c274c9f6e2d5b5ad5057a5eda6bd8d582e6c4e6f3ad20af053a10e7b97c"
+    },
+    "account_scope": {
+      "rows": 120,
+      "sha256": "c4164079a4a005b7577ced86af76887624b50fe267906166f14704e4587fafcb"
+    },
+    "assessment": {
+      "rows": 20,
+      "sha256": "6601427a3b8625407f6fbc36a05d3937021285bc48f5554cca175f65f16a8a00"
+    },
+    "attendance": {
+      "rows": 20,
+      "sha256": "ac2c873f55d2f5eb7e8d2b63109143658f9f0d39122a9f4992170ea211856cf9"
+    },
+    "audit_log": {
+      "rows": 380,
+      "sha256": "598e117fcaf27cade186a3051a6160018363e8624af87353118262da37db34cc"
+    },
+    "bundle_item": {
+      "rows": 20,
+      "sha256": "b13540f8159a55f188dc03d0c66e6093509f180f87541e71b168a8d9e1f74565"
+    },
+    "care_bundle": {
+      "rows": 20,
+      "sha256": "f80510ba4fd745ab53bead537faa5d8afeaa5adec8a3a0207dc087e1e9fefe3c"
+    },
+    "care_plan": {
+      "rows": 20,
+      "sha256": "4ce2053f5886e7d1f978335b5dca57547068c37041c7b3f54bad639bbf4d7474"
+    },
+    "caregiver": {
+      "rows": 20,
+      "sha256": "b7cf8d8779265dbba6198135087e10b8eb73d5820f02111a93c9c90f862214fb"
+    },
+    "caregiver_area": {
+      "rows": 20,
+      "sha256": "b3746543bc9f44da7f997044d9d8fac1ef8a4e87370675fb2ba349ba2d8a6fb9"
+    },
+    "claim": {
+      "rows": 20,
+      "sha256": "31d350ae48076f6e559d77eda25e2665076f98b5811416eeac04eea3f1091fbd"
+    },
+    "claim_evidence": {
+      "rows": 20,
+      "sha256": "a8b023470e45c629066da9aa64ea96283bd5a380b6dd367fe469f21845bccad4"
+    },
+    "claim_item": {
+      "rows": 20,
+      "sha256": "50181b487788c2d6e0de3d5bb897bed36c5224aa1f167c0e2149bee23e988480"
+    },
+    "claim_review": {
+      "rows": 40,
+      "sha256": "d9f566ec1a37c2e00e045c27c27f3d6462a0167054d6bfe6dddb18b9df6961eb"
+    },
+    "community": {
+      "rows": 20,
+      "sha256": "d3ee50365fa553d0207ead36ffb71a1bd242c358077dab2cfd4df72b5ed32810"
+    },
+    "complaint": {
+      "rows": 20,
+      "sha256": "70b9b8670a1f05c25a924bc79077c4b7bf75abc12c1b9e6bc13715d2dce97113"
+    },
+    "complaint_log": {
+      "rows": 20,
+      "sha256": "2367396e7e5b1b23e3091a83f941c1032ae11d9e7b47051f82f5128bfec20147"
+    },
+    "credential": {
+      "rows": 20,
+      "sha256": "db3a5504e2fad98e5a216d19efe00a8d9bf39ba71927d9abdb42dbdbe89784c6"
+    },
+    "device": {
+      "rows": 20,
+      "sha256": "cb427b374bfc78098f76cba41b6a4c4d83115266d7e67a7588fb1e0548e7a0c3"
+    },
+    "device_binding": {
+      "rows": 20,
+      "sha256": "135f260bb92557e7254bc8ca43e18ecb8f6f425b47a967e2532eaf4670e126f9"
+    },
+    "dispatch": {
+      "rows": 40,
+      "sha256": "47f84fa682fb09e337e149eccd48860e660e268a49e19c832ef4934ec306e74a"
+    },
+    "elder": {
+      "rows": 20,
+      "sha256": "9a87539ead5ee730c145b98f648b629b7e0fe89e550fc8036781e81aa3bddab4"
+    },
+    "elder_tag": {
+      "rows": 20,
+      "sha256": "4913dd568315292766b1a82fefbc4b2a757708b138f8462f0e3ed2a8bbabe092"
+    },
+    "emergency": {
+      "rows": 20,
+      "sha256": "56dbca4e02eb65cd984ef6f3b04deb9785d1b7d13e3799de8a9782e8e7e08182"
+    },
+    "emergency_log": {
+      "rows": 60,
+      "sha256": "c19b0bc2a60433764a8f6db836666ae0ca09db59cc29d1ac6bf4a84c8165f64f"
+    },
+    "event_step": {
+      "rows": 20,
+      "sha256": "41b5125c5b21a6177e45b2ee11b8c6217365557483ac30c6111c33c9f0887c37"
+    },
+    "guardian": {
+      "rows": 20,
+      "sha256": "f1e50ffc668df790402c5c01f798459fbc6ee6be51916d42a6f88e39ac16776b"
+    },
+    "inspection": {
+      "rows": 40,
+      "sha256": "33f562eda28d5db22dbb99c82270dd84f8dfe71be35d6d08f6a5006d884651ca"
+    },
+    "inspection_batch": {
+      "rows": 20,
+      "sha256": "07299cea3247495cc077ff8ccf50279c12ea19305d6c5dd03ab5d74075fecec4"
+    },
+    "metric_rule": {
+      "rows": 20,
+      "sha256": "2b2bc504bc927335c448372798e6088a7e6cd2494d06842497344d9435e04596"
+    },
+    "notification": {
+      "rows": 140,
+      "sha256": "8fe5e88cda5fbd8552c810c7594aff502ec8c2909da7a4911bebb2d58e62677f"
+    },
+    "organization": {
+      "rows": 20,
+      "sha256": "51c755a320a1b66ed5332085ccc7acfbb1927fb86fa24780f092b20c802dc589"
+    },
+    "organization_report": {
+      "rows": 20,
+      "sha256": "a362af4034a119a294ed83853627aaac41c6b903fd8d7d580b4ad365ce01d5f2"
+    },
+    "payment": {
+      "rows": 20,
+      "sha256": "3e3213239a2d8651664921f1eee27cbbda794841591eb4c21279b4147f2950dd"
+    },
+    "plan_item": {
+      "rows": 20,
+      "sha256": "e0aafcfd78544b86017f65b5eb568bbbc5b174d488c5f837d2ffdd09a3c434b3"
+    },
+    "policy": {
+      "rows": 20,
+      "sha256": "5591d9422114fb9b3fcdb7b7ef08062dd1591ad8e36781f3feb4189efd497e3d"
+    },
+    "policy_area": {
+      "rows": 20,
+      "sha256": "d22bfa13807d8aa8eaa238d9a646d049570beee4e5f246d691e6bfdcdb0bb4f2"
+    },
+    "public_notice": {
+      "rows": 20,
+      "sha256": "bb79b7311bef6fa8e9c6b06b653b98b7ed03a175e228624bd8c3e6e8bda8d559"
+    },
+    "recruitment": {
+      "rows": 20,
+      "sha256": "72f0157142ccda99099695b3bf24dae9e5b942edd3ca6e33f85936c012d67f7b"
+    },
+    "rectification_submission": {
+      "rows": 20,
+      "sha256": "a6f7226b6826f14647552eed54153c5d6bcbeedf645ffe45bbcd25482bf6c5e7"
+    },
+    "service_item": {
+      "rows": 20,
+      "sha256": "5a1c6c3275504305dd5e53266066d25627cb8881304fca436108a8e8b3f011dc"
+    },
+    "service_order": {
+      "rows": 40,
+      "sha256": "22760dfdecc91feb46ea08f35a158dbfa0e22ad4cf1a10acfcc5d9470ef4e8f8"
+    },
+    "service_record": {
+      "rows": 20,
+      "sha256": "e43dad2153bd37d2c732c96e6c5934be86a286a1de4c722d4baa0b9596aec2d2"
+    },
+    "shift": {
+      "rows": 40,
+      "sha256": "9dacf3facf1286a2a2533fc64dc2922fb29761da7891806bdab9baf7a82ac9af"
+    },
+    "training": {
+      "rows": 20,
+      "sha256": "5adfdd97d6ed3d3a51e736bbbda34ab0d321da3b58603f41a4ec3b4ed57507ca"
+    },
+    "training_record": {
+      "rows": 20,
+      "sha256": "8eacbc8d65b47b2c94f9aaefe7935141db27954fa2fea6d13df3d01b2622dbf4"
+    },
+    "vital": {
+      "rows": 20,
+      "sha256": "300f152487830a84263396ab5c735d06ef42d01e356ae1efd4d76d903d228d1b"
+    }
+  },
+  "objects_replaced": [
+    "assert_order",
+    "assert_plan",
+    "assessment_before_insert",
+    "assessment_pause_old_plans",
+    "binding_before_insert",
+    "dispatch_accept_check",
+    "elder_transfer_binding_check",
+    "escalate_events",
+    "expire_plans",
+    "immutable_emergency_log",
+    "keep_emergency_log"
+  ],
+  "sql_sha256": "abf10c636d667a39b8622a9906b5472447a960b9d59f547affe8277ee72ab21e"
+}

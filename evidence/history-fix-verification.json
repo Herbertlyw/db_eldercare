@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-13T12:07:46.527784",
+  "baseline_commit": "945517ed3a1e1b0b6b5da160dd4b1ce300855e88",
+  "resolved_defects": [
+    "R4: terminal dispatch records and established timestamps cannot be rewritten",
+    "R5: emergency_log cannot be updated or deleted",
+    "R6: empty query result row counts are zero"
+  ],
+  "implemented_project_rules": [
+    "R1: latest effective reassessment pauses superseded plans; completed services and paid claims retain history",
+    "R2: unbind original community device before transfer; device stays with original community",
+    "R3: level >= 2 notifies local regulator; jurisdiction read access is independent of notification responsibility"
+  ],
+  "requirement_boundary": "R1-R3 are project design choices, not verbatim mandatory teacher requirements. Original exploratory failures are preserved in business-recheck-20261113/results.json.",
+  "integration_tests": {
+    "tests": 125,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "added": 16,
+    "evidence": "test-summary.json"
+  },
+  "browser": {
+    "role_routes": 109,
+    "business_submissions": 26,
+    "additional_transfer_and_reassessment_checks": "history-browser.json"
+  },
+  "migration": {
+    "business_tables_unchanged": 47,
+    "rehearsed_twice": true,
+    "evidence": "history-migration-eldercare.json"
+  },
+  "recovery": {
+    "full_and_actual_binlog": true,
+    "matched_tables": 47,
+    "matched_query_pairs": 15,
+    "evidence": "recovery.json"
+  },
+  "documents": {
+    "group_report_pages": 119,
+    "personal_report_pages": 3,
+    "slides": 12,
+    "wps_open_and_pdf_export_verified": true,
+    "presentation_package_and_layout_checks_passed": true,
+    "placeholders_remain_blue": true
+  },
+  "limitations": [
+    "Windows scripts have not been executed on a Windows computer",
+    "Device, location and payment interfaces are course simulations",
+    "Real team contributions and presentation video are deferred"
+  ],
+  "sha256": {
+    "database/02_routines.sql": "caabb5cac9aebe80bbe820351ff078f462844e0d44dd1e25e3d531d58c668f69",
+    "database/migrations/20261113_history_rules.sql": "abf10c636d667a39b8622a9906b5472447a960b9d59f547affe8277ee72ab21e",
+    "scripts/capture_evidence.py": "37f78d7ebd68c3d3a4b4e660bfc81b5c9a37043cedab2696d1061c57268df813",
+    "src/main/java/edu/bjfu/eldercare/WorkflowService.java": "2fbae300624d6cfc5f3171154bf9e382e91cd5133b96b12b0da2971923834a0a",
+    "src/main/resources/static/completion.js": "066bbe033647748e3e278996cac7a31b0d0640e231853cad69b5ae20e3d989ae",
+    "src/test/java/edu/bjfu/eldercare/HistoryRulesIntegrationTest.java": "fad55b6cefe29dddfedde637cd20c7f7bd76da684ad3244e01beec8f6ee7e8c5",
+    "target/eldercare-1.0.0.jar": "29ba75e40bbf0e4e9b4190c85f10e055179f30401edb8a372913f660796f4f09",
+    "outputs/刘禹伟_个人报告预填稿_待确认实际分工.pdf": "4730c9aefa5ff3e9dd9c09e83a8269498379227b1a4074bef55a0b831382a35c",
+    "outputs/社区居家养老平台小组报告_待补成员信息.docx": "912b8e28643618018a0503b8aeeff17bfeb2c126208b8083477235c584cd5341",
+    "outputs/刘禹伟_个人报告预填稿_待确认实际分工.docx": "046ee954b6d13d37c59c7302d4abbdc682eebb934a99f5c0dd48d607856cbbd5",
+    "outputs/社区居家养老平台课程答辩_修订版.pdf": "b36e0aa7c840c301c34b05b6f2c2737ba151e82b23b6d0d19165a8172564cf0d",
+    "outputs/社区居家养老平台课程答辩_修订版.pptx": "b7a1dd4be3c86ebc782d89a00feb2adbba14fde437bf11d308bd9613a7786f48",
+    "outputs/社区居家养老平台小组报告_待补成员信息.pdf": "470b0811edafaa7302d78f4bd720b712fa037bc3454812cb26e14e32e57e1b92"
+  }
+}

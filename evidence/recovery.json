@@ -1,10 +1,10 @@
 {
-  "time": "2026-11-13T09:52:28.148074",
-  "backup_sha256": "bb9e1e403e7b86a09a70654cc6f7a4482763945b438b2626d444becf99a1559b",
+  "time": "2026-11-13T11:53:11.400709",
+  "backup_sha256": "e92957beb5e5423b8d91a3baf861a8e48650d03a94082aea0698800f04bcdb9b",
   "binlog": "mysql-bin.000001",
   "end_binlog": "mysql-bin.000001",
-  "start_position": 9490233,
-  "end_position": 9490616,
+  "start_position": 12403008,
+  "end_position": 12403391,
   "position_source": "mysqldump --source-data=2 snapshot coordinates",
   "base_service_items": 20,
   "incremental_marker_recovered": true,
@@ -294,7 +294,7 @@
       "source": 21,
       "restored": 21,
       "content_equal": true,
-      "content_sha256": "776f8d361deb12e3a8afba532ee17774a00d57d1bba8e2a49fbd66ea927163ab"
+      "content_sha256": "3fa35a0f5e110ee2475f0830af7495b3d59f617da7c1656985a148ec758908a6"
     },
     {
       "table": "service_order",
