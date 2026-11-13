@@ -4,7 +4,7 @@
 
 小组成员及 Agent 修改项目之前，请先阅读 [协作规范 AGENTS.md](AGENTS.md)。每项任务使用独立分支，完成自检和测试、同步最新 main 后，在本地合并并推送 main；不要求创建 PR 或等待他人审批。
 
-源码、SQL、报告和 PPT 保存在本仓库。直接运行请到 [Releases 下载完整运行包](https://github.com/Herbertlyw/db_eldercare/releases/latest)，选择“左邻右舍养老平台_运行与课程材料.zip”；GitHub 自动生成的 Source code 压缩包不包含编译好的 JAR。
+源码、SQL、报告和 PPT 保存在本仓库。[Releases 中的运行包](https://github.com/Herbertlyw/db_eldercare/releases)与各自的发布标签对应；GitHub 自动生成的 Source code 压缩包不包含编译好的 JAR。当前源码可按下文构建，完整课程运行包包含 JAR、初始化脚本和课程材料。
 
 ## Windows 运行
 
@@ -87,12 +87,12 @@ java -jar eldercare.jar
 
 ## 已有数据库升级
 
-v1.0.1 补齐历史记录保护，并明确复评、设备迁移和应急通知规则。已有 v1.0.0 的 47 表数据库，先停止应用、做全量备份，再执行 `database/migrations/20261113_history_rules.sql` 并更换 JAR。脚本仅替换存储对象，不重建业务表；新安装不需要执行迁移。当前 125 项真实 MySQL 集成测试通过，详细规则和验证范围见 `docs/运行维护与验收.md` 与 `docs/功能验收清单.md`。
+v1.0.1 补齐历史记录保护，并明确复评、设备迁移和应急通知规则。已有 v1.0.0 的 47 表数据库，先停止应用、做全量备份，再执行 `database/migrations/20261113_history_rules.sql` 并更换 JAR。脚本仅替换存储对象，不重建业务表；新安装不需要执行迁移。自动化测试共 163 项通过，其中 125 项为真实 MySQL 业务测试、1 项为路由契约集成测试、37 项为独立测试，详细规则和验证范围见 `docs/运行维护与验收.md` 与 `docs/功能验收清单.md`。
 
 ## Java 代码结构与开发
 
-业务操作按七个模块拆分，状态与计算规则放在领域层，SQL 放在 JDBC 仓储和查询适配器。`CareService.execute` 保留统一事务边界。项目没有改用 ORM，数据库中的过程、触发器和并发约束继续生效。具体目录、调用过程和开发约定见 [Java 架构与开发约定](docs/Java架构与开发约定.md)，初学者可先看 [从零讲解与代码导读](docs/从零讲解与代码导读.md)。
+业务操作按七个模块拆分，状态与计算规则放在领域层，SQL 放在 JDBC 仓储和查询适配器。`CareService.execute` 保留统一事务边界。持久层使用 Spring JDBC，数据库中的过程、触发器和并发约束参与业务校验。具体目录、调用过程和开发约定见 [Java 架构与开发约定](docs/Java架构与开发约定.md)，初学者可先看 [从零讲解与代码导读](docs/从零讲解与代码导读.md)。
 
 运行 `mvn spotless:apply` 统一 Java 格式；构建会自动检查格式。测试可通过 `TEST_DATABASE=eldercare_<名称>_test` 选择独立可重建测试库，浏览器测试通过 `TEST_PORT` 选择 18081—18089 的独立端口。不要复用其他正在运行的任务所用的测试库。
 
-当前源码的重构不包含重新发布 Release，下载页中的旧运行包与当前源码结构可能不同。
+运行包包含当前分层实现的 JAR、数据库脚本、报告和 PPTX。包内 SHA256SUMS.json 记录各文件的校验值，evidence/delivery-verification.json 记录 JAR 校验值及独立测试库的运行验证范围。

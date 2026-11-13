@@ -1,0 +1,63 @@
+{
+  "time": "2026-11-13T14:12:55.542715+08:00",
+  "sourceCommit": "4877b8b79447f9061be274513d47caa205df316d",
+  "database": "eldercare_package_test",
+  "platform": "macOS arm64; Java 17; MySQL 8.4.11",
+  "jarSha256": "b16d29d34934afa994f72dd11c9da85b7f27e79a5963eafccd293da14e43b9b3",
+  "schemaTables": 47,
+  "schemaImported": true,
+  "seedCompleted": true,
+  "publicNotices": true,
+  "roles": [
+    {
+      "account": "admin1",
+      "query": "elders",
+      "login": true,
+      "identity": true,
+      "queryOk": true,
+      "logout": true
+    },
+    {
+      "account": "family1",
+      "query": "orders",
+      "login": true,
+      "identity": true,
+      "queryOk": true,
+      "logout": true
+    },
+    {
+      "account": "caregiver1",
+      "query": "orders",
+      "login": true,
+      "identity": true,
+      "queryOk": true,
+      "logout": true
+    },
+    {
+      "account": "manager1",
+      "query": "caregivers",
+      "login": true,
+      "identity": true,
+      "queryOk": true,
+      "logout": true
+    },
+    {
+      "account": "street1",
+      "query": "jurisdictionStats",
+      "login": true,
+      "identity": true,
+      "queryOk": true,
+      "logout": true
+    },
+    {
+      "account": "regulator1",
+      "query": "jurisdictionStats",
+      "login": true,
+      "identity": true,
+      "queryOk": true,
+      "logout": true
+    }
+  ],
+  "windowsRealMachineVerified": false,
+  "testEvidence": "evidence/test-summary.json (163 tests; source Java unchanged in this material task)"
+}
