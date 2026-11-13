@@ -1,6 +1,6 @@
 # 左邻右舍社区居家养老服务平台
 
-数据库系统课程设计，Java 17、Spring Boot 3.4.4、Spring JDBC、MySQL 8.0.16 及以上。已在本机原生 MySQL 8.4.11 运行，Docker 不是运行依赖。业务、政策、设备和体征数据均为课程虚构示例。
+数据库系统课程设计，Java 17、Spring Boot 3.4.4、Spring JDBC、MySQL 8.0.16 及以上。本机验证环境为原生 MySQL 8.4.11，Docker 不是运行依赖。业务、政策、设备和体征数据均为课程虚构示例。
 
 小组成员及 Agent 修改项目之前，请先阅读 [协作规范 AGENTS.md](AGENTS.md)。每项任务使用独立分支，完成自检和测试、同步最新 main 后，在本地合并并推送 main；不要求创建 PR 或等待他人审批。
 
@@ -35,6 +35,8 @@ python3 scripts/run.py
 
 数据库管理员创建空库及专用用户，然后依次执行 `database/01_schema.sql`、`02_routines.sql`、`03_views.sql`。连接需支持触发器、存储过程和 CHECK 约束，不能使用 SQLite 或 H2 代替验收数据库。
 
+先执行 `mvn -DskipTests package` 构建源码，将 `target/eldercare-1.0.0.jar` 复制为运行目录中的 `eldercare.jar`。完整运行包已包含该文件。
+
 设置环境变量 `DB_URL`、`DB_USER`、`DB_PASSWORD`、`FIELD_KEY`（64 个十六进制字符）、`DEMO_PASSWORD` 后运行：
 
 ```sh
@@ -46,7 +48,7 @@ java -jar eldercare.jar
 
 ## 目录
 
-- `src/main/java/edu/bjfu/eldercare`：按 interfaces、application、domain、infrastructure 分层的 Java 单体，持久化仍为 Spring JDBC。
+- `src/main/java/edu/bjfu/eldercare`：按 interfaces、application、domain、infrastructure 分层的 Java 单体，持久化使用 Spring JDBC。
 - `src/main/resources/static`：本地演示界面，无外部 CDN 依赖。
 - `database`：建表、过程和触发器、15 个视图、15 组双实现查询。
 - `src/test`：领域规则、分层依赖和路由测试，以及真实 MySQL 权限、边界、回滚和并发案例。
@@ -74,20 +76,24 @@ java -jar eldercare.jar
 
 组名、4—5 名真实成员、实际分工和个人贡献、真实会议与协作记录、全员发言的答辩录像、教师提问后的反馈。模板中的这些项目不会伪造。报告中的待确认位置必须在提交前处理。
 
-## 2026 年 11 月 13 日功能补齐
+## 业务范围与课程材料
 
-五条业务线补入招聘培训、投诉办理、比例抽查、整改复核、公示、机构考核、多社区授权及统计；补齐档案与计划维护、详情查询、设备解绑与定时模拟、应急到场和关闭、补贴证明归档及驳回重报。结构为 47 张基础表、15 个业务视图及 2 个内部视图。全部测试方法和实际结果见 `evidence/test-summary.json`，浏览器操作证据见 `evidence/completion-browser.json`。
+系统包含档案与评估、订单与投诉、护工招聘培训及排班、设备与应急、补贴与质量监管。数据库为 47 张基础表、15 个业务视图、2 个内部视图、10 个存储过程和 74 个触发器。种子包含 24 个社区以及自理、部分失能、重度失能样例。
 
-已有本机库通过 `database/migrations/20261113_completion.sql` 保留数据升级；迁移前停应用并备份。新安装只按最新 01、02、03 顺序导入，不再执行历史迁移。新库种子包含 24 个社区以及自理、部分失能、重度失能样例；本机旧库保留其 20 个社区和原业务记录。
+- [需求分析与整体设计](docs/需求与整体设计思路.md)：业务、权限、状态及系统边界。
+- [课程要求与实现对照](docs/需求追踪与模板差异.md)：任务书、模板和评分标准的对应材料。
+- [功能验收清单](docs/功能验收清单.md)：实际入口与代表性测试。
+- [运行维护与验收](docs/运行维护与验收.md)：配置、备份、安全与升级操作。
+- [代码与需求复查记录](docs/代码与需求复查记录.md)：验证范围、实际问题和回归案例。
+- [报告与 PPT](outputs)：小组及个人报告、13 页答辩 PPTX 和 PDF。
 
-开发环境可安装 Playwright 后运行 `node scripts/verify_browser.cjs`，先将独立测试应用接到 `eldercare_test` 并启动在 `18081`，关闭其定时任务。该脚本会新增虚构业务记录，使用 `DEMO_PASSWORD` 环境变量或本机开发配置中的演示密码。不要将测试端口连接到展示库。
+2026 年 11 月 13 日的自动化记录为 163 项通过：125 项真实 MySQL 业务测试、1 项 Spring 路由契约集成测试、37 项独立测试。实际方法和结果见 `evidence/test-summary.json`，浏览器记录见 `evidence/completion-browser.json`。这些结果对应记录中的执行环境及日期。
 
-新增操作说明与逐项对应关系见 `docs/功能验收清单.md`。原先发现的缺口保存在复查记录的历史部分，不能把旧状态当作当前版本结论。
-
+开发环境安装 Playwright 后可运行 `node scripts/verify_browser.cjs`。先将应用连接独立测试库，关闭定时任务并启动在测试端口；脚本会写入虚构业务数据，使用 `DEMO_PASSWORD` 或本机开发配置中的演示密码。不得对展示库执行。
 
 ## 已有数据库升级
 
-v1.0.1 补齐历史记录保护，并明确复评、设备迁移和应急通知规则。已有 v1.0.0 的 47 表数据库，先停止应用、做全量备份，再执行 `database/migrations/20261113_history_rules.sql` 并更换 JAR。脚本仅替换存储对象，不重建业务表；新安装不需要执行迁移。自动化测试共 163 项通过，其中 125 项为真实 MySQL 业务测试、1 项为路由契约集成测试、37 项为独立测试，详细规则和验证范围见 `docs/运行维护与验收.md` 与 `docs/功能验收清单.md`。
+新安装在空库按 01、02、03 的顺序导入 SQL，不执行历史迁移。已有数据库按 [迁移说明](database/migrations/README.md) 确认适用结构，先停应用、备份并在副本演练。迁移脚本不用于重复初始化，也不以重建业务库替代升级。
 
 ## Java 代码结构与开发
 

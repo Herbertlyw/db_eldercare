@@ -105,7 +105,7 @@ export async function editDeck({presentation:p,input}){
   code(s,['SELECT e.id, COUNT(a.id) n','FROM elder e','LEFT JOIN assessment a','  ON a.elder_id = e.id','GROUP BY e.id;'],60,309,550,23);
   code(s,['SELECT e.id,','  (SELECT COUNT(*)','   FROM assessment a','   WHERE a.elder_id=e.id) n','FROM elder e;'],668,309,550,23);
   tx(s,'COUNT(a.id) 不统计左连接产生的 NULL；子查询没有匹配记录时返回 0。',60,532,1160,45,25);
-  tx(s,'已完成 15 组双实现查询，30 段 SQL 的对应结果均逐行比较一致。',60,608,1160,39,25,C.navy);
+  tx(s,'15 组业务查询各有两种 SQL 实现，对应结果逐行比较一致。',60,608,1160,39,25,C.navy);
   s.speakerNotes.text='约 25 秒。两种 SQL 都返回每位老人及评估次数。第一种必须统计 a.id，不能直接 COUNT(*)，否则没有评估的老人也会被计为一次。第二种相关子查询在无记录时返回零。项目一共提供 15 组比较，结果均一致。来源：database/queries.json 的 A2，query-comparison.json。';
  }
  if(i===7){
@@ -145,10 +145,10 @@ export async function editDeck({presentation:p,input}){
  }
  if(i===10){
   s=base(p,i,'系统测试');
-  tx(s,`自动化测试 ${input.testCount} 项通过：126 项集成测试，37 项独立测试。`,60,151,1158,42,27);
+  tx(s,`自动化测试 ${input.testCount} 项通过（2026 年 11 月 13 日记录）`,60,151,1158,42,27);
   table(s,[['测试场景','核对内容','结果'],['并发创建计划','同一老人的重叠计划只能成功一份','通过'],['并发派单','最后一个班次名额不能被重复占用','通过'],['历史保护','终态派单、应急升级日志禁止改写','通过'],['复评与迁移','旧计划暂停；迁移前先解绑设备','通过'],['补贴核算','月季年周期、重报与金额追溯','通过']],60,222,1160,[270,725,165],60);
   tx(s,`浏览器验证 ${input.readRoutes} 个角色查询入口、${input.browserActions} 次业务提交。`,60,603,1160,32,23,C.navy);tx(s,'全量备份与 binlog 在独立库恢复，47 张表逐行内容一致。',60,638,1160,29,22,C.muted);
-  s.speakerNotes.text='约 25 秒。自动化测试共 163 项，失败、错误和跳过均为零。125 项真实 MySQL 业务测试覆盖权限、回滚、并发和历史保护，1 项启动后核对路由契约。37 项独立测试覆盖领域规则、路由边界和分层依赖。浏览器验证 109 个角色查询入口、26 次业务提交。备份恢复另有独立演练记录，47 张表逐行内容一致。来源：evidence/test-summary.json、completion-browser.json、recovery.json。';
+  s.speakerNotes.text='约 25 秒。2026 年 11 月 13 日记录的自动化测试共 163 项，失败、错误和跳过均为零。125 项真实 MySQL 业务测试覆盖权限、回滚、并发和历史保护，1 项启动后核对路由契约。37 项独立测试覆盖领域规则、路由边界和分层依赖。浏览器验证 109 个角色查询入口、26 次业务提交。备份恢复另有独立演练记录，47 张表逐行内容一致。来源：evidence/test-summary.json、completion-browser.json、recovery.json。';
  }
  if(i===11){
   s=base(p,i,'运行说明与待完成事项');
