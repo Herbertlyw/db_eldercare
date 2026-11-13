@@ -42,7 +42,7 @@ flowchart TD
 
 对应的 SQL 写入实现在 `infrastructure/persistence/Jdbc*Repository.java`；列表和详情查询放在 `infrastructure/query/*Queries.java`。这七个代码模块是对课程五条业务线的实现划分，不是新增七条教师要求。
 
-`CareService` 不再包含所有业务的巨型分支；模块通过 `ActionModule` 注册操作。重复名称会阻止启动，避免新处理逻辑静默遮蔽旧逻辑。`ReadService` 同样检查重复查询和详情名称。原有接口名保留，包括 `order.reject` 和 `order.release` 等兼容别名。
+`CareService` 负责统一的事务与操作分发；模块通过 `ActionModule` 注册操作。重复名称会阻止启动，避免新处理逻辑静默遮蔽旧逻辑。`ReadService` 同样检查重复查询和详情名称。兼容接口包括 `order.reject` 和 `order.release` 等兼容别名。
 
 ## 用“护工接单”理解调用过程
 
@@ -63,11 +63,11 @@ flowchart TD
 
 应用层依赖 `Scope` 的授权操作；`JdbcScope` 查询账号与业务记录实现这些检查。查询使用的 SQL 过滤片段由基础设施中的 `QueryScope` 单独提供。家属关联、机构归属和多社区范围必须同时覆盖列表、详情和写操作，不能只在界面隐藏按钮。
 
-## 这次采用到什么程度
+## 领域模型与查询投影
 
 订单、投诉、照护计划、补贴申报和应急事件使用明确的状态类型；服务价格和围栏计算可以独立测试。数据库继续承担跨行约束、并发保护和历史记录保护。
 
-当前仍有 `Map<String, Object>` 请求和查询投影，以兼容现有表单与 SQL 视图；部分旧输入保留字符串日期，由数据库按原有约定校验。因此这是逐步落实领域规则的分层实现，并非所有数据都已转换为完整的聚合模型。以后某个流程复杂起来，再为它增加专用命令和结果类型，不为每张表机械增加一套类。
+请求和查询投影采用 `Map<String, Object>`，与表单和 SQL 视图对应；部分旧输入保留字符串日期，由数据库按原有约定校验。业务模型按流程设置，领域状态对象处理规则，查询投影提供展示数据。流程复杂时可以增加专用命令和结果类型，数据库表与领域聚合不要求逐一对应。
 
 ## 修改代码时的约定
 
@@ -99,4 +99,4 @@ TEST_DATABASE=eldercare_refactor_test python3 scripts/test.py
 TEST_PORT=18082 TEST_DATABASE=eldercare_refactor_test node scripts/verify_browser.cjs
 ```
 
-测试结果以 `evidence/test-summary.json` 和 `evidence/completion-browser.json` 为准。源码更新不会自动更新 GitHub Release 中的旧 JAR；使用当前架构时应从当前源码构建。
+测试结果以 `evidence/test-summary.json` 和 `evidence/completion-browser.json` 为准。运行包包含与发布源码对应的 JAR、SQL、报告和 PPTX；包内 SHA256SUMS.json 记录文件校验值。

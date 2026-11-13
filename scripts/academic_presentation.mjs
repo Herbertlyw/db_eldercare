@@ -9,7 +9,7 @@ function node(s,label,x,y,w,h=64,fill='white',size=25){let a=rect(s,x,y,w,h,fill
 function link(s,a,b,fs='right',ts='left',dashed=false){return s.shapes.connect(a,b,{kind:'straight',fromSide:fs,toSide:ts,line:{fill:C.navy,width:1.6,style:dashed?'dashed':'solid'},tail:{type:'arrow',length:'sm',width:'sm'}});}
 function arrow(s,x,y,w,h=0){return s.shapes.add({geometry:'connector',kind:'straight',position:{left:x,top:y,width:w,height:h},line:{fill:C.navy,width:1.5},tail:{type:'arrow',width:'sm',length:'sm'}});}
 function base(p,i,title){
- let s=p.slides.getItem(i);s.shapes.deleteAll();s.setViewportSize(1280,720);s.background.fill='#FFFFFF';
+ let s=p.slides.getItem(i);s.shapes.deleteAll();for(const t of [...s.tables.items])s.tables.deleteById(t.id);for(const image of [...s.images.items])image.delete();s.setViewportSize(1280,720);s.background.fill='#FFFFFF';
  tx(s,String(i).padStart(2,'0'),58,44,62,55,32,C.accent);tx(s,title,138,42,1080,61,40,C.ink,true,'left','宋体');rule(s,60,118,1160,C.ink,1.2);
  tx(s,'数据库系统课程设计',60,677,800,24,16,C.muted);tx(s,String(i+1).padStart(2,'0'),1160,675,60,27,18,C.muted,false,'right');return s;
 }
@@ -44,25 +44,37 @@ export async function editDeck({presentation:p,input}){
   tx(s,'系统管理老人档案、上门服务和补贴记录，主要业务分为以下五部分。',60,153,1158,45,27);
   table(s,[['业务模块','主要操作','主要使用人员'],['档案与评估','建档、能力评估、制定照护计划','社区管理员、家属'],['服务订单','预约、派单、服务记录、家属确认','社区管理员、护工、家属'],['护工与排班','招聘培训、证书排班、工时复核','机构负责人、护工'],['监测与应急','设备绑定、体征采样、事件处置','社区管理员、护工'],['补贴与监管','周期补贴、抽查整改、辖区统计','社区、街道、民政']],60,224,1160,[235,555,370],62);
   tx(s,'主要业务顺序：建档评估 → 预约派单 → 上门服务 → 家属确认 → 补贴申报',60,620,1160,39,24,C.navy);
-  s.speakerNotes.text='约 20 秒。系统围绕上门服务记录展开，覆盖五条业务线。家属查询关联老人并预约服务，管理员派单，护工记录服务，家属确认后再用于补贴申报。机构负责人员资质和班次，街道和民政分别审核。来源：任务书与 CareService.java。';
+  s.speakerNotes.text='约 20 秒。系统围绕上门服务记录展开，覆盖五条业务线。家属查询关联老人并预约服务，管理员派单，护工记录服务，家属确认后再用于补贴申报。机构负责人员资质和班次，街道和民政分别审核。来源：任务书、application/service 下七个业务服务。';
  }
  if(i===2){
-  s=base(p,i,'系统结构');
-  tx(s,'Java 17 · Spring Boot · Spring JDBC · MySQL 8',60,151,1160,42,27,C.navy);
-  const a=node(s,'浏览器页面',60,225,335,63),b=node(s,'接口层  Api / Auth',60,327,335,63),c=node(s,'业务事务与权限校验',60,429,335,63),d=node(s,'持久层  Store → MySQL',60,531,335,63);link(s,a,b,'bottom','top');link(s,b,c,'bottom','top');link(s,c,d,'bottom','top');
-  s.images.add({...(input.assets?.workspace?{blob:input.assets.workspace,contentType:'image/png'}:{path:'/Users/herbert/Developer/db_project/evidence/ui-workspace-completion.png'}),position:{left:448,top:219,width:770,height:393},fit:'contain'});
-  tx(s,'社区管理员登录后的实际页面',448,625,770,30,20,C.muted,false,'center');
-  s.speakerNotes.text='约 20 秒。浏览器负责录入和展示，接口层检查登录身份，业务层完成权限判断和事务，Store 统一执行 JDBC 查询与更新。右侧是实际运行的社区工作台。来源：Application、Api、Auth、CareService、WorkflowService、ReadService、Scope、Store.java；evidence/ui-workspace-completion.png。';
+  s=base(p,i,'系统架构');
+  tx(s,'Java 17   Spring Boot   Spring JDBC   MySQL',60,151,1160,36,27,C.navy);
+  const rows=[
+   [205,70,'接口层','interfaces/web','Api 接收 HTTP 请求，Errors 返回错误'],
+   [305,85,'应用层','application','CareService / ReadService，七个业务服务与 Auth'],
+   [420,85,'领域层','domain','业务状态、计算规则与 Repository 仓储接口'],
+   [550,85,'基础设施层','infrastructure','Jdbc*Repository、Store、查询适配器与定时任务']
+  ];
+  let boxes=[];
+  for(const [y,h,title,path,detail] of rows){
+   boxes.push(rect(s,60,y,1160,h,'#F7F9FA'));
+   tx(s,title,78,y+12,218,35,28,C.navy,true);tx(s,path,78,y+47,218,26,19,C.muted);
+   tx(s,detail,325,y+24,870,42,26);
+  }
+  link(s,boxes[0],boxes[1],'bottom','top');link(s,boxes[1],boxes[2],'bottom','top');
+  link(s,boxes[3],boxes[2],'top','bottom',true);
+  tx(s,'JDBC 实现领域仓储接口，SQL 在基础设施中执行',669,513,551,29,20,C.muted);
+  s.speakerNotes.text='约 25 秒。程序采用分层单体。接口层处理请求和错误，应用层安排事务、授权和业务步骤，领域层保存状态及计算规则。基础设施实现仓储接口，通过 JDBC 访问 MySQL。图中向上的虚线表示接口实现，不代表领域代码依赖 JDBC。数据库继续执行跨行约束、过程和触发器。来源：src/main/java/edu/bjfu/eldercare 四层包及 docs/Java架构与开发约定.md。';
  }
  if(i===3){
   s=base(p,i,'概念结构设计');
-  tx(s,'系统共设计 47 张基础表，下图展示计划和派单的主要实体关系。',60,151,1158,42,27);
+  tx(s,'系统包含 47 张基础表，下图展示计划和派单的主要实体关系。',60,151,1158,42,27);
   const a=entity(s,'老人档案','elder','PK  id',60,233),b=entity(s,'能力评估','assessment','FK  elder_id',460,233),c=entity(s,'照护计划','care_plan','FK  assessment_id',860,233);
   const d=entity(s,'服务订单','service_order','FK  elder_id',60,472),e=entity(s,'派单记录','dispatch','FK  order_id · shift_id',460,472),f=entity(s,'护工排班','shift','FK  caregiver_id',860,472);
   link(s,a,b);link(s,b,c);link(s,a,d,'bottom','top');link(s,d,e);link(s,f,e,'left','right');
   for(const [x,y,t] of [[331,268,'1 : N'],[732,268,'1 : N'],[331,507,'1 : N'],[732,507,'N : 1'],[193,411,'1 : N']])tx(s,t,x,y,99,28,21,C.navy);
   tx(s,'计划引用具体评估；订单保留多次派单记录。完整主外键及可选性见报告 UML 图。',60,632,1158,33,23,C.muted);
-  s.speakerNotes.text='约 25 秒。一个老人可有多次评估，计划引用其中一次评估。订单与派单为一对多，从而保留改派历史；派单引用班次，班次决定护工。此页用 1:N 简写关系，零条记录的可选性及全部外键在报告图中展开。来源：01_schema.sql、foreign-keys.tsv。';
+  s.speakerNotes.text='约 20 秒。一个老人可有多次评估，计划引用其中一次评估。订单与派单为一对多，从而保留改派历史；派单引用班次，班次决定护工。此页用 1:N 简写关系，零条记录的可选性及全部外键在报告图中展开。来源：01_schema.sql、foreign-keys.tsv。';
  }
  if(i===4){
   s=base(p,i,'逻辑结构设计');
@@ -71,7 +83,7 @@ export async function editDeck({presentation:p,input}){
   tx(s,'care_plan 不重复保存 elder_id，老人归属通过 assessment 查询。',60,365,1158,40,25);
   const r2=[node(s,'派单记录\ndispatch',60,450,260,98,'white',25),node(s,'护工排班\nshift',490,450,260,98,'white',25),node(s,'护工\ncaregiver',920,450,260,98,'white',25)];link(s,r2[0],r2[1]);link(s,r2[1],r2[2]);tx(s,'shift_id',351,461,130,31,20,C.muted);tx(s,'caregiver_id',776,461,145,31,20,C.muted);
   tx(s,'dispatch 不重复保存 caregiver_id，护工归属通过 shift 查询。',60,575,1158,40,25);
-  s.speakerNotes.text='约 20 秒。这两处对应第三范式分析。计划引用评估以后，老人字段可通过评估得到；派单引用班次以后，护工字段可通过班次得到。删除重复归属字段后，用两个内部视图供业务查询。来源：docs/逻辑设计与范式分析.md。';
+  s.speakerNotes.text='约 15 秒。这两处对应第三范式分析。计划引用评估以后，老人字段可通过评估得到；派单引用班次以后，护工字段可通过班次得到。两个内部视图根据外键关联提供业务查询所需的归属。来源：docs/逻辑设计与范式分析.md。';
  }
  if(i===5){
   s=base(p,i,'派单事务实现');
@@ -83,7 +95,7 @@ export async function editDeck({presentation:p,input}){
   code(s,['UPDATE shift','SET used_count = used_count + 1','WHERE id = p_shift','  AND used_count < capacity;'],620,299,600,23);
   tx(s,'更新行数不是 1 时抛出异常，\n整个事务回滚。',678,462,536,80,26);
   rule(s,60,587,1160);tx(s,'改派失败时，旧派单和原有班次占用同时恢复。',60,614,1160,39,27,C.navy);
-  s.speakerNotes.text='约 35 秒。先锁定订单和护工，再验证资质、区域和预约冲突。改派保留原记录。右侧是容量条件更新的节选，完整 SQL 还检查班次状态与时段。更新失败就抛异常，由外层事务回滚。并发争抢最后一个名额已在真实 MySQL 中测试。来源：02_routines.sql 的 assign_order。';
+  s.speakerNotes.text='约 30 秒。先锁定订单和护工，再验证资质、区域和预约冲突。改派保留原记录。右侧是容量条件更新的节选，完整 SQL 还检查班次状态与时段。更新失败就抛异常，由外层事务回滚。并发争抢最后一个名额已在真实 MySQL 中测试。来源：02_routines.sql 的 assign_order。';
  }
  if(i===6){
   s=base(p,i,'业务查询设计');
@@ -117,7 +129,7 @@ export async function editDeck({presentation:p,input}){
   const review=['监管发现问题','机构提交材料','监管复核结果','通过后公示结论'].map((label,j)=>node(s,label,60+j*300,496,260,70,'white',24));
   for(let j=0;j<3;j++)link(s,review[j],review[j+1]);
   tx(s,'退回后追加新材料，保留上次提交与审核意见；整改完成前限制接单。',60,603,1160,46,24,C.navy);
-  s.speakerNotes.text='约 25 秒。投诉由家属提出，社区受理后转给实际承接服务的机构；尚未派单的问题由社区自行处理。机构回复后，家属或社区确认结案。整改由机构提交材料，监管可以通过或退回。两种流程都保留每次办理记录。来源：WorkflowService、complaint_log、rectification_submission；浏览器已走通两条流程。';
+  s.speakerNotes.text='约 25 秒。投诉由家属提出，社区受理后转给实际承接服务的机构；尚未派单的问题由社区自行处理。机构回复后，家属或社区确认结案。整改由机构提交材料，监管可以通过或退回。两种流程都保留每次办理记录。来源：application/service/FeedbackService.java、GovernanceService.java，complaint_log、rectification_submission；浏览器已走通两条流程。';
  }
  if(i===9){
   s=base(p,i,'辖区授权与补贴周期');
@@ -129,14 +141,14 @@ export async function editDeck({presentation:p,input}){
   tx(s,'按政策确定申报周期',675,170,545,42,30,C.navy,true);
   table(s,[['周期','输入示例'],['月度','2026-11'],['季度','2026-Q4'],['年度','2026']],675,254,545,[245,300],65);
   tx(s,'同一老人、同一项目的周期不能重叠。\n补件重报保留原订单、工时和审核。',675,561,545,90,24,C.navy);
-  s.speakerNotes.text='约 25 秒。监管范围由账号与社区的关联表确定，不能只用账号所属社区过滤。统计提供覆盖率和及时响应率，并说明分母。补贴规则可以按月、季或年结算，跨周期也检查重复；驳回后在原申请补充材料。应急通知按项目规则送达本社区责任人员：一级为家属、护工和社区管理员，二级及以上增加本社区监管。跨社区查询权不等于通知订阅。来源：Scope、ReadService、escalate_events、submit_claim；月季年和越权测试已通过。';
+  s.speakerNotes.text='约 25 秒。监管范围由账号与社区的关联表确定，不能只用账号所属社区过滤。统计提供覆盖率和及时响应率，并说明分母。补贴规则可以按月、季或年结算，跨周期也检查重复；驳回后在原申请补充材料。应急通知按项目规则送达本社区责任人员：一级为家属、护工和社区管理员，二级及以上增加本社区监管。跨社区查询权不等于通知订阅。来源：infrastructure/security/JdbcScope.java、infrastructure/query/GovernanceQueries.java，escalate_events、submit_claim；月季年和越权测试已通过。';
  }
  if(i===10){
   s=base(p,i,'系统测试');
-  tx(s,`使用独立 MySQL 测试库执行 ${input.testCount} 项集成测试，全部通过。`,60,151,1158,42,27);
+  tx(s,`自动化测试 ${input.testCount} 项通过：126 项集成测试，37 项独立测试。`,60,151,1158,42,27);
   table(s,[['测试场景','核对内容','结果'],['并发创建计划','同一老人的重叠计划只能成功一份','通过'],['并发派单','最后一个班次名额不能被重复占用','通过'],['历史保护','终态派单、应急升级日志禁止改写','通过'],['复评与迁移','旧计划暂停；迁移前先解绑设备','通过'],['补贴核算','月季年周期、重报与金额追溯','通过']],60,222,1160,[270,725,165],60);
   tx(s,`浏览器验证 ${input.readRoutes} 个角色查询入口、${input.browserActions} 次业务提交。`,60,603,1160,32,23,C.navy);tx(s,'全量备份与 binlog 在独立库恢复，47 张表逐行内容一致。',60,638,1160,29,22,C.muted);
-  s.speakerNotes.text='约 25 秒。测试关注正常操作、异常输入、权限和并发。表中列出五个重点场景。本轮新增 16 项回归测试，检查复评与计划衔接、设备迁移、本社区升级通知以及数据库直接改写历史的拒绝行为。另做过一轮受控备份恢复，47 张表逐行内容一致，并确认实际 binlog 增量记录恢复。恢复演练不等同于生产环境容灾保证。来源：DatabaseIntegrationTest、WorkflowIntegrationTest、HistoryRulesIntegrationTest、Surefire XML、recovery.json。';
+  s.speakerNotes.text='约 25 秒。自动化测试共 163 项，失败、错误和跳过均为零。125 项真实 MySQL 业务测试覆盖权限、回滚、并发和历史保护，1 项启动后核对路由契约。37 项独立测试覆盖领域规则、路由边界和分层依赖。浏览器验证 109 个角色查询入口、26 次业务提交。备份恢复另有独立演练记录，47 张表逐行内容一致。来源：evidence/test-summary.json、completion-browser.json、recovery.json。';
  }
  if(i===11){
   s=base(p,i,'运行说明与待完成事项');
@@ -146,6 +158,15 @@ export async function editDeck({presentation:p,input}){
   rule(s,60,585,1160);tx(s,'演示使用虚构业务数据，设备采样、定位围栏和拨付均按课程场景模拟。',60,617,1160,41,24,C.muted);
   s.speakerNotes.text='约 20 秒。提供数据库脚本、JAR 与 Windows 初始化和启动脚本，运行不依赖 Docker。已在本机验证程序，Windows 目标电脑仍需实测。真实成员、实际贡献和发言视频需要小组补齐，蓝色内容用于标记这些待完成项。';
  }
+ if(i===12){
+  s=base(p,i,'接单流程与代码职责');
+  tx(s,'入口  POST /api/actions/order.accept',60,151,1160,42,27,C.navy);
+  const steps=[['CareService.execute','开启事务，设置审计身份并分发操作'],['OrderService.acceptOrder','校验角色，锁定记录并检查访问范围'],['ServiceOrder.requireAcceptable','检查订单是否处于待接单状态'],['JdbcOrderRepository','执行资格过程，更新派单与订单状态']];
+  steps.forEach(([name,detail],i)=>{tx(s,String(i+1),60,230+i*88,40,34,26,C.accent);tx(s,name,110,230+i*88,1060,34,27,C.ink,true);tx(s,detail,110,269+i*88,1060,34,25,C.muted);});
+  rule(s,60,610,1160);tx(s,'所有写入属于同一个事务，任一步骤失败时整体回滚。',60,630,1160,35,25,C.navy);
+  s.speakerNotes.text='约 25 秒。以接单为例，HTTP 请求先进入 CareService 的公开事务方法，再调用 OrderService。应用服务校验权限和加锁，领域对象检查订单状态，JDBC 仓储调用数据库资格过程并更新记录。事务覆盖整个调用链，中途失败时统一回滚。来源：application/CareService.java 的 execute，application/service/OrderService.java 的 acceptOrder，domain/order/ServiceOrder.java 的 requireAcceptable，infrastructure/persistence/JdbcOrderRepository.java。';
+ }
+
  }
  return {edited:input.slides,slideCount:p.slides.items.length};
 }
