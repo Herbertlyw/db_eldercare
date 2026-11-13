@@ -1,6 +1,6 @@
 # Java 架构与开发约定
 
-本项目采用 DDD 风格的分层单体。一个 Spring Boot 进程连接一个 MySQL 数据库，仍使用 Spring JDBC / JdbcTemplate 手写 SQL。DDD 是组织代码和业务规则的方法，不是数据库访问框架，也不替代课程要求的关系设计、视图、存储过程、触发器和数据库测试。
+本项目采用 DDD 风格的分层单体。一个 Spring Boot 进程连接一个 MySQL 数据库，使用 Spring JDBC / JdbcTemplate 手写 SQL。DDD 是组织代码和业务规则的方法，不是数据库访问框架，也不替代课程要求的关系设计、视图、存储过程、触发器和数据库测试。
 
 ## 四层分别做什么
 
@@ -40,7 +40,7 @@ flowchart TD
 | 补贴 | `application/service/SubsidyService.java` | 政策、申报、证明、分级审核、拨付和重报 |
 | 监管 | `application/service/GovernanceService.java` | 抽查、整改、机构考核和公示 |
 
-对应的 SQL 写入实现在 `infrastructure/persistence/Jdbc*Repository.java`；列表和详情查询放在 `infrastructure/query/*Queries.java`。这七个代码模块是对课程五条业务线的实现划分，不是新增七条教师要求。
+对应的 SQL 写入实现在 `infrastructure/persistence/Jdbc*Repository.java`；列表和详情查询放在 `infrastructure/query/*Queries.java`。七个代码模块按办理流程划分，共同覆盖课程规定的五条业务线。
 
 `CareService` 负责统一的事务与操作分发；模块通过 `ActionModule` 注册操作。重复名称会阻止启动，避免新处理逻辑静默遮蔽旧逻辑。`ReadService` 同样检查重复查询和详情名称。兼容接口包括 `order.reject` 和 `order.release` 等兼容别名。
 
@@ -67,7 +67,7 @@ flowchart TD
 
 订单、投诉、照护计划、补贴申报和应急事件使用明确的状态类型；服务价格和围栏计算可以独立测试。数据库继续承担跨行约束、并发保护和历史记录保护。
 
-请求和查询投影采用 `Map<String, Object>`，与表单和 SQL 视图对应；部分旧输入保留字符串日期，由数据库按原有约定校验。业务模型按流程设置，领域状态对象处理规则，查询投影提供展示数据。流程复杂时可以增加专用命令和结果类型，数据库表与领域聚合不要求逐一对应。
+请求和查询投影采用 `Map<String, Object>`，与表单和 SQL 视图对应；部分请求使用字符串日期，由数据库按接口约定校验。业务模型按流程设置，领域状态对象处理规则，查询投影提供展示数据。流程复杂时可以增加专用命令和结果类型，数据库表与领域聚合不要求逐一对应。
 
 ## 修改代码时的约定
 
@@ -85,7 +85,7 @@ mvn spotless:check
 
 ## 验证方式
 
-`src/test/java/edu/bjfu/eldercare/domain/DomainRulesTest.java` 验证纯业务规则；`ArchitectureTest` 检查依赖方向；`application/RoutingTest` 检查重复注册、未知操作和分页拒绝；原有三组 MySQL 集成测试继续检查权限、触发器、回滚、并发与历史保护。`RouteContractIntegrationTest` 在 Spring 启动后核对 71 个操作、49 个列表和 15 类详情。
+`src/test/java/edu/bjfu/eldercare/domain/DomainRulesTest.java` 验证纯业务规则；`ArchitectureTest` 检查依赖方向；`application/RoutingTest` 检查重复注册、未知操作和分页拒绝；三组 MySQL 业务集成测试检查权限、触发器、回滚、并发与历史保护。`RouteContractIntegrationTest` 在 Spring 启动后核对 71 个操作、49 个列表和 15 类详情。
 
 本机可用以下命令选择单独测试库。脚本会删除并重建该库，运行前确认没有其他任务使用它；数据库名仅允许 `eldercare_test` 或 `eldercare_<名称>_test`。
 

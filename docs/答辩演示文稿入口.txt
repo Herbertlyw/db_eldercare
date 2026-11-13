@@ -1,5 +1,7 @@
 答辩文件：outputs/社区居家养老平台课程答辩_修订版.pptx
+PDF 文件：outputs/社区居家养老平台课程答辩_修订版.pdf
 
-共 12 页，16:9。使用 WPS 演示或 Microsoft PowerPoint 打开，文字和流程、关系图可编辑；每页附讲稿备注。
-已在本机 macOS WPS 中打开并成功导出 12 页 PDF。结构和逐页复核结果见 evidence/presentation-check.json。Windows WPS 尚未实机验证。
+共 13 页，16:9。使用 WPS 演示或 Microsoft PowerPoint 打开 PPTX；文字、表格和流程图为可编辑对象，每页附讲稿备注。
+内容包括需求分析、四层架构、接单流程、关系模型、SQL、事务、业务规则、测试与运行说明。
+当前文件检查记录见 evidence/documentation-check.json。Windows WPS 尚未实机验证。
 蓝色内容为待填写或待验证内容。录制前补齐真实成员与分工，并根据实际发言安排调整备注。

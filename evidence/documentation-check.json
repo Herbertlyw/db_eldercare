@@ -1,0 +1,101 @@
+{
+  "checkedAt": "2026-11-13T08:54:11.847082+00:00",
+  "sourceBaseline": "c176667743dfe65ea1c40fcac860f53b97d0afe2",
+  "scope": "Repository documentation and course materials compared with current Java/SQL sources. Product source and SQL unchanged. No database tests rerun in this documentation task.",
+  "databaseObjects": {
+    "tables": 47,
+    "businessViews": 15,
+    "internalViews": 2,
+    "procedures": 10,
+    "triggers": 74
+  },
+  "routeContract": {
+    "actions": 71,
+    "queries": 49,
+    "details": 15
+  },
+  "diagram": {
+    "globalEntities": 47,
+    "foreignKeys": 92,
+    "matchesSchemaEvidence": true
+  },
+  "java": {
+    "mainFiles": 73,
+    "mainPhysicalLines": 6527,
+    "testFiles": 7,
+    "testPhysicalLines": 3808
+  },
+  "priorBusinessVerification": {
+    "source": "evidence/test-summary.json",
+    "tests": 163,
+    "mysqlBusinessTests": 125,
+    "routeContractIntegrationTests": 1,
+    "independentTests": 37,
+    "rerun": false
+  },
+  "documents": {
+    "groupPages": 122,
+    "personalPages": 3,
+    "tocVerified": true,
+    "groupPixelIdenticalPages": 115,
+    "groupChangedPagesVisuallyChecked": [
+      25,
+      26,
+      31,
+      66,
+      73,
+      83,
+      84
+    ],
+    "allPageContactSheetsChecked": true,
+    "pendingTextColour": "1565C0"
+  },
+  "presentation": {
+    "slides": 13,
+    "notes": 13,
+    "nativeTables": 4,
+    "packageIntegrity": "pass",
+    "layoutGeometry": "pass",
+    "artifactToolImport": "pass",
+    "renderedSlidesVisuallyChecked": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "windowsWpsVerified": false
+  },
+  "files": {
+    "README.md": "ac1d03e0cdb63660e5fe45d23bdc98eef6254384bcf9a620c60e606b155cc3e3",
+    "AGENTS.md": "74481c853694f62e0fb9860a7c6e75908a74be44766fba9e47dca5c4a16958a9",
+    "docs/Java架构与开发约定.md": "da470e5a2f2ccaa50b75f150f7eb88fc2dde5948670191d70d639b51332ba4d5",
+    "docs/从零讲解与代码导读.md": "e3df85fcb17d63ce94b5a08d864325f11ae8a2ee4e03730da70d8cebe09db605",
+    "docs/代码与需求复查记录.md": "ec2733aaff0f49e5ed65dc8fff2cf3cd9f055cb521231fe504b5dcfce47183e5",
+    "docs/功能验收清单.md": "59c7c9afd74b8f0e423b29ac536e37ee28b6d3bc5d6a86c7674b725193eaea9d",
+    "docs/数据字典与关系模式.md": "99112cd41d6256287b4dc4a7f0545b1e4d3ef5fb712d96b92357793da054d61b",
+    "docs/答辩讲解与录制脚本.md": "3f3dc700fdadda6baed32e04ca3c4673792319ff388a6de580b00032dcf1da7e",
+    "docs/运行维护与验收.md": "57fc07ee168f7293f7556ae5159bf59427175549153c08066501b328fea2dd8b",
+    "docs/逻辑设计与范式分析.md": "5b4448a1995bb204817d77d43ec06fb6dab12269746f8f822a6f3cd75eb93b38",
+    "docs/需求与整体设计思路.md": "2b712eaaf6f8f91da7d501ddb2c182762911d53713a0fb21b14e5f27dfd52d12",
+    "docs/需求追踪与模板差异.md": "f22bcbd396a93eae5adf716d2ea0bbe6ba37ebfd024634bde926644a16439e4c",
+    "docs/答辩演示文稿入口.txt": "8febcb5706b5fa29eb555caddbe593a1e6b6c7d9204ec46eb63982445c12c92f",
+    "database/migrations/README.md": "e0d64642faa0187d1984f8c23739f0593c918783559cfbc73bf0db896df67755",
+    "scripts/academic_presentation.mjs": "3fa8b8b3b05b65c3c5302becf9ca687b62e788ef4b93d3501b37f858d931acd5",
+    "scripts/export_presentation.mjs": "c0c273ba786c34dfcfa6d669c943320734e765e18c54af5417e027292fb04aff",
+    "outputs/刘禹伟_个人报告预填稿_待确认实际分工.docx": "211ec7325224f34cc8429b6e11f5440fa4fa15a2b770d6af021dbb43cb5addd8",
+    "outputs/刘禹伟_个人报告预填稿_待确认实际分工.pdf": "c67bc6b78cc6f5c9b543393b1f6afba6150350c7b0f9ba11be7c16046b6d75f6",
+    "outputs/社区居家养老平台小组报告_待补成员信息.docx": "bd851970dfee10fdc16675929ff57c93dfdeab7e1975c3381b4133233e4344c3",
+    "outputs/社区居家养老平台小组报告_待补成员信息.pdf": "801301719b982cb68bdcb9eccddfbd2acdd322d5646db4c947eca4a450c5891a",
+    "outputs/社区居家养老平台课程答辩_修订版.pdf": "7524f37e6a5495039da37813676d53c0e678fd7333bf95b5a67be25a14d8e360",
+    "outputs/社区居家养老平台课程答辩_修订版.pptx": "941f2214702eac27180044185356a8380fc7232c3ee182d72a1cd1036dffd572"
+  }
+}
