@@ -1,0 +1,580 @@
+-- Upgrade from the previous course version; backup and stop the app first.
+SET @actor='migration:20261113';
+DROP TRIGGER IF EXISTS `keep_assessment`;
+DROP TRIGGER IF EXISTS `audit_attendance_insert`;
+DROP TRIGGER IF EXISTS `audit_attendance_update`;
+DROP TRIGGER IF EXISTS `keep_attendance`;
+DROP TRIGGER IF EXISTS `immutable_audit_log`;
+DROP TRIGGER IF EXISTS `keep_audit_log`;
+DROP TRIGGER IF EXISTS `plan_before_insert`;
+DROP TRIGGER IF EXISTS `audit_care_plan_insert`;
+DROP TRIGGER IF EXISTS `plan_before_update`;
+DROP TRIGGER IF EXISTS `audit_care_plan_update`;
+DROP TRIGGER IF EXISTS `audit_claim_insert`;
+DROP TRIGGER IF EXISTS `claim_before_update`;
+DROP TRIGGER IF EXISTS `audit_claim_update`;
+DROP TRIGGER IF EXISTS `keep_claim`;
+DROP TRIGGER IF EXISTS `immutable_claim_item`;
+DROP TRIGGER IF EXISTS `keep_claim_item`;
+DROP TRIGGER IF EXISTS `immutable_claim_review`;
+DROP TRIGGER IF EXISTS `keep_claim_review`;
+DROP TRIGGER IF EXISTS `binding_before_insert`;
+DROP TRIGGER IF EXISTS `binding_before_update`;
+DROP TRIGGER IF EXISTS `keep_binding`;
+DROP TRIGGER IF EXISTS `audit_dispatch_insert`;
+DROP TRIGGER IF EXISTS `dispatch_accept_check`;
+DROP TRIGGER IF EXISTS `audit_dispatch_update`;
+DROP TRIGGER IF EXISTS `keep_dispatch`;
+DROP TRIGGER IF EXISTS `audit_emergency_insert`;
+DROP TRIGGER IF EXISTS `emergency_notify`;
+DROP TRIGGER IF EXISTS `audit_emergency_update`;
+DROP TRIGGER IF EXISTS `audit_inspection_insert`;
+DROP TRIGGER IF EXISTS `audit_inspection_update`;
+DROP TRIGGER IF EXISTS `payment_before_insert`;
+DROP TRIGGER IF EXISTS `immutable_payment`;
+DROP TRIGGER IF EXISTS `keep_payment`;
+DROP TRIGGER IF EXISTS `order_before_insert`;
+DROP TRIGGER IF EXISTS `audit_service_order_insert`;
+DROP TRIGGER IF EXISTS `order_before_update`;
+DROP TRIGGER IF EXISTS `audit_service_order_update`;
+DROP TRIGGER IF EXISTS `confirmed_record_immutable`;
+DROP TRIGGER IF EXISTS `keep_service_record`;
+DROP TRIGGER IF EXISTS `shift_before_insert`;
+DROP TRIGGER IF EXISTS `shift_before_update`;
+DROP TRIGGER IF EXISTS `used_shift_before_update`;
+DROP TRIGGER IF EXISTS `vital_before_insert`;
+DROP TRIGGER IF EXISTS `vital_after_insert`;
+DROP TRIGGER IF EXISTS `immutable_vital`;
+DROP TRIGGER IF EXISTS `keep_vital`;
+DROP PROCEDURE IF EXISTS `assert_order`;
+DROP PROCEDURE IF EXISTS `assert_plan`;
+DROP PROCEDURE IF EXISTS `assert_shift`;
+DROP PROCEDURE IF EXISTS `assert_worker_order`;
+DROP PROCEDURE IF EXISTS `assign_order`;
+DROP PROCEDURE IF EXISTS `escalate_events`;
+DROP PROCEDURE IF EXISTS `expire_plans`;
+DROP PROCEDURE IF EXISTS `submit_claim`;
+DROP PROCEDURE IF EXISTS `verify_hours`;
+-- Completion schema 2026-11-13. Coordinates use a fictional local plane in metres.
+ALTER TABLE community ADD street_name VARCHAR(80) NOT NULL DEFAULT '演示街道', ADD center_x DECIMAL(12,3) NOT NULL DEFAULT 0, ADD center_y DECIMAL(12,3) NOT NULL DEFAULT 0, ADD radius_m INT NOT NULL DEFAULT 5000, ADD fence_m INT NOT NULL DEFAULT 200, ADD CHECK(radius_m>0 AND fence_m>0 AND fence_m<=radius_m);
+ALTER TABLE elder ADD position_x DECIMAL(12,3) NOT NULL DEFAULT 0, ADD position_y DECIMAL(12,3) NOT NULL DEFAULT 0;
+ALTER TABLE guardian ADD active BOOLEAN NOT NULL DEFAULT TRUE;
+ALTER TABLE service_order ADD position_x DECIMAL(12,3) NOT NULL DEFAULT 0, ADD position_y DECIMAL(12,3) NOT NULL DEFAULT 0;
+ALTER TABLE attendance ADD checkin_x DECIMAL(12,3), ADD checkin_y DECIMAL(12,3), ADD checkout_x DECIMAL(12,3), ADD checkout_y DECIMAL(12,3), ADD checkout_fence_ok BOOLEAN, ADD CHECK((checkin_x IS NULL)=(checkin_y IS NULL)), ADD CHECK((checkout_x IS NULL)=(checkout_y IS NULL));
+ALTER TABLE device ADD community_id BIGINT, ADD FOREIGN KEY(community_id) REFERENCES community(id);
+ALTER TABLE emergency ADD initial_deadline DATETIME, ADD closed_at DATETIME(6), ADD close_reason VARCHAR(300);
+ALTER TABLE notification MODIFY event_id BIGINT NULL, ADD assessment_id BIGINT, ADD dedupe_key VARCHAR(150) UNIQUE, ADD FOREIGN KEY(assessment_id) REFERENCES assessment(id);
+ALTER TABLE policy ADD settlement_cycle ENUM('MONTH','QUARTER','YEAR') NOT NULL DEFAULT 'MONTH', ADD minimum_age INT NOT NULL DEFAULT 0, ADD required_tag ENUM('ALONE','DISABLED','LOW_INCOME'), ADD CHECK(minimum_age BETWEEN 0 AND 120);
+ALTER TABLE claim MODIFY period VARCHAR(10) NOT NULL, ADD community_id BIGINT, ADD period_start DATE, ADD period_end DATE, ADD FOREIGN KEY(community_id) REFERENCES community(id), ADD CHECK(period_end IS NULL OR period_end>period_start);
+ALTER TABLE complaint ADD status ENUM('SUBMITTED','ASSIGNED','REPLIED','CLOSED') NOT NULL DEFAULT 'SUBMITTED', ADD organization_id BIGINT, ADD handler_id BIGINT, ADD result VARCHAR(1000), ADD updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD FOREIGN KEY(organization_id) REFERENCES organization(id), ADD FOREIGN KEY(handler_id) REFERENCES account(id);
+ALTER TABLE audit_log ADD before_data JSON, ADD after_data JSON;
+CREATE TABLE account_scope(id BIGINT PRIMARY KEY AUTO_INCREMENT,account_id BIGINT NOT NULL,community_id BIGINT NOT NULL,UNIQUE(account_id,community_id),FOREIGN KEY(account_id) REFERENCES account(id),FOREIGN KEY(community_id) REFERENCES community(id));
+CREATE TABLE policy_area(id BIGINT PRIMARY KEY AUTO_INCREMENT,policy_id BIGINT NOT NULL,community_id BIGINT NOT NULL,UNIQUE(policy_id,community_id),FOREIGN KEY(policy_id) REFERENCES policy(id),FOREIGN KEY(community_id) REFERENCES community(id));
+CREATE TABLE recruitment(id BIGINT PRIMARY KEY AUTO_INCREMENT,organization_id BIGINT NOT NULL,candidate_name VARCHAR(60) NOT NULL,phone_cipher TEXT NOT NULL,status ENUM('APPLIED','HIRED','REJECTED') NOT NULL DEFAULT 'APPLIED',caregiver_id BIGINT UNIQUE,reviewer_id BIGINT,review_note VARCHAR(500),created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,reviewed_at DATETIME,FOREIGN KEY(organization_id) REFERENCES organization(id),FOREIGN KEY(caregiver_id) REFERENCES caregiver(id),FOREIGN KEY(reviewer_id) REFERENCES account(id));
+CREATE TABLE training(id BIGINT PRIMARY KEY AUTO_INCREMENT,organization_id BIGINT NOT NULL,title VARCHAR(100) NOT NULL,starts_at DATETIME NOT NULL,ends_at DATETIME NOT NULL,CHECK(ends_at>starts_at),FOREIGN KEY(organization_id) REFERENCES organization(id));
+CREATE TABLE training_record(id BIGINT PRIMARY KEY AUTO_INCREMENT,training_id BIGINT NOT NULL,caregiver_id BIGINT NOT NULL,result ENUM('PENDING','PASS','FAIL') NOT NULL DEFAULT 'PENDING',score INT,recorded_by BIGINT,recorded_at DATETIME,UNIQUE(training_id,caregiver_id),CHECK(score IS NULL OR score BETWEEN 0 AND 100),FOREIGN KEY(training_id) REFERENCES training(id),FOREIGN KEY(caregiver_id) REFERENCES caregiver(id),FOREIGN KEY(recorded_by) REFERENCES account(id));
+CREATE TABLE complaint_log(id BIGINT PRIMARY KEY AUTO_INCREMENT,complaint_id BIGINT NOT NULL,actor_id BIGINT NOT NULL,status VARCHAR(30) NOT NULL,message VARCHAR(1000) NOT NULL,created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY(complaint_id) REFERENCES complaint(id),FOREIGN KEY(actor_id) REFERENCES account(id));
+CREATE TABLE inspection_batch(id BIGINT PRIMARY KEY AUTO_INCREMENT,community_id BIGINT NOT NULL,inspector_id BIGINT NOT NULL,target_type ENUM('ORDER','CAREGIVER') NOT NULL,starts_at DATETIME NOT NULL,ends_at DATETIME NOT NULL,ratio DECIMAL(6,5) NOT NULL,population INT NOT NULL,sample_count INT NOT NULL,sample_seed CHAR(36) NOT NULL,created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,CHECK(ends_at>starts_at),CHECK(ratio>0 AND ratio<=1),CHECK(population>=sample_count AND sample_count>0),FOREIGN KEY(community_id) REFERENCES community(id),FOREIGN KEY(inspector_id) REFERENCES account(id));
+ALTER TABLE inspection MODIFY status ENUM('PENDING','OPEN','REVIEW','CLOSED') NOT NULL DEFAULT 'OPEN', ADD batch_id BIGINT, ADD created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, MODIFY score INT NULL, ADD FOREIGN KEY(batch_id) REFERENCES inspection_batch(id);
+CREATE TABLE rectification_submission(id BIGINT PRIMARY KEY AUTO_INCREMENT,inspection_id BIGINT NOT NULL,submitted_by BIGINT NOT NULL,measures VARCHAR(1000) NOT NULL,evidence VARCHAR(1000) NOT NULL,created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,decision ENUM('PENDING','ACCEPT','RETURN') NOT NULL DEFAULT 'PENDING',reviewer_id BIGINT,review_note VARCHAR(1000),reviewed_at DATETIME,FOREIGN KEY(inspection_id) REFERENCES inspection(id),FOREIGN KEY(submitted_by) REFERENCES account(id),FOREIGN KEY(reviewer_id) REFERENCES account(id));
+CREATE TABLE organization_report(id BIGINT PRIMARY KEY AUTO_INCREMENT,organization_id BIGINT NOT NULL,period CHAR(7) NOT NULL,summary VARCHAR(2000) NOT NULL,evidence VARCHAR(1000) NOT NULL,submitted_by BIGINT NOT NULL,status ENUM('SUBMITTED','ACCEPTED','RETURNED') NOT NULL DEFAULT 'SUBMITTED',reviewer_id BIGINT,review_note VARCHAR(1000),created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,reviewed_at DATETIME,FOREIGN KEY(organization_id) REFERENCES organization(id),FOREIGN KEY(submitted_by) REFERENCES account(id),FOREIGN KEY(reviewer_id) REFERENCES account(id));
+CREATE TABLE public_notice(id BIGINT PRIMARY KEY AUTO_INCREMENT,inspection_id BIGINT NOT NULL,publisher_id BIGINT NOT NULL,title VARCHAR(100) NOT NULL,body VARCHAR(1000) NOT NULL,published_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,withdrawn_at DATETIME,withdraw_reason VARCHAR(300),FOREIGN KEY(inspection_id) REFERENCES inspection(id),FOREIGN KEY(publisher_id) REFERENCES account(id));
+CREATE TABLE claim_evidence(id BIGINT PRIMARY KEY AUTO_INCREMENT,claim_id BIGINT NOT NULL,submitted_by BIGINT NOT NULL,name VARCHAR(100) NOT NULL,content TEXT NOT NULL,content_sha256 CHAR(64) NOT NULL,created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY(claim_id) REFERENCES claim(id),FOREIGN KEY(submitted_by) REFERENCES account(id));
+CREATE TABLE event_step(id BIGINT PRIMARY KEY AUTO_INCREMENT,event_id BIGINT NOT NULL,actor_id BIGINT NOT NULL,action VARCHAR(30) NOT NULL,message VARCHAR(1000) NOT NULL,created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),FOREIGN KEY(event_id) REFERENCES emergency(id),FOREIGN KEY(actor_id) REFERENCES account(id));
+CREATE INDEX idx_complaint_status ON complaint(organization_id,status,created_at);
+CREATE INDEX idx_scope_community ON account_scope(community_id,account_id);
+CREATE INDEX idx_training_worker ON training_record(caregiver_id,result);
+CREATE INDEX idx_inspection_batch ON inspection(batch_id,status);
+
+ALTER TABLE complaint ADD kind ENUM('REVIEW','COMPLAINT') NOT NULL DEFAULT 'COMPLAINT';
+ALTER TABLE device ADD simulation_enabled BOOLEAN NOT NULL DEFAULT FALSE, ADD simulation_metric_id BIGINT, ADD simulation_seconds INT NOT NULL DEFAULT 60, ADD last_simulated_at DATETIME(6), ADD CHECK(simulation_seconds BETWEEN 30 AND 3600), ADD FOREIGN KEY(simulation_metric_id) REFERENCES metric_rule(id);
+
+ALTER TABLE vital MODIFY collected_at DATETIME(6) NOT NULL;
+
+
+UPDATE community SET street_name=CONCAT('演示街道',CEIL(id/2)),center_x=id*10000 WHERE area_code LIKE 'DEMO-%';
+UPDATE elder e JOIN community c ON c.id=e.community_id SET e.position_x=c.center_x,e.position_y=c.center_y;
+UPDATE service_order o JOIN community c ON c.id=o.community_id SET o.position_x=c.center_x,o.position_y=c.center_y;
+UPDATE device d SET community_id=COALESCE((SELECT e.community_id FROM device_binding b JOIN elder e ON e.id=b.elder_id WHERE b.device_id=d.id ORDER BY b.bound_at DESC,b.id DESC LIMIT 1),1);
+UPDATE claim c JOIN elder e ON e.id=c.elder_id SET c.community_id=e.community_id,c.period_start=STR_TO_DATE(CONCAT(c.period,'-01'),'%Y-%m-%d'),c.period_end=DATE_ADD(STR_TO_DATE(CONCAT(c.period,'-01'),'%Y-%m-%d'),INTERVAL 1 MONTH);
+UPDATE complaint SET kind='REVIEW',status='CLOSED',result='迁移前的历史服务评价';
+INSERT INTO account_scope(account_id,community_id) SELECT a.id,c.id FROM account a JOIN community h ON h.id=a.community_id JOIN community c ON c.district=h.district WHERE a.role='REGULATOR' OR (a.role='STREET' AND c.street_name=h.street_name);
+INSERT INTO policy_area(policy_id,community_id) SELECT id,community_id FROM policy;
+INSERT INTO complaint_log(complaint_id,actor_id,status,message) SELECT id,account_id,'CLOSED','迁移前服务评价，保留原内容' FROM complaint;
+INSERT INTO recruitment(organization_id,candidate_name,phone_cipher,status,caregiver_id,reviewer_id,review_note,reviewed_at) SELECT c.organization_id,c.name,g.phone_cipher,'HIRED',c.id,a.id,'迁移时补充的虚构历史招聘样例',NOW()-INTERVAL 200 DAY FROM caregiver c JOIN account a ON a.organization_id=c.organization_id AND a.role='MANAGER' JOIN guardian g ON g.id=c.id;
+INSERT INTO training(organization_id,title,starts_at,ends_at) SELECT id,'迁移补充：虚构岗前培训',NOW()-INTERVAL 180 DAY,NOW()-INTERVAL 179 DAY FROM organization;
+INSERT INTO training_record(training_id,caregiver_id,result,score,recorded_by,recorded_at) SELECT t.id,c.id,'PASS',90,a.id,t.ends_at FROM training t JOIN caregiver c ON c.organization_id=t.organization_id JOIN account a ON a.organization_id=t.organization_id AND a.role='MANAGER';
+INSERT INTO organization_report(organization_id,period,summary,evidence,submitted_by) SELECT o.id,DATE_FORMAT(NOW(),'%Y-%m'),'迁移补充：课程虚构月报','演示服务与回访记录',a.id FROM organization o JOIN account a ON a.organization_id=o.id AND a.role='MANAGER';
+INSERT INTO claim_evidence(claim_id,submitted_by,name,content,content_sha256) SELECT c.id,a.id,'迁移归档说明','原申报订单、工时与家属确认记录保持不变',SHA2('原申报订单、工时与家属确认记录保持不变',256) FROM claim c JOIN account a ON a.community_id=c.community_id AND a.role='ADMIN';
+INSERT INTO event_step(event_id,actor_id,action,message) SELECT e.id,a.id,'MIGRATED','保留原事件及升级记录；原系统未保存的首次时限不倒推填写' FROM emergency e JOIN elder old ON old.id=e.elder_id JOIN account a ON a.community_id=old.community_id AND a.role='ADMIN';
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(1,6,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(1,6,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,4,'补充回访记录','课程虚构回访记录','ACCEPT',6,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,6,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(2,12,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(2,12,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,10,'补充回访记录','课程虚构回访记录','ACCEPT',12,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,12,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(3,18,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(3,18,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,16,'补充回访记录','课程虚构回访记录','ACCEPT',18,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,18,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(4,24,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(4,24,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,22,'补充回访记录','课程虚构回访记录','ACCEPT',24,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,24,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(5,30,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(5,30,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,28,'补充回访记录','课程虚构回访记录','ACCEPT',30,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,30,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(6,36,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(6,36,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,34,'补充回访记录','课程虚构回访记录','ACCEPT',36,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,36,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(7,42,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(7,42,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,40,'补充回访记录','课程虚构回访记录','ACCEPT',42,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,42,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(8,48,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(8,48,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,46,'补充回访记录','课程虚构回访记录','ACCEPT',48,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,48,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(9,54,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(9,54,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,52,'补充回访记录','课程虚构回访记录','ACCEPT',54,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,54,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(10,60,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(10,60,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,58,'补充回访记录','课程虚构回访记录','ACCEPT',60,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,60,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(11,66,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(11,66,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,64,'补充回访记录','课程虚构回访记录','ACCEPT',66,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,66,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(12,72,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(12,72,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,70,'补充回访记录','课程虚构回访记录','ACCEPT',72,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,72,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(13,78,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(13,78,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,76,'补充回访记录','课程虚构回访记录','ACCEPT',78,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,78,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(14,84,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(14,84,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,82,'补充回访记录','课程虚构回访记录','ACCEPT',84,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,84,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(15,90,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(15,90,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,88,'补充回访记录','课程虚构回访记录','ACCEPT',90,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,90,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(16,96,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(16,96,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,94,'补充回访记录','课程虚构回访记录','ACCEPT',96,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,96,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(17,102,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(17,102,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,100,'补充回访记录','课程虚构回访记录','ACCEPT',102,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,102,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(18,108,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(18,108,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,106,'补充回访记录','课程虚构回访记录','ACCEPT',108,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,108,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(19,114,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(19,114,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,112,'补充回访记录','课程虚构回访记录','ACCEPT',114,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,114,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+
+INSERT INTO inspection_batch(community_id,inspector_id,target_type,starts_at,ends_at,ratio,population,sample_count,sample_seed) VALUES(20,120,'CAREGIVER',NOW()-INTERVAL 30 DAY,NOW(),1,1,1,UUID());
+SET @batch=LAST_INSERT_ID();
+INSERT INTO inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result,batch_id) VALUES(20,120,'PHONE',85,'课程虚构补充场景：回访材料不完整','补充回访说明','CLOSED','虚构整改样例已复核',@batch);
+SET @inspection=LAST_INSERT_ID();
+INSERT INTO rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at) VALUES(@inspection,118,'补充回访记录','课程虚构回访记录','ACCEPT',120,'虚构样例复核通过',NOW());
+INSERT INTO public_notice(inspection_id,publisher_id,title,body) VALUES(@inspection,120,'养老服务质量抽查结果','课程虚构抽查；评分 85；整改复核完成。不含个人信息。');
+
+DROP VIEW IF EXISTS v_assessment_due;
+DROP VIEW IF EXISTS v_active_plan;
+DROP VIEW IF EXISTS v_family_care;
+DROP VIEW IF EXISTS v_dispatch_overdue;
+DROP VIEW IF EXISTS v_wait_confirmation;
+DROP VIEW IF EXISTS v_reassign_history;
+DROP VIEW IF EXISTS v_credential_due;
+DROP VIEW IF EXISTS v_shift_capacity;
+DROP VIEW IF EXISTS v_hours_review;
+DROP VIEW IF EXISTS v_device_current;
+DROP VIEW IF EXISTS v_abnormal_vital;
+DROP VIEW IF EXISTS v_emergency_pending;
+DROP VIEW IF EXISTS v_claim_eligible;
+DROP VIEW IF EXISTS v_claim_progress;
+DROP VIEW IF EXISTS v_rectification;
+DELIMITER $$
+CREATE PROCEDURE assert_plan(IN p_elder BIGINT,IN p_assess BIGINT,IN p_bundle BIGINT,IN p_start DATETIME,IN p_end DATETIME,IN p_id BIGINT)
+BEGIN
+ DECLARE guard_id BIGINT;
+ SELECT id INTO guard_id FROM elder WHERE id=p_elder FOR UPDATE;
+ IF NOT EXISTS(SELECT 1 FROM elder WHERE id=p_elder AND status='ACTIVE') THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='ELDER_INACTIVE'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM assessment a JOIN care_bundle b ON b.ability_level=a.ability_level WHERE a.id=p_assess AND a.elder_id=p_elder AND b.id=p_bundle AND a.assessed_at<=p_start AND a.valid_until>=p_end) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='PLAN_ASSESSMENT_INVALID'; END IF;
+ IF EXISTS(SELECT 1 FROM v_plan_context WHERE elder_id=p_elder AND id<>p_id AND status='ACTIVE' AND starts_at<p_end AND ends_at>p_start) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='PLAN_OVERLAP'; END IF;
+END$$
+CREATE TRIGGER plan_before_insert BEFORE INSERT ON care_plan FOR EACH ROW BEGIN IF NEW.status='ACTIVE' THEN CALL assert_plan((SELECT elder_id FROM assessment WHERE id=NEW.assessment_id),NEW.assessment_id,NEW.bundle_id,NEW.starts_at,NEW.ends_at,0); END IF; END$$
+CREATE TRIGGER plan_before_update BEFORE UPDATE ON care_plan FOR EACH ROW BEGIN IF NEW.status='ACTIVE' THEN CALL assert_plan((SELECT elder_id FROM assessment WHERE id=NEW.assessment_id),NEW.assessment_id,NEW.bundle_id,NEW.starts_at,NEW.ends_at,NEW.id); END IF; END$$
+CREATE PROCEDURE expire_plans()
+BEGIN
+ UPDATE care_plan p JOIN assessment a ON a.id=p.assessment_id SET p.status=CASE WHEN a.valid_until<=NOW() THEN 'PAUSED' ELSE 'EXPIRED' END WHERE p.status='ACTIVE' AND (a.valid_until<=NOW() OR p.ends_at<=NOW());
+END$$
+CREATE PROCEDURE assert_shift(IN p_worker BIGINT,IN p_start DATETIME,IN p_end DATETIME,IN p_id BIGINT)
+BEGIN
+ DECLARE guard_id BIGINT;
+ SELECT id INTO guard_id FROM caregiver WHERE id=p_worker FOR UPDATE;
+ IF EXISTS(SELECT 1 FROM shift WHERE caregiver_id=p_worker AND id<>p_id AND status='OPEN' AND starts_at<p_end AND ends_at>p_start) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='SHIFT_OVERLAP'; END IF;
+END$$
+CREATE TRIGGER shift_before_insert BEFORE INSERT ON shift FOR EACH ROW BEGIN CALL assert_shift(NEW.caregiver_id,NEW.starts_at,NEW.ends_at,0); END$$
+CREATE TRIGGER shift_before_update BEFORE UPDATE ON shift FOR EACH ROW BEGIN IF NEW.status='OPEN' THEN CALL assert_shift(NEW.caregiver_id,NEW.starts_at,NEW.ends_at,NEW.id); END IF; END$$
+CREATE PROCEDURE assert_order(IN p_elder BIGINT,IN p_item BIGINT,IN p_community BIGINT,IN p_start DATETIME,IN p_end DATETIME)
+BEGIN
+ IF NOT EXISTS(SELECT 1 FROM elder WHERE id=p_elder AND community_id=p_community AND status='ACTIVE') THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='ORDER_COMMUNITY_INVALID'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM v_plan_context p JOIN assessment a ON a.id=p.assessment_id JOIN plan_item i ON i.plan_id=p.id WHERE p.elder_id=p_elder AND i.item_id=p_item AND p.status='ACTIVE' AND p.starts_at<=p_start AND p.ends_at>=p_end AND a.valid_until>=p_end AND a.valid_until>NOW()) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='ORDER_PLAN_INVALID'; END IF;
+END$$
+CREATE TRIGGER order_before_insert BEFORE INSERT ON service_order FOR EACH ROW BEGIN CALL assert_order(NEW.elder_id,NEW.item_id,NEW.community_id,NEW.starts_at,NEW.ends_at); END$$
+CREATE TRIGGER order_before_update BEFORE UPDATE ON service_order FOR EACH ROW
+BEGIN
+ IF OLD.status='COMPLETED' THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='COMPLETED_ORDER_IMMUTABLE'; END IF;
+ IF NEW.status='COMPLETED' AND NOT EXISTS(SELECT 1 FROM v_dispatch_context d JOIN service_record r ON r.dispatch_id=d.id WHERE d.order_id=NEW.id AND d.status='FINISHED' AND r.confirmed_by IS NOT NULL AND r.confirmed_at IS NOT NULL AND r.confirmation IS NOT NULL AND EXISTS(SELECT 1 FROM guardian g JOIN account ac ON ac.id=g.account_id WHERE g.elder_id=NEW.elder_id AND g.account_id=r.confirmed_by AND g.active=1 AND ac.role='FAMILY')) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='CONFIRMATION_REQUIRED'; END IF;
+END$$
+-- Assignment, acceptance and check-in share the same eligibility checks.
+CREATE PROCEDURE assert_worker_order(IN p_order BIGINT,IN p_shift BIGINT)
+BEGIN
+ DECLARE v_worker,v_guard,v_elder,v_item,v_community BIGINT;
+ DECLARE v_start,v_end DATETIME;
+ SELECT elder_id,item_id,community_id,starts_at,ends_at INTO v_elder,v_item,v_community,v_start,v_end FROM service_order WHERE id=p_order;
+ CALL assert_order(v_elder,v_item,v_community,v_start,v_end);
+ SELECT caregiver_id INTO v_worker FROM shift WHERE id=p_shift;
+ SELECT id INTO v_guard FROM caregiver WHERE id=v_worker FOR UPDATE;
+ IF v_worker IS NULL OR NOT EXISTS(SELECT 1 FROM caregiver c JOIN account ac ON ac.id=c.account_id JOIN caregiver_area a ON a.caregiver_id=c.id JOIN credential x ON x.caregiver_id=c.id WHERE c.id=v_worker AND c.status='ACTIVE' AND ac.active=1 AND a.community_id=v_community AND x.item_id=v_item AND x.valid_from<=LEAST(NOW(),v_start) AND x.valid_until>=GREATEST(NOW(),v_end)) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='WORKER_NOT_QUALIFIED'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM training_record WHERE caregiver_id=v_worker AND result='PASS') THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='TRAINING_REQUIRED'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM shift WHERE id=p_shift AND status='OPEN' AND starts_at<=v_start AND ends_at>=v_end) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='SHIFT_FULL_OR_OUTSIDE'; END IF;
+ IF EXISTS(SELECT 1 FROM inspection i WHERE i.status IN('OPEN','REVIEW') AND (i.caregiver_id=v_worker OR i.order_id IN(SELECT order_id FROM v_dispatch_context WHERE caregiver_id=v_worker AND status IN('ACCEPTED','FINISHED')))) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='RECTIFICATION_REQUIRED'; END IF;
+ IF EXISTS(SELECT 1 FROM v_dispatch_context d JOIN service_order o ON o.id=d.order_id WHERE d.caregiver_id=v_worker AND d.status IN('WAITING','ACCEPTED') AND o.id<>p_order AND o.starts_at<v_end AND o.ends_at>v_start) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='WORKER_TIME_CONFLICT'; END IF;
+END$$
+CREATE PROCEDURE assign_order(IN p_order BIGINT,IN p_shift BIGINT,IN p_reason VARCHAR(200))
+BEGIN
+ DECLARE v_elder,v_item,v_community,v_worker,v_guard,v_old_shift BIGINT;
+ DECLARE v_start,v_end DATETIME;
+ DECLARE v_state VARCHAR(30);
+ SELECT elder_id,item_id,community_id,starts_at,ends_at,status INTO v_elder,v_item,v_community,v_start,v_end,v_state FROM service_order WHERE id=p_order FOR UPDATE;
+ IF v_state IS NULL OR v_state NOT IN ('PENDING','ASSIGNED','ACCEPTED') THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='ORDER_NOT_DISPATCHABLE'; END IF;
+ CALL assert_worker_order(p_order,p_shift);
+ SET v_old_shift=(SELECT shift_id FROM v_dispatch_context WHERE order_id=p_order AND active_order IS NOT NULL);
+ IF v_old_shift IS NOT NULL THEN
+  IF p_reason IS NULL OR LENGTH(TRIM(p_reason))<2 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='REASSIGN_REASON_REQUIRED'; END IF;
+  UPDATE dispatch SET status='REASSIGNED',reason=p_reason WHERE order_id=p_order AND active_order IS NOT NULL;
+  UPDATE shift SET used_count=used_count-1 WHERE id=v_old_shift;
+ END IF;
+ UPDATE shift SET used_count=used_count+1 WHERE id=p_shift AND status='OPEN' AND starts_at<=v_start AND ends_at>=v_end AND used_count<capacity;
+ IF ROW_COUNT()<>1 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='SHIFT_FULL_OR_OUTSIDE'; END IF;
+ INSERT INTO dispatch(order_id,shift_id,reason) VALUES(p_order,p_shift,COALESCE(p_reason,'首次派单'));
+ UPDATE service_order SET status='ASSIGNED' WHERE id=p_order;
+END$$
+CREATE PROCEDURE verify_hours(IN p_dispatch BIGINT)
+BEGIN
+ UPDATE attendance a JOIN v_dispatch_context d ON d.id=a.dispatch_id JOIN service_order o ON o.id=d.order_id SET a.status=IF(a.fence_ok AND COALESCE(a.checkout_fence_ok,0) AND a.check_in>=o.starts_at-INTERVAL 30 MINUTE AND a.check_out<=o.ends_at+INTERVAL 30 MINUTE AND TIMESTAMPDIFF(MINUTE,a.check_in,a.check_out)>=CEIL(TIMESTAMPDIFF(MINUTE,o.starts_at,o.ends_at)*0.8),'VALID','REVIEW'),a.effective_minutes=IF(a.fence_ok AND COALESCE(a.checkout_fence_ok,0) AND a.check_in>=o.starts_at-INTERVAL 30 MINUTE AND a.check_out<=o.ends_at+INTERVAL 30 MINUTE AND TIMESTAMPDIFF(MINUTE,a.check_in,a.check_out)>=CEIL(TIMESTAMPDIFF(MINUTE,o.starts_at,o.ends_at)*0.8),TIMESTAMPDIFF(MINUTE,a.check_in,a.check_out),0) WHERE a.dispatch_id=p_dispatch AND a.check_out IS NOT NULL AND a.status='PENDING';
+END$$
+CREATE TRIGGER vital_before_insert BEFORE INSERT ON vital FOR EACH ROW
+BEGIN
+ DECLARE v_low,v_high DECIMAL(12,3);
+ IF NEW.collected_at>NOW(6) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='VITAL_FUTURE_TIME'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM device_binding WHERE id=NEW.binding_id AND bound_at<=NEW.collected_at AND (unbound_at IS NULL OR unbound_at>NEW.collected_at)) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='VITAL_BINDING_TIME_INVALID'; END IF;
+ SELECT low_value,high_value INTO v_low,v_high FROM metric_rule WHERE id=NEW.metric_rule_id;
+ SET NEW.abnormal=(NEW.metric_value<v_low OR NEW.metric_value>v_high);
+END$$
+CREATE TRIGGER vital_after_insert AFTER INSERT ON vital FOR EACH ROW
+BEGIN
+ IF NEW.abnormal THEN
+ INSERT INTO emergency(elder_id,vital_id,source,deadline,status) SELECT b.elder_id,NEW.id,'DEVICE',DATE_ADD(NOW(),INTERVAL m.response_seconds SECOND),'UNCONFIRMED' FROM device_binding b JOIN metric_rule m ON m.id=NEW.metric_rule_id WHERE b.id=NEW.binding_id;
+ END IF;
+END$$
+CREATE PROCEDURE escalate_events()
+BEGIN
+ INSERT IGNORE INTO emergency_log(event_id,level,message) SELECT id,level+1,'响应超时，升级并通知值班主管' FROM emergency WHERE status IN('OPEN','UNCONFIRMED') AND deadline<=NOW() AND level<3;
+ UPDATE emergency SET level=level+1,deadline=DATE_ADD(NOW(),INTERVAL IF(level=2,180,60) SECOND) WHERE status IN('OPEN','UNCONFIRMED') AND deadline<=NOW() AND level<3;
+ INSERT IGNORE INTO notification(event_id,account_id,message)
+ SELECT e.id,a.id,CONCAT('应急事件待处理，级别 ',e.level)
+ FROM emergency e JOIN elder x ON x.id=e.elder_id JOIN account a ON a.active=1
+ WHERE e.status IN('OPEN','UNCONFIRMED') AND (
+  (a.community_id=x.community_id AND a.role IN('ADMIN','REGULATOR'))
+  OR EXISTS(SELECT 1 FROM guardian g WHERE g.elder_id=e.elder_id AND g.account_id=a.id AND g.active=1)
+  OR EXISTS(SELECT 1 FROM v_plan_context p JOIN caregiver c ON c.id=p.caregiver_id WHERE p.elder_id=e.elder_id AND p.status='ACTIVE' AND p.starts_at<=NOW() AND p.ends_at>NOW() AND c.account_id=a.id AND c.status='ACTIVE')
+  OR EXISTS(SELECT 1 FROM service_order o JOIN v_dispatch_context d ON d.order_id=o.id JOIN caregiver c ON c.id=d.caregiver_id WHERE o.elder_id=e.elder_id AND d.status IN('WAITING','ACCEPTED') AND c.account_id=a.id AND c.status='ACTIVE')
+ );
+END$$
+CREATE PROCEDURE submit_claim(IN p_elder BIGINT,IN p_policy BIGINT,IN p_period VARCHAR(10),IN p_orders JSON)
+BEGIN
+ DECLARE v_guard,v_item,v_claim,v_order,v_community BIGINT;
+ DECLARE v_rate,v_amount,v_price DECIMAL(12,2);
+ DECLARE v_minutes,v_i INT DEFAULT 0;
+ DECLARE v_unit,v_cycle VARCHAR(10);
+ DECLARE v_start,v_end DATE;
+ SELECT id,community_id INTO v_guard,v_community FROM elder WHERE id=p_elder FOR UPDATE;
+ SELECT item_id,rate,settlement_cycle INTO v_item,v_rate,v_cycle FROM policy WHERE id=p_policy;
+ IF v_item IS NULL OR p_orders IS NULL OR JSON_TYPE(p_orders)<>'ARRAY' OR JSON_LENGTH(p_orders)=0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='CLAIM_INPUT_INVALID'; END IF;
+ IF v_cycle='MONTH' AND p_period REGEXP '^[0-9]{4}-(0[1-9]|1[0-2])$' THEN
+  SET v_start=STR_TO_DATE(CONCAT(p_period,'-01'),'%Y-%m-%d'); SET v_end=DATE_ADD(v_start,INTERVAL 1 MONTH);
+ ELSEIF v_cycle='QUARTER' AND p_period REGEXP '^[0-9]{4}-Q[1-4]$' THEN
+  SET v_start=STR_TO_DATE(CONCAT(LEFT(p_period,4),'-',1+(CAST(RIGHT(p_period,1) AS UNSIGNED)-1)*3,'-01'),'%Y-%m-%d'); SET v_end=DATE_ADD(v_start,INTERVAL 3 MONTH);
+ ELSEIF v_cycle='YEAR' AND p_period REGEXP '^[0-9]{4}$' THEN
+  SET v_start=STR_TO_DATE(CONCAT(p_period,'-01-01'),'%Y-%m-%d'); SET v_end=DATE_ADD(v_start,INTERVAL 1 YEAR);
+ ELSE SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='CLAIM_PERIOD_INVALID'; END IF;
+ IF v_start IS NULL OR v_end IS NULL OR EXISTS(SELECT 1 FROM claim WHERE elder_id=p_elder AND item_id=v_item AND period_start<v_end AND period_end>v_start) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='CLAIM_PERIOD_OVERLAP'; END IF;
+ INSERT INTO claim(elder_id,item_id,period,community_id,period_start,period_end) VALUES(p_elder,v_item,p_period,v_community,v_start,v_end);
+ SET v_claim=LAST_INSERT_ID();
+ WHILE v_i<JSON_LENGTH(p_orders) DO
+ SET v_order=CAST(JSON_UNQUOTE(JSON_EXTRACT(p_orders,CONCAT('$[',v_i,']'))) AS UNSIGNED);
+ IF NOT EXISTS(SELECT 1 FROM service_order o JOIN policy p ON p.id=p_policy JOIN elder e ON e.id=o.elder_id JOIN service_item si ON si.id=o.item_id WHERE o.id=v_order AND o.elder_id=p_elder AND o.item_id=v_item AND o.status='COMPLETED' AND EXISTS(SELECT 1 FROM policy_area pa WHERE pa.policy_id=p.id AND pa.community_id=o.community_id) AND o.starts_at>=p.starts_at AND o.ends_at<=p.ends_at AND o.starts_at>=v_start AND o.starts_at<v_end AND si.subsidizable=1 AND TIMESTAMPDIFF(YEAR,e.birth_date,o.starts_at)>=p.minimum_age AND (p.required_tag IS NULL OR EXISTS(SELECT 1 FROM elder_tag t WHERE t.elder_id=e.id AND t.tag=p.required_tag)) AND EXISTS(SELECT 1 FROM assessment a WHERE a.elder_id=e.id AND a.ability_level=p.ability_level AND a.assessed_at<=o.starts_at AND a.valid_until>=o.ends_at AND NOT EXISTS(SELECT 1 FROM assessment newer WHERE newer.elder_id=e.id AND newer.assessed_at<=o.starts_at AND (newer.assessed_at>a.assessed_at OR (newer.assessed_at=a.assessed_at AND newer.id>a.id))))) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='CLAIM_ORDER_INELIGIBLE'; END IF;
+ SET v_minutes=(SELECT a.effective_minutes FROM attendance a JOIN v_dispatch_context d ON d.id=a.dispatch_id JOIN service_record r ON r.dispatch_id=d.id WHERE d.order_id=v_order AND d.status='FINISHED' AND a.status='VALID' AND r.confirmed_by IS NOT NULL LIMIT 1);
+ IF v_minutes IS NULL OR v_minutes<=0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='CLAIM_EVIDENCE_MISSING'; END IF;
+ SELECT o.amount,si.unit INTO v_price,v_unit FROM service_order o JOIN service_item si ON si.id=o.item_id WHERE o.id=v_order;
+ SET v_amount=LEAST(v_price,ROUND(IF(v_unit='HOUR',v_minutes/60*v_rate,v_rate),2));
+ IF v_amount<=0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='CLAIM_ZERO_AMOUNT'; END IF;
+ INSERT INTO claim_item(claim_id,policy_id,order_id,amount,effective_minutes,rate_snapshot) VALUES(v_claim,p_policy,v_order,v_amount,v_minutes,v_rate);
+ SET v_i=v_i+1;
+ END WHILE;
+ UPDATE claim SET amount=(SELECT SUM(amount) FROM claim_item WHERE claim_id=v_claim),status='SUBMITTED' WHERE id=v_claim;
+END$$
+CREATE TRIGGER claim_before_update BEFORE UPDATE ON claim FOR EACH ROW
+BEGIN
+ IF OLD.status='PAID' THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='PAID_CLAIM_IMMUTABLE'; END IF;
+ IF NEW.status<>OLD.status AND NOT ((OLD.status='DRAFT' AND NEW.status='SUBMITTED') OR (OLD.status='SUBMITTED' AND NEW.status IN('STREET_APPROVED','REJECTED')) OR (OLD.status='STREET_APPROVED' AND NEW.status IN('APPROVED','REJECTED')) OR (OLD.status='APPROVED' AND NEW.status='PAID') OR (OLD.status='REJECTED' AND NEW.status='SUBMITTED' AND EXISTS(SELECT 1 FROM claim_evidence ce WHERE ce.claim_id=OLD.id AND ce.created_at>=COALESCE((SELECT MAX(created_at) FROM claim_review WHERE claim_id=OLD.id),'1000-01-01')))) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='CLAIM_STATE_INVALID'; END IF;
+ IF NEW.status='PAID' AND NOT EXISTS(SELECT 1 FROM payment WHERE claim_id=NEW.id AND amount=NEW.amount) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='PAYMENT_EVIDENCE_REQUIRED'; END IF;
+ IF NEW.status<>'DRAFT' AND NEW.amount<>(SELECT COALESCE(SUM(amount),0) FROM claim_item WHERE claim_id=NEW.id) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='CLAIM_AMOUNT_MISMATCH'; END IF;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER audit_care_plan_insert AFTER INSERT ON care_plan FOR EACH ROW INSERT INTO audit_log(table_name,row_id,operation,actor,old_status,new_status) VALUES('care_plan',NEW.id,'INSERT',COALESCE(@actor,'database'),NULL,NEW.status)$$
+CREATE TRIGGER audit_care_plan_update AFTER UPDATE ON care_plan FOR EACH ROW INSERT INTO audit_log(table_name,row_id,operation,actor,old_status,new_status) VALUES('care_plan',NEW.id,'UPDATE',COALESCE(@actor,'database'),OLD.status,NEW.status)$$
+CREATE TRIGGER audit_service_order_insert AFTER INSERT ON service_order FOR EACH ROW INSERT INTO audit_log(table_name,row_id,operation,actor,old_status,new_status) VALUES('service_order',NEW.id,'INSERT',COALESCE(@actor,'database'),NULL,NEW.status)$$
+CREATE TRIGGER audit_service_order_update AFTER UPDATE ON service_order FOR EACH ROW INSERT INTO audit_log(table_name,row_id,operation,actor,old_status,new_status) VALUES('service_order',NEW.id,'UPDATE',COALESCE(@actor,'database'),OLD.status,NEW.status)$$
+CREATE TRIGGER audit_dispatch_insert AFTER INSERT ON dispatch FOR EACH ROW INSERT INTO audit_log(table_name,row_id,operation,actor,old_status,new_status) VALUES('dispatch',NEW.id,'INSERT',COALESCE(@actor,'database'),NULL,NEW.status)$$
+CREATE TRIGGER audit_dispatch_update AFTER UPDATE ON dispatch FOR EACH ROW INSERT INTO audit_log(table_name,row_id,operation,actor,old_status,new_status) VALUES('dispatch',NEW.id,'UPDATE',COALESCE(@actor,'database'),OLD.status,NEW.status)$$
+CREATE TRIGGER audit_claim_insert AFTER INSERT ON claim FOR EACH ROW INSERT INTO audit_log(table_name,row_id,operation,actor,old_status,new_status) VALUES('claim',NEW.id,'INSERT',COALESCE(@actor,'database'),NULL,NEW.status)$$
+CREATE TRIGGER audit_claim_update AFTER UPDATE ON claim FOR EACH ROW INSERT INTO audit_log(table_name,row_id,operation,actor,old_status,new_status) VALUES('claim',NEW.id,'UPDATE',COALESCE(@actor,'database'),OLD.status,NEW.status)$$
+CREATE TRIGGER audit_attendance_insert AFTER INSERT ON attendance FOR EACH ROW INSERT INTO audit_log(table_name,row_id,operation,actor,old_status,new_status) VALUES('attendance',NEW.id,'INSERT',COALESCE(@actor,'database'),NULL,NEW.status)$$
+CREATE TRIGGER audit_attendance_update AFTER UPDATE ON attendance FOR EACH ROW INSERT INTO audit_log(table_name,row_id,operation,actor,old_status,new_status) VALUES('attendance',NEW.id,'UPDATE',COALESCE(@actor,'database'),OLD.status,NEW.status)$$
+CREATE TRIGGER audit_emergency_insert AFTER INSERT ON emergency FOR EACH ROW INSERT INTO audit_log(table_name,row_id,operation,actor,old_status,new_status) VALUES('emergency',NEW.id,'INSERT',COALESCE(@actor,'database'),NULL,NEW.status)$$
+CREATE TRIGGER audit_emergency_update AFTER UPDATE ON emergency FOR EACH ROW INSERT INTO audit_log(table_name,row_id,operation,actor,old_status,new_status) VALUES('emergency',NEW.id,'UPDATE',COALESCE(@actor,'database'),OLD.status,NEW.status)$$
+CREATE TRIGGER audit_inspection_insert AFTER INSERT ON inspection FOR EACH ROW INSERT INTO audit_log(table_name,row_id,operation,actor,old_status,new_status) VALUES('inspection',NEW.id,'INSERT',COALESCE(@actor,'database'),NULL,NEW.status)$$
+CREATE TRIGGER audit_inspection_update AFTER UPDATE ON inspection FOR EACH ROW INSERT INTO audit_log(table_name,row_id,operation,actor,old_status,new_status) VALUES('inspection',NEW.id,'UPDATE',COALESCE(@actor,'database'),OLD.status,NEW.status)$$
+CREATE TRIGGER keep_assessment BEFORE DELETE ON assessment FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORY_DELETE_FORBIDDEN'$$
+CREATE TRIGGER keep_dispatch BEFORE DELETE ON dispatch FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORY_DELETE_FORBIDDEN'$$
+CREATE TRIGGER keep_service_record BEFORE DELETE ON service_record FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORY_DELETE_FORBIDDEN'$$
+CREATE TRIGGER keep_attendance BEFORE DELETE ON attendance FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORY_DELETE_FORBIDDEN'$$
+CREATE TRIGGER keep_vital BEFORE DELETE ON vital FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORY_DELETE_FORBIDDEN'$$
+CREATE TRIGGER keep_claim BEFORE DELETE ON claim FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORY_DELETE_FORBIDDEN'$$
+CREATE TRIGGER keep_claim_item BEFORE DELETE ON claim_item FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORY_DELETE_FORBIDDEN'$$
+CREATE TRIGGER keep_claim_review BEFORE DELETE ON claim_review FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORY_DELETE_FORBIDDEN'$$
+CREATE TRIGGER keep_payment BEFORE DELETE ON payment FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORY_DELETE_FORBIDDEN'$$
+CREATE TRIGGER keep_audit_log BEFORE DELETE ON audit_log FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORY_DELETE_FORBIDDEN'$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER immutable_audit_log BEFORE UPDATE ON audit_log FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'$$
+CREATE TRIGGER immutable_payment BEFORE UPDATE ON payment FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'$$
+CREATE TRIGGER immutable_claim_item BEFORE UPDATE ON claim_item FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'$$
+CREATE TRIGGER immutable_claim_review BEFORE UPDATE ON claim_review FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'$$
+CREATE TRIGGER immutable_vital BEFORE UPDATE ON vital FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'$$
+CREATE TRIGGER confirmed_record_immutable BEFORE UPDATE ON service_record FOR EACH ROW BEGIN IF OLD.confirmed_at IS NOT NULL THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='CONFIRMED_RECORD_IMMUTABLE'; END IF; END$$
+DELIMITER ;
+
+-- Keep historical ownership and time intervals stable after data have been collected.
+DELIMITER $$
+CREATE TRIGGER binding_before_insert BEFORE INSERT ON device_binding FOR EACH ROW
+BEGIN
+ DECLARE guard_id BIGINT;
+ SELECT id INTO guard_id FROM device WHERE id=NEW.device_id FOR UPDATE;
+ IF NOT EXISTS(SELECT 1 FROM device WHERE id=NEW.device_id AND status='ACTIVE') THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='DEVICE_INACTIVE'; END IF;
+ IF EXISTS(SELECT 1 FROM device_binding b WHERE b.device_id=NEW.device_id AND b.bound_at<COALESCE(NEW.unbound_at,'9999-12-31 23:59:59.999999') AND COALESCE(b.unbound_at,'9999-12-31 23:59:59.999999')>NEW.bound_at) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='BINDING_OVERLAP'; END IF;
+END$$
+CREATE TRIGGER binding_before_update BEFORE UPDATE ON device_binding FOR EACH ROW
+BEGIN
+ IF NEW.device_id<>OLD.device_id OR NEW.elder_id<>OLD.elder_id OR NEW.bound_at<>OLD.bound_at OR OLD.unbound_at IS NOT NULL THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'; END IF;
+ IF NEW.unbound_at IS NULL OR EXISTS(SELECT 1 FROM vital WHERE binding_id=OLD.id AND collected_at>=NEW.unbound_at) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='VITAL_BINDING_TIME_INVALID'; END IF;
+END$$
+CREATE TRIGGER keep_binding BEFORE DELETE ON device_binding FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORY_DELETE_FORBIDDEN'$$
+CREATE TRIGGER dispatch_accept_check BEFORE UPDATE ON dispatch FOR EACH ROW
+BEGIN
+ IF NEW.order_id<>OLD.order_id OR NEW.shift_id<>OLD.shift_id THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'; END IF;
+ IF NEW.status='ACCEPTED' AND OLD.status<>NEW.status THEN CALL assert_worker_order(NEW.order_id,NEW.shift_id); END IF;
+END$$
+CREATE TRIGGER used_shift_before_update BEFORE UPDATE ON shift FOR EACH ROW
+BEGIN
+ IF EXISTS(SELECT 1 FROM dispatch WHERE shift_id=OLD.id) AND (NEW.caregiver_id<>OLD.caregiver_id OR NEW.starts_at<>OLD.starts_at OR NEW.ends_at<>OLD.ends_at) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'; END IF;
+END$$
+CREATE TRIGGER emergency_notify AFTER INSERT ON emergency FOR EACH ROW
+BEGIN
+ INSERT IGNORE INTO notification(event_id,account_id,message)
+ SELECT NEW.id,a.id,CONCAT('应急事件待处理，级别 ',NEW.level) FROM account a JOIN elder e ON e.id=NEW.elder_id
+ WHERE a.active=1 AND (
+  (a.community_id=e.community_id AND (a.role='ADMIN' OR (a.role='REGULATOR' AND NEW.level>=2)))
+  OR EXISTS(SELECT 1 FROM guardian g WHERE g.elder_id=e.id AND g.account_id=a.id AND g.active=1)
+  OR EXISTS(SELECT 1 FROM v_plan_context p JOIN caregiver c ON c.id=p.caregiver_id WHERE p.elder_id=e.id AND p.status='ACTIVE' AND p.starts_at<=NOW() AND p.ends_at>NOW() AND c.account_id=a.id AND c.status='ACTIVE')
+  OR EXISTS(SELECT 1 FROM service_order o JOIN v_dispatch_context d ON d.order_id=o.id JOIN caregiver c ON c.id=d.caregiver_id WHERE o.elder_id=e.id AND d.status IN('WAITING','ACCEPTED') AND c.account_id=a.id AND c.status='ACTIVE')
+ );
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER payment_before_insert BEFORE INSERT ON payment FOR EACH ROW
+BEGIN
+ DECLARE v_amount DECIMAL(12,2);
+ DECLARE v_status VARCHAR(30);
+ SELECT amount,status INTO v_amount,v_status FROM claim WHERE id=NEW.claim_id FOR UPDATE;
+ IF v_status IS NULL OR v_status<>'APPROVED' OR NEW.amount<>v_amount THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='PAYMENT_AMOUNT_OR_STATE_INVALID'; END IF;
+END$$
+DELIMITER ;
+
+-- Completion rules 2026-11-13.
+DELIMITER $$
+CREATE TRIGGER assessment_immutable BEFORE UPDATE ON assessment FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='ASSESSMENT_APPEND_ONLY'$$
+CREATE TRIGGER attendance_final_immutable BEFORE UPDATE ON attendance FOR EACH ROW
+BEGIN
+ IF OLD.status IN('VALID','INVALID') THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'; END IF;
+ IF OLD.status='REVIEW' AND (NOT(NEW.check_in<=>OLD.check_in) OR NOT(NEW.check_out<=>OLD.check_out) OR NEW.dispatch_id<>OLD.dispatch_id OR NEW.fence_ok<>OLD.fence_ok) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'; END IF;
+ IF OLD.status='REVIEW' AND NEW.status IN('VALID','INVALID') AND (NEW.reviewer_id IS NULL OR NEW.review_reason IS NULL OR LENGTH(TRIM(NEW.review_reason))=0 OR NOT EXISTS(SELECT 1 FROM account a JOIN caregiver c ON c.organization_id=a.organization_id JOIN v_dispatch_context d ON d.caregiver_id=c.id WHERE a.id=NEW.reviewer_id AND a.role='MANAGER' AND d.id=OLD.dispatch_id)) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HOURS_REVIEW_REQUIRED'; END IF;
+END$$
+CREATE TRIGGER training_result_immutable BEFORE UPDATE ON training_record FOR EACH ROW BEGIN IF OLD.result<>'PENDING' THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'; END IF; END$$
+CREATE TRIGGER elder_coordinates_insert BEFORE INSERT ON elder FOR EACH ROW BEGIN IF NOT EXISTS(SELECT 1 FROM community c WHERE c.id=NEW.community_id AND POW(NEW.position_x-c.center_x,2)+POW(NEW.position_y-c.center_y,2)<=POW(c.radius_m,2)) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='ADDRESS_OUTSIDE_COMMUNITY'; END IF; END$$
+CREATE TRIGGER elder_coordinates_update BEFORE UPDATE ON elder FOR EACH ROW BEGIN IF NOT EXISTS(SELECT 1 FROM community c WHERE c.id=NEW.community_id AND POW(NEW.position_x-c.center_x,2)+POW(NEW.position_y-c.center_y,2)<=POW(c.radius_m,2)) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='ADDRESS_OUTSIDE_COMMUNITY'; END IF; END$$
+CREATE TRIGGER order_coordinates BEFORE INSERT ON service_order FOR EACH ROW
+BEGIN
+ IF NOT EXISTS(SELECT 1 FROM community c WHERE c.id=NEW.community_id AND POW(NEW.position_x-c.center_x,2)+POW(NEW.position_y-c.center_y,2)<=POW(c.radius_m,2)) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='ADDRESS_OUTSIDE_COMMUNITY'; END IF;
+END$$
+CREATE TRIGGER event_initial_deadline BEFORE INSERT ON emergency FOR EACH ROW SET NEW.initial_deadline=NEW.deadline$$
+CREATE TRIGGER event_history_guard BEFORE UPDATE ON emergency FOR EACH ROW
+BEGIN
+ IF OLD.status IN('CLOSED','FALSE_ALARM') OR NEW.elder_id<>OLD.elder_id OR NOT(NEW.initial_deadline<=>OLD.initial_deadline) OR NEW.occurred_at<>OLD.occurred_at THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'; END IF;
+ IF NEW.arrived_at IS NOT NULL AND (NEW.responded_at IS NULL OR NEW.arrived_at<NEW.responded_at) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='EVENT_TIME_INVALID'; END IF;
+ IF NEW.status='CLOSED' AND (NEW.arrived_at IS NULL OR NEW.closed_at IS NULL OR NEW.closed_at<NEW.arrived_at OR NEW.result IS NULL) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='EVENT_RESULT_REQUIRED'; END IF;
+END$$
+CREATE PROCEDURE remind_assessments()
+BEGIN
+ INSERT IGNORE INTO notification(account_id,assessment_id,dedupe_key,message)
+ SELECT a.id,d.assessment_id,CONCAT('assessment:',d.assessment_id,':',a.id),CONCAT('老人 ',d.name,' 的评估将于 ',d.valid_until,' 到期，请安排复评') FROM v_assessment_due d JOIN account a ON a.community_id=d.community_id AND a.role='ADMIN' AND a.active=1;
+END$$
+CREATE TRIGGER elder_audit_update AFTER UPDATE ON elder FOR EACH ROW INSERT INTO audit_log(table_name,row_id,operation,actor,before_data,after_data) VALUES('elder',NEW.id,'UPDATE',COALESCE(@actor,'database'),JSON_OBJECT('address',OLD.address,'community',OLD.community_id,'status',OLD.status,'x',OLD.position_x,'y',OLD.position_y),JSON_OBJECT('address',NEW.address,'community',NEW.community_id,'status',NEW.status,'x',NEW.position_x,'y',NEW.position_y))$$
+CREATE TRIGGER guardian_audit_update AFTER UPDATE ON guardian FOR EACH ROW INSERT INTO audit_log(table_name,row_id,operation,actor,before_data,after_data) VALUES('guardian',NEW.id,'UPDATE',COALESCE(@actor,'database'),JSON_OBJECT('relation',OLD.relation_name,'active',OLD.active),JSON_OBJECT('relation',NEW.relation_name,'active',NEW.active))$$
+CREATE TRIGGER plan_details_audit AFTER UPDATE ON care_plan FOR EACH ROW INSERT INTO audit_log(table_name,row_id,operation,actor,before_data,after_data) VALUES('care_plan',NEW.id,'DETAIL_CHANGE',COALESCE(@actor,'database'),JSON_OBJECT('assessment',OLD.assessment_id,'bundle',OLD.bundle_id,'worker',OLD.caregiver_id,'start',OLD.starts_at,'end',OLD.ends_at,'status',OLD.status),JSON_OBJECT('assessment',NEW.assessment_id,'bundle',NEW.bundle_id,'worker',NEW.caregiver_id,'start',NEW.starts_at,'end',NEW.ends_at,'status',NEW.status))$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER immutable_complaint_log BEFORE UPDATE ON complaint_log FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'$$
+CREATE TRIGGER keep_complaint_log BEFORE DELETE ON complaint_log FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORY_DELETE_FORBIDDEN'$$
+CREATE TRIGGER immutable_claim_evidence BEFORE UPDATE ON claim_evidence FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'$$
+CREATE TRIGGER keep_claim_evidence BEFORE DELETE ON claim_evidence FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORY_DELETE_FORBIDDEN'$$
+CREATE TRIGGER immutable_event_step BEFORE UPDATE ON event_step FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'$$
+CREATE TRIGGER keep_event_step BEFORE DELETE ON event_step FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORY_DELETE_FORBIDDEN'$$
+CREATE TRIGGER immutable_inspection_batch BEFORE UPDATE ON inspection_batch FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'$$
+CREATE TRIGGER keep_inspection_batch BEFORE DELETE ON inspection_batch FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORY_DELETE_FORBIDDEN'$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER rectification_review_history BEFORE UPDATE ON rectification_submission FOR EACH ROW BEGIN
+ IF OLD.decision<>'PENDING' OR NOT(NEW.inspection_id<=>OLD.inspection_id) OR NOT(NEW.submitted_by<=>OLD.submitted_by) OR NOT(NEW.measures<=>OLD.measures) OR NOT(NEW.evidence<=>OLD.evidence) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'; END IF;
+END$$
+CREATE TRIGGER keep_rectification_submission BEFORE DELETE ON rectification_submission FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORY_DELETE_FORBIDDEN'$$
+CREATE TRIGGER organization_review_history BEFORE UPDATE ON organization_report FOR EACH ROW BEGIN
+ IF OLD.status<>'SUBMITTED' OR NOT(NEW.organization_id<=>OLD.organization_id) OR NOT(NEW.period<=>OLD.period) OR NOT(NEW.summary<=>OLD.summary) OR NOT(NEW.evidence<=>OLD.evidence) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORICAL_FACT_IMMUTABLE'; END IF;
+END$$
+CREATE TRIGGER keep_organization_report BEFORE DELETE ON organization_report FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='HISTORY_DELETE_FORBIDDEN'$$
+DELIMITER ;
+
+CREATE VIEW v_assessment_due AS SELECT e.id,e.name,e.community_id,a.id assessment_id,a.valid_until FROM elder e JOIN assessment a ON a.elder_id=e.id WHERE e.status='ACTIVE' AND a.assessed_at<=NOW() AND a.valid_until BETWEEN NOW() AND NOW()+INTERVAL 30 DAY AND NOT EXISTS(SELECT 1 FROM assessment newer WHERE newer.elder_id=a.elder_id AND newer.assessed_at<=NOW() AND (newer.assessed_at>a.assessed_at OR (newer.assessed_at=a.assessed_at AND newer.id>a.id)));
+CREATE VIEW v_active_plan AS SELECT p.id,p.elder_id,e.name,e.community_id,p.starts_at,p.ends_at,c.name caregiver_name FROM v_plan_context p JOIN elder e ON e.id=p.elder_id JOIN caregiver c ON c.id=p.caregiver_id WHERE p.status='ACTIVE' AND NOW()>=p.starts_at AND NOW()<p.ends_at;
+CREATE VIEW v_family_care AS SELECT g.account_id,e.id elder_id,e.name,e.community_id,p.id plan_id,p.status FROM guardian g JOIN elder e ON e.id=g.elder_id LEFT JOIN v_plan_context p ON p.elder_id=e.id AND p.status='ACTIVE' AND p.starts_at<=NOW() AND p.ends_at>NOW() WHERE g.active=1;
+CREATE VIEW v_dispatch_overdue AS SELECT o.id,o.elder_id,o.community_id,o.starts_at,o.status FROM service_order o WHERE (o.status='PENDING' AND o.created_at<NOW()-INTERVAL 15 MINUTE) OR (o.status='ASSIGNED' AND EXISTS(SELECT 1 FROM dispatch d WHERE d.order_id=o.id AND d.status='WAITING' AND d.assigned_at<NOW()-INTERVAL 15 MINUTE));
+CREATE VIEW v_wait_confirmation AS SELECT o.id,o.elder_id,o.community_id,r.id record_id FROM service_order o JOIN dispatch d ON d.order_id=o.id JOIN service_record r ON r.dispatch_id=d.id WHERE o.status='CONFIRM' AND r.confirmed_at IS NULL;
+CREATE VIEW v_reassign_history AS SELECT d.id,d.order_id,d.caregiver_id,c.name,d.reason,d.assigned_at,o.community_id FROM v_dispatch_context d JOIN caregiver c ON c.id=d.caregiver_id JOIN service_order o ON o.id=d.order_id WHERE d.status='REASSIGNED';
+CREATE VIEW v_credential_due AS SELECT x.id,c.name,c.organization_id,x.item_id,x.valid_until FROM credential x JOIN caregiver c ON c.id=x.caregiver_id WHERE x.valid_until<NOW()+INTERVAL 30 DAY;
+CREATE VIEW v_shift_capacity AS SELECT s.id,s.caregiver_id,c.organization_id,s.starts_at,s.ends_at,s.capacity-s.used_count available FROM shift s JOIN caregiver c ON c.id=s.caregiver_id WHERE s.status='OPEN';
+CREATE VIEW v_hours_review AS SELECT a.id,d.caregiver_id,c.organization_id,d.order_id,a.check_in,a.check_out,a.location_note,a.status FROM attendance a JOIN v_dispatch_context d ON d.id=a.dispatch_id JOIN caregiver c ON c.id=d.caregiver_id WHERE a.status='REVIEW';
+CREATE VIEW v_device_current AS SELECT d.id,d.serial_no,d.status,b.elder_id,e.community_id,b.bound_at FROM device d LEFT JOIN device_binding b ON b.device_id=d.id AND b.unbound_at IS NULL LEFT JOIN elder e ON e.id=b.elder_id;
+CREATE VIEW v_abnormal_vital AS SELECT v.id,b.elder_id,e.community_id,m.metric,v.metric_value,v.collected_at FROM vital v JOIN device_binding b ON b.id=v.binding_id JOIN elder e ON e.id=b.elder_id JOIN metric_rule m ON m.id=v.metric_rule_id WHERE v.abnormal=1;
+CREATE VIEW v_emergency_pending AS SELECT x.id,x.elder_id,e.community_id,x.status,x.level,x.deadline,TIMESTAMPDIFF(SECOND,NOW(),x.deadline) remaining_seconds FROM emergency x JOIN elder e ON e.id=x.elder_id WHERE x.status NOT IN('CLOSED','FALSE_ALARM');
+CREATE VIEW v_claim_eligible AS SELECT o.id,o.elder_id,o.item_id,o.community_id,o.amount,a.effective_minutes FROM service_order o JOIN dispatch d ON d.order_id=o.id JOIN attendance a ON a.dispatch_id=d.id JOIN service_record r ON r.dispatch_id=d.id JOIN service_item s ON s.id=o.item_id WHERE o.status='COMPLETED' AND d.status='FINISHED' AND r.confirmed_at IS NOT NULL AND a.status='VALID' AND s.subsidizable=1 AND NOT EXISTS(SELECT 1 FROM claim_item ci WHERE ci.order_id=o.id);
+CREATE VIEW v_claim_progress AS SELECT c.id,c.elder_id,c.community_id,c.period,c.amount,c.status,p.reference_no,p.paid_at FROM claim c JOIN elder e ON e.id=c.elder_id LEFT JOIN payment p ON p.claim_id=c.id;
+CREATE VIEW v_rectification AS SELECT i.id,i.order_id,i.caregiver_id,i.issue,i.rectification,COALESCE(o.community_id,org.community_id) community_id FROM inspection i LEFT JOIN service_order o ON o.id=i.order_id LEFT JOIN caregiver c ON c.id=i.caregiver_id LEFT JOIN organization org ON org.id=c.organization_id WHERE i.status IN('OPEN','REVIEW');

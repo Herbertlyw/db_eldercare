@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-12",
+  "tests": 66,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "tables": 35,
+  "min_rows": 20,
+  "direct_three_or_more_base_table_queries": {
+    "A1": [
+      "assessment",
+      "care_plan",
+      "elder"
+    ],
+    "B1": [
+      "dispatch",
+      "elder",
+      "service_order"
+    ],
+    "B3": [
+      "dispatch",
+      "service_order",
+      "service_record"
+    ],
+    "C1": [
+      "attendance",
+      "caregiver",
+      "dispatch",
+      "shift"
+    ],
+    "D1": [
+      "device_binding",
+      "elder",
+      "vital"
+    ],
+    "E1": [
+      "claim",
+      "community",
+      "elder"
+    ]
+  },
+  "business_views": 15,
+  "internal_views": 2,
+  "browser_role_routes": 80,
+  "windows_native_execution": false,
+  "scope": "Functional, data-integrity and permission review; not a dependency vulnerability scan",
+  "java_source_sha256": {
+    "src/main/java/edu/bjfu/eldercare/Seed.java": "faafd3c1ab7bac5b1e2a40f4c2856838324265258a30cd3256513415015bd912",
+    "src/main/java/edu/bjfu/eldercare/Jobs.java": "abba4c8f1c049f301f5e143a93f5a26bd7efe7e05228b89efe23e9b0221024d6",
+    "src/main/java/edu/bjfu/eldercare/Application.java": "6ad06c9b99581dffbd001fa51a69b2a64d8345d5e802c041af59122eeb46ea3d",
+    "src/main/java/edu/bjfu/eldercare/Auth.java": "275371cf5e552bf032cb532e3914872c508f4314b30570e146321d31ede1cd8d",
+    "src/main/java/edu/bjfu/eldercare/CareService.java": "f6c81a33fd9677b9d43605eabd87622b7a8348d89c1444ea3f35f5fa58603ba8",
+    "src/main/java/edu/bjfu/eldercare/Crypto.java": "9d6ab7e350c2ec9213cd8ab52459ab1d750c22867ccc07597ebb68efa6f388e7",
+    "src/main/java/edu/bjfu/eldercare/Store.java": "e0fc4f001b97e6c9fd7ffd459a97e4f2cbfd214e2a8b2c597fb6cb9eba00f1de",
+    "src/main/java/edu/bjfu/eldercare/Api.java": "89ea426069f6c5f80ab4a40634c3712c6641e161c3e27befe97b9a7ba365d68a"
+  }
+}

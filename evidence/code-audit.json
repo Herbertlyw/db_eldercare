@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-13",
+  "tests": 109,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "test_execution_time": "2026-11-13T09:56:20.579656",
+  "tables": 47,
+  "min_rows": 20,
+  "direct_three_or_more_base_table_queries": {
+    "A1": [
+      "assessment",
+      "care_plan",
+      "elder"
+    ],
+    "B1": [
+      "dispatch",
+      "elder",
+      "service_order"
+    ],
+    "B3": [
+      "dispatch",
+      "service_order",
+      "service_record"
+    ],
+    "C1": [
+      "attendance",
+      "caregiver",
+      "dispatch",
+      "shift"
+    ],
+    "D1": [
+      "device_binding",
+      "elder",
+      "vital"
+    ]
+  },
+  "business_views": 15,
+  "internal_views": 2,
+  "browser_role_routes": 109,
+  "browser_form_submissions": 26,
+  "windows_native_execution": false,
+  "scope": "Task-sheet functions, data integrity, roles, browser workflows, migration and recovery; no claim of exhaustive defect absence.",
+  "source_sha256": {
+    "src/main/java/edu/bjfu/eldercare/Api.java": "4ccb9a186d937d3ce0ce7d135f3b804f5dc1b3b3f85fa92aa5b5caef0aba3747",
+    "src/main/java/edu/bjfu/eldercare/Application.java": "6ad06c9b99581dffbd001fa51a69b2a64d8345d5e802c041af59122eeb46ea3d",
+    "src/main/java/edu/bjfu/eldercare/Auth.java": "275371cf5e552bf032cb532e3914872c508f4314b30570e146321d31ede1cd8d",
+    "src/main/java/edu/bjfu/eldercare/CareService.java": "4825eb98d6d5d1e6d32a69580d14b157ddf0341c28176a3ee6d812a996583ada",
+    "src/main/java/edu/bjfu/eldercare/Crypto.java": "6bd11badc6b1a85ab9393b89c05ca8038f677d2059fc31f71f6b906a3c954b53",
+    "src/main/java/edu/bjfu/eldercare/Inputs.java": "e2f1247bb91ec69b962663b63b72ed7d1c8384b4c21358ee61076428a6238813",
+    "src/main/java/edu/bjfu/eldercare/Jobs.java": "f1d50c74f8da3a41868de67bec85eab2de8d729c6307eb87a772b13be48cb0c5",
+    "src/main/java/edu/bjfu/eldercare/ReadService.java": "839aad06dcace9458eaf27859ebd2ec4ff8e9b1148cfdb1e20837476e5239e51",
+    "src/main/java/edu/bjfu/eldercare/Scope.java": "f49af6408c2c49717b4283a47282934569f655f83a5965a446e246b120027e36",
+    "src/main/java/edu/bjfu/eldercare/Seed.java": "de6a61da862614ac4edc490c32b5a565b46d67c0eb63a3e080213fc40a4f6a36",
+    "src/main/java/edu/bjfu/eldercare/Simulator.java": "50a0c32db7ff04b5333b2cb96fe76ebd1aa0ca8b350b69a808e97b63592edb66",
+    "src/main/java/edu/bjfu/eldercare/Store.java": "51453ecd1816730275c6949f843b406106a6881d93b64263154b0096cd1c66c3",
+    "src/main/java/edu/bjfu/eldercare/WorkflowService.java": "2b3bcc3e2326a9a60c7ab4c603459b3c5193df260c42963890505c4776dff508",
+    "src/main/resources/application.properties": "36121fedda205cd6b62a7ce72af6a663c5544004a69cb838fa85340d9a207e12",
+    "src/main/resources/static/app.js": "b11e8d427f90338980a9f805c1233810c2fcf75ddacd80f719edc78de6aa1ccb",
+    "src/main/resources/static/completion.js": "5c5f7213a82774711df467c9227446b1a95b061524d7d131cec883c07e52f72e",
+    "src/main/resources/static/index.html": "45ffbffac3c477f2923c8577ab64ed70c55606bba65ddc15a0f7b31b7a843fd3",
+    "src/main/resources/static/neighborhood.svg": "dcc5b78981cb9c673f4060423667cfd4d01550e26e6b4426d2311a729c0cd1f5",
+    "src/main/resources/static/style.css": "366416c0bfcea5581a123d7a31965fc29c4b111a57f880587b5b7f059609d668",
+    "src/test/java/edu/bjfu/eldercare/DatabaseIntegrationTest.java": "9230dcc723122331ba064a283c496d883ab5fbff5472a3061401e83ec91fb518",
+    "src/test/java/edu/bjfu/eldercare/WorkflowIntegrationTest.java": "82f1e3a58f56d2d0d14802e455e6000d66788ff6c6a5c30fe0d3b5bf841bbc57",
+    "database/01_schema.sql": "1caf1ab983f12025703b3205de873135288419784f3549d17595035238c725e4",
+    "database/02_routines.sql": "0e5faad063ac647c7eae3748fa90aea8861be260953ed8b3b62ed0258375ccd4",
+    "database/03_views.sql": "5c5bdad2b9f95b3baa8ac754dddb744094c48c3d995d4fd691673a6b0e1044cb",
+    "database/04_queries.sql": "184326d69433eec9f039158edec3b260575662010b4a70ce3b530213e1c317d8",
+    "database/migrations/20261112_integrity.sql": "77015940e0fe17e08f8fff9e83f0d7b47f35719840dfae76968ec6877e409c34",
+    "database/migrations/20261113_completion.sql": "1e8db564a9f1fc1421febfd44742b321b1abb283641dd5ec703bd9785c16e1bd",
+    "database/queries.json": "78d0953d8f8cb3a622857265ad92839862d46d0e9d39255f983c0f4cd64c80c4"
+  }
+}

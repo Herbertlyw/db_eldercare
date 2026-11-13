@@ -5,3 +5,8 @@ target/
 *.log
 __pycache__/
 outputs/*.zip
+.~*
+~$*
+
+# Unpacked delivery copies remain local; canonical sources live at repository root.
+/outputs/*/

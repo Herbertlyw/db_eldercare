@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="470" viewBox="0 0 1000 470">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1,1 L8,5 L1,9" fill="none" stroke="#6B7B87" stroke-width="1.4"/></marker></defs>
+<rect width="1000" height="470" fill="white"/>
+<text x="20" y="35.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="28" font-weight="600" text-anchor="start" fill="#223747">派单与改派的事务边界</text>
+<rect x="25" y="110" width="220" height="165" rx="5" fill="#EDF4F1" stroke="#24695D" stroke-width="1.5"/>
+<text x="43" y="148.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="22" font-weight="400" text-anchor="start" fill="#6B7B87">01</text>
+<text x="43" y="193.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="27" font-weight="600" text-anchor="start" fill="#223747">锁定数据</text>
+<text x="43" y="237.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" font-weight="400" text-anchor="start" fill="#223747">订单和护工记录</text>
+<path d="M245,193 H266" fill="none" stroke="#6B7B87" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="271" y="110" width="220" height="165" rx="5" fill="#EDF4F1" stroke="#24695D" stroke-width="1.5"/>
+<text x="289" y="148.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="22" font-weight="400" text-anchor="start" fill="#6B7B87">02</text>
+<text x="289" y="193.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="27" font-weight="600" text-anchor="start" fill="#223747">检查资格</text>
+<text x="289" y="237.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" font-weight="400" text-anchor="start" fill="#223747">资质、区域、时段</text>
+<path d="M491,193 H512" fill="none" stroke="#6B7B87" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="517" y="110" width="220" height="165" rx="5" fill="#EDF4F1" stroke="#24695D" stroke-width="1.5"/>
+<text x="535" y="148.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="22" font-weight="400" text-anchor="start" fill="#6B7B87">03</text>
+<text x="535" y="193.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="27" font-weight="600" text-anchor="start" fill="#223747">调整派单</text>
+<text x="535" y="237.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" font-weight="400" text-anchor="start" fill="#223747">释放旧名额并保留历史</text>
+<path d="M737,193 H758" fill="none" stroke="#6B7B87" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="763" y="110" width="220" height="165" rx="5" fill="#EDF4F1" stroke="#24695D" stroke-width="1.5"/>
+<text x="781" y="148.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="22" font-weight="400" text-anchor="start" fill="#6B7B87">04</text>
+<text x="781" y="193.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="27" font-weight="600" text-anchor="start" fill="#223747">写入结果</text>
+<text x="781" y="237.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="18" font-weight="400" text-anchor="start" fill="#223747">条件更新班次并写派单</text>
+<path d="M135,286 V333 H870 V286" fill="none" stroke="#6B7B87" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="500" y="370.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="25" font-weight="600" text-anchor="middle" fill="#A16B38">任一步失败 → 整体回滚，旧派单和占用名额一并恢复</text>
+<text x="500" y="427.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="22" font-weight="400" text-anchor="middle" fill="#6B7B87">校验通过后统一提交；两个订单竞争最后一个名额时，只允许一个成功。</text>
+</svg>

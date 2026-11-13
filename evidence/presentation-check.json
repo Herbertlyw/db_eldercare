@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-13",
+  "file": "社区居家养老平台课程答辩_修订版.pptx",
+  "sha256": "e6d1fdb06bb99f29d38c9a1599819da69ab8425aa484f28c462cca21ff5ab1f4",
+  "slides": 12,
+  "notes": 12,
+  "native_tables": 4,
+  "embedded_images": 2,
+  "file_integrity": "passed",
+  "native_application": "macOS WPS Office",
+  "native_open_and_pdf_export": "passed",
+  "native_pdf_pages_visually_reviewed": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "windows_wps_verified": false,
+  "pdf_sha256": "63e9f6861d7d647411dac6deea5a399a9a52222ca0a019e54d3ffdb7c6f3fc55",
+  "integration_test_count": 109
+}

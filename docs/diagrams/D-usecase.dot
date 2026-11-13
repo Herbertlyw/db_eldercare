@@ -1,6 +1,0 @@
-digraph G { graph [rankdir=LR, bgcolor="white",nodesep=0.35,ranksep=0.7]; node [fontname="Noto Sans CJK SC",fontsize=14,color="#31574e"]; edge [fontname="Noto Sans CJK SC",fontsize=10,color="#719087",arrowsize=0.6];
-a0 [shape=plaintext,label="«actor»\n社区管理员"];
-a1 [shape=plaintext,label="«actor»\n护工"];
-a2 [shape=plaintext,label="«actor»\n家属"];
-subgraph cluster_system { label="监测与应急";color="#9cae9f";u0 [shape=ellipse,label="绑定设备与上传数据"];u1 [shape=ellipse,label="查看异常信息"];u2 [shape=ellipse,label="响应应急事件"];u3 [shape=ellipse,label="回填处置结果"];}
-a0->u0 [arrowhead=none];a0->u2 [arrowhead=none];a0->u3 [arrowhead=none];a1->u2 [arrowhead=none];a1->u3 [arrowhead=none];a2->u1 [arrowhead=none];}

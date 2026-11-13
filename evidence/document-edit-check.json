@@ -1,18 +1,36 @@
 {
+  "date": "2026-11-13",
   "blue": "1565C0",
   "blue_runs": {
     "社区居家养老平台小组报告_待补成员信息.docx": 27,
     "刘禹伟_个人报告预填稿_待确认实际分工.docx": 19
   },
-  "group_pages": 58,
+  "preserved_original_parts": {
+    "小组": 22,
+    "个人": 13
+  },
+  "original_template_sha256": {
+    "小组": "c8423588cfa98fefb2394c7107ac5f07275040ae53f6c8480fd1b1ebbe4ac66e",
+    "个人": "6563747e9359c41691b177345612a49332d72e5418a39e20064f664e51d90683"
+  },
+  "output_sha256": {
+    "社区居家养老平台小组报告_待补成员信息.docx": "1ea662c36795e18d1d31efba0ffbfad32614a5ebc8399c1a9ae0b5c5b6b8c816",
+    "刘禹伟_个人报告预填稿_待确认实际分工.docx": "046ee954b6d13d37c59c7302d4abbdc682eebb934a99f5c0dd48d607856cbbd5"
+  },
+  "figure_count": 30,
+  "group_pages": 117,
+  "personal_pages": 3,
   "toc_pages_verified": [
     3,
     4,
     11,
-    17,
-    22,
-    46,
-    58
+    25,
+    31,
+    63,
+    81
   ],
-  "business_pending_status_not_recolored": true
+  "global_uml_entities": 47,
+  "global_uml_foreign_keys": 92,
+  "procedure_trigger_native_table": true,
+  "visual_review": "All rendered group pages reviewed in contact sheets, with dense tables, SQL, diagrams and revised pages checked at full size; all three personal pages checked at full size. Final unchanged pages compared by image hash."
 }

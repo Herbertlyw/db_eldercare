@@ -1,0 +1,68 @@
+{
+  "time": "2026-11-13T01:58:07.838Z",
+  "database": "eldercare_test",
+  "checks": [
+    {
+      "role": "admin1",
+      "readRoutes": 35,
+      "forms": 40
+    },
+    {
+      "role": "family1",
+      "readRoutes": 18,
+      "forms": 7
+    },
+    {
+      "role": "caregiver1",
+      "readRoutes": 12,
+      "forms": 9
+    },
+    {
+      "role": "manager1",
+      "readRoutes": 21,
+      "forms": 15
+    },
+    {
+      "role": "street1",
+      "readRoutes": 7,
+      "forms": 1
+    },
+    {
+      "role": "regulator1",
+      "readRoutes": 16,
+      "forms": 11
+    }
+  ],
+  "actionsDone": [
+    "complaint.create",
+    "complaint.assign",
+    "complaint.reply",
+    "recruitment.create",
+    "recruitment.review",
+    "training.create",
+    "training.enroll",
+    "training.result",
+    "organization.submit",
+    "complaint.close",
+    "organization.review",
+    "inspection.order",
+    "rectification.submit",
+    "inspection.close",
+    "notice.publish",
+    "complaint.create",
+    "complaint.assign",
+    "complaint.reply",
+    "complaint.close",
+    "order.recommend",
+    "metric.create",
+    "device.create",
+    "device.bind",
+    "device.simulation",
+    "simulator.run",
+    "device.simulation"
+  ],
+  "complaintDetails": true,
+  "publicNoticesWithoutLogin": true,
+  "mobileOverflow": false,
+  "pageErrors": []
+}

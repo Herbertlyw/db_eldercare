@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="390" viewBox="0 0 1200 390">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1,1 L8,5 L1,9" fill="none" stroke="#6B7B87" stroke-width="1.4"/></marker></defs>
+<rect width="1200" height="390" fill="white"/>
+<text x="25" y="40.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="30" font-weight="600" text-anchor="start" fill="#223747">抽查、整改与公示</text>
+<rect x="25" y="125" width="270" height="100" rx="4" fill="#EDF4F1" stroke="#24695D" stroke-width="1.5"/>
+<text x="160" y="181.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#223747">监管按比例抽查</text>
+<path d="M295,175 H315" fill="none" stroke="#6B7B87" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="320" y="125" width="270" height="100" rx="4" fill="#EDF4F1" stroke="#24695D" stroke-width="1.5"/>
+<text x="455" y="181.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#223747">机构提交整改材料</text>
+<path d="M590,175 H610" fill="none" stroke="#6B7B87" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="615" y="125" width="270" height="100" rx="4" fill="#EDF4F1" stroke="#24695D" stroke-width="1.5"/>
+<text x="750" y="181.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#223747">监管复核通过</text>
+<path d="M885,175 H905" fill="none" stroke="#6B7B87" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="910" y="125" width="270" height="100" rx="4" fill="#EDF4F1" stroke="#24695D" stroke-width="1.5"/>
+<text x="1045" y="181.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#223747">发布脱敏质量公示</text>
+<path d="M750,240 V285 H455 V240" fill="none" stroke="#6B7B87" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<text x="600" y="330.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="23" font-weight="400" text-anchor="middle" fill="#A16B38">复核退回：保留原材料，机构补充后再次提交。</text>
+</svg>

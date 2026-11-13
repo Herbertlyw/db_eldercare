@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="990" viewBox="0 0 1000 990">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1,1 L8,5 L1,9" fill="none" stroke="#6B7B87" stroke-width="1.4"/></marker></defs>
+<rect width="1000" height="990" fill="white"/>
+<text x="20" y="38.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="30" font-weight="600" text-anchor="start" fill="#223747">全局数据模型分区</text>
+<text x="20" y="75.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="23" font-weight="400" text-anchor="start" fill="#6B7B87">47 张基础表按主要用途归类；跨模块通过外键关联。</text>
+<rect x="20" y="112" width="960" height="121" rx="0" fill="white" stroke="#9AAAB2" stroke-width="1.5"/>
+<rect x="20" y="112" width="245" height="121" rx="0" fill="#EDF4F1" stroke="none" stroke-width="1.5"/>
+<text x="42" y="154.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="600" text-anchor="start" fill="#24695D">公共基础</text>
+<text x="42" y="195.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#6B7B87">6 张表</text>
+<text x="285" y="144.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#223747">community · organization · account</text>
+<text x="285" y="173.4" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#223747">account_scope · service_item · audit_log</text>
+<rect x="20" y="250" width="960" height="121" rx="0" fill="white" stroke="#9AAAB2" stroke-width="1.5"/>
+<rect x="20" y="250" width="245" height="121" rx="0" fill="#EDF4F1" stroke="none" stroke-width="1.5"/>
+<text x="42" y="292.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="600" text-anchor="start" fill="#24695D">A  档案与评估</text>
+<text x="42" y="333.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#6B7B87">8 张表</text>
+<text x="285" y="282.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#223747">elder · elder_tag · guardian · assessment</text>
+<text x="285" y="311.4" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#223747">care_bundle · bundle_item · care_plan · plan_item</text>
+<rect x="20" y="388" width="960" height="121" rx="0" fill="white" stroke="#9AAAB2" stroke-width="1.5"/>
+<rect x="20" y="388" width="245" height="121" rx="0" fill="#EDF4F1" stroke="none" stroke-width="1.5"/>
+<text x="42" y="430.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="600" text-anchor="start" fill="#24695D">B  下单与派单</text>
+<text x="42" y="471.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#6B7B87">5 张表</text>
+<text x="285" y="420.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#223747">service_order · dispatch · service_record</text>
+<text x="285" y="449.4" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#223747">complaint · complaint_log</text>
+<rect x="20" y="526" width="960" height="121" rx="0" fill="white" stroke="#9AAAB2" stroke-width="1.5"/>
+<rect x="20" y="526" width="245" height="121" rx="0" fill="#EDF4F1" stroke="none" stroke-width="1.5"/>
+<text x="42" y="568.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="600" text-anchor="start" fill="#24695D">C  护工与排班</text>
+<text x="42" y="609.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#6B7B87">8 张表</text>
+<text x="285" y="558.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#223747">caregiver · credential · caregiver_area · shift</text>
+<text x="285" y="587.4" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#223747">attendance · recruitment · training · training_record</text>
+<rect x="20" y="664" width="960" height="121" rx="0" fill="white" stroke="#9AAAB2" stroke-width="1.5"/>
+<rect x="20" y="664" width="245" height="121" rx="0" fill="#EDF4F1" stroke="none" stroke-width="1.5"/>
+<text x="42" y="706.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="600" text-anchor="start" fill="#24695D">D  监测与应急</text>
+<text x="42" y="747.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#6B7B87">8 张表</text>
+<text x="285" y="696.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#223747">device · device_binding · metric_rule · vital</text>
+<text x="285" y="725.4" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#223747">emergency · emergency_log · notification · event_step</text>
+<rect x="20" y="802" width="960" height="121" rx="0" fill="white" stroke="#9AAAB2" stroke-width="1.5"/>
+<rect x="20" y="802" width="245" height="121" rx="0" fill="#EDF4F1" stroke="none" stroke-width="1.5"/>
+<text x="42" y="844.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="600" text-anchor="start" fill="#24695D">E  补贴与监管</text>
+<text x="42" y="885.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#6B7B87">12 张表</text>
+<text x="285" y="834.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#223747">policy · policy_area · claim · claim_item · claim_review</text>
+<text x="285" y="863.4" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#223747">payment · claim_evidence · inspection · inspection_batch</text>
+<text x="285" y="892.8" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="21" font-weight="400" text-anchor="start" fill="#223747">rectification_submission · organization_report · public_notice</text>
+<text x="20" y="975.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="22" font-weight="600" text-anchor="start" fill="#24695D">关联主线：老人 → 评估／计划 → 服务订单 → 派单／工时 → 补贴明细</text>
+</svg>

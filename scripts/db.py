@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Local Docker lifecycle helper. Secrets stay in .local and are never printed."""
+"""Local native MySQL helper. Secrets stay in .local and are never printed."""
 import json,subprocess,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]

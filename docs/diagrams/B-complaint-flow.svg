@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="390" viewBox="0 0 1200 390">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1,1 L8,5 L1,9" fill="none" stroke="#6B7B87" stroke-width="1.4"/></marker></defs>
+<rect width="1200" height="390" fill="white"/>
+<text x="25" y="40.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="30" font-weight="600" text-anchor="start" fill="#223747">投诉办理过程</text>
+<rect x="25" y="125" width="270" height="100" rx="4" fill="#EDF4F1" stroke="#24695D" stroke-width="1.5"/>
+<text x="160" y="181.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#223747">家属提交问题</text>
+<path d="M295,175 H315" fill="none" stroke="#6B7B87" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="320" y="125" width="270" height="100" rx="4" fill="#EDF4F1" stroke="#24695D" stroke-width="1.5"/>
+<text x="455" y="181.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#223747">社区受理并转机构</text>
+<path d="M590,175 H610" fill="none" stroke="#6B7B87" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="615" y="125" width="270" height="100" rx="4" fill="#EDF4F1" stroke="#24695D" stroke-width="1.5"/>
+<text x="750" y="181.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#223747">经办单位调查回复</text>
+<path d="M885,175 H905" fill="none" stroke="#6B7B87" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="910" y="125" width="270" height="100" rx="4" fill="#EDF4F1" stroke="#24695D" stroke-width="1.5"/>
+<text x="1045" y="181.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#223747">家属或社区确认结案</text>
+<text x="600" y="310.0" font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" font-size="23" font-weight="400" text-anchor="middle" fill="#6B7B87">每个步骤保存经办账号、时间和说明；评价单独登记。</text>
+</svg>

@@ -34,7 +34,19 @@
     "payment": "拨付",
     "inspection": "质量抽查",
     "complaint": "评价投诉",
-    "audit_log": "操作审计"
+    "audit_log": "操作审计",
+    "account_scope": "监管辖区授权",
+    "policy_area": "政策适用社区",
+    "recruitment": "招聘申请",
+    "training": "岗前培训",
+    "training_record": "培训成绩",
+    "complaint_log": "投诉办理记录",
+    "inspection_batch": "比例抽查批次",
+    "rectification_submission": "整改提交与复核",
+    "organization_report": "机构考核材料",
+    "public_notice": "服务质量公示",
+    "claim_evidence": "补贴证明材料",
+    "event_step": "应急处置步骤"
   },
   "groups": {
     "A": [
@@ -48,7 +60,7 @@
         "bundle_item",
         "care_plan",
         "plan_item",
-        "account"
+        "service_item"
       ]
     ],
     "B": [
@@ -59,7 +71,9 @@
         "service_order",
         "dispatch",
         "service_record",
+        "attendance",
         "complaint",
+        "complaint_log",
         "shift"
       ]
     ],
@@ -72,9 +86,13 @@
         "credential",
         "caregiver_area",
         "community",
+        "service_item",
         "shift",
         "attendance",
-        "dispatch"
+        "dispatch",
+        "recruitment",
+        "training",
+        "training_record"
       ]
     ],
     "D": [
@@ -87,7 +105,8 @@
         "vital",
         "emergency",
         "emergency_log",
-        "notification"
+        "notification",
+        "event_step"
       ]
     ],
     "E": [
@@ -101,7 +120,12 @@
         "claim_review",
         "payment",
         "inspection",
-        "account"
+        "policy_area",
+        "claim_evidence",
+        "inspection_batch",
+        "rectification_submission",
+        "organization_report",
+        "public_notice"
       ]
     ]
   },
@@ -112,23 +136,27 @@
         "家属"
       ],
       [
-        "建立档案与家属关联",
-        "登记能力评估",
-        "制定照护计划",
-        "查询评估与计划"
+        "建立档案与维护标签",
+        "登记评估与复评提醒",
+        "制定、调整和暂停计划",
+        "维护家属及联系方式",
+        "查看评估、频次和计划"
       ]
     ],
     "B": [
       [
-        "社区管理员",
         "家属",
-        "护工"
+        "社区管理员",
+        "护工",
+        "机构负责人"
       ],
       [
-        "预约服务",
-        "派单与改派",
-        "接单与服务记录",
-        "确认服务及评价"
+        "电话或家属预约",
+        "推荐、派单与保留改派历史",
+        "接单、签到签退及记录服务",
+        "确认完成并评价",
+        "受理、回复及结案投诉",
+        "处理超时订单和退回派单"
       ]
     ],
     "C": [
@@ -137,10 +165,12 @@
         "护工"
       ],
       [
-        "登记职业资质",
-        "安排班次",
-        "签到签退",
-        "复核异常工时"
+        "招聘申请与录用",
+        "培训安排、报名及成绩",
+        "管理证书和服务区域",
+        "安排班次与接单名额",
+        "签到签退与工时复核",
+        "查询月度工时与服务评分"
       ]
     ],
     "D": [
@@ -150,23 +180,30 @@
         "家属"
       ],
       [
-        "绑定设备与上传数据",
-        "查看异常信息",
-        "响应应急事件",
-        "回填处置结果"
+        "设备登记、绑定与解绑",
+        "配置指标及定时模拟采样",
+        "查看体征、预警和通知",
+        "确认异常或登记误报",
+        "响应、登记到场与处置结果",
+        "未及时响应时自动升级"
       ]
     ],
     "E": [
       [
         "社区管理员",
         "街道审核人员",
-        "民政监管人员"
+        "民政监管人员",
+        "机构负责人"
       ],
       [
-        "提交补贴申报",
-        "街道初审",
-        "民政审核与拨付",
-        "质量抽查与整改"
+        "维护政策及适用辖区",
+        "周期申报与证明归档",
+        "分级审核、补件和拨付",
+        "按比例抽查与登记结果",
+        "提交整改、退回和复核",
+        "提交机构考核材料",
+        "公示抽查结论",
+        "查看辖区覆盖率及响应情况"
       ]
     ]
   }

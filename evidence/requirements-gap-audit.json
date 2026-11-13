@@ -1,0 +1,355 @@
+{
+  "time": "2026-11-12T23:11:05.133771",
+  "purpose": "Requirements coverage audit; HTTP reads/login/logout, read-only SQL and two rolled-back UPDATE probes in eldercare_test; no business code fixes or committed business changes.",
+  "sources": {
+    "source_pdf": {
+      "path": "/Users/herbert/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files/wxid_zcqy6xqd6p9q22_43fb/msg/file/2026-11/课设/社区居家养老智慧服务平台课程设计2026年任务书.pdf",
+      "sha256": "0ab744aef1f546e55a16c7b58f8755f28a854543fe279bc55713f923f186b0fe",
+      "pages_read": 9
+    },
+    "teacher_transcript": {
+      "path": "/Users/herbert/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files/wxid_zcqy6xqd6p9q22_43fb/temp/drag/20261112144431-转写_数据库大课设——任务书解读-逐字稿文本-1.docx",
+      "sha256": "cdb45405a65bc195265b563213d8d188c9e88ccc2f1188677052bc20c8831a2f",
+      "paragraphs_read": 44,
+      "coverage": "00:01:58–00:34:23; supplied transcript ends before the announced follow-up meeting"
+    },
+    "cached_text_matches_originals": true
+  },
+  "write_actions": [
+    "FAMILY",
+    "CAREGIVER",
+    "elder.create",
+    "guardian.create",
+    "credential.create",
+    "caregiver.status",
+    "device.create",
+    "elder.update",
+    "elder.transfer",
+    "elder.deactivate",
+    "assessment.create",
+    "plan.create",
+    "order.create",
+    "order.recommend",
+    "order.assign",
+    "order.accept",
+    "order.checkin",
+    "order.finish",
+    "order.confirm",
+    "order.cancel",
+    "complaint.create",
+    "shift.create",
+    "shift.delete",
+    "hours.review",
+    "device.bind",
+    "vital.upload",
+    "event.create",
+    "event.respond",
+    "event.close",
+    "claim.submit",
+    "claim.review",
+    "claim.pay",
+    "inspection.create",
+    "inspection.order",
+    "inspection.close",
+    "maintenance.run"
+  ],
+  "read_kinds": [
+    "elders",
+    "orders",
+    "plans",
+    "assessments",
+    "events",
+    "claims",
+    "devices",
+    "vitals",
+    "caregivers",
+    "shifts",
+    "credentials",
+    "hours",
+    "inspections",
+    "assessmentDue",
+    "dispatchPool",
+    "activePlans",
+    "familyCare",
+    "waitingConfirmation",
+    "reassignments",
+    "credentialDue",
+    "shiftCapacity",
+    "hoursReview",
+    "currentDevices",
+    "abnormalVitals",
+    "pendingEvents",
+    "eligibleClaims",
+    "claimProgress",
+    "rectifications",
+    "monthlyHours",
+    "quality",
+    "organizationQuality",
+    "selfPay",
+    "catalog",
+    "bundles",
+    "policies",
+    "notifications"
+  ],
+  "http_reads": [
+    {
+      "role": "FAMILY",
+      "kind": "elders",
+      "total": 1,
+      "row_fields": [
+        "id",
+        "name",
+        "birth_date",
+        "address",
+        "community_id",
+        "status"
+      ]
+    },
+    {
+      "role": "FAMILY",
+      "kind": "plans",
+      "total": 1,
+      "row_fields": [
+        "id",
+        "assessment_id",
+        "bundle_id",
+        "caregiver_id",
+        "starts_at",
+        "ends_at",
+        "status",
+        "elder_id",
+        "elder_name"
+      ]
+    },
+    {
+      "role": "FAMILY",
+      "kind": "orders",
+      "total": 2,
+      "row_fields": [
+        "id",
+        "elder_id",
+        "item_id",
+        "community_id",
+        "starts_at",
+        "ends_at",
+        "address",
+        "channel",
+        "amount",
+        "status",
+        "created_by",
+        "created_at",
+        "elder_name"
+      ]
+    },
+    {
+      "role": "FAMILY",
+      "kind": "waitingConfirmation",
+      "total": 0,
+      "row_fields": []
+    },
+    {
+      "role": "FAMILY",
+      "kind": "claimProgress",
+      "total": 1,
+      "row_fields": [
+        "id",
+        "elder_id",
+        "community_id",
+        "period",
+        "amount",
+        "status",
+        "reference_no",
+        "paid_at"
+      ]
+    },
+    {
+      "role": "CAREGIVER",
+      "kind": "notifications",
+      "total": 1,
+      "row_fields": [
+        "id",
+        "event_id",
+        "account_id",
+        "message",
+        "created_at"
+      ]
+    },
+    {
+      "role": "CAREGIVER",
+      "kind": "events",
+      "total": 0,
+      "row_fields": []
+    },
+    {
+      "role": "REGULATOR",
+      "kind": "claims",
+      "total": 1,
+      "row_fields": [
+        "id",
+        "elder_id",
+        "item_id",
+        "period",
+        "amount",
+        "status",
+        "elder_name"
+      ]
+    },
+    {
+      "role": "REGULATOR",
+      "kind": "pendingEvents",
+      "total": 1,
+      "row_fields": [
+        "id",
+        "elder_id",
+        "community_id",
+        "status",
+        "level",
+        "deadline",
+        "remaining_seconds"
+      ]
+    },
+    {
+      "role": "REGULATOR",
+      "kind": "organizationQuality",
+      "total": 1,
+      "row_fields": [
+        "id",
+        "name",
+        "inspection_score"
+      ]
+    },
+    {
+      "role": "MANAGER",
+      "kind": "inspections",
+      "total": 1,
+      "row_fields": [
+        "id",
+        "order_id",
+        "caregiver_id",
+        "inspector_id",
+        "method",
+        "score",
+        "issue",
+        "rectification",
+        "status",
+        "result"
+      ]
+    }
+  ],
+  "sql_observations": {
+    "same_district_communities": {
+      "query": "SELECT district,COUNT(*) community_count FROM community GROUP BY district ORDER BY district",
+      "result": [
+        {
+          "district": "演示区县1",
+          "community_count": "4"
+        },
+        {
+          "district": "演示区县2",
+          "community_count": "4"
+        },
+        {
+          "district": "演示区县3",
+          "community_count": "4"
+        },
+        {
+          "district": "演示区县4",
+          "community_count": "4"
+        },
+        {
+          "district": "演示区县5",
+          "community_count": "4"
+        }
+      ]
+    },
+    "catalog_ability_coverage": {
+      "query": "SELECT 'assessment' object,ability_level,COUNT(*) count FROM assessment GROUP BY ability_level UNION ALL SELECT 'bundle',ability_level,COUNT(*) FROM care_bundle GROUP BY ability_level UNION ALL SELECT 'policy',ability_level,COUNT(*) FROM policy GROUP BY ability_level",
+      "result": [
+        {
+          "object": "assessment",
+          "ability_level": "SEVERE",
+          "count": "20"
+        },
+        {
+          "object": "bundle",
+          "ability_level": "SEVERE",
+          "count": "20"
+        },
+        {
+          "object": "policy",
+          "ability_level": "SEVERE",
+          "count": "20"
+        }
+      ]
+    },
+    "notification_without_visible_worker_event": {
+      "query": "SELECT COUNT(*) count FROM notification n JOIN account a ON a.id=n.account_id JOIN emergency e ON e.id=n.event_id WHERE a.role='CAREGIVER' AND NOT EXISTS(SELECT 1 FROM service_order o JOIN v_dispatch_context d ON d.order_id=o.id JOIN caregiver c ON c.id=d.caregiver_id WHERE o.elder_id=e.elder_id AND c.account_id=a.id AND d.status IN('WAITING','ACCEPTED'))",
+      "result": [
+        {
+          "count": "20"
+        }
+      ]
+    },
+    "base_ledger_counts": {
+      "query": "SELECT (SELECT COUNT(*) FROM service_record) service_records,(SELECT COUNT(*) FROM plan_item) plan_items,(SELECT COUNT(*) FROM claim_item) claim_items,(SELECT COUNT(*) FROM complaint) complaints",
+      "result": [
+        {
+          "service_records": "20",
+          "plan_items": "20",
+          "claim_items": "20",
+          "complaints": "20"
+        }
+      ]
+    },
+    "hour_rule_one_minute_example": {
+      "query": "SELECT 'scheduled 10:00-11:00; actual 10:05-10:06' example,IF(TIMESTAMP('2026-11-12 10:05:00')>=TIMESTAMP('2026-11-12 10:00:00')-INTERVAL 30 MINUTE AND TIMESTAMP('2026-11-12 10:06:00')<=TIMESTAMP('2026-11-12 11:00:00')+INTERVAL 30 MINUTE,'VALID','REVIEW') current_rule,TIMESTAMPDIFF(MINUTE,'2026-11-12 10:05:00','2026-11-12 10:06:00') minutes",
+      "result": [
+        {
+          "example": "scheduled 10:00-11:00; actual 10:05-10:06",
+          "current_rule": "VALID",
+          "minutes": "1"
+        }
+      ]
+    }
+  },
+  "source_sha256": {
+    "src/main/java/edu/bjfu/eldercare/Api.java": "89ea426069f6c5f80ab4a40634c3712c6641e161c3e27befe97b9a7ba365d68a",
+    "src/main/java/edu/bjfu/eldercare/Application.java": "6ad06c9b99581dffbd001fa51a69b2a64d8345d5e802c041af59122eeb46ea3d",
+    "src/main/java/edu/bjfu/eldercare/Auth.java": "275371cf5e552bf032cb532e3914872c508f4314b30570e146321d31ede1cd8d",
+    "src/main/java/edu/bjfu/eldercare/CareService.java": "f6c81a33fd9677b9d43605eabd87622b7a8348d89c1444ea3f35f5fa58603ba8",
+    "src/main/java/edu/bjfu/eldercare/Crypto.java": "9d6ab7e350c2ec9213cd8ab52459ab1d750c22867ccc07597ebb68efa6f388e7",
+    "src/main/java/edu/bjfu/eldercare/Jobs.java": "abba4c8f1c049f301f5e143a93f5a26bd7efe7e05228b89efe23e9b0221024d6",
+    "src/main/java/edu/bjfu/eldercare/Seed.java": "faafd3c1ab7bac5b1e2a40f4c2856838324265258a30cd3256513415015bd912",
+    "src/main/java/edu/bjfu/eldercare/Store.java": "e0fc4f001b97e6c9fd7ffd459a97e4f2cbfd214e2a8b2c597fb6cb9eba00f1de",
+    "src/main/resources/application.properties": "36121fedda205cd6b62a7ce72af6a663c5544004a69cb838fa85340d9a207e12",
+    "src/main/resources/static/app.js": "fec8f2b0cc2697313d187f579b24e7a511c4739a0a022dee159e5600782b0e76",
+    "src/main/resources/static/index.html": "7416616320dff6388200b7d3c0118b8657bbe6fcec9e0226e3f3bdaeb7aa663b",
+    "src/main/resources/static/neighborhood.svg": "dcc5b78981cb9c673f4060423667cfd4d01550e26e6b4426d2311a729c0cd1f5",
+    "src/main/resources/static/style.css": "d2403b96a5b090f438247a746b9da522fb024020895a3d9239de54b13163c216",
+    "src/test/java/edu/bjfu/eldercare/DatabaseIntegrationTest.java": "90807d2695999900ba1b69ac346479d820a176491a5fc0ff83fe03c9caf8213f",
+    "database/01_schema.sql": "14e82d91b22383cc7ba8c1081d010f977c83a3349ff035361eb13ee5e1eb4ddf",
+    "database/02_routines.sql": "d0e85269a6db7023b60ad686b0e38c0ef0491071b1864e50f99f4c39bc833e49",
+    "database/03_views.sql": "8cac0fd2713c9fe0f8c75728b0736d5b498f8e9d6659db169f59803c5c1b96ee",
+    "database/04_queries.sql": "e342b838fdbe3939581b0f7f2825ae81e750aa91f01ea6256623c11f309bfc50",
+    "database/migrations/20261112_integrity.sql": "77015940e0fe17e08f8fff9e83f0d7b47f35719840dfae76968ec6877e409c34",
+    "database/queries.json": "028d43971f6d03e409a035435ca7164aec98796981dc52e537178019fdf9c572"
+  },
+  "previous_66_test_java_sources_unchanged": true,
+  "test_scope_note": "Previous 66-test result is retained, not rerun; these checks measure requirement coverage and read results, not full correctness.",
+  "rollback_probes": [
+    {
+      "check": "recognized_attendance_minutes",
+      "principal": "elder_app (application database account, not a web role or root)",
+      "database": "eldercare_test",
+      "transaction": "ROLLBACK",
+      "result": "changed_rows\n1"
+    },
+    {
+      "check": "historical_assessment_score",
+      "principal": "elder_app (application database account, not a web role or root)",
+      "database": "eldercare_test",
+      "transaction": "ROLLBACK",
+      "result": "changed_rows\n1"
+    }
+  ]
+}

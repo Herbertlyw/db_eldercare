@@ -8,6 +8,9 @@ account	organization_id	bigint	YES	NULL	MUL
 account	failures	int	NO	0		
 account	locked_until	datetime	YES	NULL		
 account	active	tinyint(1)	NO	1		
+account_scope	id	bigint	NO	NULL	PRI	auto_increment
+account_scope	account_id	bigint	NO	NULL	MUL	
+account_scope	community_id	bigint	NO	NULL	MUL	
 assessment	id	bigint	NO	NULL	PRI	auto_increment
 assessment	elder_id	bigint	NO	NULL	MUL	
 assessment	scale_name	varchar(50)	NO	NULL		
@@ -18,14 +21,19 @@ assessment	assessed_at	datetime	NO	NULL
 assessment	valid_until	datetime	NO	NULL		
 attendance	id	bigint	NO	NULL	PRI	auto_increment
 attendance	dispatch_id	bigint	NO	NULL	UNI	
-attendance	check_in	datetime	NO	NULL		
-attendance	check_out	datetime	YES	NULL		
+attendance	check_in	datetime(6)	NO	NULL		
+attendance	check_out	datetime(6)	YES	NULL		
 attendance	location_note	varchar(200)	NO	NULL		
 attendance	fence_ok	tinyint(1)	NO	NULL		
 attendance	status	enum('PENDING','REVIEW','VALID','INVALID')	NO	PENDING		
 attendance	effective_minutes	int	NO	0		
 attendance	reviewer_id	bigint	YES	NULL	MUL	
 attendance	review_reason	varchar(300)	YES	NULL		
+attendance	checkin_x	decimal(12,3)	YES	NULL		
+attendance	checkin_y	decimal(12,3)	YES	NULL		
+attendance	checkout_x	decimal(12,3)	YES	NULL		
+attendance	checkout_y	decimal(12,3)	YES	NULL		
+attendance	checkout_fence_ok	tinyint(1)	YES	NULL		
 audit_log	id	bigint	NO	NULL	PRI	auto_increment
 audit_log	table_name	varchar(50)	NO	NULL	MUL	
 audit_log	row_id	bigint	NO	NULL		
@@ -34,6 +42,8 @@ audit_log	actor	varchar(100)	NO	NULL
 audit_log	old_status	varchar(100)	YES	NULL		
 audit_log	new_status	varchar(100)	YES	NULL		
 audit_log	created_at	datetime	NO	CURRENT_TIMESTAMP		DEFAULT_GENERATED
+audit_log	before_data	json	YES	NULL		
+audit_log	after_data	json	YES	NULL		
 bundle_item	id	bigint	NO	NULL	PRI	auto_increment
 bundle_item	bundle_id	bigint	NO	NULL	MUL	
 bundle_item	item_id	bigint	NO	NULL	MUL	
@@ -59,9 +69,19 @@ caregiver_area	community_id	bigint	NO	NULL	MUL
 claim	id	bigint	NO	NULL	PRI	auto_increment
 claim	elder_id	bigint	NO	NULL	MUL	
 claim	item_id	bigint	NO	NULL	MUL	
-claim	period	char(7)	NO	NULL		
+claim	period	varchar(10)	NO	NULL		
 claim	amount	decimal(12,2)	NO	0.00		
 claim	status	enum('DRAFT','SUBMITTED','STREET_APPROVED','APPROVED','REJECTED','PAID')	NO	DRAFT		
+claim	community_id	bigint	YES	NULL	MUL	
+claim	period_start	date	YES	NULL		
+claim	period_end	date	YES	NULL		
+claim_evidence	id	bigint	NO	NULL	PRI	auto_increment
+claim_evidence	claim_id	bigint	NO	NULL	MUL	
+claim_evidence	submitted_by	bigint	NO	NULL	MUL	
+claim_evidence	name	varchar(100)	NO	NULL		
+claim_evidence	content	text	NO	NULL		
+claim_evidence	content_sha256	char(64)	NO	NULL		
+claim_evidence	created_at	datetime	NO	CURRENT_TIMESTAMP		DEFAULT_GENERATED
 claim_item	id	bigint	NO	NULL	PRI	auto_increment
 claim_item	claim_id	bigint	NO	NULL	MUL	
 claim_item	policy_id	bigint	NO	NULL	MUL	
@@ -80,12 +100,29 @@ community	id	bigint	NO	NULL	PRI	auto_increment
 community	name	varchar(80)	NO	NULL		
 community	district	varchar(80)	NO	NULL		
 community	area_code	varchar(30)	NO	NULL	UNI	
+community	street_name	varchar(80)	NO	演示街道		
+community	center_x	decimal(12,3)	NO	0.000		
+community	center_y	decimal(12,3)	NO	0.000		
+community	radius_m	int	NO	5000		
+community	fence_m	int	NO	200		
 complaint	id	bigint	NO	NULL	PRI	auto_increment
 complaint	order_id	bigint	NO	NULL	MUL	
 complaint	account_id	bigint	NO	NULL	MUL	
 complaint	rating	int	NO	NULL		
 complaint	content	varchar(500)	NO	NULL		
 complaint	created_at	datetime	NO	CURRENT_TIMESTAMP		DEFAULT_GENERATED
+complaint	status	enum('SUBMITTED','ASSIGNED','REPLIED','CLOSED')	NO	SUBMITTED		
+complaint	organization_id	bigint	YES	NULL	MUL	
+complaint	handler_id	bigint	YES	NULL	MUL	
+complaint	result	varchar(1000)	YES	NULL		
+complaint	updated_at	datetime	NO	CURRENT_TIMESTAMP		DEFAULT_GENERATED
+complaint	kind	enum('REVIEW','COMPLAINT')	NO	COMPLAINT		
+complaint_log	id	bigint	NO	NULL	PRI	auto_increment
+complaint_log	complaint_id	bigint	NO	NULL	MUL	
+complaint_log	actor_id	bigint	NO	NULL	MUL	
+complaint_log	status	varchar(30)	NO	NULL		
+complaint_log	message	varchar(1000)	NO	NULL		
+complaint_log	created_at	datetime	NO	CURRENT_TIMESTAMP		DEFAULT_GENERATED
 credential	id	bigint	NO	NULL	PRI	auto_increment
 credential	caregiver_id	bigint	NO	NULL	MUL	
 credential	item_id	bigint	NO	NULL	MUL	
@@ -98,11 +135,16 @@ device	serial_no	varchar(80)	NO	NULL	UNI
 device	type_name	varchar(50)	NO	NULL		
 device	location_note	varchar(200)	NO	NULL		
 device	status	enum('ACTIVE','OFFLINE','RETIRED')	NO	ACTIVE		
+device	community_id	bigint	YES	NULL	MUL	
+device	simulation_enabled	tinyint(1)	NO	0		
+device	simulation_metric_id	bigint	YES	NULL	MUL	
+device	simulation_seconds	int	NO	60		
+device	last_simulated_at	datetime(6)	YES	NULL		
 device_binding	id	bigint	NO	NULL	PRI	auto_increment
 device_binding	device_id	bigint	NO	NULL	MUL	
 device_binding	elder_id	bigint	NO	NULL	MUL	
-device_binding	bound_at	datetime	NO	NULL		
-device_binding	unbound_at	datetime	YES	NULL		
+device_binding	bound_at	datetime(6)	NO	NULL		
+device_binding	unbound_at	datetime(6)	YES	NULL		
 device_binding	active_device	bigint	YES	NULL	UNI	STORED GENERATED
 dispatch	id	bigint	NO	NULL	PRI	auto_increment
 dispatch	order_id	bigint	NO	NULL	MUL	
@@ -120,6 +162,8 @@ elder	birth_date	date	NO	NULL
 elder	address	varchar(200)	NO	NULL		
 elder	community_id	bigint	NO	NULL	MUL	
 elder	status	enum('ACTIVE','INACTIVE')	NO	ACTIVE		
+elder	position_x	decimal(12,3)	NO	0.000		
+elder	position_y	decimal(12,3)	NO	0.000		
 elder_tag	id	bigint	NO	NULL	PRI	auto_increment
 elder_tag	elder_id	bigint	NO	NULL	MUL	
 elder_tag	tag	enum('ALONE','DISABLED','LOW_INCOME')	NO	NULL		
@@ -135,39 +179,75 @@ emergency	responded_by	bigint	YES	NULL	MUL
 emergency	responded_at	datetime	YES	NULL		
 emergency	arrived_at	datetime	YES	NULL		
 emergency	result	varchar(1000)	YES	NULL		
+emergency	initial_deadline	datetime	YES	NULL		
+emergency	closed_at	datetime(6)	YES	NULL		
+emergency	close_reason	varchar(300)	YES	NULL		
 emergency_log	id	bigint	NO	NULL	PRI	auto_increment
 emergency_log	event_id	bigint	NO	NULL	MUL	
 emergency_log	level	int	NO	NULL		
 emergency_log	created_at	datetime	NO	CURRENT_TIMESTAMP		DEFAULT_GENERATED
 emergency_log	message	varchar(300)	NO	NULL		
+event_step	id	bigint	NO	NULL	PRI	auto_increment
+event_step	event_id	bigint	NO	NULL	MUL	
+event_step	actor_id	bigint	NO	NULL	MUL	
+event_step	action	varchar(30)	NO	NULL		
+event_step	message	varchar(1000)	NO	NULL		
+event_step	created_at	datetime(6)	NO	CURRENT_TIMESTAMP(6)		DEFAULT_GENERATED
 guardian	id	bigint	NO	NULL	PRI	auto_increment
 guardian	elder_id	bigint	NO	NULL	MUL	
 guardian	account_id	bigint	NO	NULL	MUL	
 guardian	relation_name	varchar(30)	NO	NULL		
 guardian	phone_cipher	text	NO	NULL		
+guardian	active	tinyint(1)	NO	1		
 inspection	id	bigint	NO	NULL	PRI	auto_increment
 inspection	order_id	bigint	YES	NULL	MUL	
 inspection	caregiver_id	bigint	YES	NULL	MUL	
 inspection	inspector_id	bigint	NO	NULL	MUL	
 inspection	method	enum('PHONE','VISIT')	NO	NULL		
-inspection	score	int	NO	NULL		
+inspection	score	int	YES	NULL		
 inspection	issue	varchar(300)	NO	NULL		
 inspection	rectification	varchar(300)	NO	NULL		
-inspection	status	enum('OPEN','CLOSED')	NO	OPEN		
+inspection	status	enum('PENDING','OPEN','REVIEW','CLOSED')	NO	OPEN		
 inspection	result	varchar(300)	YES	NULL		
+inspection	batch_id	bigint	YES	NULL	MUL	
+inspection	created_at	datetime	NO	CURRENT_TIMESTAMP		DEFAULT_GENERATED
+inspection_batch	id	bigint	NO	NULL	PRI	auto_increment
+inspection_batch	community_id	bigint	NO	NULL	MUL	
+inspection_batch	inspector_id	bigint	NO	NULL	MUL	
+inspection_batch	target_type	enum('ORDER','CAREGIVER')	NO	NULL		
+inspection_batch	starts_at	datetime	NO	NULL		
+inspection_batch	ends_at	datetime	NO	NULL		
+inspection_batch	ratio	decimal(6,5)	NO	NULL		
+inspection_batch	population	int	NO	NULL		
+inspection_batch	sample_count	int	NO	NULL		
+inspection_batch	sample_seed	char(36)	NO	NULL		
+inspection_batch	created_at	datetime	NO	CURRENT_TIMESTAMP		DEFAULT_GENERATED
 metric_rule	id	bigint	NO	NULL	PRI	auto_increment
 metric_rule	metric	varchar(60)	NO	NULL	UNI	
 metric_rule	low_value	decimal(12,3)	NO	NULL		
 metric_rule	high_value	decimal(12,3)	NO	NULL		
 metric_rule	response_seconds	int	NO	NULL		
 notification	id	bigint	NO	NULL	PRI	auto_increment
-notification	event_id	bigint	NO	NULL	MUL	
+notification	event_id	bigint	YES	NULL	MUL	
 notification	account_id	bigint	NO	NULL	MUL	
 notification	message	varchar(300)	NO	NULL		
 notification	created_at	datetime	NO	CURRENT_TIMESTAMP		DEFAULT_GENERATED
+notification	assessment_id	bigint	YES	NULL	MUL	
+notification	dedupe_key	varchar(150)	YES	NULL	UNI	
 organization	id	bigint	NO	NULL	PRI	auto_increment
 organization	name	varchar(100)	NO	NULL		
 organization	community_id	bigint	NO	NULL	MUL	
+organization_report	id	bigint	NO	NULL	PRI	auto_increment
+organization_report	organization_id	bigint	NO	NULL	MUL	
+organization_report	period	char(7)	NO	NULL		
+organization_report	summary	varchar(2000)	NO	NULL		
+organization_report	evidence	varchar(1000)	NO	NULL		
+organization_report	submitted_by	bigint	NO	NULL	MUL	
+organization_report	status	enum('SUBMITTED','ACCEPTED','RETURNED')	NO	SUBMITTED		
+organization_report	reviewer_id	bigint	YES	NULL	MUL	
+organization_report	review_note	varchar(1000)	YES	NULL		
+organization_report	created_at	datetime	NO	CURRENT_TIMESTAMP		DEFAULT_GENERATED
+organization_report	reviewed_at	datetime	YES	NULL		
 payment	id	bigint	NO	NULL	PRI	auto_increment
 payment	claim_id	bigint	NO	NULL	UNI	
 payment	reference_no	varchar(80)	NO	NULL	UNI	
@@ -185,6 +265,40 @@ policy	ability_level	enum('SELF','PARTIAL','SEVERE')	NO	NULL
 policy	rate	decimal(10,2)	NO	NULL		
 policy	starts_at	datetime	NO	NULL		
 policy	ends_at	datetime	NO	NULL		
+policy	settlement_cycle	enum('MONTH','QUARTER','YEAR')	NO	MONTH		
+policy	minimum_age	int	NO	0		
+policy	required_tag	enum('ALONE','DISABLED','LOW_INCOME')	YES	NULL		
+policy_area	id	bigint	NO	NULL	PRI	auto_increment
+policy_area	policy_id	bigint	NO	NULL	MUL	
+policy_area	community_id	bigint	NO	NULL	MUL	
+public_notice	id	bigint	NO	NULL	PRI	auto_increment
+public_notice	inspection_id	bigint	NO	NULL	MUL	
+public_notice	publisher_id	bigint	NO	NULL	MUL	
+public_notice	title	varchar(100)	NO	NULL		
+public_notice	body	varchar(1000)	NO	NULL		
+public_notice	published_at	datetime	NO	CURRENT_TIMESTAMP		DEFAULT_GENERATED
+public_notice	withdrawn_at	datetime	YES	NULL		
+public_notice	withdraw_reason	varchar(300)	YES	NULL		
+recruitment	id	bigint	NO	NULL	PRI	auto_increment
+recruitment	organization_id	bigint	NO	NULL	MUL	
+recruitment	candidate_name	varchar(60)	NO	NULL		
+recruitment	phone_cipher	text	NO	NULL		
+recruitment	status	enum('APPLIED','HIRED','REJECTED')	NO	APPLIED		
+recruitment	caregiver_id	bigint	YES	NULL	UNI	
+recruitment	reviewer_id	bigint	YES	NULL	MUL	
+recruitment	review_note	varchar(500)	YES	NULL		
+recruitment	created_at	datetime	NO	CURRENT_TIMESTAMP		DEFAULT_GENERATED
+recruitment	reviewed_at	datetime	YES	NULL		
+rectification_submission	id	bigint	NO	NULL	PRI	auto_increment
+rectification_submission	inspection_id	bigint	NO	NULL	MUL	
+rectification_submission	submitted_by	bigint	NO	NULL	MUL	
+rectification_submission	measures	varchar(1000)	NO	NULL		
+rectification_submission	evidence	varchar(1000)	NO	NULL		
+rectification_submission	created_at	datetime	NO	CURRENT_TIMESTAMP		DEFAULT_GENERATED
+rectification_submission	decision	enum('PENDING','ACCEPT','RETURN')	NO	PENDING		
+rectification_submission	reviewer_id	bigint	YES	NULL	MUL	
+rectification_submission	review_note	varchar(1000)	YES	NULL		
+rectification_submission	reviewed_at	datetime	YES	NULL		
 service_item	id	bigint	NO	NULL	PRI	auto_increment
 service_item	name	varchar(80)	NO	NULL		
 service_item	category	varchar(30)	NO	NULL		
@@ -204,6 +318,8 @@ service_order	amount	decimal(10,2)	NO	NULL
 service_order	status	enum('PENDING','ASSIGNED','ACCEPTED','SERVING','CONFIRM','COMPLETED','CANCELLED')	NO	PENDING	MUL	
 service_order	created_by	bigint	NO	NULL	MUL	
 service_order	created_at	datetime	NO	CURRENT_TIMESTAMP		DEFAULT_GENERATED
+service_order	position_x	decimal(12,3)	NO	0.000		
+service_order	position_y	decimal(12,3)	NO	0.000		
 service_record	id	bigint	NO	NULL	PRI	auto_increment
 service_record	dispatch_id	bigint	NO	NULL	UNI	
 service_record	notes	varchar(1000)	NO	NULL		
@@ -217,12 +333,24 @@ shift	ends_at	datetime	NO	NULL
 shift	capacity	int	NO	NULL		
 shift	used_count	int	NO	0		
 shift	status	enum('OPEN','CLOSED')	NO	OPEN		
+training	id	bigint	NO	NULL	PRI	auto_increment
+training	organization_id	bigint	NO	NULL	MUL	
+training	title	varchar(100)	NO	NULL		
+training	starts_at	datetime	NO	NULL		
+training	ends_at	datetime	NO	NULL		
+training_record	id	bigint	NO	NULL	PRI	auto_increment
+training_record	training_id	bigint	NO	NULL	MUL	
+training_record	caregiver_id	bigint	NO	NULL	MUL	
+training_record	result	enum('PENDING','PASS','FAIL')	NO	PENDING		
+training_record	score	int	YES	NULL		
+training_record	recorded_by	bigint	YES	NULL	MUL	
+training_record	recorded_at	datetime	YES	NULL		
 v_abnormal_vital	id	bigint	NO	0		
 v_abnormal_vital	elder_id	bigint	NO	NULL		
 v_abnormal_vital	community_id	bigint	NO	NULL		
 v_abnormal_vital	metric	varchar(60)	NO	NULL		
 v_abnormal_vital	metric_value	decimal(12,3)	NO	NULL		
-v_abnormal_vital	collected_at	datetime	NO	NULL		
+v_abnormal_vital	collected_at	datetime(6)	NO	NULL		
 v_active_plan	id	bigint	NO	0		
 v_active_plan	elder_id	bigint	NO	NULL		
 v_active_plan	name	varchar(60)	NO	NULL		
@@ -243,8 +371,8 @@ v_claim_eligible	amount	decimal(10,2)	NO	NULL
 v_claim_eligible	effective_minutes	int	NO	0		
 v_claim_progress	id	bigint	NO	0		
 v_claim_progress	elder_id	bigint	NO	NULL		
-v_claim_progress	community_id	bigint	NO	NULL		
-v_claim_progress	period	char(7)	NO	NULL		
+v_claim_progress	community_id	bigint	YES	NULL		
+v_claim_progress	period	varchar(10)	NO	NULL		
 v_claim_progress	amount	decimal(12,2)	NO	0.00		
 v_claim_progress	status	enum('DRAFT','SUBMITTED','STREET_APPROVED','APPROVED','REJECTED','PAID')	NO	DRAFT		
 v_claim_progress	reference_no	varchar(80)	YES	NULL		
@@ -259,7 +387,7 @@ v_device_current	serial_no	varchar(80)	NO	NULL
 v_device_current	status	enum('ACTIVE','OFFLINE','RETIRED')	NO	ACTIVE		
 v_device_current	elder_id	bigint	YES	NULL		
 v_device_current	community_id	bigint	YES	NULL		
-v_device_current	bound_at	datetime	YES	NULL		
+v_device_current	bound_at	datetime(6)	YES	NULL		
 v_dispatch_context	id	bigint	NO	0		
 v_dispatch_context	order_id	bigint	NO	NULL		
 v_dispatch_context	shift_id	bigint	NO	NULL		
@@ -291,8 +419,8 @@ v_hours_review	id	bigint	NO	0
 v_hours_review	caregiver_id	bigint	NO	NULL		
 v_hours_review	organization_id	bigint	NO	NULL		
 v_hours_review	order_id	bigint	NO	NULL		
-v_hours_review	check_in	datetime	NO	NULL		
-v_hours_review	check_out	datetime	YES	NULL		
+v_hours_review	check_in	datetime(6)	NO	NULL		
+v_hours_review	check_out	datetime(6)	YES	NULL		
 v_hours_review	location_note	varchar(200)	NO	NULL		
 v_hours_review	status	enum('PENDING','REVIEW','VALID','INVALID')	NO	PENDING		
 v_plan_context	id	bigint	NO	0		
@@ -315,7 +443,7 @@ v_rectification	order_id	bigint	YES	NULL
 v_rectification	caregiver_id	bigint	YES	NULL		
 v_rectification	issue	varchar(300)	NO	NULL		
 v_rectification	rectification	varchar(300)	NO	NULL		
-v_rectification	community_id	bigint	NO	NULL		
+v_rectification	community_id	bigint	YES	NULL		
 v_shift_capacity	id	bigint	NO	0		
 v_shift_capacity	caregiver_id	bigint	NO	NULL		
 v_shift_capacity	organization_id	bigint	NO	NULL		
@@ -330,7 +458,7 @@ vital	id	bigint	NO	NULL	PRI	auto_increment
 vital	binding_id	bigint	NO	NULL	MUL	
 vital	metric_rule_id	bigint	NO	NULL	MUL	
 vital	sample_key	varchar(80)	NO	NULL		
-vital	collected_at	datetime	NO	NULL		
+vital	collected_at	datetime(6)	NO	NULL		
 vital	metric_value	decimal(12,3)	NO	NULL		
 vital	abnormal	tinyint(1)	NO	0		
 vital	source	varchar(50)	NO	NULL		

@@ -1,0 +1,33 @@
+{
+  "time": "2026-11-12T11:52:29.350Z",
+  "checks": [
+    {
+      "role": "admin1",
+      "readRoutes": 30
+    },
+    {
+      "role": "family1",
+      "readRoutes": 16
+    },
+    {
+      "role": "caregiver1",
+      "readRoutes": 8
+    },
+    {
+      "role": "manager1",
+      "readRoutes": 12
+    },
+    {
+      "role": "street1",
+      "readRoutes": 4
+    },
+    {
+      "role": "regulator1",
+      "readRoutes": 10
+    }
+  ],
+  "recommendationForm": true,
+  "mobileOverflow": false,
+  "pageErrors": [],
+  "mutations": "none; recommendation is read-only"
+}

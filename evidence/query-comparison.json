@@ -6,8 +6,8 @@
     "rows": 20,
     "A": "id\tname\n1\t演示老人1\n2\t演示老人2\n3\t演示老人3\n4\t演示老人4\n5\t演示老人5\n6\t演示老人6\n7\t演示老人7\n8\t演示老人8\n9\t演示老人9\n10\t演示老人10\n11\t演示老人11\n12\t演示老人12\n13\t演示老人13\n14\t演示老人14\n15\t演示老人15\n16\t演示老人16\n17\t演示老人17\n18\t演示老人18\n19\t演示老人19\n20\t演示老人20\n",
     "B": "id\tname\n1\t演示老人1\n2\t演示老人2\n3\t演示老人3\n4\t演示老人4\n5\t演示老人5\n6\t演示老人6\n7\t演示老人7\n8\t演示老人8\n9\t演示老人9\n10\t演示老人10\n11\t演示老人11\n12\t演示老人12\n13\t演示老人13\n14\t演示老人14\n15\t演示老人15\n16\t演示老人16\n17\t演示老人17\n18\t演示老人18\n19\t演示老人19\n20\t演示老人20\n",
-    "planA": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\ta\tNULL\tALL\tPRIMARY,idx_assessment_elder\tNULL\tNULL\tNULL\t20\t11.11\tUsing where; Using temporary\n1\tSIMPLE\te\tNULL\teq_ref\tPRIMARY\tPRIMARY\t8\teldercare.a.elder_id\t1\t100.00\tNULL\n1\tSIMPLE\tp\tNULL\tref\tidx_plan_elder,idx_plan_assessment\tidx_plan_assessment\t9\teldercare.a.id,const\t1\t100.00\tUsing where; Using index; Distinct\n1\tSIMPLE\ta\tNULL\teq_ref\tPRIMARY\tPRIMARY\t8\teldercare.a.id\t1\t100.00\tUsing index; Distinct\n",
-    "planB": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\ta\tNULL\tALL\tPRIMARY,idx_assessment_elder\tNULL\tNULL\tNULL\t20\t11.11\tUsing where; Start temporary\n1\tSIMPLE\te\tNULL\teq_ref\tPRIMARY\tPRIMARY\t8\teldercare.a.elder_id\t1\t100.00\tNULL\n1\tSIMPLE\tp\tNULL\tref\tidx_plan_elder,idx_plan_assessment\tidx_plan_assessment\t9\teldercare.a.id,const\t1\t100.00\tUsing where; Using index\n1\tSIMPLE\ta\tNULL\teq_ref\tPRIMARY\tPRIMARY\t8\teldercare.a.id\t1\t100.00\tUsing index; End temporary\n"
+    "planA": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\ta\tNULL\tALL\tPRIMARY,idx_assessment_elder\tNULL\tNULL\tNULL\t20\t11.11\tUsing where; Using temporary\n1\tSIMPLE\te\tNULL\teq_ref\tPRIMARY\tPRIMARY\t8\teldercare.a.elder_id\t1\t100.00\tNULL\n1\tSIMPLE\tp\tNULL\tref\tidx_plan_elder,idx_plan_assessment\tidx_plan_assessment\t9\teldercare.a.id,const\t1\t11.11\tUsing where; Using index; Distinct\n",
+    "planB": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\t<subquery2>\tNULL\tALL\tNULL\tNULL\tNULL\tNULL\tNULL\t0.00\tNULL\n1\tSIMPLE\te\tNULL\teq_ref\tPRIMARY\tPRIMARY\t8\t<subquery2>.elder_id\t1\t100.00\tNULL\n2\tMATERIALIZED\ta\tNULL\tALL\tPRIMARY,idx_assessment_elder\tNULL\tNULL\tNULL\t20\t11.11\tUsing where\n2\tMATERIALIZED\tp\tNULL\tref\tidx_plan_elder,idx_plan_assessment\tidx_plan_assessment\t9\teldercare.a.id,const\t1\t11.11\tUsing where; Using index\n"
   },
   {
     "id": "A2",
@@ -26,7 +26,7 @@
     "rows": -1,
     "A": "",
     "B": "",
-    "planA": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\te\tNULL\tindex\tNULL\tcommunity_id\t8\tNULL\t20\t100.00\tUsing index\n1\tSIMPLE\ta\tNULL\tref\tPRIMARY,idx_assessment_elder\tidx_assessment_elder\t8\teldercare.e.id\t1\t100.00\tUsing index\n1\tSIMPLE\tp\tNULL\tref\tidx_plan_elder,idx_plan_assessment\tidx_plan_assessment\t9\teldercare.a.id,const\t1\t10.00\tUsing where; Using index\n",
+    "planA": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\te\tNULL\tindex\tNULL\tcommunity_id\t8\tNULL\t20\t100.00\tUsing index\n1\tSIMPLE\tp\tNULL\tindex\tidx_plan_elder,idx_plan_assessment\tidx_plan_assessment\t19\tNULL\t20\t10.00\tUsing where; Using index\n1\tSIMPLE\ta\tNULL\teq_ref\tPRIMARY,idx_assessment_elder\tPRIMARY\t8\teldercare.p.assessment_id\t1\t100.00\tUsing where\n",
     "planB": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\te\tNULL\tindex\tNULL\tcommunity_id\t8\tNULL\t20\t100.00\tUsing index\n1\tSIMPLE\ta\tNULL\tref\tPRIMARY,idx_assessment_elder\tidx_assessment_elder\t8\teldercare.e.id\t1\t100.00\tUsing where; Not exists; Using index\n1\tSIMPLE\tp\tNULL\tref\tidx_plan_elder,idx_plan_assessment\tidx_plan_assessment\t9\teldercare.a.id,const\t1\t100.00\tUsing where; Using index\n"
   },
   {
@@ -36,7 +36,7 @@
     "rows": 20,
     "A": "id\tname\n1\t演示老人1\n3\t演示老人2\n5\t演示老人3\n7\t演示老人4\n9\t演示老人5\n11\t演示老人6\n13\t演示老人7\n15\t演示老人8\n17\t演示老人9\n19\t演示老人10\n21\t演示老人11\n23\t演示老人12\n25\t演示老人13\n27\t演示老人14\n29\t演示老人15\n31\t演示老人16\n33\t演示老人17\n35\t演示老人18\n37\t演示老人19\n39\t演示老人20\n",
     "B": "id\tname\n1\t演示老人1\n3\t演示老人2\n5\t演示老人3\n7\t演示老人4\n9\t演示老人5\n11\t演示老人6\n13\t演示老人7\n15\t演示老人8\n17\t演示老人9\n19\t演示老人10\n21\t演示老人11\n23\t演示老人12\n25\t演示老人13\n27\t演示老人14\n29\t演示老人15\n31\t演示老人16\n33\t演示老人17\n35\t演示老人18\n37\t演示老人19\n39\t演示老人20\n",
-    "planA": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\td\tNULL\tref\torder_id,idx_dispatch_worker,idx_dispatch_shift\tidx_dispatch_worker\t1\tconst\t20\t100.00\tUsing index condition; Using temporary\n1\tSIMPLE\to\tNULL\teq_ref\tPRIMARY,idx_order_elder\tPRIMARY\t8\teldercare.d.order_id\t1\t100.00\tNULL\n1\tSIMPLE\te\tNULL\teq_ref\tPRIMARY\tPRIMARY\t8\teldercare.o.elder_id\t1\t100.00\tNULL\n1\tSIMPLE\ts\tNULL\teq_ref\tPRIMARY\tPRIMARY\t8\teldercare.d.shift_id\t1\t100.00\tUsing index; Distinct\n",
+    "planA": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\td\tNULL\tref\torder_id,idx_dispatch_worker\tidx_dispatch_worker\t1\tconst\t20\t100.00\tUsing index condition; Using temporary\n1\tSIMPLE\to\tNULL\teq_ref\tPRIMARY,idx_order_elder\tPRIMARY\t8\teldercare.d.order_id\t1\t100.00\tNULL\n1\tSIMPLE\te\tNULL\teq_ref\tPRIMARY\tPRIMARY\t8\teldercare.o.elder_id\t1\t100.00\tNULL\n",
     "planB": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\te\tNULL\tALL\tPRIMARY\tNULL\tNULL\tNULL\t20\t100.00\tNULL\n1\tSIMPLE\to\tNULL\tref\tPRIMARY,idx_order_elder\tidx_order_elder\t8\teldercare.e.id\t2\t100.00\tUsing index\n1\tSIMPLE\t<subquery2>\tNULL\teq_ref\t<auto_distinct_key>\t<auto_distinct_key>\t8\teldercare.o.id\t1\t100.00\tNULL\n2\tMATERIALIZED\td\tNULL\tref\torder_id,idx_dispatch_worker,idx_dispatch_shift\tidx_dispatch_worker\t1\tconst\t20\t100.00\tUsing index condition\n2\tMATERIALIZED\ts\tNULL\teq_ref\tPRIMARY\tPRIMARY\t8\teldercare.d.shift_id\t1\t100.00\tUsing index\n"
   },
   {
@@ -56,7 +56,7 @@
     "rows": -1,
     "A": "",
     "B": "",
-    "planA": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\to\tNULL\tref\tPRIMARY,item_id,community_id,created_by,idx_order_status_time,idx_order_elder\tidx_order_status_time\t1\tconst\t1\t100.00\tUsing where; Using index; Using temporary\n1\tSIMPLE\td\tNULL\tref\tPRIMARY,order_id,idx_dispatch_shift\torder_id\t8\teldercare.o.id\t2\t100.00\tDistinct\n1\tSIMPLE\tr\tNULL\teq_ref\tdispatch_id\tdispatch_id\t8\teldercare.d.id\t1\t10.00\tUsing where; Distinct\n1\tSIMPLE\ts\tNULL\teq_ref\tPRIMARY\tPRIMARY\t8\teldercare.d.shift_id\t1\t100.00\tUsing index; Distinct\n",
+    "planA": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\to\tNULL\tref\tPRIMARY,item_id,community_id,created_by,idx_order_status_time,idx_order_elder\tidx_order_status_time\t1\tconst\t1\t100.00\tUsing where; Using index; Using temporary\n1\tSIMPLE\td\tNULL\tref\tPRIMARY,order_id\torder_id\t8\teldercare.o.id\t2\t100.00\tUsing index; Distinct\n1\tSIMPLE\tr\tNULL\teq_ref\tdispatch_id\tdispatch_id\t8\teldercare.d.id\t1\t10.00\tUsing where; Distinct\n",
     "planB": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\to\tNULL\tref\tPRIMARY,idx_order_status_time\tidx_order_status_time\t1\tconst\t1\t100.00\tUsing where; Using index\n1\tSIMPLE\td\tNULL\tref\tPRIMARY,order_id,idx_dispatch_shift\torder_id\t8\teldercare.o.id\t2\t100.00\tNULL\n1\tSIMPLE\tr\tNULL\teq_ref\tdispatch_id\tdispatch_id\t8\teldercare.d.id\t1\t10.00\tUsing where\n1\tSIMPLE\ts\tNULL\teq_ref\tPRIMARY\tPRIMARY\t8\teldercare.d.shift_id\t1\t100.00\tUsing index; FirstMatch(o)\n"
   },
   {
@@ -66,8 +66,8 @@
     "rows": 20,
     "A": "id\tminutes\n1\t60\n2\t60\n3\t60\n4\t60\n5\t60\n6\t60\n7\t60\n8\t60\n9\t60\n10\t60\n11\t60\n12\t60\n13\t60\n14\t60\n15\t60\n16\t60\n17\t60\n18\t60\n19\t60\n20\t60\n",
     "B": "id\tminutes\n1\t60\n2\t60\n3\t60\n4\t60\n5\t60\n6\t60\n7\t60\n8\t60\n9\t60\n10\t60\n11\t60\n12\t60\n13\t60\n14\t60\n15\t60\n16\t60\n17\t60\n18\t60\n19\t60\n20\t60\n",
-    "planA": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\tc\tNULL\tindex\tPRIMARY,account_id,organization_id\tPRIMARY\t8\tNULL\t20\t100.00\tUsing index\n1\tSIMPLE\ts\tNULL\tref\tPRIMARY,idx_shift_caregiver\tidx_shift_caregiver\t8\teldercare.c.id\t2\t100.00\tUsing index\n1\tSIMPLE\td\tNULL\tref\tidx_dispatch_shift\tidx_dispatch_shift\t8\teldercare.s.id\t2\t100.00\tUsing index\n1\tSIMPLE\ta\tNULL\teq_ref\tdispatch_id\tdispatch_id\t8\teldercare.d.id\t1\t100.00\tUsing where\n",
-    "planB": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tPRIMARY\tc\tNULL\tindex\tNULL\taccount_id\t8\tNULL\t20\t100.00\tUsing index\n2\tDEPENDENT SUBQUERY\ts\tNULL\tref\tPRIMARY,idx_shift_caregiver\tidx_shift_caregiver\t8\teldercare.c.id\t2\t100.00\tUsing index\n2\tDEPENDENT SUBQUERY\td\tNULL\tref\tPRIMARY,idx_dispatch_shift\tidx_dispatch_shift\t8\teldercare.s.id\t2\t100.00\tUsing index\n2\tDEPENDENT SUBQUERY\ta\tNULL\teq_ref\tdispatch_id\tdispatch_id\t8\teldercare.d.id\t1\t25.00\tUsing where\n"
+    "planA": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\tc\tNULL\tindex\tPRIMARY,account_id,organization_id\tPRIMARY\t8\tNULL\t20\t100.00\tUsing index\n1\tSIMPLE\tsh\tNULL\tref\tidx_shift_caregiver\tidx_shift_caregiver\t8\teldercare.c.id\t2\t100.00\tUsing index\n1\tSIMPLE\td\tNULL\tref\tidx_dispatch_shift\tidx_dispatch_shift\t8\teldercare.sh.id\t2\t100.00\tUsing index\n1\tSIMPLE\ta\tNULL\teq_ref\tdispatch_id\tdispatch_id\t8\teldercare.d.id\t1\t100.00\tUsing where\n",
+    "planB": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tPRIMARY\tc\tNULL\tindex\tNULL\taccount_id\t8\tNULL\t20\t100.00\tUsing index\n2\tDEPENDENT SUBQUERY\tsh\tNULL\tref\tPRIMARY,idx_shift_caregiver\tidx_shift_caregiver\t8\teldercare.c.id\t2\t100.00\tUsing index\n2\tDEPENDENT SUBQUERY\td\tNULL\tref\tPRIMARY,idx_dispatch_shift\tidx_dispatch_shift\t8\teldercare.sh.id\t2\t100.00\tUsing index\n2\tDEPENDENT SUBQUERY\ta\tNULL\teq_ref\tdispatch_id\tdispatch_id\t8\teldercare.d.id\t1\t25.00\tUsing where\n"
   },
   {
     "id": "C2",
@@ -116,8 +116,8 @@
     "rows": -1,
     "A": "",
     "B": "",
-    "planA": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\td\tNULL\tindex\tNULL\tserial_no\t322\tNULL\t20\t100.00\tUsing index\n1\tSIMPLE\tb\tNULL\tALL\tdevice_id\tNULL\tNULL\tNULL\t20\t10.00\tUsing where; Not exists; Using join buffer (hash join)\n",
-    "planB": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\td\tNULL\tindex\tNULL\tserial_no\t322\tNULL\t20\t100.00\tUsing index\n1\tSIMPLE\tb\tNULL\tref\tdevice_id\tdevice_id\t8\teldercare.d.id\t1\t100.00\tUsing where; Not exists\n"
+    "planA": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\td\tNULL\tindex\tNULL\tcommunity_id\t9\tNULL\t20\t100.00\tUsing index\n1\tSIMPLE\tb\tNULL\tALL\tdevice_id\tNULL\tNULL\tNULL\t20\t10.00\tUsing where; Not exists; Using join buffer (hash join)\n",
+    "planB": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\td\tNULL\tindex\tNULL\tcommunity_id\t9\tNULL\t20\t100.00\tUsing index\n1\tSIMPLE\tb\tNULL\tref\tdevice_id\tdevice_id\t8\teldercare.d.id\t1\t100.00\tUsing where; Not exists\n"
   },
   {
     "id": "E1",
@@ -126,8 +126,8 @@
     "rows": 20,
     "A": "id\tamount\n1\t30.00\n2\t30.00\n3\t30.00\n4\t30.00\n5\t30.00\n6\t30.00\n7\t30.00\n8\t30.00\n9\t30.00\n10\t30.00\n11\t30.00\n12\t30.00\n13\t30.00\n14\t30.00\n15\t30.00\n16\t30.00\n17\t30.00\n18\t30.00\n19\t30.00\n20\t30.00\n",
     "B": "id\tamount\n1\t30.00\n10\t30.00\n11\t30.00\n12\t30.00\n13\t30.00\n14\t30.00\n15\t30.00\n16\t30.00\n17\t30.00\n18\t30.00\n19\t30.00\n2\t30.00\n20\t30.00\n3\t30.00\n4\t30.00\n5\t30.00\n6\t30.00\n7\t30.00\n8\t30.00\n9\t30.00\n",
-    "planA": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\tco\tNULL\tindex\tPRIMARY,area_code\tPRIMARY\t8\tNULL\t20\t100.00\tUsing index\n1\tSIMPLE\te\tNULL\tref\tcommunity_id\tcommunity_id\t8\teldercare.co.id\t1\t100.00\tUsing index\n1\tSIMPLE\tc\tNULL\tref\telder_id\telder_id\t8\teldercare.e.id\t1\t100.00\tUsing where\n",
-    "planB": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tPRIMARY\tco\tNULL\tindex\tNULL\tarea_code\t122\tNULL\t20\t100.00\tUsing index\n2\tDEPENDENT SUBQUERY\te\tNULL\tref\tPRIMARY,community_id\tcommunity_id\t8\teldercare.co.id\t1\t100.00\tUsing index\n2\tDEPENDENT SUBQUERY\tc\tNULL\tref\telder_id\telder_id\t8\teldercare.e.id\t1\t83.33\tUsing where\n"
+    "planA": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\tco\tNULL\tindex\tPRIMARY,area_code\tPRIMARY\t8\tNULL\t20\t100.00\tUsing index\n1\tSIMPLE\tc\tNULL\tref\tcommunity_id\tcommunity_id\t9\teldercare.co.id\t1\t100.00\tUsing where\n",
+    "planB": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tPRIMARY\tco\tNULL\tindex\tNULL\tarea_code\t122\tNULL\t20\t100.00\tUsing index\n2\tDEPENDENT SUBQUERY\tc\tNULL\tref\tcommunity_id\tcommunity_id\t9\teldercare.co.id\t1\t83.33\tUsing where\n"
   },
   {
     "id": "E2",
@@ -146,7 +146,7 @@
     "rows": 20,
     "A": "id\tamount\n1\t30.00\n2\t30.00\n3\t30.00\n4\t30.00\n5\t30.00\n6\t30.00\n7\t30.00\n8\t30.00\n9\t30.00\n10\t30.00\n11\t30.00\n12\t30.00\n13\t30.00\n14\t30.00\n15\t30.00\n16\t30.00\n17\t30.00\n18\t30.00\n19\t30.00\n20\t30.00\n",
     "B": "id\tamount\n1\t30.00\n2\t30.00\n3\t30.00\n4\t30.00\n5\t30.00\n6\t30.00\n7\t30.00\n8\t30.00\n9\t30.00\n10\t30.00\n11\t30.00\n12\t30.00\n13\t30.00\n14\t30.00\n15\t30.00\n16\t30.00\n17\t30.00\n18\t30.00\n19\t30.00\n20\t30.00\n",
-    "planA": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\tc\tNULL\tindex\tPRIMARY,elder_id,item_id\tPRIMARY\t8\tNULL\t20\t100.00\tUsing index\n1\tSIMPLE\ti\tNULL\tref\tclaim_id\tclaim_id\t8\teldercare.c.id\t1\t100.00\tNULL\n",
+    "planA": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tSIMPLE\tc\tNULL\tindex\tPRIMARY,elder_id,item_id,community_id\tPRIMARY\t8\tNULL\t20\t100.00\tUsing index\n1\tSIMPLE\ti\tNULL\tref\tclaim_id\tclaim_id\t8\teldercare.c.id\t1\t100.00\tNULL\n",
     "planB": "id\tselect_type\ttable\tpartitions\ttype\tpossible_keys\tkey\tkey_len\tref\trows\tfiltered\tExtra\n1\tPRIMARY\tc\tNULL\tindex\tNULL\titem_id\t8\tNULL\t20\t100.00\tUsing index\n2\tDEPENDENT SUBQUERY\ti\tNULL\tref\tclaim_id\tclaim_id\t8\teldercare.c.id\t1\t100.00\tNULL\n"
   }
 ]
