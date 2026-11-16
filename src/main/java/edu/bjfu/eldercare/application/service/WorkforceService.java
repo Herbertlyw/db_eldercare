@@ -46,6 +46,7 @@ public class WorkforceService implements ActionModule {
     public Map<String, ActionHandler> actions() {
         return Map.ofEntries(
                 Map.entry("credential.create", this::createCredential),
+                Map.entry("credential.type", this::updateCredentialType),
                 Map.entry("caregiver.status", this::changeCaregiverStatus),
                 Map.entry("shift.create", this::createShift),
                 Map.entry("shift.delete", this::deleteShift),
@@ -66,9 +67,26 @@ public class WorkforceService implements ActionModule {
                 recordId,
                 rawNumber(input, "itemId"),
                 rawText(input, "certificateNo"),
+                certificateType(input),
                 rawText(input, "level"),
                 rawText(input, "validFrom"),
                 rawText(input, "validUntil"));
+    }
+
+    private String certificateType(Map<String, Object> input) {
+        String value = text(input, "certificateType");
+        if (value.codePointCount(0, value.length()) > 80 || value.equals("未登记")) {
+            throw new Rule("请填写不超过80字的证书类型");
+        }
+        return value;
+    }
+
+    private Object updateCredentialType(Auth.User user, Map<String, Object> input) {
+        Auth.role(user, "MANAGER");
+        long credentialId = number(input, "credentialId");
+        var credential = repository.findCredentialForUpdate(credentialId);
+        scope.worker(user, id(credential, "caregiver_id"));
+        return repository.updateCredentialType(certificateType(input), credentialId);
     }
 
     private Object changeCaregiverStatus(Auth.User user, Map<String, Object> input) {

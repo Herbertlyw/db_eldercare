@@ -1,12 +1,12 @@
 {
-  "time": "2026-11-13T05:41:12.621Z",
-  "database": "eldercare_refactor_test",
-  "port": 18082,
+  "time": "2026-11-16T03:43:30.683Z",
+  "database": "eldercare_interaction_20261116_test",
+  "port": 18087,
   "checks": [
     {
       "role": "admin1",
       "readRoutes": 35,
-      "forms": 40
+      "forms": 41
     },
     {
       "role": "family1",
@@ -21,7 +21,7 @@
     {
       "role": "manager1",
       "readRoutes": 21,
-      "forms": 15
+      "forms": 17
     },
     {
       "role": "street1",
@@ -35,6 +35,8 @@
     }
   ],
   "actionsDone": [
+    "credential.create",
+    "credential.type",
     "complaint.create",
     "complaint.assign",
     "complaint.reply",
@@ -64,6 +66,7 @@
   ],
   "complaintDetails": true,
   "publicNoticesWithoutLogin": true,
+  "searchAndRefresh": true,
   "mobileOverflow": false,
   "pageErrors": []
 }

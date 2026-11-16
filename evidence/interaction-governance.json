@@ -1,0 +1,18 @@
+{
+  "time": "2026-11-16T03:39:54.597Z",
+  "database": "eldercare_interaction_20261116_test",
+  "checks": [
+    "claim.resubmit",
+    "claim.review",
+    "claim.review",
+    "claim.pay",
+    "hours.review",
+    "complaint.reply",
+    "complaint.close",
+    "rectification.submit",
+    "inspection.close"
+  ],
+  "reviewHistory": true,
+  "noRepeatPayment": true,
+  "pageErrors": []
+}

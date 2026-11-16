@@ -7,6 +7,10 @@
 | 20261112_integrity.sql | 35 表结构中需要微秒绑定、打卡时间及完整性例程的数据库 | 检查 device_binding、attendance 字段及脚本所依赖的视图；须在副本演练 |
 | 20261113_completion.sql | 35 张基础表、尚无招聘培训等关系的结构 | 执行一次；文件中包含例程和视图定义。与当前源码配套时再应用 history_rules 脚本。开发机编排见 scripts/migrate_completion.py |
 | 20261113_history_rules.sql | 47 表结构、需要装配对应历史保护例程的数据库 | 替换 11 个存储对象，不重建业务表；使用匹配 JAR |
+| 20261114_acceptance.sql | 当前 47 表结构 | 增加证书类型，历史值标为未登记；移除两个历史遗留索引；允许重复执行 |
+| 20261114_demo_credential_types.sql | 可选，仅 Seed / ScenarioCare 的虚构课程数据 | 在 acceptance 后执行，按模拟账号及证书编号识别示例；真实业务库不执行 |
+| 20261116_password_management.sql | 当前 47 表结构 | 增加密码版本和首次改密标志；不改变原有密码、角色和启用状态；允许重复执行 |
+| 20261116_seed_names.sql | 可选，仅内置课程数据 | 为社区、机构、服务项目、照护包、政策、设备与培训采用自然名称；按来源标识和旧值匹配，保留人工编辑；不改账号、业务状态或历史凭证。先备份并在副本演练，可重复执行 |
 
 ## 操作顺序
 
@@ -19,3 +23,14 @@
 MySQL DDL 可能隐式提交，失败后不能假定整份脚本自动回滚。停止后续写入并保留错误和当前结构，在独立库恢复备份、核对后再切换连接。不要通过删除业务库解决迁移问题。
 
 对应演练记录：`evidence/migration-eldercare.json`、`evidence/history-migration-eldercare.json`。这些是已记录环境的结果，不能替代其他机器的实际升级验证。
+
+本地验收迁移证据见 `evidence/acceptance-migration.json` 和 `evidence/acceptance-display-migration.json`。证书类型与等级是两个字段，升级不改变原证书编号、有效期或业务记录。
+
+## 47 表数据库与当前源码配套
+
+1. 已有库缺少 `credential.certificate_type` 或保留历史索引时，执行 `20261114_acceptance.sql`。内置课程数据可再执行 `20261114_demo_credential_types.sql`；业务人员实际登记的资料不按示例补录。
+2. 缺少 `account.password_version`、`account.must_change_password` 时，执行 `20261116_password_management.sql`，保留账号密码、角色与启用状态。
+3. 内置名称可选执行 `20261116_seed_names.sql`。该脚本按原占位值与来源标识匹配，不覆盖人工更名，不改历史评估、审核日志与已确认凭证。
+4. 构建并启动当前源码对应的 JAR。新安装直接使用当前 `01_schema.sql`、`02_routines.sql`、`03_views.sql` 和 Seed，不额外重放旧版本迁移。
+
+上述步骤都需先备份并在副本演练。名称迁移的 47 表逐字段核对、重复执行与人工编辑保护记录见 `evidence/natural-names-migration.json`，本地应用记录见 `evidence/natural-names-display.json`；密码迁移记录见 `evidence/password-migration.json`。React 构建本身不修改 MySQL 数据。

@@ -1,0 +1,17 @@
+[
+  {
+    "script": "scripts/recovery_drill.py",
+    "guard": "Source database is in use",
+    "passed": true
+  },
+  {
+    "script": "scripts/recovery_drill.py",
+    "guard": "Restore target already exists",
+    "passed": true
+  },
+  {
+    "script": "scripts/verify_scheduled_jobs.py",
+    "guard": "explicitly disposable test database",
+    "passed": true
+  }
+]

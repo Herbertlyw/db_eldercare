@@ -1,0 +1,5 @@
+{
+  "other_database": "eldercare_acceptance_20261114_test",
+  "unrelated_binlog_insert_not_replayed": true,
+  "restore_target": "eldercare_acceptance_filtered_restore"
+}

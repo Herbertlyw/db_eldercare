@@ -26,9 +26,30 @@ public class JdbcIdentityRepository implements IdentityRepository {
 
     public List<Map<String, Object>> findActiveAccount(long id) {
         return db.rows(
-                "SELECT id,username,role,community_id,organization_id FROM account WHERE id=? AND"
-                        + " active=1",
+                "SELECT"
+                    + " id,username,role,community_id,organization_id,password_version,must_change_password,locked_until"
+                    + " FROM account WHERE id=? AND active=1",
                 id);
+    }
+
+    public void replacePassword(long id, String hash, boolean mustChange) {
+        db.update(
+                "UPDATE account SET"
+                    + " password_hash=?,password_version=password_version+1,must_change_password=?,failures=0,locked_until=NULL"
+                    + " WHERE id=?",
+                hash,
+                mustChange,
+                id);
+    }
+
+    public void recordPasswordAudit(long id, String operation, String actor, String reason) {
+        db.update(
+                "INSERT INTO audit_log(table_name,row_id,operation,actor,after_data)"
+                        + " VALUES('account',?,?,?,JSON_OBJECT('reason',?))",
+                id,
+                operation,
+                actor,
+                reason);
     }
 
     public void recordFailure(Object id) {

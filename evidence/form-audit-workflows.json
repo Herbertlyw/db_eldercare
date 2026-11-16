@@ -1,0 +1,72 @@
+{
+  "time": "2026-11-16T06:07:27.757Z",
+  "database": "eldercare_interaction_20261116_test",
+  "port": 18087,
+  "checks": [
+    {
+      "role": "admin1",
+      "readRoutes": 35,
+      "forms": 41
+    },
+    {
+      "role": "family1",
+      "readRoutes": 18,
+      "forms": 7
+    },
+    {
+      "role": "caregiver1",
+      "readRoutes": 12,
+      "forms": 9
+    },
+    {
+      "role": "manager1",
+      "readRoutes": 21,
+      "forms": 17
+    },
+    {
+      "role": "street1",
+      "readRoutes": 7,
+      "forms": 1
+    },
+    {
+      "role": "regulator1",
+      "readRoutes": 16,
+      "forms": 11
+    }
+  ],
+  "actionsDone": [
+    "credential.create",
+    "credential.type",
+    "complaint.create",
+    "complaint.assign",
+    "complaint.reply",
+    "recruitment.create",
+    "recruitment.review",
+    "training.create",
+    "training.enroll",
+    "training.result",
+    "organization.submit",
+    "complaint.close",
+    "organization.review",
+    "inspection.order",
+    "rectification.submit",
+    "inspection.close",
+    "notice.publish",
+    "complaint.create",
+    "complaint.assign",
+    "complaint.reply",
+    "complaint.close",
+    "order.recommend",
+    "metric.create",
+    "device.create",
+    "device.bind",
+    "device.simulation",
+    "simulator.run",
+    "device.simulation"
+  ],
+  "complaintDetails": true,
+  "publicNoticesWithoutLogin": true,
+  "searchAndRefresh": true,
+  "mobileOverflow": false,
+  "pageErrors": []
+}

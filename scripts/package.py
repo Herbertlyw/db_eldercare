@@ -8,8 +8,8 @@ stage = root / '.local/delivery/左邻右舍养老课程设计'
 if stage.exists():
     shutil.rmtree(stage)
 stage.mkdir(parents=True)
-for name in ['database', 'src', 'docs', 'scripts', 'evidence']:
-    shutil.copytree(root / name, stage / name, ignore=shutil.ignore_patterns('__pycache__', '*.pyc', '.DS_Store', '.~*', '~$*'))
+for name in ['database', 'src', 'frontend', 'docs', 'scripts', 'evidence']:
+    shutil.copytree(root / name, stage / name, ignore=shutil.ignore_patterns('node_modules', 'dist', '__pycache__', '*.pyc', '.DS_Store', '.~*', '~$*'))
 for name in ['README.md', 'AGENTS.md', '.editorconfig', 'pom.xml', '初始化Windows.bat', '启动Windows.bat']:
     shutil.copy2(root / name, stage / name)
 shutil.copy2(root / 'target/eldercare-1.0.0.jar', stage / 'eldercare.jar')

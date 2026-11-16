@@ -1,0 +1,15 @@
+{
+  "time": "2026-11-16T07:30:05.832Z",
+  "database": "eldercare_interaction_20261116_test",
+  "checks": [
+    "admin visual and DOM order, prerequisites, clearing time",
+    "empty availability stays disabled",
+    "lookup failure disables selection and retry recovers",
+    "changing elder clears stale project",
+    "plan assessment waits for elder",
+    "dispatch waits for order and clears old shift",
+    "family contextual reservation and mobile order"
+  ],
+  "pageErrors": [],
+  "businessWrites": false
+}

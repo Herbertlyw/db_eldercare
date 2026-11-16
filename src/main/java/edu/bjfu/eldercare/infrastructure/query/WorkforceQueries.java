@@ -51,8 +51,8 @@ public class WorkforceQueries implements QueryModule {
         String sql;
         Auth.role(user, "ADMIN", "MANAGER", "CAREGIVER", "REGULATOR");
         sql =
-                "SELECT c.*,a.community_id FROM caregiver c JOIN account a ON a.id=c.account_id"
-                        + " WHERE "
+                "SELECT c.*,a.username,a.community_id FROM caregiver c JOIN account a ON"
+                        + " a.id=c.account_id WHERE "
                         + scope.workerFilter(user, parameters);
         return new PageQuery(sql, parameters);
     }
@@ -138,7 +138,7 @@ public class WorkforceQueries implements QueryModule {
         Auth.role(user, "ADMIN", "MANAGER", "REGULATOR");
         sql =
                 "SELECT c.id,c.name,c.organization_id,(SELECT ROUND(AVG(q.rating),2) FROM complaint"
-                    + " q WHERE EXISTS(SELECT 1 FROM v_dispatch_context d WHERE"
+                    + " q WHERE q.kind='REVIEW' AND EXISTS(SELECT 1 FROM v_dispatch_context d WHERE"
                     + " d.order_id=q.order_id AND d.caregiver_id=c.id AND d.status='FINISHED'))"
                     + " service_rating,(SELECT ROUND(AVG(i.score),2) FROM inspection i WHERE"
                     + " i.caregiver_id=c.id OR EXISTS(SELECT 1 FROM v_dispatch_context d WHERE"

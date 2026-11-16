@@ -1,0 +1,37 @@
+{
+  "time": "2026-11-16T16:40:43.938604",
+  "scope": "local only",
+  "javaSqlFilesUnchanged": 96,
+  "javaTests": 188,
+  "frontendTests": 22,
+  "browserReports": [
+    "pages",
+    "scenarios",
+    "forms",
+    "media",
+    "passwords",
+    "records",
+    "workflows",
+    "claims"
+  ],
+  "browserLayoutWidths": [
+    320,
+    390,
+    760,
+    768,
+    1024,
+    1280,
+    1600
+  ],
+  "jarSha256": "f68d1b617b59558813d8f0afc030c9d6dc40cf68f9b1e31bbb4d82a12cb4b3cd",
+  "jarAssetsMatchSourceBuild": true,
+  "database": "eldercare_react_final_test",
+  "displayDatabaseReset": false,
+  "gitPushed": false,
+  "limitations": [
+    "Windows runtime has not been tested on a Windows machine",
+    "Browser acceptance used local Chrome; it is not a cross-browser certification"
+  ],
+  "businessFormSubmissions": 61,
+  "passwordDialogChanges": 2
+}

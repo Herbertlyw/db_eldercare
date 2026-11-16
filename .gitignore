@@ -10,3 +10,7 @@ outputs/*.zip
 
 # Unpacked delivery copies remain local; canonical sources live at repository root.
 /outputs/*/
+
+# Frontend dependencies and generated production assets
+/frontend/node_modules/
+/frontend/dist/

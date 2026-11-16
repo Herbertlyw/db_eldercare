@@ -1,0 +1,29 @@
+{
+  "time": "2026-11-16T03:45:22.223Z",
+  "database": "eldercare_interaction_20261116_test",
+  "port": 18087,
+  "checks": [
+    "admin1 role tasks and records",
+    "family1 role tasks and records",
+    "caregiver1 role tasks and records",
+    "manager1 role tasks and records",
+    "street1 role tasks and records",
+    "regulator1 role tasks and records",
+    "appointment dispatch acceptance checkin checkout confirmation review via contextual buttons",
+    "elder-to-orders navigation keeps exact association",
+    "server-side search beyond page one and persistent filters",
+    "status and date filters",
+    "read failure and retry",
+    "mobile layout"
+  ],
+  "actions": [
+    "order.create",
+    "order.assign",
+    "order.accept",
+    "order.checkin",
+    "order.finish",
+    "order.confirm",
+    "review.create"
+  ],
+  "pageErrors": []
+}

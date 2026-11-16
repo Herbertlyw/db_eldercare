@@ -1,0 +1,18 @@
+{
+  "time": "2026-11-14T20:56:40.802205",
+  "scope": "local working tree; no commit or push",
+  "branch": "codex/course-acceptance-fixes",
+  "tests": 172,
+  "browser_roles": 6,
+  "browser_actions": 28,
+  "scheduled_cycles": 2,
+  "preserved_tables": 47,
+  "query_pairs": 15,
+  "document_pages": 30,
+  "files": {
+    "database/01_schema.sql": "7bc7012670966b1f61f5e1294118cff7cf23668d8574e132f23411bb8754702e",
+    "database/migrations/20261114_acceptance.sql": "f3be7a2d5d834fe6553edc4cb817f747422d88db561478e50c009ff161effa24",
+    "database/migrations/20261114_demo_credential_types.sql": "17399265b84c4d810f579f5e7251e58b372f2c1e5cbee5e447a59a5271aa17af",
+    "outputs/左邻右舍详细需求分析.docx": "23445d85bee06a812bebe2a0b3d26efcc48657f17923f38f3ae10eadfd308a05"
+  }
+}

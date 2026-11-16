@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="684" viewBox="0 0 1100 684"><rect width="100%" height="100%" fill="white"/>
+<rect x="300" y="16" width="775" height="650" fill="white" stroke="#7d8791"/>
+<text x="325" y="53.24" text-anchor="start" font-family="STHeiti,SimHei,sans-serif" font-size="28" fill="#111111">补贴核算与质量监管</text>
+<polyline points="178,104.0 430,100" fill="none" stroke="#b9bfc6" stroke-width="1"/>
+<polyline points="178,104.0 430,182" fill="none" stroke="#b9bfc6" stroke-width="1"/>
+<polyline points="178,104.0 430,264" fill="none" stroke="#b9bfc6" stroke-width="1"/>
+<polyline points="178,222.5 430,346" fill="none" stroke="#b9bfc6" stroke-width="1"/>
+<polyline points="178,341.0 430,100" fill="none" stroke="#b9bfc6" stroke-width="1"/>
+<polyline points="178,341.0 430,346" fill="none" stroke="#b9bfc6" stroke-width="1"/>
+<polyline points="178,341.0 430,428" fill="none" stroke="#b9bfc6" stroke-width="1"/>
+<polyline points="178,341.0 430,510" fill="none" stroke="#b9bfc6" stroke-width="1"/>
+<polyline points="178,341.0 430,592" fill="none" stroke="#b9bfc6" stroke-width="1"/>
+<polyline points="178,459.5 430,510" fill="none" stroke="#b9bfc6" stroke-width="1"/>
+<polyline points="178,459.5 430,592" fill="none" stroke="#b9bfc6" stroke-width="1"/>
+<polyline points="178,578.0 430,428" fill="none" stroke="#b9bfc6" stroke-width="1"/>
+<ellipse cx="712.5" cy="100.0" rx="287.5" ry="29.0" fill="#f7f8fa" stroke="#56616c"/>
+<text x="713" y="109.57" text-anchor="middle" font-family="STHeiti,SimHei,sans-serif" font-size="29" fill="#111111">E01 政策与资格筛选</text>
+<ellipse cx="712.5" cy="182.0" rx="287.5" ry="29.0" fill="#f7f8fa" stroke="#56616c"/>
+<text x="713" y="191.57" text-anchor="middle" font-family="STHeiti,SimHei,sans-serif" font-size="29" fill="#111111">E02 订单核算与申报</text>
+<ellipse cx="712.5" cy="264.0" rx="287.5" ry="29.0" fill="#f7f8fa" stroke="#56616c"/>
+<text x="713" y="273.57" text-anchor="middle" font-family="STHeiti,SimHei,sans-serif" font-size="29" fill="#111111">E03 防重与材料归档</text>
+<ellipse cx="712.5" cy="346.0" rx="287.5" ry="29.0" fill="#f7f8fa" stroke="#56616c"/>
+<text x="713" y="355.57" text-anchor="middle" font-family="STHeiti,SimHei,sans-serif" font-size="29" fill="#111111">E04 分级审核与重报</text>
+<ellipse cx="712.5" cy="428.0" rx="287.5" ry="29.0" fill="#f7f8fa" stroke="#56616c"/>
+<text x="713" y="437.57" text-anchor="middle" font-family="STHeiti,SimHei,sans-serif" font-size="29" fill="#111111">E05 拨付与费用查询</text>
+<ellipse cx="712.5" cy="510.0" rx="287.5" ry="29.0" fill="#f7f8fa" stroke="#56616c"/>
+<text x="713" y="519.57" text-anchor="middle" font-family="STHeiti,SimHei,sans-serif" font-size="29" fill="#111111">E06 抽查与整改</text>
+<ellipse cx="712.5" cy="592.0" rx="287.5" ry="29.0" fill="#f7f8fa" stroke="#56616c"/>
+<text x="713" y="601.57" text-anchor="middle" font-family="STHeiti,SimHei,sans-serif" font-size="29" fill="#111111">E07 考核材料与公示</text>
+<ellipse cx="150.0" cy="78.0" rx="12.0" ry="12.0" fill="white" stroke="#26313c"/>
+<polyline points="150,90.0 150,125.0" fill="none" stroke="#26313c" stroke-width="2"/>
+<polyline points="122,103.0 178,103.0" fill="none" stroke="#26313c" stroke-width="2"/>
+<polyline points="150,125.0 130,153.0" fill="none" stroke="#26313c" stroke-width="2"/>
+<polyline points="150,125.0 170,153.0" fill="none" stroke="#26313c" stroke-width="2"/>
+<text x="150" y="184.25" text-anchor="middle" font-family="STHeiti,SimHei,sans-serif" font-size="25" fill="#111111">社区管理员</text>
+<ellipse cx="150.0" cy="196.5" rx="12.0" ry="12.0" fill="white" stroke="#26313c"/>
+<polyline points="150,208.5 150,243.5" fill="none" stroke="#26313c" stroke-width="2"/>
+<polyline points="122,221.5 178,221.5" fill="none" stroke="#26313c" stroke-width="2"/>
+<polyline points="150,243.5 130,271.5" fill="none" stroke="#26313c" stroke-width="2"/>
+<polyline points="150,243.5 170,271.5" fill="none" stroke="#26313c" stroke-width="2"/>
+<text x="150" y="302.75" text-anchor="middle" font-family="STHeiti,SimHei,sans-serif" font-size="25" fill="#111111">街道人员</text>
+<ellipse cx="150.0" cy="315.0" rx="12.0" ry="12.0" fill="white" stroke="#26313c"/>
+<polyline points="150,327.0 150,362.0" fill="none" stroke="#26313c" stroke-width="2"/>
+<polyline points="122,340.0 178,340.0" fill="none" stroke="#26313c" stroke-width="2"/>
+<polyline points="150,362.0 130,390.0" fill="none" stroke="#26313c" stroke-width="2"/>
+<polyline points="150,362.0 170,390.0" fill="none" stroke="#26313c" stroke-width="2"/>
+<text x="150" y="421.25" text-anchor="middle" font-family="STHeiti,SimHei,sans-serif" font-size="25" fill="#111111">民政监管</text>
+<ellipse cx="150.0" cy="433.5" rx="12.0" ry="12.0" fill="white" stroke="#26313c"/>
+<polyline points="150,445.5 150,480.5" fill="none" stroke="#26313c" stroke-width="2"/>
+<polyline points="122,458.5 178,458.5" fill="none" stroke="#26313c" stroke-width="2"/>
+<polyline points="150,480.5 130,508.5" fill="none" stroke="#26313c" stroke-width="2"/>
+<polyline points="150,480.5 170,508.5" fill="none" stroke="#26313c" stroke-width="2"/>
+<text x="150" y="539.75" text-anchor="middle" font-family="STHeiti,SimHei,sans-serif" font-size="25" fill="#111111">机构负责人</text>
+<ellipse cx="150.0" cy="552.0" rx="12.0" ry="12.0" fill="white" stroke="#26313c"/>
+<polyline points="150,564.0 150,599.0" fill="none" stroke="#26313c" stroke-width="2"/>
+<polyline points="122,577.0 178,577.0" fill="none" stroke="#26313c" stroke-width="2"/>
+<polyline points="150,599.0 130,627.0" fill="none" stroke="#26313c" stroke-width="2"/>
+<polyline points="150,599.0 170,627.0" fill="none" stroke="#26313c" stroke-width="2"/>
+<text x="150" y="658.25" text-anchor="middle" font-family="STHeiti,SimHei,sans-serif" font-size="25" fill="#111111">家属</text>
+</svg>

@@ -1,0 +1,26 @@
+{
+  "time": "2026-11-16T06:07:51.025Z",
+  "database": "eldercare_interaction_20261116_test",
+  "checks": [
+    "time ranges and cancel/confirm operation switch",
+    "recruitment rejection submits without hidden credentials",
+    "credential validity range",
+    "guardian lookup and edit prefill clear on parent change",
+    "plan ownership, contextual presets and bundle item scope",
+    "service rows prevent duplicates and submit frequency values",
+    "sample JSON import, preview count and failed import preserves input",
+    "policy-dependent period and eligible order selection, clear and empty state",
+    "inspection no-rectification submission and mandatory low-score rectification",
+    "community search, filtered selection and retained checks",
+    "sampling ratio bounds and percentage feedback",
+    "monthly quarterly annual policy period formats",
+    "family rating uses explicit choices"
+  ],
+  "actions": [
+    "recruitment.create",
+    "recruitment.review",
+    "bundle.create",
+    "inspection.create"
+  ],
+  "pageErrors": []
+}

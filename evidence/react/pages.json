@@ -1,0 +1,836 @@
+{
+  "time": "2026-11-16T08:36:51.246Z",
+  "database": "eldercare_react_final_test",
+  "roles": [
+    {
+      "account": "admin1",
+      "role": "ADMIN",
+      "routes": 35,
+      "details": 34
+    },
+    {
+      "account": "admin2",
+      "role": "ADMIN",
+      "routes": 35,
+      "details": 34
+    },
+    {
+      "account": "family1",
+      "role": "FAMILY",
+      "routes": 18,
+      "details": 18
+    },
+    {
+      "account": "caregiver1",
+      "role": "CAREGIVER",
+      "routes": 12,
+      "details": 12
+    },
+    {
+      "account": "manager1",
+      "role": "MANAGER",
+      "routes": 21,
+      "details": 20
+    },
+    {
+      "account": "street1",
+      "role": "STREET",
+      "routes": 7,
+      "details": 6
+    },
+    {
+      "account": "regulator1",
+      "role": "REGULATOR",
+      "routes": 16,
+      "details": 16
+    }
+  ],
+  "forms": [
+    {
+      "account": "admin1",
+      "action": "elder.create",
+      "fields": [
+        "name",
+        "identity",
+        "birthDate",
+        "address",
+        "x",
+        "y"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "elder.update",
+      "fields": [
+        "elderId",
+        "address",
+        "x",
+        "y"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "elder.transfer",
+      "fields": [
+        "elderId",
+        "communityId",
+        "address",
+        "x",
+        "y"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "elder.deactivate",
+      "fields": [
+        "elderId"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "guardian.create",
+      "fields": [
+        "elderId",
+        "accountId",
+        "relation",
+        "phone"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "assessment.create",
+      "fields": [
+        "elderId",
+        "scale",
+        "score",
+        "level",
+        "validUntil"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "plan.create",
+      "fields": [
+        "elderId",
+        "assessmentId",
+        "bundleId",
+        "caregiverId",
+        "startsAt",
+        "endsAt"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "order.create",
+      "fields": [
+        "elderId",
+        "startsAt",
+        "itemId",
+        "channel"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "order.recommend",
+      "fields": [
+        "orderId"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "order.assign",
+      "fields": [
+        "orderId",
+        "shiftId",
+        "reason"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "order.cancel",
+      "fields": [
+        "orderId",
+        "reason"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "shift.create",
+      "fields": [
+        "caregiverId",
+        "startsAt",
+        "endsAt",
+        "capacity"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "device.create",
+      "fields": [
+        "serial",
+        "type",
+        "location"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "device.bind",
+      "fields": [
+        "deviceId",
+        "elderId"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "vital.upload",
+      "fields": [
+        "samples"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "event.create",
+      "fields": [
+        "elderId",
+        "level",
+        "description"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "event.respond",
+      "fields": [
+        "eventId"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "event.close",
+      "fields": [
+        "eventId",
+        "result"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "claim.submit",
+      "fields": [
+        "elderId",
+        "policyId",
+        "period",
+        "orderIds"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "maintenance.run",
+      "fields": []
+    },
+    {
+      "account": "admin1",
+      "action": "account.create",
+      "fields": [
+        "username",
+        "password"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "elder.tags",
+      "fields": [
+        "elderId",
+        "tag",
+        "enabled"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "guardian.update",
+      "fields": [
+        "elderId",
+        "guardianId",
+        "relation",
+        "phone",
+        "active"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "plan.revise",
+      "fields": [
+        "elderId",
+        "planId",
+        "assessmentId",
+        "bundleId",
+        "caregiverId",
+        "startsAt",
+        "endsAt",
+        "items",
+        "reason"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "plan.state",
+      "fields": [
+        "planId",
+        "status",
+        "reason"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "catalog.create",
+      "fields": [
+        "name",
+        "category",
+        "unit",
+        "price",
+        "duration",
+        "subsidizable"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "bundle.create",
+      "fields": [
+        "name",
+        "level",
+        "items"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "metric.create",
+      "fields": [
+        "name",
+        "low",
+        "high",
+        "seconds"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "complaint.assign",
+      "fields": [
+        "complaintId",
+        "organizationId",
+        "reason"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "complaint.reply",
+      "fields": [
+        "complaintId",
+        "result"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "complaint.close",
+      "fields": [
+        "complaintId",
+        "reason"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "device.unbind",
+      "fields": [
+        "deviceId"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "device.status",
+      "fields": [
+        "deviceId",
+        "status"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "simulator.run",
+      "fields": [
+        "metricId"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "event.confirm",
+      "fields": [
+        "eventId",
+        "reason"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "event.dismiss",
+      "fields": [
+        "eventId",
+        "reason"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "event.arrive",
+      "fields": [
+        "eventId",
+        "note"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "claim.evidence",
+      "fields": [
+        "claimId",
+        "name",
+        "content"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "claim.resubmit",
+      "fields": [
+        "claimId",
+        "reason"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "device.simulation",
+      "fields": [
+        "deviceId",
+        "enabled",
+        "metricId",
+        "seconds"
+      ]
+    },
+    {
+      "account": "admin1",
+      "action": "password.reset",
+      "fields": [
+        "username",
+        "newPassword",
+        "confirmPassword",
+        "operatorPassword",
+        "reason"
+      ]
+    },
+    {
+      "account": "family1",
+      "action": "order.create",
+      "fields": [
+        "elderId",
+        "startsAt",
+        "itemId",
+        "channel"
+      ]
+    },
+    {
+      "account": "family1",
+      "action": "order.confirm",
+      "fields": [
+        "orderId",
+        "confirmation"
+      ]
+    },
+    {
+      "account": "family1",
+      "action": "order.cancel",
+      "fields": [
+        "orderId",
+        "reason"
+      ]
+    },
+    {
+      "account": "family1",
+      "action": "complaint.create",
+      "fields": [
+        "orderId",
+        "rating",
+        "content"
+      ]
+    },
+    {
+      "account": "family1",
+      "action": "event.create",
+      "fields": [
+        "elderId",
+        "level",
+        "description"
+      ]
+    },
+    {
+      "account": "family1",
+      "action": "complaint.close",
+      "fields": [
+        "complaintId",
+        "reason"
+      ]
+    },
+    {
+      "account": "family1",
+      "action": "review.create",
+      "fields": [
+        "orderId",
+        "rating",
+        "content"
+      ]
+    },
+    {
+      "account": "caregiver1",
+      "action": "order.accept",
+      "fields": [
+        "orderId"
+      ]
+    },
+    {
+      "account": "caregiver1",
+      "action": "order.checkin",
+      "fields": [
+        "orderId",
+        "location",
+        "x",
+        "y"
+      ]
+    },
+    {
+      "account": "caregiver1",
+      "action": "order.finish",
+      "fields": [
+        "orderId",
+        "notes",
+        "x",
+        "y"
+      ]
+    },
+    {
+      "account": "caregiver1",
+      "action": "event.create",
+      "fields": [
+        "elderId",
+        "level",
+        "description"
+      ]
+    },
+    {
+      "account": "caregiver1",
+      "action": "event.respond",
+      "fields": [
+        "eventId"
+      ]
+    },
+    {
+      "account": "caregiver1",
+      "action": "event.close",
+      "fields": [
+        "eventId",
+        "result"
+      ]
+    },
+    {
+      "account": "caregiver1",
+      "action": "order.reject",
+      "fields": [
+        "orderId",
+        "reason"
+      ]
+    },
+    {
+      "account": "caregiver1",
+      "action": "event.confirm",
+      "fields": [
+        "eventId",
+        "reason"
+      ]
+    },
+    {
+      "account": "caregiver1",
+      "action": "event.arrive",
+      "fields": [
+        "eventId",
+        "note"
+      ]
+    },
+    {
+      "account": "manager1",
+      "action": "credential.create",
+      "fields": [
+        "caregiverId",
+        "itemId",
+        "certificateNo",
+        "certificateType",
+        "level",
+        "validFrom",
+        "validUntil"
+      ]
+    },
+    {
+      "account": "manager1",
+      "action": "credential.type",
+      "fields": [
+        "credentialId",
+        "certificateType"
+      ]
+    },
+    {
+      "account": "manager1",
+      "action": "caregiver.status",
+      "fields": [
+        "caregiverId",
+        "status"
+      ]
+    },
+    {
+      "account": "manager1",
+      "action": "shift.create",
+      "fields": [
+        "caregiverId",
+        "startsAt",
+        "endsAt",
+        "capacity"
+      ]
+    },
+    {
+      "account": "manager1",
+      "action": "shift.delete",
+      "fields": [
+        "shiftId"
+      ]
+    },
+    {
+      "account": "manager1",
+      "action": "hours.review",
+      "fields": [
+        "attendanceId",
+        "approve",
+        "reason"
+      ]
+    },
+    {
+      "account": "manager1",
+      "action": "order.release",
+      "fields": [
+        "orderId",
+        "reason"
+      ]
+    },
+    {
+      "account": "manager1",
+      "action": "caregiver.area",
+      "fields": [
+        "caregiverId",
+        "communityId",
+        "enabled"
+      ]
+    },
+    {
+      "account": "manager1",
+      "action": "recruitment.create",
+      "fields": [
+        "name",
+        "phone"
+      ]
+    },
+    {
+      "account": "manager1",
+      "action": "recruitment.review",
+      "fields": [
+        "recruitmentId",
+        "approve",
+        "reason",
+        "username",
+        "password"
+      ]
+    },
+    {
+      "account": "manager1",
+      "action": "training.create",
+      "fields": [
+        "title",
+        "startsAt",
+        "endsAt"
+      ]
+    },
+    {
+      "account": "manager1",
+      "action": "training.enroll",
+      "fields": [
+        "trainingId",
+        "caregiverId"
+      ]
+    },
+    {
+      "account": "manager1",
+      "action": "training.result",
+      "fields": [
+        "recordId",
+        "score"
+      ]
+    },
+    {
+      "account": "manager1",
+      "action": "complaint.reply",
+      "fields": [
+        "complaintId",
+        "result"
+      ]
+    },
+    {
+      "account": "manager1",
+      "action": "rectification.submit",
+      "fields": [
+        "inspectionId",
+        "measures",
+        "evidence"
+      ]
+    },
+    {
+      "account": "manager1",
+      "action": "organization.submit",
+      "fields": [
+        "period",
+        "summary",
+        "evidence"
+      ]
+    },
+    {
+      "account": "manager1",
+      "action": "password.reset",
+      "fields": [
+        "username",
+        "newPassword",
+        "confirmPassword",
+        "operatorPassword",
+        "reason"
+      ]
+    },
+    {
+      "account": "street1",
+      "action": "claim.review",
+      "fields": [
+        "claimId",
+        "approve",
+        "reason"
+      ]
+    },
+    {
+      "account": "regulator1",
+      "action": "claim.review",
+      "fields": [
+        "claimId",
+        "approve",
+        "reason"
+      ]
+    },
+    {
+      "account": "regulator1",
+      "action": "claim.pay",
+      "fields": [
+        "claimId",
+        "reference"
+      ]
+    },
+    {
+      "account": "regulator1",
+      "action": "inspection.create",
+      "fields": [
+        "caregiverId",
+        "method",
+        "score",
+        "issue",
+        "requiresRectification",
+        "rectification"
+      ]
+    },
+    {
+      "account": "regulator1",
+      "action": "inspection.order",
+      "fields": [
+        "orderId",
+        "method",
+        "score",
+        "issue",
+        "requiresRectification",
+        "rectification"
+      ]
+    },
+    {
+      "account": "regulator1",
+      "action": "inspection.close",
+      "fields": [
+        "inspectionId",
+        "approve",
+        "result"
+      ]
+    },
+    {
+      "account": "regulator1",
+      "action": "policy.create",
+      "fields": [
+        "name",
+        "itemId",
+        "level",
+        "rate",
+        "startsAt",
+        "endsAt",
+        "cycle",
+        "minimumAge",
+        "tag",
+        "communityIds"
+      ]
+    },
+    {
+      "account": "regulator1",
+      "action": "inspection.batch",
+      "fields": [
+        "communityId",
+        "target",
+        "startsAt",
+        "endsAt",
+        "ratio"
+      ]
+    },
+    {
+      "account": "regulator1",
+      "action": "inspection.record",
+      "fields": [
+        "inspectionId",
+        "method",
+        "score",
+        "issue",
+        "requiresRectification",
+        "rectification"
+      ]
+    },
+    {
+      "account": "regulator1",
+      "action": "organization.review",
+      "fields": [
+        "reportId",
+        "approve",
+        "reason"
+      ]
+    },
+    {
+      "account": "regulator1",
+      "action": "notice.publish",
+      "fields": [
+        "inspectionId"
+      ]
+    },
+    {
+      "account": "regulator1",
+      "action": "notice.withdraw",
+      "fields": [
+        "noticeId",
+        "reason"
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "failedResponses": [],
+  "businessWrites": false
+}

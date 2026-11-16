@@ -1,20 +1,24 @@
 {
-  "time": "2026-11-13T11:53:11.400709",
-  "backup_sha256": "e92957beb5e5423b8d91a3baf861a8e48650d03a94082aea0698800f04bcdb9b",
+  "time": "2026-11-14T20:43:29.890350",
+  "source_database": "eldercare_acceptance_clone_test",
+  "restore_database": "eldercare_acceptance_filtered_restore",
+  "elapsed_seconds": 2.53,
+  "backup_sha256": "6835927ad6a23fd03d6a2e7c327f10297500eed93d2cac23bb2f205151352ac6",
   "binlog": "mysql-bin.000001",
   "end_binlog": "mysql-bin.000001",
-  "start_position": 12403008,
-  "end_position": 12403391,
+  "start_position": 22666651,
+  "end_position": 22667500,
   "position_source": "mysqldump --source-data=2 snapshot coordinates",
-  "base_service_items": 20,
+  "binlog_database_filter": "eldercare_acceptance_filtered_restore",
+  "base_service_items": 26,
   "incremental_marker_recovered": true,
   "counts": [
     {
       "table": "account",
-      "source": 120,
-      "restored": 120,
+      "source": 137,
+      "restored": 137,
       "content_equal": true,
-      "content_sha256": "74208c274c9f6e2d5b5ad5057a5eda6bd8d582e6c4e6f3ad20af053a10e7b97c"
+      "content_sha256": "82343c4a14e7bd8036910e28903d51a2d02f5ed77944c95243d9b68a0208956e"
     },
     {
       "table": "account_scope",
@@ -25,87 +29,87 @@
     },
     {
       "table": "assessment",
-      "source": 20,
-      "restored": 20,
+      "source": 41,
+      "restored": 41,
       "content_equal": true,
-      "content_sha256": "6601427a3b8625407f6fbc36a05d3937021285bc48f5554cca175f65f16a8a00"
+      "content_sha256": "59f0a391bd0a1eab9f1f203c6802f5fb0e77e226c80a79db2864c6cd0cec1f1e"
     },
     {
       "table": "attendance",
-      "source": 20,
-      "restored": 20,
+      "source": 43,
+      "restored": 43,
       "content_equal": true,
-      "content_sha256": "ac2c873f55d2f5eb7e8d2b63109143658f9f0d39122a9f4992170ea211856cf9"
+      "content_sha256": "c5fa0f00f3a48913fb6068b4a344f79c7847c52372fe229d62cef7aa8109b856"
     },
     {
       "table": "audit_log",
-      "source": 380,
-      "restored": 380,
+      "source": 825,
+      "restored": 825,
       "content_equal": true,
-      "content_sha256": "598e117fcaf27cade186a3051a6160018363e8624af87353118262da37db34cc"
+      "content_sha256": "94655939c4d3353c625ca085149ff5ac1ee1715173eb98765438faaa0f15833d"
     },
     {
       "table": "bundle_item",
-      "source": 20,
-      "restored": 20,
+      "source": 59,
+      "restored": 59,
       "content_equal": true,
-      "content_sha256": "b13540f8159a55f188dc03d0c66e6093509f180f87541e71b168a8d9e1f74565"
+      "content_sha256": "3f7552f71a46a6348533fb842f6032a24b9bf08739da93ed3d7dbe9878a8c225"
     },
     {
       "table": "care_bundle",
-      "source": 20,
-      "restored": 20,
+      "source": 29,
+      "restored": 29,
       "content_equal": true,
-      "content_sha256": "f80510ba4fd745ab53bead537faa5d8afeaa5adec8a3a0207dc087e1e9fefe3c"
+      "content_sha256": "2d96808ba3946c6535f84dea733dcd578dff62141df664daa01900a36e628c1d"
     },
     {
       "table": "care_plan",
-      "source": 20,
-      "restored": 20,
+      "source": 42,
+      "restored": 42,
       "content_equal": true,
-      "content_sha256": "4ce2053f5886e7d1f978335b5dca57547068c37041c7b3f54bad639bbf4d7474"
+      "content_sha256": "6e94b352f4867d6b32e56aa384882f6e17ba714bb166bfaa63f895de2d31b7c5"
     },
     {
       "table": "caregiver",
-      "source": 20,
-      "restored": 20,
+      "source": 25,
+      "restored": 25,
       "content_equal": true,
-      "content_sha256": "b7cf8d8779265dbba6198135087e10b8eb73d5820f02111a93c9c90f862214fb"
+      "content_sha256": "ced634eb48321c5efc896b954465b8c9706fce2870dac307643540429a7c4fcc"
     },
     {
       "table": "caregiver_area",
-      "source": 20,
-      "restored": 20,
+      "source": 26,
+      "restored": 26,
       "content_equal": true,
-      "content_sha256": "b3746543bc9f44da7f997044d9d8fac1ef8a4e87370675fb2ba349ba2d8a6fb9"
+      "content_sha256": "14bcf8d64214e77720b63bbcfdfc15e0b5f4ae5ab84bae5c5727f95bf3b0278c"
     },
     {
       "table": "claim",
-      "source": 20,
-      "restored": 20,
+      "source": 28,
+      "restored": 28,
       "content_equal": true,
-      "content_sha256": "31d350ae48076f6e559d77eda25e2665076f98b5811416eeac04eea3f1091fbd"
+      "content_sha256": "9e0bc17b2cc0f10a1530d84a4a6bc4fa98bee24e1471ef1b5f8bf73a188ab50c"
     },
     {
       "table": "claim_evidence",
-      "source": 20,
-      "restored": 20,
+      "source": 28,
+      "restored": 28,
       "content_equal": true,
-      "content_sha256": "a8b023470e45c629066da9aa64ea96283bd5a380b6dd367fe469f21845bccad4"
+      "content_sha256": "29d70a69131661bb5a7311f747044d2f983deab6f585a82067a2c8f44833b54b"
     },
     {
       "table": "claim_item",
-      "source": 20,
-      "restored": 20,
+      "source": 27,
+      "restored": 27,
       "content_equal": true,
-      "content_sha256": "50181b487788c2d6e0de3d5bb897bed36c5224aa1f167c0e2149bee23e988480"
+      "content_sha256": "46927ffee7f91dbd88344b676c6a3b6851f105acebdebdd88290c8b8325f92f3"
     },
     {
       "table": "claim_review",
-      "source": 40,
-      "restored": 40,
+      "source": 50,
+      "restored": 50,
       "content_equal": true,
-      "content_sha256": "d9f566ec1a37c2e00e045c27c27f3d6462a0167054d6bfe6dddb18b9df6961eb"
+      "content_sha256": "f87e68fcb0b050c1b08d251d391af14282bdbe8a8b64cf75d2361286f722c145"
     },
     {
       "table": "community",
@@ -116,115 +120,115 @@
     },
     {
       "table": "complaint",
-      "source": 20,
-      "restored": 20,
+      "source": 38,
+      "restored": 38,
       "content_equal": true,
-      "content_sha256": "70b9b8670a1f05c25a924bc79077c4b7bf75abc12c1b9e6bc13715d2dce97113"
+      "content_sha256": "c6812e202203c2bdcd23de3c6c067b2d3488756e0004a0de55a3ebb761cdc72d"
     },
     {
       "table": "complaint_log",
-      "source": 20,
-      "restored": 20,
+      "source": 44,
+      "restored": 44,
       "content_equal": true,
-      "content_sha256": "2367396e7e5b1b23e3091a83f941c1032ae11d9e7b47051f82f5128bfec20147"
+      "content_sha256": "e930fe61119024df3020f13c835c18527dba053278ae7680b49fb5c0013dfaa2"
     },
     {
       "table": "credential",
-      "source": 20,
-      "restored": 20,
+      "source": 50,
+      "restored": 50,
       "content_equal": true,
-      "content_sha256": "db3a5504e2fad98e5a216d19efe00a8d9bf39ba71927d9abdb42dbdbe89784c6"
+      "content_sha256": "b8c59a4436b4ee5494e898d6babc85b478a295e43524acb221b1e2b3a1f0db1c"
     },
     {
       "table": "device",
-      "source": 20,
-      "restored": 20,
+      "source": 26,
+      "restored": 26,
       "content_equal": true,
-      "content_sha256": "cb427b374bfc78098f76cba41b6a4c4d83115266d7e67a7588fb1e0548e7a0c3"
+      "content_sha256": "42facaa86e8dd9716326b2a0e545c16f2c2f4a32a0a3e4f8c635717cef4c903d"
     },
     {
       "table": "device_binding",
-      "source": 20,
-      "restored": 20,
+      "source": 26,
+      "restored": 26,
       "content_equal": true,
-      "content_sha256": "135f260bb92557e7254bc8ca43e18ecb8f6f425b47a967e2532eaf4670e126f9"
+      "content_sha256": "6bbc3a8e9f0a4cf7badb0e44fb150900d43170fa02d55a3ffb1bb2be86d7c1e9"
     },
     {
       "table": "dispatch",
-      "source": 40,
-      "restored": 40,
+      "source": 67,
+      "restored": 67,
       "content_equal": true,
-      "content_sha256": "47f84fa682fb09e337e149eccd48860e660e268a49e19c832ef4934ec306e74a"
+      "content_sha256": "9a45e4500ea0652daa4217829d36f2134656ab0adae13499ace0816f00178f22"
     },
     {
       "table": "elder",
-      "source": 20,
-      "restored": 20,
+      "source": 39,
+      "restored": 39,
       "content_equal": true,
-      "content_sha256": "9a87539ead5ee730c145b98f648b629b7e0fe89e550fc8036781e81aa3bddab4"
+      "content_sha256": "ad81432ba5f47560f01515aeac3a4cef5eb731cf7ccf27e801e273f53c9fbfa4"
     },
     {
       "table": "elder_tag",
-      "source": 20,
-      "restored": 20,
+      "source": 43,
+      "restored": 43,
       "content_equal": true,
-      "content_sha256": "4913dd568315292766b1a82fefbc4b2a757708b138f8462f0e3ed2a8bbabe092"
+      "content_sha256": "ae37d93c603c783ae0196cc84e97c26c23e386fa6113cd2a635903c641f7cd82"
     },
     {
       "table": "emergency",
-      "source": 20,
-      "restored": 20,
+      "source": 34,
+      "restored": 34,
       "content_equal": true,
-      "content_sha256": "56dbca4e02eb65cd984ef6f3b04deb9785d1b7d13e3799de8a9782e8e7e08182"
+      "content_sha256": "bd092391b830fab7dec0afa9ef5fe0bb5d4dec43587c947cd1d0de200fda06dc"
     },
     {
       "table": "emergency_log",
-      "source": 60,
-      "restored": 60,
+      "source": 77,
+      "restored": 77,
       "content_equal": true,
-      "content_sha256": "c19b0bc2a60433764a8f6db836666ae0ca09db59cc29d1ac6bf4a84c8165f64f"
+      "content_sha256": "ba028e8a9614a028650febee23a7dc10270d6e9f50e7e9e38cbec53f413259f9"
     },
     {
       "table": "event_step",
-      "source": 20,
-      "restored": 20,
+      "source": 63,
+      "restored": 63,
       "content_equal": true,
-      "content_sha256": "41b5125c5b21a6177e45b2ee11b8c6217365557483ac30c6111c33c9f0887c37"
+      "content_sha256": "eafc8ca02c74c79f28835c0d04d7aeb78e47ab65be325c261c726222e93b8065"
     },
     {
       "table": "guardian",
-      "source": 20,
-      "restored": 20,
+      "source": 39,
+      "restored": 39,
       "content_equal": true,
-      "content_sha256": "f1e50ffc668df790402c5c01f798459fbc6ee6be51916d42a6f88e39ac16776b"
+      "content_sha256": "352f7cd5088d7afe7a01c299d072a1d502041b6964a128cd2c69a11d9a970038"
     },
     {
       "table": "inspection",
-      "source": 40,
-      "restored": 40,
+      "source": 45,
+      "restored": 45,
       "content_equal": true,
-      "content_sha256": "33f562eda28d5db22dbb99c82270dd84f8dfe71be35d6d08f6a5006d884651ca"
+      "content_sha256": "498fdc8debe3c6acf777e949f762343e27f636b8a11fb64260c2f1d828dcd7ea"
     },
     {
       "table": "inspection_batch",
-      "source": 20,
-      "restored": 20,
+      "source": 25,
+      "restored": 25,
       "content_equal": true,
-      "content_sha256": "07299cea3247495cc077ff8ccf50279c12ea19305d6c5dd03ab5d74075fecec4"
+      "content_sha256": "97d3e6befb8bfeabe8fae9d651b597278a4f215f006ead197e6bce3d31add5b7"
     },
     {
       "table": "metric_rule",
-      "source": 20,
-      "restored": 20,
+      "source": 23,
+      "restored": 23,
       "content_equal": true,
-      "content_sha256": "2b2bc504bc927335c448372798e6088a7e6cd2494d06842497344d9435e04596"
+      "content_sha256": "aad2bf61ecc927edad21e35d10375f4f739136621192f7e9d0e6f2e5f6ac45d1"
     },
     {
       "table": "notification",
-      "source": 140,
-      "restored": 140,
+      "source": 207,
+      "restored": 207,
       "content_equal": true,
-      "content_sha256": "8fe5e88cda5fbd8552c810c7594aff502ec8c2909da7a4911bebb2d58e62677f"
+      "content_sha256": "4c232d6a39b918d5f9f8b1d9d96697a984fc6c1c166d23c53575e39d6b6618c3"
     },
     {
       "table": "organization",
@@ -235,108 +239,108 @@
     },
     {
       "table": "organization_report",
-      "source": 20,
-      "restored": 20,
+      "source": 23,
+      "restored": 23,
       "content_equal": true,
-      "content_sha256": "a362af4034a119a294ed83853627aaac41c6b903fd8d7d580b4ad365ce01d5f2"
+      "content_sha256": "5a2fc8901e231ffdafde1b95219f5fc1f92d0c4c2801f4ffad74cfe6ee60091e"
     },
     {
       "table": "payment",
-      "source": 20,
-      "restored": 20,
+      "source": 22,
+      "restored": 22,
       "content_equal": true,
-      "content_sha256": "3e3213239a2d8651664921f1eee27cbbda794841591eb4c21279b4147f2950dd"
+      "content_sha256": "d80fe10b43906bf7863fd9f87fd26b20bb07ffa80fdc6c0617cf639a4a95186e"
     },
     {
       "table": "plan_item",
-      "source": 20,
-      "restored": 20,
+      "source": 71,
+      "restored": 71,
       "content_equal": true,
-      "content_sha256": "e0aafcfd78544b86017f65b5eb568bbbc5b174d488c5f837d2ffdd09a3c434b3"
+      "content_sha256": "854cca27a1d2a9bc692c3b94f49633794d43d472ff38736205ec1d7f6f0dc3f2"
     },
     {
       "table": "policy",
-      "source": 20,
-      "restored": 20,
+      "source": 28,
+      "restored": 28,
       "content_equal": true,
-      "content_sha256": "5591d9422114fb9b3fcdb7b7ef08062dd1591ad8e36781f3feb4189efd497e3d"
+      "content_sha256": "5545153f47c1600dc7c3fa05db91a970267f65739bd4a65bf781f2a777527fd0"
     },
     {
       "table": "policy_area",
-      "source": 20,
-      "restored": 20,
+      "source": 34,
+      "restored": 34,
       "content_equal": true,
-      "content_sha256": "d22bfa13807d8aa8eaa238d9a646d049570beee4e5f246d691e6bfdcdb0bb4f2"
+      "content_sha256": "377336e4f973c69654f1a97e712262f5df1a1f5dae5fd33df78b84b1b627c08e"
     },
     {
       "table": "public_notice",
-      "source": 20,
-      "restored": 20,
+      "source": 22,
+      "restored": 22,
       "content_equal": true,
-      "content_sha256": "bb79b7311bef6fa8e9c6b06b653b98b7ed03a175e228624bd8c3e6e8bda8d559"
+      "content_sha256": "a0b65bdbb8f77f196581225e1121d0bc5441d58a921e346fce7358b2c08791e6"
     },
     {
       "table": "recruitment",
-      "source": 20,
-      "restored": 20,
+      "source": 29,
+      "restored": 29,
       "content_equal": true,
-      "content_sha256": "72f0157142ccda99099695b3bf24dae9e5b942edd3ca6e33f85936c012d67f7b"
+      "content_sha256": "ea28d4f02ed941f7ec3c59d7ee3a51a5fefe912ff0b14559dcd4c52b89dbba14"
     },
     {
       "table": "rectification_submission",
-      "source": 20,
-      "restored": 20,
+      "source": 23,
+      "restored": 23,
       "content_equal": true,
-      "content_sha256": "a6f7226b6826f14647552eed54153c5d6bcbeedf645ffe45bbcd25482bf6c5e7"
+      "content_sha256": "29d5bb023046779a90bdca6891617e63bf88e8f9619a5e188769806942c12730"
     },
     {
       "table": "service_item",
-      "source": 21,
-      "restored": 21,
+      "source": 27,
+      "restored": 27,
       "content_equal": true,
-      "content_sha256": "3fa35a0f5e110ee2475f0830af7495b3d59f617da7c1656985a148ec758908a6"
+      "content_sha256": "561dd0cac205b87e9b2ee6bd3af9c3af881f285ba085f1e63dc5d7539695227c"
     },
     {
       "table": "service_order",
-      "source": 40,
-      "restored": 40,
+      "source": 82,
+      "restored": 82,
       "content_equal": true,
-      "content_sha256": "22760dfdecc91feb46ea08f35a158dbfa0e22ad4cf1a10acfcc5d9470ef4e8f8"
+      "content_sha256": "f85a448eb4b8391ecd63a6d676f723c08be2be95d4308204f6f12893f6551ac6"
     },
     {
       "table": "service_record",
-      "source": 20,
-      "restored": 20,
+      "source": 42,
+      "restored": 42,
       "content_equal": true,
-      "content_sha256": "e43dad2153bd37d2c732c96e6c5934be86a286a1de4c722d4baa0b9596aec2d2"
+      "content_sha256": "dde5313ae3573284f1d2aa1e33a36243bfbfd8e422e035aff153d841fdd8dde1"
     },
     {
       "table": "shift",
-      "source": 40,
-      "restored": 40,
+      "source": 71,
+      "restored": 71,
       "content_equal": true,
-      "content_sha256": "9dacf3facf1286a2a2533fc64dc2922fb29761da7891806bdab9baf7a82ac9af"
+      "content_sha256": "e4a528796bcceb1750a2ce1e95d9a149131b35f4ee80883f300b1aa08aa77269"
     },
     {
       "table": "training",
-      "source": 20,
-      "restored": 20,
+      "source": 27,
+      "restored": 27,
       "content_equal": true,
-      "content_sha256": "5adfdd97d6ed3d3a51e736bbbda34ab0d321da3b58603f41a4ec3b4ed57507ca"
+      "content_sha256": "8de40ad3503173fe33f49c205d10afa444a93b589ee19e14c7288d6c268c91f8"
     },
     {
       "table": "training_record",
-      "source": 20,
-      "restored": 20,
+      "source": 27,
+      "restored": 27,
       "content_equal": true,
-      "content_sha256": "8eacbc8d65b47b2c94f9aaefe7935141db27954fa2fea6d13df3d01b2622dbf4"
+      "content_sha256": "7e93bb529381ce7370e47c7728e05a9bbf6d3d8276df53c71dfd664dff56812f"
     },
     {
       "table": "vital",
-      "source": 20,
-      "restored": 20,
+      "source": 76,
+      "restored": 76,
       "content_equal": true,
-      "content_sha256": "300f152487830a84263396ab5c735d06ef42d01e356ae1efd4d76d903d228d1b"
+      "content_sha256": "e9aa34858107b23059143c044adab7e330f68e5abb65a9aa6a0663db3cd1f1c9"
     }
   ],
   "restored_query_pairs": 15,

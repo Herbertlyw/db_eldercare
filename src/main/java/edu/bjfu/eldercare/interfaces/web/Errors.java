@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class Errors {
 
+    @ExceptionHandler(edu.bjfu.eldercare.application.security.PasswordChangeRequired.class)
+    ResponseEntity<?> passwordRequired() {
+        return ResponseEntity.status(403).body(Map.of("error", "PASSWORD_CHANGE_REQUIRED"));
+    }
+
     @ExceptionHandler(Unauthorized.class)
     ResponseEntity<?> unauth() {
         return ResponseEntity.status(401).body(Map.of("error", "请登录或重新登录"));

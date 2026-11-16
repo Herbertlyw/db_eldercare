@@ -1,0 +1,19 @@
+{
+  "database": "eldercare",
+  "tablesCompared": 47,
+  "changedRecords": {
+    "care_bundle": 20,
+    "community": 20,
+    "credential": 20,
+    "device": 20,
+    "elder": 20,
+    "metric_rule": 23,
+    "organization": 20,
+    "policy": 20,
+    "service_item": 20,
+    "training": 20
+  },
+  "protectedFieldsUnchanged": true,
+  "repeatIsNoOp": true,
+  "backupSha256": "d6025498f6e38d0caceb624ca1bc4f7e1a407144146c844b6ddcc0b1a2026459"
+}

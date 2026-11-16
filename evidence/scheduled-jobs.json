@@ -1,0 +1,16 @@
+{
+  "time": "2026-11-14T20:34:21.066712",
+  "database": "eldercare_acceptance_clone_test",
+  "actual_scheduler": true,
+  "manual_procedure_calls": false,
+  "cycles": 2,
+  "assessment_reminder_deduplicated": true,
+  "expired_assessment_plan_paused": true,
+  "superseded_plan_paused": true,
+  "levels": [
+    2,
+    3
+  ],
+  "simulation_samples": 2,
+  "elapsed_seconds": 61.71
+}

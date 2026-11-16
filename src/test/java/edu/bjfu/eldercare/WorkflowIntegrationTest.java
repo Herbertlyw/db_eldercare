@@ -228,6 +228,119 @@ class WorkflowIntegrationTest {
     }
 
     @Test
+    void credentialTypeIsRequiredAndCanOnlyBeMaintainedWithinOrganization() {
+        rollback(
+                () -> {
+                    var input =
+                            m(
+                                    "caregiverId",
+                                    1,
+                                    "itemId",
+                                    1,
+                                    "certificateNo",
+                                    "TYPE-" + UUID.randomUUID(),
+                                    "level",
+                                    "初级",
+                                    "validFrom",
+                                    LocalDateTime.now().minusDays(1).toString(),
+                                    "validUntil",
+                                    LocalDateTime.now().plusDays(10).toString());
+                    long before = count("credential");
+                    invalid(() -> service.execute(manager, "credential.create", input));
+                    input.put("certificateType", "  ");
+                    invalid(() -> service.execute(manager, "credential.create", input));
+                    input.put("certificateType", "甲".repeat(81));
+                    invalid(() -> service.execute(manager, "credential.create", input));
+                    assertEquals(before, count("credential"));
+                    input.put("certificateType", "  养老护理员  ");
+                    long credential =
+                            ((Number) service.execute(manager, "credential.create", input))
+                                    .longValue();
+                    assertEquals(
+                            "养老护理员",
+                            d.one("SELECT certificate_type FROM credential WHERE id=?", credential)
+                                    .get("certificate_type"));
+                    denied(
+                            () ->
+                                    run(
+                                            u(2, "MANAGER"),
+                                            "credential.type",
+                                            "credentialId",
+                                            credential,
+                                            "certificateType",
+                                            "健康照护师"));
+                    denied(
+                            () ->
+                                    run(
+                                            family,
+                                            "credential.type",
+                                            "credentialId",
+                                            credential,
+                                            "certificateType",
+                                            "健康照护师"));
+                    invalid(
+                            () ->
+                                    run(
+                                            manager,
+                                            "credential.type",
+                                            "credentialId",
+                                            credential,
+                                            "certificateType",
+                                            "未登记"));
+                    run(
+                            manager,
+                            "credential.type",
+                            "credentialId",
+                            credential,
+                            "certificateType",
+                            "健康照护师");
+                    assertEquals(
+                            "健康照护师",
+                            d.one("SELECT certificate_type FROM credential WHERE id=?", credential)
+                                    .get("certificate_type"));
+                    input.put("caregiverId", 2);
+                    denied(() -> service.execute(manager, "credential.create", input));
+                });
+    }
+
+    @Test
+    void serviceRatingOnlyIncludesReviewsAndRespectsRoleScope() {
+        rollback(
+                () -> {
+                    // Establish an independent expectation, regardless of fixture feedback values.
+                    d.update("UPDATE complaint SET kind='COMPLAINT' WHERE order_id=1");
+                    d.update(
+                            "INSERT INTO complaint(order_id,account_id,rating,content,kind)"
+                                + " VALUES(1,2,4,'评价甲','REVIEW'),(1,2,5,'评价乙','REVIEW'),(1,2,1,'投诉','COMPLAINT')");
+                    var mapper = new ObjectMapper();
+                    var rows =
+                            mapper.valueToTree(reads.list(manager, "quality", 0, 100)).get("rows");
+                    var row =
+                            java.util.stream.StreamSupport.stream(rows.spliterator(), false)
+                                    .filter(x -> x.get("id").asLong() == 1)
+                                    .findFirst()
+                                    .orElseThrow();
+                    assertEquals(4.5, row.get("service_rating").asDouble());
+                    denied(() -> reads.list(family, "quality", 0, 100));
+                    denied(() -> reads.list(worker, "quality", 0, 100));
+                    var other =
+                            mapper.valueToTree(reads.list(u(2, "MANAGER"), "quality", 0, 100))
+                                    .get("rows");
+                    assertFalse(
+                            java.util.stream.StreamSupport.stream(other.spliterator(), false)
+                                    .anyMatch(x -> x.get("id").asLong() == 1));
+                    d.update("UPDATE complaint SET kind='COMPLAINT' WHERE order_id=1");
+                    rows = mapper.valueToTree(reads.list(manager, "quality", 0, 100)).get("rows");
+                    row =
+                            java.util.stream.StreamSupport.stream(rows.spliterator(), false)
+                                    .filter(x -> x.get("id").asLong() == 1)
+                                    .findFirst()
+                                    .orElseThrow();
+                    assertTrue(row.get("service_rating").isNull());
+                });
+    }
+
+    @Test
     void tagAndContactMaintenanceIsScopedAndEncrypted() {
         rollback(
                 () -> {
@@ -658,6 +771,8 @@ class WorkflowIntegrationTest {
                             1,
                             "certificateNo",
                             "COURSE-CERT",
+                            "certificateType",
+                            "养老护理员",
                             "level",
                             "课程资格",
                             "validFrom",
@@ -1154,8 +1269,9 @@ class WorkflowIntegrationTest {
                             d.one("SELECT body FROM public_notice WHERE id=?", notice)
                                     .get("body")
                                     .toString();
-                    assertFalse(body.contains("演示老人"));
-                    assertFalse(body.contains("演示地址"));
+                    var elder = d.one("SELECT name,address FROM elder WHERE id=1");
+                    assertFalse(body.contains(elder.get("name").toString()));
+                    assertFalse(body.contains(elder.get("address").toString()));
                     assertFalse(body.contains("记录不完整"));
                     invalid(() -> run(reg, "notice.publish", "inspectionId", i));
                     run(reg, "notice.withdraw", "noticeId", notice, "reason", "演示撤回");
