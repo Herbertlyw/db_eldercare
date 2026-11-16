@@ -85,7 +85,7 @@ mvn spotless:check
 
 ## 验证方式
 
-`src/test/java/edu/bjfu/eldercare/domain/DomainRulesTest.java` 验证纯业务规则；`ArchitectureTest` 检查依赖方向；`application/RoutingTest` 检查重复注册、未知操作和分页拒绝；三组 MySQL 业务集成测试检查权限、触发器、回滚、并发与历史保护。`RouteContractIntegrationTest` 在 Spring 启动后核对 71 个操作、49 个列表和 15 类详情。
+`src/test/java/edu/bjfu/eldercare/domain/DomainRulesTest.java` 验证纯业务规则；`ArchitectureTest` 检查依赖方向；`application/RoutingTest` 检查重复注册、未知操作和分页拒绝；MySQL 业务集成测试检查权限、触发器、回滚、并发与历史保护。`RouteContractIntegrationTest` 在 Spring 启动后核对 75 个操作（含仅供离线维护的 password.recover）、49 个列表和 15 类详情。
 
 本机可用以下命令选择单独测试库。脚本会删除并重建该库，运行前确认没有其他任务使用它；数据库名仅允许 `eldercare_test` 或 `eldercare_<名称>_test`。
 
@@ -93,10 +93,18 @@ mvn spotless:check
 TEST_DATABASE=eldercare_refactor_test python3 scripts/test.py
 ```
 
-浏览器测试默认使用 18081；可通过 `TEST_PORT` 选择 18081—18089 内的另一个测试端口。必须先启动连接相应独立测试库、关闭定时任务的应用，再执行脚本。不得将测试端口指向展示库。
+React 浏览器测试默认使用 18087；可通过 `TEST_PORT` 选择 18081—18089 内的另一个测试端口。必须先启动连接相应独立测试库、关闭定时任务的应用，再执行脚本。不得将测试端口指向展示库。
 
 ```sh
 TEST_PORT=18082 TEST_DATABASE=eldercare_refactor_test node scripts/verify_browser.cjs
 ```
 
 测试结果以 `evidence/test-summary.json` 和 `evidence/completion-browser.json` 为准。运行包包含与发布源码对应的 JAR、SQL、报告和 PPTX；包内 SHA256SUMS.json 记录文件校验值。
+
+账号密码维护位于 `application/security/PasswordManagement`，通过 `ActionModule` 加入 `CareService` 的写事务；JDBC 更新和审计由 `IdentityRepository` 实现。`Auth` 在进入业务事务前单独验证当前密码并提交失败计数，再由写事务锁定账号重新校验。会话保存密码版本，每次请求与数据库比较。
+
+列表筛选通过 `ListFilter` 传入读入口，由基础设施层的 `ListFiltering` 在已授权查询外附加过滤条件。关键词和日期使用绑定参数，关联字段采用白名单；分页、总数和状态选项均保持原有账号范围。旧调用可以继续使用不带筛选的读方法。
+
+## 前端与后端边界
+
+浏览器使用 React、TypeScript 和 Arco Design React，通过同源 API 调用接口层。前端源码在 `frontend`，由 Vite 构建；Maven 在 `generate-resources` 阶段执行 npm 依赖安装和构建，将产物放入 JAR 的 `static` 目录。Java 层继续使用 Spring JDBC，不引入 ORM，不把授权或业务事务移到浏览器。前端约定与验证方式见 [前端开发说明](../frontend/README.md)。

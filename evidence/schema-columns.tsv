@@ -2,6 +2,8 @@ TABLE_NAME	COLUMN_NAME	COLUMN_TYPE	IS_NULLABLE	COLUMN_DEFAULT	COLUMN_KEY	EXTRA
 account	id	bigint	NO	NULL	PRI	auto_increment
 account	username	varchar(50)	NO	NULL	UNI	
 account	password_hash	varchar(100)	NO	NULL		
+account	password_version	bigint	NO	0		
+account	must_change_password	tinyint(1)	NO	0		
 account	role	enum('ADMIN','FAMILY','CAREGIVER','MANAGER','STREET','REGULATOR')	NO	NULL		
 account	community_id	bigint	NO	NULL	MUL	
 account	organization_id	bigint	YES	NULL	MUL	
@@ -57,7 +59,7 @@ care_plan	bundle_id	bigint	NO	NULL	MUL
 care_plan	caregiver_id	bigint	NO	NULL	MUL	
 care_plan	starts_at	datetime	NO	NULL		
 care_plan	ends_at	datetime	NO	NULL		
-care_plan	status	enum('ACTIVE','PAUSED','EXPIRED','ENDED')	NO	ACTIVE	MUL	
+care_plan	status	enum('ACTIVE','PAUSED','EXPIRED','ENDED')	NO	ACTIVE		
 caregiver	id	bigint	NO	NULL	PRI	auto_increment
 caregiver	account_id	bigint	NO	NULL	UNI	
 caregiver	organization_id	bigint	NO	NULL	MUL	
@@ -127,6 +129,7 @@ credential	id	bigint	NO	NULL	PRI	auto_increment
 credential	caregiver_id	bigint	NO	NULL	MUL	
 credential	item_id	bigint	NO	NULL	MUL	
 credential	certificate_no	varchar(80)	NO	NULL	UNI	
+credential	certificate_type	varchar(80)	NO	NULL		
 credential	certificate_level	varchar(30)	NO	NULL		
 credential	valid_from	datetime	NO	NULL		
 credential	valid_until	datetime	NO	NULL		
@@ -149,7 +152,7 @@ device_binding	active_device	bigint	YES	NULL	UNI	STORED GENERATED
 dispatch	id	bigint	NO	NULL	PRI	auto_increment
 dispatch	order_id	bigint	NO	NULL	MUL	
 dispatch	shift_id	bigint	NO	NULL	MUL	
-dispatch	status	enum('WAITING','ACCEPTED','FINISHED','REASSIGNED','REJECTED')	NO	WAITING	MUL	
+dispatch	status	enum('WAITING','ACCEPTED','FINISHED','REASSIGNED','REJECTED')	NO	WAITING		
 dispatch	reason	varchar(200)	NO	首次派单		
 dispatch	assigned_at	datetime	NO	CURRENT_TIMESTAMP		DEFAULT_GENERATED
 dispatch	accepted_at	datetime	YES	NULL		

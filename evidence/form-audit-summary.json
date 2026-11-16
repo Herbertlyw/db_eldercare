@@ -1,0 +1,31 @@
+{
+  "time": "2026-11-16T06:08:58.311246+00:00",
+  "database": "eldercare_interaction_20261116_test",
+  "localOnly": true,
+  "displayDatabaseWritten": false,
+  "roles": 6,
+  "roleFormEntries": 86,
+  "distinctActions": 73,
+  "behaviorGroups": 13,
+  "businessWorkflowSubmissions": 28,
+  "orderWorkflowSubmissions": 7,
+  "passwordWorkflowPassed": true,
+  "javaTestsRunForThisFrontendChange": false,
+  "frontendSha256": {
+    "index.html": "72a4d73d2ed4034764598ffeea7400db334370ff712b1ac6790346c50d431e4a",
+    "app.js": "e97a19f4257201d1dea7a383d69d2e5cb057d3a48e12a1aa28e9d7679893bd8e",
+    "completion.js": "c244ad5857b5c904b90c4369d27a7f3e904572d334f98012c9ccf81a63be836a",
+    "style.css": "0d2c0cce29a8628020662097faf2106360175eb3b2cf3e3f1484ad71cc2c4905",
+    "interaction-form-behavior.js": "dc6fb82231ef4972d0bbf401562a662ff1bc5a2c698279de331c6d2e9372f634",
+    "interaction-forms.js": "363d24c573ea2e285b808debdbeb9ef3e095e6df0d0fc03abbf10dd963fdfdc5",
+    "interaction-rules.js": "0a69c59796f425dfc94b5ac6f505030336a480ce6ee8115995d38a3325ac2abd",
+    "interactions.js": "eccbb236ba1b67d4399484f8396f9924aa3203d03c7050136e6e28eb500bc76f",
+    "passwords.js": "ddde8a28276db7fa26b342563ee5ae27a35d5a140204a49fd474128886118a1e"
+  },
+  "fixturePreparation": {
+    "database": "eldercare_interaction_20261116_test",
+    "reason": "Reserve slots for repeated isolated browser workflows; no application rules changed",
+    "before": "id\tcapacity\tused_count\n2\t3\t3\n",
+    "after": "id\tcapacity\tused_count\n2\t8\t3\n"
+  }
+}

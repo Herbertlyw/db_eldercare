@@ -1,1 +1,69 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 220" fill="none"><g stroke="#788696" stroke-width="1.4" stroke-linejoin="round"><path d="M18 187H520" stroke="#c6c9c7"/><path d="M48 186V88L113 58L178 88V186" fill="#e9e7df"/><path d="M43 88L113 54L183 88"/><path d="M71 106H94V132H71ZM132 106H155V132H132ZM103 150H124V186" fill="#f7f5f0"/><path d="M199 186V30H327V186" fill="#f0eee7"/><path d="M192 30H334M211 30V19H315V30"/><path d="M219 52H242V76H219ZM283 52H306V76H283ZM219 94H242V118H219ZM283 94H306V118H283ZM219 136H242V160H219ZM283 136H306V160H283Z" fill="#e0e5e5" stroke="#a8b1b6"/><path d="M253 163H272V186"/><path d="M351 186V109L402 82L454 109V186" fill="#e8e2d7"/><path d="M344 109L402 77L462 109"/><path d="M369 126H390V146H369ZM414 126H435V146H414Z" fill="#f7f5f0"/><path d="M391 163H414V186"/><path d="M488 185V124M484 147L473 136M489 144L501 133" stroke="#8d9484"/><path d="M489 107C465 105 459 122 465 137C459 153 474 158 487 153C505 163 519 149 511 136C518 118 505 107 489 107Z" fill="#dfe3d8" stroke="#a4ad9b"/><path d="M488 185V129" stroke="#8d9484"/><path d="M26 186V144M23 158L16 151"/><path d="M24 130C6 127 0 147 9 156C5 169 22 173 31 166C45 166 47 152 39 146C41 137 32 130 24 130Z" fill="#e0e4d9" stroke="#a4ad9b"/><path d="M25 186V151" stroke="#8d9484"/><path d="M176 167H197M173 173H201M178 173V185M196 173V185" stroke="#a88168"/><path d="M352 201H436M99 205H193M259 197H314" stroke="#d5d3ca"/></g><g fill="#b27d60"><rect x="248" y="45" width="30" height="7" rx="1"/><rect x="395" y="113" width="15" height="4" rx="1"/></g><circle cx="167" cy="44" r="14" fill="#ebdfcb"/><path d="M347 53q8-9 16 0q8-9 16 0" stroke="#b9bcb8" stroke-width="1.3"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" fill="none">
+  <defs>
+    <g id="window-left"><path d="m0 0 17 8v24L0 24Z" fill="#96b7ec"/><path d="m1 12 15 7M8 4v24" stroke="#e3edff" stroke-width="1"/></g>
+    <g id="window-right"><path d="m0 0 18-10v24L0 24Z" fill="#6f99db"/><path d="m1 12 16-9M9-5v24" stroke="#c8dafa" stroke-width="1"/></g>
+    <g id="tree"><path d="M0 0v48" stroke="#b1cdf3" stroke-width="2"/><path d="M0 22-13 9M0 14 12 0" stroke="#b1cdf3" stroke-width="1.5"/><path d="M0-36c-28 0-35 51 0 56 35-5 28-56 0-56Z" fill="#567ebc"/><path d="M0-20v45M0 4l-9-8m9 17 10-9" stroke="#aac9f4" stroke-width="1.5"/></g>
+  </defs>
+  <!-- A shared courtyard on an isometric street grid. -->
+  <path d="m46 271 316-176 318 145-317 159Z" fill="#29569e"/>
+  <path d="m46 271 317 128 317-159M85 245l317 134M148 211l317 135M210 176l317 137M275 140l315 140M110 298 427 124M174 324l316-170M240 351l314-167M305 377l316-163" stroke="#4b73af" stroke-width="1"/>
+  <path d="m160 270 190-103 201 93-190 101Z" fill="#6689be"/>
+  <path d="m176 269 173-94 185 85-173 92Z" fill="#aec6ec"/>
+  <!-- Residential building. -->
+  <path d="m145 121 105-61 105 48-105 61Z" fill="#fff"/>
+  <path d="m145 121 105 48v139l-105-48Z" fill="#e8f0ff"/>
+  <path d="m250 169 105-61v139l-105 61Z" fill="#b8cfee"/>
+  <path d="m137 119 113 52 113-65v9l-113 65-113-52Z" fill="#d6e4fb"/>
+  <path d="m137 119 113-66 113 53-113 65Z" fill="#f4f8ff"/>
+  <path d="m157 118 93-54 93 43-93 54Z" stroke="#cfddf4" stroke-width="2"/>
+  <path d="m191 92 53-30 30 14-53 31Z" fill="#f9fcff"/>
+  <path d="m191 92 30 15v15l-30-14Zm30 15 53-31v15l-53 31Z" fill="#cfdef5"/>
+  <use href="#window-left" x="160" y="145"/><use href="#window-left" x="192" y="160"/><use href="#window-left" x="225" y="175"/>
+  <use href="#window-left" x="160" y="190"/><use href="#window-left" x="192" y="205"/><use href="#window-left" x="225" y="220"/>
+  <use href="#window-right" x="265" y="174"/><use href="#window-right" x="298" y="155"/><use href="#window-right" x="330" y="137"/>
+  <use href="#window-right" x="265" y="219"/><use href="#window-right" x="298" y="200"/><use href="#window-right" x="330" y="182"/>
+  <path d="m188 238 30 14v41l-30-14Z" fill="#789cce"/>
+  <path d="m192 243 22 10v40l-22-10Z" fill="#9bb9e6"/>
+  <path d="m202 247 0 40" stroke="#d7e6fc"/>
+  <path d="m177 277 51 23-9 5-51-23Zm-9 5 51 23v5l-51-23Z" fill="#d6e5fc"/>
+  <path d="m145 261 105 48 105-61" stroke="#9bb6df" stroke-width="2"/>
+  <!-- Neighborhood service station. -->
+  <path d="m394 223 85-49 102 47-84 49Z" fill="#f7faff"/>
+  <path d="m394 223 103 47v67l-103-47Z" fill="#e3edfd"/>
+  <path d="m497 270 84-49v67l-84 49Z" fill="#b0c9ed"/>
+  <path d="m383 221 114 52 96-55v11l-96 55-114-52Z" fill="#8fb3eb"/>
+  <path d="m383 221 96-55 114 52-96 55Z" fill="#d6e5fd"/>
+  <path d="m404 218 75-43 94 43-76 43Z" fill="#f8fbff"/>
+  <path d="m418 249 22 10v31l-22-10Z" fill="#8faee0"/>
+  <path d="m424 252 0 31m10-26v31m-16-25 22 10" stroke="#eaf2ff"/>
+  <path d="m460 278 22 10v42l-22-10Z" fill="#88a8d9"/>
+  <path d="m465 281 12 6v43l-12-6Z" fill="#628ccc"/>
+  <path d="m520 276 33-19v28l-33 19Z" fill="#749cda"/>
+  <path d="m536 267 0 28m-16-5 33-19" stroke="#c7dcfb"/>
+  <path d="m444 245 31 14v8l-31-14Z" fill="#d0a06e"/>
+  <path d="m443 320 52 24-12 7-52-24Z" fill="#e2edff"/>
+  <!-- A low garden wall and seating. -->
+  <path d="m286 309 76-43 44 20-77 43Z" fill="#f0f5ff"/>
+  <path d="m286 309 43 20v8l-43-20Zm43 20 77-43v8l-77 43Z" fill="#9fbee9"/>
+  <path d="m301 308 61-34 30 13-62 35Z" fill="#7698ca"/>
+  <use href="#tree" x="337" y="265"/><use href="#tree" x="372" y="244"/>
+  <use href="#tree" x="112" y="225"/><use href="#tree" x="609" y="242"/>
+  <g stroke="#d7e6fc" stroke-width="2" stroke-linecap="round">
+    <path d="m352 333 41-23m-41 28 41-23m-39 25v9m37-30v9"/>
+    <path d="M574 191v-63m-8 0h16"/>
+  </g>
+  <path d="m565 125 10-6 10 5-10 6Z" fill="#f1e6cc"/>
+  <path d="m565 125 10 5v9l-10-5Zm10 5 10-6v9l-10 6Z" fill="#d6d9df"/>
+  <g transform="translate(264 334)">
+    <ellipse cx="0" cy="22" rx="10" ry="4" fill="#426cb0"/>
+    <circle cx="0" cy="-6" r="4" fill="#e8d8bf"/>
+    <path d="M-4 0h8l2 12H-6Z" fill="#f3f7ff"/>
+    <path d="m-2 12-2 11m6-11 3 11" stroke="#b8cceb" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(288 346)">
+    <ellipse cx="0" cy="20" rx="8" ry="3" fill="#426cb0"/>
+    <circle cx="0" cy="-7" r="4" fill="#e8d8bf"/>
+    <path d="M-4-1h8l2 11H-6Z" fill="#d7ac7b"/>
+    <path d="m-2 10-1 11m5-11 1 11m4-12h4v14" stroke="#c4d5ee" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>

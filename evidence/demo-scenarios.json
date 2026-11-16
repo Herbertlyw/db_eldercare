@@ -1,0 +1,516 @@
+{
+  "verifiedAt": "2026-11-14T00:37:07.512856+08:00",
+  "scope": "本地课程演示库；独立真实 MySQL 测试库及展示库副本",
+  "tables": 47,
+  "enumFields": 30,
+  "enumValues": 100,
+  "coverage": [
+    {
+      "field": "account.role",
+      "expected": [
+        "ADMIN",
+        "FAMILY",
+        "CAREGIVER",
+        "MANAGER",
+        "STREET",
+        "REGULATOR"
+      ],
+      "counts": {
+        "ADMIN": 20,
+        "FAMILY": 32,
+        "CAREGIVER": 25,
+        "MANAGER": 20,
+        "STREET": 20,
+        "REGULATOR": 20
+      },
+      "missing": []
+    },
+    {
+      "field": "assessment.ability_level",
+      "expected": [
+        "SELF",
+        "PARTIAL",
+        "SEVERE"
+      ],
+      "counts": {
+        "SEVERE": 26,
+        "SELF": 7,
+        "PARTIAL": 6
+      },
+      "missing": []
+    },
+    {
+      "field": "attendance.status",
+      "expected": [
+        "PENDING",
+        "REVIEW",
+        "VALID",
+        "INVALID"
+      ],
+      "counts": {
+        "VALID": 40,
+        "PENDING": 1,
+        "REVIEW": 1,
+        "INVALID": 1
+      },
+      "missing": []
+    },
+    {
+      "field": "care_bundle.ability_level",
+      "expected": [
+        "SELF",
+        "PARTIAL",
+        "SEVERE"
+      ],
+      "counts": {
+        "SEVERE": 23,
+        "SELF": 3,
+        "PARTIAL": 3
+      },
+      "missing": []
+    },
+    {
+      "field": "care_plan.status",
+      "expected": [
+        "ACTIVE",
+        "PAUSED",
+        "EXPIRED",
+        "ENDED"
+      ],
+      "counts": {
+        "ACTIVE": 38,
+        "PAUSED": 1,
+        "EXPIRED": 1,
+        "ENDED": 1
+      },
+      "missing": []
+    },
+    {
+      "field": "caregiver.status",
+      "expected": [
+        "ACTIVE",
+        "LEAVE",
+        "LEFT"
+      ],
+      "counts": {
+        "ACTIVE": 23,
+        "LEAVE": 1,
+        "LEFT": 1
+      },
+      "missing": []
+    },
+    {
+      "field": "claim.status",
+      "expected": [
+        "DRAFT",
+        "SUBMITTED",
+        "STREET_APPROVED",
+        "APPROVED",
+        "REJECTED",
+        "PAID"
+      ],
+      "counts": {
+        "PAID": 22,
+        "DRAFT": 1,
+        "SUBMITTED": 1,
+        "STREET_APPROVED": 1,
+        "APPROVED": 1,
+        "REJECTED": 2
+      },
+      "missing": []
+    },
+    {
+      "field": "claim_review.stage",
+      "expected": [
+        "STREET",
+        "REGULATOR"
+      ],
+      "counts": {
+        "STREET": 26,
+        "REGULATOR": 24
+      },
+      "missing": []
+    },
+    {
+      "field": "claim_review.decision",
+      "expected": [
+        "APPROVE",
+        "REJECT"
+      ],
+      "counts": {
+        "APPROVE": 48,
+        "REJECT": 2
+      },
+      "missing": []
+    },
+    {
+      "field": "complaint.status",
+      "expected": [
+        "SUBMITTED",
+        "ASSIGNED",
+        "REPLIED",
+        "CLOSED"
+      ],
+      "counts": {
+        "SUBMITTED": 1,
+        "CLOSED": 35,
+        "ASSIGNED": 1,
+        "REPLIED": 1
+      },
+      "missing": []
+    },
+    {
+      "field": "complaint.kind",
+      "expected": [
+        "REVIEW",
+        "COMPLAINT"
+      ],
+      "counts": {
+        "REVIEW": 34,
+        "COMPLAINT": 4
+      },
+      "missing": []
+    },
+    {
+      "field": "device.status",
+      "expected": [
+        "ACTIVE",
+        "OFFLINE",
+        "RETIRED"
+      ],
+      "counts": {
+        "ACTIVE": 24,
+        "OFFLINE": 1,
+        "RETIRED": 1
+      },
+      "missing": []
+    },
+    {
+      "field": "dispatch.status",
+      "expected": [
+        "WAITING",
+        "ACCEPTED",
+        "FINISHED",
+        "REASSIGNED",
+        "REJECTED"
+      ],
+      "counts": {
+        "WAITING": 1,
+        "ACCEPTED": 2,
+        "FINISHED": 42,
+        "REASSIGNED": 21,
+        "REJECTED": 1
+      },
+      "missing": []
+    },
+    {
+      "field": "elder.status",
+      "expected": [
+        "ACTIVE",
+        "INACTIVE"
+      ],
+      "counts": {
+        "ACTIVE": 38,
+        "INACTIVE": 1
+      },
+      "missing": []
+    },
+    {
+      "field": "elder_tag.tag",
+      "expected": [
+        "ALONE",
+        "DISABLED",
+        "LOW_INCOME"
+      ],
+      "counts": {
+        "ALONE": 31,
+        "DISABLED": 6,
+        "LOW_INCOME": 6
+      },
+      "missing": []
+    },
+    {
+      "field": "emergency.status",
+      "expected": [
+        "UNCONFIRMED",
+        "OPEN",
+        "RESPONDED",
+        "CLOSED",
+        "FALSE_ALARM"
+      ],
+      "counts": {
+        "UNCONFIRMED": 21,
+        "OPEN": 2,
+        "RESPONDED": 2,
+        "CLOSED": 6,
+        "FALSE_ALARM": 1
+      },
+      "missing": []
+    },
+    {
+      "field": "inspection.method",
+      "expected": [
+        "PHONE",
+        "VISIT"
+      ],
+      "counts": {
+        "PHONE": 42,
+        "VISIT": 3
+      },
+      "missing": []
+    },
+    {
+      "field": "inspection.status",
+      "expected": [
+        "PENDING",
+        "OPEN",
+        "REVIEW",
+        "CLOSED"
+      ],
+      "counts": {
+        "CLOSED": 41,
+        "PENDING": 1,
+        "OPEN": 2,
+        "REVIEW": 1
+      },
+      "missing": []
+    },
+    {
+      "field": "inspection_batch.target_type",
+      "expected": [
+        "ORDER",
+        "CAREGIVER"
+      ],
+      "counts": {
+        "CAREGIVER": 22,
+        "ORDER": 3
+      },
+      "missing": []
+    },
+    {
+      "field": "organization_report.status",
+      "expected": [
+        "SUBMITTED",
+        "ACCEPTED",
+        "RETURNED"
+      ],
+      "counts": {
+        "SUBMITTED": 21,
+        "ACCEPTED": 1,
+        "RETURNED": 1
+      },
+      "missing": []
+    },
+    {
+      "field": "policy.ability_level",
+      "expected": [
+        "SELF",
+        "PARTIAL",
+        "SEVERE"
+      ],
+      "counts": {
+        "SEVERE": 22,
+        "SELF": 3,
+        "PARTIAL": 3
+      },
+      "missing": []
+    },
+    {
+      "field": "policy.settlement_cycle",
+      "expected": [
+        "MONTH",
+        "QUARTER",
+        "YEAR"
+      ],
+      "counts": {
+        "MONTH": 24,
+        "QUARTER": 2,
+        "YEAR": 2
+      },
+      "missing": []
+    },
+    {
+      "field": "policy.required_tag",
+      "expected": [
+        "ALONE",
+        "DISABLED",
+        "LOW_INCOME"
+      ],
+      "counts": {
+        "NULL": 22,
+        "ALONE": 2,
+        "DISABLED": 2,
+        "LOW_INCOME": 2
+      },
+      "missing": []
+    },
+    {
+      "field": "recruitment.status",
+      "expected": [
+        "APPLIED",
+        "HIRED",
+        "REJECTED"
+      ],
+      "counts": {
+        "HIRED": 25,
+        "APPLIED": 2,
+        "REJECTED": 2
+      },
+      "missing": []
+    },
+    {
+      "field": "rectification_submission.decision",
+      "expected": [
+        "PENDING",
+        "ACCEPT",
+        "RETURN"
+      ],
+      "counts": {
+        "ACCEPT": 21,
+        "PENDING": 1,
+        "RETURN": 1
+      },
+      "missing": []
+    },
+    {
+      "field": "service_item.unit",
+      "expected": [
+        "VISIT",
+        "HOUR"
+      ],
+      "counts": {
+        "VISIT": 23,
+        "HOUR": 3
+      },
+      "missing": []
+    },
+    {
+      "field": "service_order.channel",
+      "expected": [
+        "PHONE",
+        "FAMILY",
+        "COMMUNITY"
+      ],
+      "counts": {
+        "COMMUNITY": 60,
+        "PHONE": 12,
+        "FAMILY": 10
+      },
+      "missing": []
+    },
+    {
+      "field": "service_order.status",
+      "expected": [
+        "PENDING",
+        "ASSIGNED",
+        "ACCEPTED",
+        "SERVING",
+        "CONFIRM",
+        "COMPLETED",
+        "CANCELLED"
+      ],
+      "counts": {
+        "PENDING": 35,
+        "ASSIGNED": 1,
+        "ACCEPTED": 1,
+        "SERVING": 1,
+        "CONFIRM": 2,
+        "COMPLETED": 40,
+        "CANCELLED": 2
+      },
+      "missing": []
+    },
+    {
+      "field": "shift.status",
+      "expected": [
+        "OPEN",
+        "CLOSED"
+      ],
+      "counts": {
+        "OPEN": 70,
+        "CLOSED": 1
+      },
+      "missing": []
+    },
+    {
+      "field": "training_record.result",
+      "expected": [
+        "PENDING",
+        "PASS",
+        "FAIL"
+      ],
+      "counts": {
+        "PASS": 25,
+        "PENDING": 1,
+        "FAIL": 1
+      },
+      "missing": []
+    }
+  ],
+  "counts": {
+    "account": 137,
+    "account_scope": 120,
+    "assessment": 39,
+    "attendance": 43,
+    "audit_log": 811,
+    "bundle_item": 59,
+    "care_bundle": 29,
+    "care_plan": 41,
+    "caregiver": 25,
+    "caregiver_area": 26,
+    "claim": 28,
+    "claim_evidence": 28,
+    "claim_item": 27,
+    "claim_review": 50,
+    "community": 20,
+    "complaint": 38,
+    "complaint_log": 44,
+    "credential": 50,
+    "device": 26,
+    "device_binding": 26,
+    "dispatch": 67,
+    "elder": 39,
+    "elder_tag": 43,
+    "emergency": 32,
+    "emergency_log": 72,
+    "event_step": 63,
+    "guardian": 39,
+    "inspection": 45,
+    "inspection_batch": 25,
+    "metric_rule": 23,
+    "notification": 181,
+    "organization": 20,
+    "organization_report": 23,
+    "payment": 22,
+    "plan_item": 71,
+    "policy": 28,
+    "policy_area": 34,
+    "public_notice": 22,
+    "recruitment": 29,
+    "rectification_submission": 23,
+    "service_item": 26,
+    "service_order": 82,
+    "service_record": 42,
+    "shift": 71,
+    "training": 27,
+    "training_record": 27,
+    "vital": 74
+  },
+  "existingRowsPreserved": true,
+  "repeatedImportUnchanged": true,
+  "tests": {
+    "tests": 170,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "accounts": 10,
+    "checkedLists": 186,
+    "errors": []
+  },
+  "mediaChecks": 14,
+  "displayLoginChecks": 12,
+  "departedAccountBlocked": true,
+  "jarStaticFilesMatch": true
+}

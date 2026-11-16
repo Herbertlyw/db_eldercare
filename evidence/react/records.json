@@ -1,0 +1,28 @@
+{
+  "time": "2026-11-16T08:35:04.938Z",
+  "database": "eldercare_react_final_test",
+  "actions": [
+    "elder.create",
+    "account.create",
+    "guardian.create",
+    "guardian.update",
+    "elder.tags",
+    "elder.update",
+    "assessment.create",
+    "bundle.create",
+    "plan.create",
+    "plan.revise",
+    "plan.state",
+    "plan.state",
+    "order.create",
+    "order.cancel",
+    "elder.transfer",
+    "elder.deactivate"
+  ],
+  "checks": [
+    "elder guardian assessment plan revise pause resume appointment cancel",
+    "family linked-elder scope and cross-community access",
+    "transfer updates visible community and deactivate"
+  ],
+  "pageErrors": []
+}

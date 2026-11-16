@@ -2,7 +2,9 @@ package edu.bjfu.eldercare.interfaces.web;
 
 import edu.bjfu.eldercare.application.CareService;
 import edu.bjfu.eldercare.application.ReadService;
+import edu.bjfu.eldercare.application.port.query.ListFilter;
 import edu.bjfu.eldercare.application.security.Auth;
+import java.time.LocalDate;
 import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,7 +58,17 @@ public class Api {
             @RequestHeader(value = "Authorization", required = false) String token,
             @PathVariable String action,
             @RequestBody Map<String, Object> body) {
-        return Map.of("result", service.execute(auth.require(token), action, body));
+        Auth.User user;
+        if (action.equals("password.change") || action.equals("password.reset")) {
+            boolean own = action.equals("password.change");
+            Object current = body.get(own ? "oldPassword" : "operatorPassword");
+            user =
+                    auth.verifyPassword(
+                            token, current instanceof String ? (String) current : null, own);
+        } else {
+            user = auth.require(token);
+        }
+        return Map.of("result", service.execute(user, action, body));
     }
 
     @GetMapping("/details/{kind}/{id}")
@@ -72,7 +84,18 @@ public class Api {
             @RequestHeader(value = "Authorization", required = false) String token,
             @PathVariable String kind,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size) {
-        return reads.list(auth.require(token), kind, page, size);
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(defaultValue = "") String search,
+            @RequestParam(defaultValue = "") String status,
+            @RequestParam(required = false) LocalDate from,
+            @RequestParam(required = false) LocalDate to,
+            @RequestParam(defaultValue = "") String field,
+            @RequestParam(required = false) Long value) {
+        return reads.list(
+                auth.require(token),
+                kind,
+                page,
+                size,
+                new ListFilter(search, status, from, to, field, value));
     }
 }

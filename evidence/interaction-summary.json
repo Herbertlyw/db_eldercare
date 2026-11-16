@@ -1,0 +1,21 @@
+{
+  "time": "2026-11-16T11:47:02.610306",
+  "branch": "codex/role-interactions",
+  "local_only": true,
+  "database_migration_required": false,
+  "automated_tests": 188,
+  "test_failures": 0,
+  "roles": 6,
+  "query_routes": 109,
+  "business_browser_submissions": 44,
+  "password_browser_passed": true,
+  "review_not_complaint_timeline": true,
+  "mobile_record_cards": true,
+  "display_url": "http://127.0.0.1:18080",
+  "display_jar_sha256": "b69ddf34015c86ad1b49014c415649c44f9f45ed02780e8593c19d4f15786522",
+  "frontend_sha256": {
+    "src/main/resources/static/interaction-rules.js": "0a69c59796f425dfc94b5ac6f505030336a480ce6ee8115995d38a3325ac2abd",
+    "src/main/resources/static/interaction-forms.js": "5d8e99fc7cc9541b13fa2e51897008660150d8d3e2e4199ea428ff179179a7d4",
+    "src/main/resources/static/interactions.js": "390e610598d19527ca19d12dbdcc72d5ead1a81e5ea8720febd02094b15aa48f"
+  }
+}

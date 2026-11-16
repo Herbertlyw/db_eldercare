@@ -1,0 +1,15 @@
+{
+  "time": "2026-11-16T03:47:02.447Z",
+  "url": "http://127.0.0.1:18080",
+  "readOnly": true,
+  "adminLogin": true,
+  "taskCounts": [
+    "待派单16→",
+    "待受理投诉1→",
+    "待处理应急6→",
+    "评估到期0→"
+  ],
+  "serverFiltering": true,
+  "mobileOverflow": false,
+  "pageErrors": []
+}

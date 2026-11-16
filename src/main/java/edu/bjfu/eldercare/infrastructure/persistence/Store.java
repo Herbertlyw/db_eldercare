@@ -20,6 +20,19 @@ public class Store {
         this.jdbc = jdbc;
     }
 
+    public List<String> columns(String sql, Object... args) {
+        return jdbc.query(
+                "SELECT * FROM (" + sql + ") scoped LIMIT 0",
+                (org.springframework.jdbc.core.ResultSetExtractor<List<String>>)
+                        rs -> {
+                            var names = new java.util.ArrayList<String>();
+                            for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++)
+                                names.add(rs.getMetaData().getColumnLabel(i));
+                            return names;
+                        },
+                args);
+    }
+
     public List<Map<String, Object>> rows(String sql, Object... args) {
         return jdbc.queryForList(sql, args);
     }

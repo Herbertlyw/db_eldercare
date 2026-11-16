@@ -1,0 +1,17 @@
+{
+  "time": "2026-11-16T08:40:12.849Z",
+  "database": "eldercare_react_final_test",
+  "actions": [
+    "claim.submit",
+    "claim.evidence",
+    "claim.review",
+    "claim.resubmit",
+    "policy.create"
+  ],
+  "checks": [
+    "policy-period eligible order selection submission evidence",
+    "rejected claim resubmission preserves evidence",
+    "policy creation and community multiselect"
+  ],
+  "pageErrors": []
+}

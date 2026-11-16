@@ -19,19 +19,34 @@ public class JdbcWorkforceRepository implements WorkforceRepository {
             Number caregiverId,
             Number itemId,
             String certificateNo,
+            String certificateType,
             String certificateLevel,
             String validFrom,
             String validUntil) {
         return db.insert(
                 "INSERT INTO"
-                    + " credential(caregiver_id,item_id,certificate_no,certificate_level,valid_from,valid_until)"
-                    + " VALUES(?,?,?,?,?,?)",
+                    + " credential(caregiver_id,item_id,certificate_no,certificate_type,certificate_level,valid_from,valid_until)"
+                    + " VALUES(?,?,?,?,?,?,?)",
                 caregiverId,
                 itemId,
                 certificateNo,
+                certificateType,
                 certificateLevel,
                 validFrom,
                 validUntil);
+    }
+
+    @Override
+    public Map<String, Object> findCredentialForUpdate(Number credentialId) {
+        return db.one("SELECT * FROM credential WHERE id=? FOR UPDATE", credentialId);
+    }
+
+    @Override
+    public int updateCredentialType(String certificateType, Number credentialId) {
+        return db.update(
+                "UPDATE credential SET certificate_type=? WHERE id=?",
+                certificateType,
+                credentialId);
     }
 
     @Override

@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-11-16T17:14:32.085416",
+  "localOnly": true,
+  "url": "http://127.0.0.1:18080",
+  "javaMysql": {
+    "database": "eldercare_names_20261116_test",
+    "tests": 188,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "frontendTests": 22,
+  "browser": {
+    "accounts": 7,
+    "routes": 144,
+    "forms": 86,
+    "errors": [],
+    "failedResponses": []
+  },
+  "displayMigration": "../natural-names-display.json",
+  "copyMigration": "../natural-names-migration.json",
+  "sourceHashes": {
+    "src/main/java/edu/bjfu/eldercare/infrastructure/bootstrap/Seed.java": "85e53e4934b1d31b5385dec61f73c0c4a65bcc73f4e8a51b6d405e805b8d5a89",
+    "src/main/java/edu/bjfu/eldercare/infrastructure/bootstrap/SeedLabels.java": "30b81b1612258d0067c441747e5665184d0902cecafe42edbde36cbe25830aff",
+    "src/main/java/edu/bjfu/eldercare/infrastructure/bootstrap/DemoContent.java": "fccc49e4b82e2532a3391033c6dcd0a74201f95db533e9ff1d7dfb7a55bc6436",
+    "src/main/java/edu/bjfu/eldercare/infrastructure/bootstrap/ScenarioMonitoring.java": "1b188890d996c67b0ea2473aab944aae3f7a3bca11338174d20b6785ce89b0ee",
+    "src/main/resources/seed-labels.json": "f3d38a152675ff81a6b5e2ece2a24532021865ab2f858404f524bff8504d459c",
+    "database/migrations/20261116_seed_names.sql": "e115b2358c106cd7a07f8deeeb85052efd1f15108f12b5bbcc3628db5286b6b9",
+    "frontend/src/pages/Workspace.tsx": "0dec002babb3177cc35b3dbfb7ac9619a8fb9991f1723e575f2abc371f81baad",
+    "frontend/src/pages/Login.tsx": "b182cf378463c251af846c72d7339ac2f8dc807b1d590f0d16b38d9fd6761993",
+    "frontend/src/model/registry.json": "0a46a24aeb94e272f49022f462bf8690c5bb1c5d032c4b199cc0d0ab7735ea12"
+  },
+  "jarSha256": "deab7cbcd80e2a3232f0df64cd86ba88adaab5300321d1124ca6ea1293be7146"
+}

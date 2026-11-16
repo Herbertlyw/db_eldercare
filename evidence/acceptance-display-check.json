@@ -1,0 +1,8 @@
+{
+  "database": "eldercare",
+  "port": 18080,
+  "manager_login": true,
+  "caregiver_21_service_rating": 4.5,
+  "credential_type_visible": true,
+  "jobs_enabled": true
+}

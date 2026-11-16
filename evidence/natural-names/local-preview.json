@@ -1,0 +1,15 @@
+{
+  "time": "2026-11-16T09:11:24.634Z",
+  "url": "http://127.0.0.1:18080",
+  "readOnly": true,
+  "accounts": [
+    "admin1",
+    "admin2",
+    "family1",
+    "caregiver1",
+    "manager1",
+    "street1",
+    "regulator1"
+  ],
+  "pageErrors": []
+}

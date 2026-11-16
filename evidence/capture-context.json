@@ -1,0 +1,9 @@
+{
+  "time": "2026-11-16T11:06:01.656402",
+  "database": "eldercare",
+  "git_head": "d3fdfea9a2cd6ab189ee0fb48e8c2e5731618ca1",
+  "working_tree_dirty": true,
+  "schema_sha256": "b0fd9a501209fc070043f2dd57ad726f0a1dcf2f7e21ffd7dbcc7ed25b903766",
+  "tables": 47,
+  "query_pairs": 15
+}

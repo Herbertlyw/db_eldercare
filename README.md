@@ -1,6 +1,6 @@
 # 左邻右舍社区居家养老服务平台
 
-数据库系统课程设计，Java 17、Spring Boot 3.4.4、Spring JDBC、MySQL 8.0.16 及以上。本机验证环境为原生 MySQL 8.4.11，Docker 不是运行依赖。业务、政策、设备和体征数据均为课程虚构示例。
+数据库系统课程设计，Java 17、Spring Boot 3.4.4、Spring JDBC、MySQL 8.0.16 及以上。前端使用 React、TypeScript 和 Arco Design React。本机验证环境为原生 MySQL 8.4.11，Docker 不是运行依赖。业务、政策、设备和体征数据均为课程虚构示例。
 
 小组成员及 Agent 修改项目之前，请先阅读 [协作规范 AGENTS.md](AGENTS.md)。每项任务使用独立分支，完成自检和测试、同步最新 main 后，在本地合并并推送 main；不要求创建 PR 或等待他人审批。
 
@@ -15,7 +15,22 @@
 
 初始化脚本不安装 Docker，不要求 Python 或 Maven。PowerShell 脚本已静态检查，尚未在真实 Windows 机器执行；遇到版本或 PATH 差异请保留错误信息。若 MySQL 在远程主机，需由该数据库管理员配置来源主机授权，当前自动建用户脚本按本机 MySQL 设计。
 
+## 开发依赖
+
+| 用途 | 依赖 | 安装与使用 |
+| --- | --- | --- |
+| Java 后端 | JDK 17、Maven 3.9 | `java -version`、`mvn -version` 检查 PATH；Java 依赖由 Maven 安装 |
+| 数据库 | MySQL 8.0.16 及以上 | 初始化表、视图、过程和触发器；应用继续使用 Spring JDBC |
+| 前端源码构建 | Node.js 22.12 及以上、npm | `npm --prefix frontend ci` 使用已提交的锁文件 |
+| 前端组件 | React 18.3.1、Arco Design React 2.66.18 | 版本在 `frontend/package.json`，传递依赖在 `package-lock.json` |
+| 前端开发与测试 | TypeScript、Vite、Vitest、Playwright | 随 `npm ci` 安装；浏览器验收另外需要 Chrome |
+| 已构建 JAR 运行 | Java 17、MySQL | 无需 Node.js、npm 或独立前端服务器 |
+
+前端开发、检查命令和目录职责见 [frontend/README.md](frontend/README.md)。不要提交 `node_modules`、`frontend/dist`、`target` 或本机 `.local` 配置。安装或升级 npm 依赖时同时提交 `package.json` 和 `package-lock.json`；不要只修改其中一个文件。
+
 ## 本项目工作目录运行
+
+源码构建需要 Java 17、Maven 3.9、Node.js 22.12 及以上和 npm；Maven 会安装前端锁定依赖并将页面打入 JAR。运行已构建的 JAR 不需要 Node.js。
 
 本机已经配置独立 MySQL 实例，端口 `33316`，应用端口 `18080`。连接秘密和密钥在 `.local/config.json`，不加入提交包。
 
@@ -46,10 +61,37 @@ java -jar eldercare.jar
 
 种子只接受空库。重新初始化测试请使用独立测试库，不能清空演示或其他用户数据库。数据库服务端时间须与应用按同一时区解释，当前采用 Asia/Shanghai；Windows 安装时检查 MySQL `@@time_zone` 与系统时区。
 
+### 已有数据库升级
+
+拉取代码不会自动修改数据库。已有 47 表数据库先停止应用并备份，在独立副本核对后，按[迁移说明](database/migrations/README.md)执行适用脚本：证书字段使用 `20261114_acceptance.sql`，密码维护使用 `20261116_password_management.sql`；内置课程数据可选执行 `20261114_demo_credential_types.sql` 和 `20261116_seed_names.sql`。已经具备对应结构的数据库按脚本适用条件检查，不重新初始化业务库。
+
+构建后启动配套 JAR，核对登录、列表及办理入口。升级保持现有账号和密码；已有业务记录按各自状态继续办理。社区、机构、服务和政策的初始化名称在 `src/main/resources/seed-labels.json` 中维护，数据来源说明见 [演示数据说明](docs/演示数据说明.md)。
+
+### 丰富本地演示数据
+
+已初始化的课程库可选择导入邻里示例：
+
+```sh
+java -jar eldercare.jar --app.demo-content=true --app.jobs=false --spring.main.web-application-type=none
+```
+
+执行前停止应用，备份数据库并在副本演练。该命令与 `--app.seed=true` 分开执行；正常启动不会自动导入。它为原种子人物使用自然的虚构中文姓名，并在青禾社区增加 12 位老人、12 个家属账号、12 份评估、12 份照护计划、12 笔待派单预约和 3 个照护包，涵盖三种能力等级。家属账号为 `neighbor_family1` 至 `neighbor_family12`，初始密码与导入时 `family1` 相同，各自只能查看绑定的老人。人物定义在 `src/main/resources/static/demo-people.json`，不含真实身份信息。
+
+导入在同一事务中完成，编号或账号冲突会回滚。重复执行不重复新增，也不会覆盖已录入档案的后续修改。已有种子人物只有在身份摘要匹配且姓名仍为默认占位名时才更名。新增老人使用编号 1001—1012；该命令不改变表结构、不删除原有数据，适用于保留 20 或 24 个社区的课程种子库。预约时间相对首次导入日期生成，日常预约和后续调整通过正常业务界面办理。
+
+业务状态示例使用独立命令，可在基础种子初始化后导入，也可与邻里示例一起保留：
+
+```sh
+java -jar eldercare.jar --app.demo-scenarios=true --app.jobs=false --spring.main.web-application-type=none
+```
+
+执行前同样须停应用、备份并在副本演练。示例包含不同状态的订单、工时、投诉、招聘培训、设备应急、补贴和抽查整改，覆盖基础表中 30 个枚举字段的 100 个取值。所有记录均为课程虚构数据，导入不修改原有业务记录；首次导入整批提交，再次执行保持已有数据。详细内容、账号和验证方式见 [演示数据说明](docs/演示数据说明.md)。
+
 ## 目录
 
 - `src/main/java/edu/bjfu/eldercare`：按 interfaces、application、domain、infrastructure 分层的 Java 单体，持久化使用 Spring JDBC。
-- `src/main/resources/static`：本地演示界面，无外部 CDN 依赖。
+- `frontend`：React + Arco 页面源码、TypeScript 配置、依赖锁文件和前端测试。
+- `src/main/resources/static`：人物资料、头像、社区照片和品牌插画；页面无需外部 CDN。
 - `database`：建表、过程和触发器、15 个视图、15 组双实现查询。
 - `src/test`：领域规则、分层依赖和路由测试，以及真实 MySQL 权限、边界、回滚和并发案例。
 - `evidence`：测试日志、数据数量、SQL 等价验证、执行计划与备份恢复证据。
@@ -87,9 +129,9 @@ java -jar eldercare.jar
 - [代码与需求复查记录](docs/代码与需求复查记录.md)：验证范围、实际问题和回归案例。
 - [报告与 PPT](outputs)：小组及个人报告、13 页答辩 PPTX 和 PDF。
 
-2026 年 11 月 13 日的自动化记录为 163 项通过：125 项真实 MySQL 业务测试、1 项 Spring 路由契约集成测试、37 项独立测试。实际方法和结果见 `evidence/test-summary.json`，浏览器记录见 `evidence/completion-browser.json`。这些结果对应记录中的执行环境及日期。
+当前 Java/MySQL 验证记录见 `evidence/test-summary.json`。React 浏览器脚本位于 `scripts/react`，覆盖角色页面、表单、跨角色业务流、密码维护和照片交互。使用方法见 [前端开发说明](frontend/README.md)，业务办理证据位于 `evidence/react`，自然名称和逐角色页面证据位于 `evidence/natural-names`。所有写入测试必须连接独立 MySQL 测试库，并关闭定时任务；页面入口检查不能代替真实业务回归。
 
-开发环境安装 Playwright 后可运行 `node scripts/verify_browser.cjs`。先将应用连接独立测试库，关闭定时任务并启动在测试端口；脚本会写入虚构业务数据，使用 `DEMO_PASSWORD` 或本机开发配置中的演示密码。不得对展示库执行。
+可通过 `npm --prefix frontend run dev` 启动本地前端开发服务，默认地址为 `http://127.0.0.1:18089`，API 代理至 `18080` 的 Java 应用。正式运行由 Java 同时提供页面和 API。
 
 ## 已有数据库升级
 
@@ -102,3 +144,13 @@ java -jar eldercare.jar
 运行 `mvn spotless:apply` 统一 Java 格式；构建会自动检查格式。测试可通过 `TEST_DATABASE=eldercare_<名称>_test` 选择独立可重建测试库，浏览器测试通过 `TEST_PORT` 选择 18081—18089 的独立端口。不要复用其他正在运行的任务所用的测试库。
 
 运行包包含当前分层实现的 JAR、数据库脚本、报告和 PPTX。包内 SHA256SUMS.json 记录各文件的校验值，evidence/delivery-verification.json 记录 JAR 校验值及独立测试库的运行验证范围。
+
+证书类型与等级分别保存；旧库按 [数据库迁移说明](database/migrations/README.md)执行 `20261114_acceptance.sql` 后启动配套程序。机构负责人可在职业证书页面登记或补录类型。正常演示启用自动任务，`--app.jobs=false` 只用于需要固定数据的隔离测试。
+
+## 账号密码维护
+
+用户登录后可在菜单底部修改密码。忘记密码可通过登录页“忘记密码？”查看联系办法；社区管理员重置本社区家属账号，机构负责人重置本机构护工账号，管理人员由维护工具恢复。重置后的临时密码必须在首次登录时修改，旧登录会话失效。操作说明见 [运行维护与验收](docs/运行维护与验收.md)。旧库先执行 `database/migrations/20261116_password_management.sql`，新建库已包含相关字段。
+
+## 页面操作
+
+各角色可从页面上方待办进入对应记录，在记录旁办理当前阶段的业务。表单支持按姓名和名称查找；列表可按关键词、状态和日期查询全部授权记录。具体操作及验证方法见 [页面交互与角色操作](docs/页面交互与角色操作.md)。

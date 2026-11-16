@@ -39,6 +39,7 @@ public class Seed implements CommandLineRunner {
             throw new Rule("DEMO_PASSWORD 缺失");
         }
         String hash = auth.password(pass);
+        var labels = new SeedLabels();
         LocalDateTime now = LocalDateTime.now().withNano(0),
                 past = now.minusDays(10).withHour(10).withMinute(0).withSecond(0),
                 future = now.plusDays(1).withHour(10).withMinute(0).withSecond(0);
@@ -49,15 +50,15 @@ public class Seed implements CommandLineRunner {
                     "INSERT INTO community(id,name,district,area_code,street_name,center_x)"
                             + " VALUES(?,?,?,?,?,?)",
                     i,
-                    "演示社区" + i,
-                    "演示区县" + ((i - 1) / 4 + 1),
+                    labels.place(i, "community"),
+                    labels.place(i, "district"),
                     "DEMO-" + i,
-                    "演示街道" + ((i - 1) / 2 + 1),
+                    labels.place(i, "street"),
                     i * 10000);
             d.update(
                     "INSERT INTO organization(id,name,community_id) VALUES(?,?,?)",
                     i,
-                    "演示服务机构" + i,
+                    labels.place(i, "organization"),
                     i);
             for (int j = 0; j < roles.length; j++) {
                 d.update(
@@ -80,11 +81,11 @@ public class Seed implements CommandLineRunner {
                         + " elder(id,name,identity_hash,identity_cipher,birth_date,address,community_id,position_x)"
                         + " VALUES(?,?,?,?,?,?,?,?)",
                     i,
-                    "演示老人" + i,
+                    labels.person(i, "elders"),
                     crypto.hash("SYNTHETIC-ID-" + i),
                     crypto.encrypt("SYNTHETIC-ID-" + i),
                     LocalDate.of(1940 + i % 20, 1, 1),
-                    "演示社区" + i + "一号楼",
+                    labels.place(i, "address"),
                     i,
                     i * 10000);
             d.update("INSERT INTO elder_tag(elder_id,tag) VALUES(?,'ALONE')", i);
@@ -100,7 +101,7 @@ public class Seed implements CommandLineRunner {
                         + " VALUES(?,?,?,30,?,?,?,?)",
                     i,
                     i,
-                    "课程模拟量表",
+                    "老人能力评估记录表",
                     ability,
                     admin,
                     now.minusDays(120),
@@ -110,12 +111,12 @@ public class Seed implements CommandLineRunner {
                         + " service_item(id,name,category,unit,price,duration_minutes,subsidizable)"
                         + " VALUES(?,?,?,'VISIT',80,60,1)",
                     i,
-                    "上门服务方案" + i,
+                    labels.place(i, "item"),
                     new String[] {"助餐", "助浴", "陪诊", "家政", "康复"}[(i - 1) % 5]);
             d.update(
                     "INSERT INTO care_bundle(id,name,ability_level) VALUES(?,?,?)",
                     i,
-                    "演示照护包" + i,
+                    labels.place(i, "bundle"),
                     ability);
             d.update(
                     "INSERT INTO bundle_item(bundle_id,item_id,weekly_frequency) VALUES(?,?,2)",
@@ -126,11 +127,11 @@ public class Seed implements CommandLineRunner {
                     i,
                     worker,
                     i,
-                    "演示护工" + i);
+                    labels.person(i, "caregivers"));
             d.update(
                     "INSERT INTO"
-                        + " credential(caregiver_id,item_id,certificate_no,certificate_level,valid_from,valid_until)"
-                        + " VALUES(?,?,?,'课程模拟资格',?,?)",
+                        + " credential(caregiver_id,item_id,certificate_no,certificate_type,certificate_level,valid_from,valid_until)"
+                        + " VALUES(?,?,?,'养老护理员','初级',?,?)",
                     i,
                     i,
                     "DEMO-CERT-" + i,
@@ -170,13 +171,14 @@ public class Seed implements CommandLineRunner {
                             i,
                             past,
                             past.plusHours(1),
-                            "演示地址" + i,
+                            labels.place(i, "address"),
                             admin,
                             i * 10000);
             long old =
                     d.insert("INSERT INTO dispatch(order_id,shift_id) VALUES(?,?)", order, shift);
             d.update(
-                    "UPDATE dispatch SET status='REASSIGNED',reason='演示历史改派后重新安排' WHERE id=?", old);
+                    "UPDATE dispatch SET status='REASSIGNED',reason='原护工无法到场，重新安排服务' WHERE id=?",
+                    old);
             long dispatch =
                     d.insert(
                             "INSERT INTO dispatch(order_id,shift_id,status,accepted_at)"
@@ -187,7 +189,7 @@ public class Seed implements CommandLineRunner {
             d.insert(
                     "INSERT INTO"
                         + " attendance(dispatch_id,check_in,check_out,location_note,fence_ok,checkout_fence_ok)"
-                        + " VALUES(?,?,?,'模拟地址围栏内',1,1)",
+                        + " VALUES(?,?,?,'服务地址范围内',1,1)",
                     dispatch,
                     past,
                     past.plusHours(1));
@@ -195,7 +197,7 @@ public class Seed implements CommandLineRunner {
             d.insert(
                     "INSERT INTO"
                         + " service_record(dispatch_id,notes,confirmed_by,confirmed_at,confirmation)"
-                        + " VALUES(?,'模拟服务记录',?,?,'演示家属确认')",
+                        + " VALUES(?,'按照服务计划完成照护，已与家属核对服务内容',?,?,'家属确认服务已完成')",
                     dispatch,
                     family,
                     past.plusHours(1));
@@ -210,15 +212,15 @@ public class Seed implements CommandLineRunner {
                     i,
                     future,
                     future.plusHours(1),
-                    "演示地址" + i,
+                    labels.place(i, "address"),
                     admin,
                     i * 10000);
             d.update(
                     "INSERT INTO device(id,serial_no,type_name,location_note,community_id)"
-                            + " VALUES(?,?,?,'演示住所',?)",
+                            + " VALUES(?,?,?,'老人住所',?)",
                     i,
                     "DEMO-DEVICE-" + i,
-                    "模拟采集器",
+                    "居家活动监测终端",
                     i);
             d.update(
                     "INSERT INTO device_binding(id,device_id,elder_id,bound_at) VALUES(?,?,?,?)",
@@ -230,7 +232,7 @@ public class Seed implements CommandLineRunner {
                     "INSERT INTO metric_rule(id,metric,low_value,high_value,response_seconds)"
                             + " VALUES(?,?,10,90,300)",
                     i,
-                    "课程演示指标" + i);
+                    labels.place(i, "metric"));
             d.insert(
                     "INSERT INTO"
                         + " vital(binding_id,metric_rule_id,sample_key,collected_at,metric_value,source)"
@@ -240,11 +242,11 @@ public class Seed implements CommandLineRunner {
                     now.minusMinutes(1));
             long event = d.count("SELECT MAX(id) FROM emergency");
             d.insert(
-                    "INSERT INTO emergency_log(event_id,level,message) VALUES(?,1,'模拟异常待确认')",
+                    "INSERT INTO emergency_log(event_id,level,message) VALUES(?,1,'活动指标异常，等待核实')",
                     event);
             d.insert(
                     "INSERT INTO notification(event_id,account_id,message)"
-                            + " VALUES(?,?,'模拟异常，请及时确认')",
+                            + " VALUES(?,?,'活动指标异常，请及时确认')",
                     event,
                     admin);
             d.update(
@@ -252,7 +254,7 @@ public class Seed implements CommandLineRunner {
                         + " policy(id,name,community_id,item_id,ability_level,rate,starts_at,ends_at)"
                         + " VALUES(?,?,?,?,?,30,?,?)",
                     i,
-                    "课程虚构补贴政策" + i,
+                    labels.place(i, "policy"),
                     i,
                     i,
                     ability,
@@ -263,13 +265,13 @@ public class Seed implements CommandLineRunner {
             long claim = d.count("SELECT MAX(id) FROM claim");
             d.insert(
                     "INSERT INTO claim_review(claim_id,reviewer_id,stage,decision,reason)"
-                            + " VALUES(?,?,'STREET','APPROVE','演示审核')",
+                            + " VALUES(?,?,'STREET','APPROVE','材料齐全，符合补助条件')",
                     claim,
                     admin + 4);
             d.update("UPDATE claim SET status='STREET_APPROVED' WHERE id=?", claim);
             d.insert(
                     "INSERT INTO claim_review(claim_id,reviewer_id,stage,decision,reason)"
-                            + " VALUES(?,?,'REGULATOR','APPROVE','演示审核')",
+                            + " VALUES(?,?,'REGULATOR','APPROVE','材料齐全，符合补助条件')",
                     claim,
                     regulator);
             d.update("UPDATE claim SET status='APPROVED' WHERE id=?", claim);
@@ -281,26 +283,26 @@ public class Seed implements CommandLineRunner {
             d.insert(
                     "INSERT INTO"
                         + " inspection(caregiver_id,inspector_id,method,score,issue,rectification,status,result)"
-                        + " VALUES(?,?,'PHONE',95,'历史服务记录不全','补齐回访记录','CLOSED','模拟整改复核通过')",
+                        + " VALUES(?,?,'PHONE',95,'历史服务记录不全','补齐回访记录','CLOSED','已核验补充的回访记录，整改通过')",
                     i,
                     regulator);
             long feedback =
                     d.insert(
                             "INSERT INTO complaint(order_id,account_id,rating,content,status,kind)"
-                                    + " VALUES(?,?,5,'课程模拟服务评价','CLOSED','REVIEW')",
+                                    + " VALUES(?,?,5,'服务细致，按时到达，沟通耐心','CLOSED','REVIEW')",
                             order,
                             family);
             d.insert(
                     "INSERT INTO complaint_log(complaint_id,actor_id,status,message)"
-                            + " VALUES(?,?,'CLOSED','虚构评价，无待处理投诉')",
+                            + " VALUES(?,?,'CLOSED','服务评价已归档')",
                     feedback,
                     family);
             d.insert(
                     "INSERT INTO"
                         + " recruitment(organization_id,candidate_name,phone_cipher,status,caregiver_id,reviewer_id,review_note,reviewed_at)"
-                        + " VALUES(?,?,?,'HIRED',?,?,'虚构历史招聘记录',?)",
+                        + " VALUES(?,?,?,'HIRED',?,?,'材料审核及面试通过',?)",
                     i,
-                    "演示护工" + i,
+                    labels.person(i, "caregivers"),
                     crypto.encrypt("DEMO-PHONE-" + i),
                     i,
                     admin + 3,
@@ -308,7 +310,7 @@ public class Seed implements CommandLineRunner {
             long training =
                     d.insert(
                             "INSERT INTO training(organization_id,title,starts_at,ends_at)"
-                                    + " VALUES(?,'课程模拟岗前培训',?,?)",
+                                    + " VALUES(?,'居家照护服务岗前培训',?,?)",
                             i,
                             now.minusDays(180),
                             now.minusDays(179));
@@ -334,7 +336,7 @@ public class Seed implements CommandLineRunner {
             d.insert(
                     "INSERT INTO"
                         + " rectification_submission(inspection_id,submitted_by,measures,evidence,decision,reviewer_id,review_note,reviewed_at)"
-                        + " VALUES(?,?,'虚构历史整改措施','虚构回访记录','ACCEPT',?,'历史材料核验通过',?)",
+                        + " VALUES(?,?,'补充服务回访记录，落实签字核对','家属回访记录与服务确认表','ACCEPT',?,'历史材料核验通过',?)",
                     i,
                     admin + 3,
                     regulator,
@@ -342,23 +344,23 @@ public class Seed implements CommandLineRunner {
             d.insert(
                     "INSERT INTO"
                         + " organization_report(organization_id,period,summary,evidence,submitted_by)"
-                        + " VALUES(?,?,'课程模拟机构月报','服务记录及工时明细',?)",
+                        + " VALUES(?,?,'本月服务按计划开展，工时及回访记录已归档','服务记录及工时明细',?)",
                     i,
                     past.toString().substring(0, 7),
                     admin + 3);
             d.insert(
                     "INSERT INTO public_notice(inspection_id,publisher_id,title,body)"
-                            + " VALUES(?,?,'养老服务质量抽查结果','课程虚构抽查；评分 95；处置状态：已完成。无个人信息。')",
+                            + " VALUES(?,?,'养老服务质量抽查结果','本次养老服务抽查评分 95 分，整改已完成并通过复核。')",
                     i,
                     regulator);
             d.insert(
                     "INSERT INTO claim_evidence(claim_id,submitted_by,name,content,content_sha256)"
-                            + " VALUES(?,?,'虚构归档说明','关联服务记录、工时及家属确认',SHA2('关联服务记录、工时及家属确认',256))",
+                            + " VALUES(?,?,'服务凭证归档说明','关联服务记录、工时及家属确认',SHA2('关联服务记录、工时及家属确认',256))",
                     claim,
                     admin);
             d.insert(
                     "INSERT INTO event_step(event_id,actor_id,action,message)"
-                            + " VALUES(?,?,'REPORT','课程模拟告警上报')",
+                            + " VALUES(?,?,'REPORT','监测指标超出阈值，已上报告警')",
                     event,
                     admin);
         }

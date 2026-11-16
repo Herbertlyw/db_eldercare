@@ -1,6 +1,6 @@
 {
-  "time": "2026-11-13T13:38:39.937249",
-  "database": "eldercare_refactor_test",
+  "time": "2026-11-16T17:08:39.038301",
+  "database": "eldercare_names_20261116_test",
   "engine": "native MySQL 8.4.11",
   "suites": [
     {
@@ -94,6 +94,33 @@
       ]
     },
     {
+      "suite": "edu.bjfu.eldercare.DemoContentIntegrationTest",
+      "kind": "integration",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "lateIdentifierConflictRollsBackTheWholeImport",
+        "importsLinkedRecordsOnceAndPreservesEditsAndAccessBoundaries"
+      ]
+    },
+    {
+      "suite": "edu.bjfu.eldercare.DemoScenariosIntegrationTest",
+      "kind": "integration",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "historiesAmountsCapacityAndEventTimesAreConsistent",
+        "allBaseTableEnumValuesHaveExamples",
+        "lateUniqueConflictRollsBackAllModules",
+        "examplesSupportRealActionsAndKeepRoleBoundaries",
+        "importPreservesExistingRowsAndIsIdempotentAfterUserEdits"
+      ]
+    },
+    {
       "suite": "edu.bjfu.eldercare.HistoryRulesIntegrationTest",
       "kind": "integration",
       "tests": 16,
@@ -120,6 +147,42 @@
       ]
     },
     {
+      "suite": "edu.bjfu.eldercare.ListFilterIntegrationTest",
+      "kind": "integration",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "searchTreatsWildcardsAndQuotesAsLiteralText",
+        "keywordAndRelationshipFiltersCannotExpandRoleScope",
+        "filterMetadataRespectsAuthorizedRows",
+        "searchFindsRecordsBeyondFirstPageAndKeepsPagination",
+        "dateAndStatusFiltersApplyBeforeCountingAndPaging",
+        "filteredHttpRequestsRequireAuthenticationAndValidateInput",
+        "invalidFiltersRejectUnknownIdentifiersAndUnsupportedFields"
+      ]
+    },
+    {
+      "suite": "edu.bjfu.eldercare.PasswordIntegrationTest",
+      "kind": "integration",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "rollbackPreservesPasswordVersionAndAudit",
+        "badPasswordInputsLeaveCredentialsUnchanged",
+        "maintenanceRecoveryCannotBeInvokedThroughWebRoles",
+        "administratorResetForcesChangeBeforeAnyProtectedBusiness",
+        "concurrentPasswordChangesCannotOverwriteEachOther",
+        "selfChangeRevokesAllSessionsAndDoesNotRecordSecrets",
+        "resetCannotCrossCommunityOrReachPrivilegedAccounts",
+        "managerCanOnlyResetOwnOrganizationCaregivers",
+        "repeatedWrongCurrentPasswordIsRateLimitedAndResetRequiresOperatorPassword"
+      ]
+    },
+    {
       "suite": "edu.bjfu.eldercare.RouteContractIntegrationTest",
       "kind": "integration",
       "tests": 1,
@@ -133,7 +196,7 @@
     {
       "suite": "edu.bjfu.eldercare.WorkflowIntegrationTest",
       "kind": "integration",
-      "tests": 43,
+      "tests": 45,
       "failures": 0,
       "errors": 0,
       "skipped": 0,
@@ -180,7 +243,9 @@
         "falseAlarmRequiresReasonAndCannotBeReopened",
         "claimRejectionResubmissionKeepsItemsAndPriorReview",
         "trainingEnrollResultAndQualificationAreIndependent",
-        "responsibilityWorkerReadsAndCompletesEventWithSeparateArrival"
+        "credentialTypeIsRequiredAndCanOnlyBeMaintainedWithinOrganization",
+        "responsibilityWorkerReadsAndCompletesEventWithSeparateArrival",
+        "serviceRatingOnlyIncludesReviewsAndRespectsRoleScope"
       ]
     },
     {
@@ -237,7 +302,7 @@
       ]
     }
   ],
-  "tests": 163,
+  "tests": 188,
   "failures": 0,
   "errors": 0,
   "skipped": 0

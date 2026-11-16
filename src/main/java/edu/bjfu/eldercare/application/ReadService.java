@@ -2,6 +2,7 @@ package edu.bjfu.eldercare.application;
 
 import edu.bjfu.eldercare.application.port.QueryExecutor;
 import edu.bjfu.eldercare.application.port.query.DetailHandler;
+import edu.bjfu.eldercare.application.port.query.ListFilter;
 import edu.bjfu.eldercare.application.port.query.PageQuery;
 import edu.bjfu.eldercare.application.port.query.QueryHandler;
 import edu.bjfu.eldercare.application.port.query.QueryModule;
@@ -48,6 +49,10 @@ public class ReadService {
     }
 
     public Object list(Auth.User user, String kind, int page, int size) {
+        return list(user, kind, page, size, ListFilter.NONE);
+    }
+
+    public Object list(Auth.User user, String kind, int page, int size, ListFilter filter) {
         if (page < 0 || page > 100000 || size < 1 || size > 100) {
             throw new Rule("分页参数无效");
         }
@@ -56,7 +61,7 @@ public class ReadService {
             throw new Rule("未知数据类别");
         }
         PageQuery query = handler.prepare(user);
-        return executor.page(query, page, size);
+        return executor.page(query, page, size, filter);
     }
 
     public Object details(Auth.User user, String kind, long id) {

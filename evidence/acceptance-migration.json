@@ -1,0 +1,12 @@
+{
+  "database": "eldercare_acceptance_clone_test",
+  "tables_preserved": 47,
+  "repeat_safe": true,
+  "indexes_match_fresh": true,
+  "backup_sha256": "fef05ab0cd9deae291076eff80c015341a7d92e07090f5b39ce1675555fea08c",
+  "pending_certificate_types": 50,
+  "removed_legacy_indexes": [
+    "idx_plan_elder",
+    "idx_dispatch_worker"
+  ]
+}

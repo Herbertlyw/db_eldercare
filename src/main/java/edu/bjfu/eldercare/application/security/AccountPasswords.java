@@ -18,8 +18,14 @@ public class AccountPasswords {
     }
 
     public String encode(Map<String, Object> input) {
-        String password = text(input, "password");
-        if (password.length() < 10 || password.getBytes(StandardCharsets.UTF_8).length > 72) {
+        return encode(text(input, "password"));
+    }
+
+    public String encode(String password) {
+        if (password == null
+                || password.isBlank()
+                || password.codePointCount(0, password.length()) < 10
+                || password.getBytes(StandardCharsets.UTF_8).length > 72) {
             throw new Rule("初始密码至少 10 个字符，且不超过 72 字节");
         }
         return auth.password(password);

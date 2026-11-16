@@ -1,0 +1,2840 @@
+{
+  "time": "2026-11-16T07:29:25.391Z",
+  "database": "eldercare_interaction_20261116_test",
+  "businessWrites": false,
+  "forms": [
+    {
+      "account": "admin1",
+      "action": "elder.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "name",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "姓名"
+        },
+        {
+          "name": "identity",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "身份证号（课程虚构编号）"
+        },
+        {
+          "name": "birthDate",
+          "type": "date",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "出生日期"
+        },
+        {
+          "name": "address",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "住址"
+        },
+        {
+          "name": "x",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "住址横坐标（米）"
+        },
+        {
+          "name": "y",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "住址纵坐标（米）"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "elder.update",
+      "error": "",
+      "fields": [
+        {
+          "name": "elderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "老人"
+        },
+        {
+          "name": "address",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "新住址"
+        },
+        {
+          "name": "x",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "住址横坐标（米）"
+        },
+        {
+          "name": "y",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "住址纵坐标（米）"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "elder.transfer",
+      "error": "",
+      "fields": [
+        {
+          "name": "elderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "老人"
+        },
+        {
+          "name": "communityId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "目标社区"
+        },
+        {
+          "name": "address",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "新住址"
+        },
+        {
+          "name": "x",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "住址横坐标（米）"
+        },
+        {
+          "name": "y",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "住址纵坐标（米）"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "elder.deactivate",
+      "error": "",
+      "fields": [
+        {
+          "name": "elderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "老人"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "guardian.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "elderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "老人"
+        },
+        {
+          "name": "accountId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "家属账号"
+        },
+        {
+          "name": "relation",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "与老人关系"
+        },
+        {
+          "name": "phone",
+          "type": "tel",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "联系电话"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "assessment.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "elderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "老人"
+        },
+        {
+          "name": "scale",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "评估量表"
+        },
+        {
+          "name": "score",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "得分"
+        },
+        {
+          "name": "level",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "能力等级"
+        },
+        {
+          "name": "validUntil",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "有效期截止"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "plan.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "elderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "老人"
+        },
+        {
+          "name": "assessmentId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "评估"
+        },
+        {
+          "name": "bundleId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "服务包"
+        },
+        {
+          "name": "caregiverId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "责任护工"
+        },
+        {
+          "name": "startsAt",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "开始时间"
+        },
+        {
+          "name": "endsAt",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "结束时间"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "order.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "elderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "老人"
+        },
+        {
+          "name": "startsAt",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "预约时间"
+        },
+        {
+          "name": "itemId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "服务项目"
+        },
+        {
+          "name": "channel",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "下单渠道"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "order.recommend",
+      "error": "",
+      "fields": [
+        {
+          "name": "orderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "订单"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "order.assign",
+      "error": "",
+      "fields": [
+        {
+          "name": "orderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "订单"
+        },
+        {
+          "name": "shiftId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "班次"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "派单或改派原因"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "order.cancel",
+      "error": "",
+      "fields": [
+        {
+          "name": "orderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "订单"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "取消原因"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "shift.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "caregiverId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "护工"
+        },
+        {
+          "name": "startsAt",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "开始时间"
+        },
+        {
+          "name": "endsAt",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "结束时间"
+        },
+        {
+          "name": "capacity",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "可接单量"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "device.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "serial",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "设备序列号"
+        },
+        {
+          "name": "type",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "设备类型"
+        },
+        {
+          "name": "location",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "安装位置"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "device.bind",
+      "error": "",
+      "fields": [
+        {
+          "name": "deviceId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "设备"
+        },
+        {
+          "name": "elderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "老人"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "vital.upload",
+      "error": "",
+      "fields": [
+        {
+          "name": "samples",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "采样记录"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "event.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "elderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "老人"
+        },
+        {
+          "name": "level",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "紧急等级"
+        },
+        {
+          "name": "description",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "事件说明"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "event.respond",
+      "error": "",
+      "fields": [
+        {
+          "name": "eventId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "事件"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "event.close",
+      "error": "",
+      "fields": [
+        {
+          "name": "eventId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "事件"
+        },
+        {
+          "name": "result",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "到场处置结果"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "claim.submit",
+      "error": "",
+      "fields": [
+        {
+          "name": "elderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "老人"
+        },
+        {
+          "name": "policyId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "政策"
+        },
+        {
+          "name": "period",
+          "type": "text",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "结算月份"
+        },
+        {
+          "name": "orderIds",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": false,
+          "caption": "申报订单"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "maintenance.run",
+      "error": "",
+      "fields": [],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "account.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "username",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "登录账号"
+        },
+        {
+          "name": "password",
+          "type": "password",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "初始密码（至少 10 个字符）"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "elder.tags",
+      "error": "",
+      "fields": [
+        {
+          "name": "elderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "老人"
+        },
+        {
+          "name": "tag",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "特殊标签"
+        },
+        {
+          "name": "enabled",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "是否保留此标签"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "guardian.update",
+      "error": "",
+      "fields": [
+        {
+          "name": "elderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "老人"
+        },
+        {
+          "name": "guardianId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "家属关联编号"
+        },
+        {
+          "name": "relation",
+          "type": "text",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "与老人关系"
+        },
+        {
+          "name": "phone",
+          "type": "tel",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "联系电话"
+        },
+        {
+          "name": "active",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "关联是否有效"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "plan.revise",
+      "error": "",
+      "fields": [
+        {
+          "name": "elderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "老人"
+        },
+        {
+          "name": "planId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "原计划"
+        },
+        {
+          "name": "assessmentId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "评估"
+        },
+        {
+          "name": "bundleId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "服务包"
+        },
+        {
+          "name": "caregiverId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "责任护工"
+        },
+        {
+          "name": "startsAt",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "新计划开始时间"
+        },
+        {
+          "name": "endsAt",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "新计划结束时间"
+        },
+        {
+          "name": "items",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": false,
+          "caption": "服务项目与每周次数"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "调整原因"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "plan.state",
+      "error": "",
+      "fields": [
+        {
+          "name": "planId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "计划"
+        },
+        {
+          "name": "status",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "计划状态"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "操作原因"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "catalog.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "name",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "项目名称"
+        },
+        {
+          "name": "category",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "服务类别"
+        },
+        {
+          "name": "unit",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "计价单位"
+        },
+        {
+          "name": "price",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "指导价（元）"
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "标准时长（分钟）"
+        },
+        {
+          "name": "subsidizable",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "是否可补贴"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "bundle.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "name",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "服务包名称"
+        },
+        {
+          "name": "level",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "适用能力等级"
+        },
+        {
+          "name": "items",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": false,
+          "caption": "服务项目与每周次数"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "metric.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "name",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "指标名称与单位"
+        },
+        {
+          "name": "low",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "下限"
+        },
+        {
+          "name": "high",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "上限"
+        },
+        {
+          "name": "seconds",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "初始响应时限（秒）"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "complaint.assign",
+      "error": "",
+      "fields": [
+        {
+          "name": "complaintId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "投诉"
+        },
+        {
+          "name": "organizationId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": false,
+          "caption": "承接机构（社区自办留空）"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "受理意见"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "complaint.reply",
+      "error": "",
+      "fields": [
+        {
+          "name": "complaintId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "投诉"
+        },
+        {
+          "name": "result",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "调查情况与处理结果"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "complaint.close",
+      "error": "",
+      "fields": [
+        {
+          "name": "complaintId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "投诉"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "结案说明"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "device.unbind",
+      "error": "",
+      "fields": [
+        {
+          "name": "deviceId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "设备"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "device.status",
+      "error": "",
+      "fields": [
+        {
+          "name": "deviceId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "设备"
+        },
+        {
+          "name": "status",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "设备状态"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "simulator.run",
+      "error": "",
+      "fields": [
+        {
+          "name": "metricId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "监测指标"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "event.confirm",
+      "error": "",
+      "fields": [
+        {
+          "name": "eventId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "事件"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "核实情况"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "event.dismiss",
+      "error": "",
+      "fields": [
+        {
+          "name": "eventId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "事件"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "误报核实依据"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "event.arrive",
+      "error": "",
+      "fields": [
+        {
+          "name": "eventId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "事件"
+        },
+        {
+          "name": "note",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "到场情况"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "claim.evidence",
+      "error": "",
+      "fields": [
+        {
+          "name": "claimId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "申报"
+        },
+        {
+          "name": "name",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "材料名称"
+        },
+        {
+          "name": "content",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "证明内容与关联编号"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "claim.resubmit",
+      "error": "",
+      "fields": [
+        {
+          "name": "claimId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "已驳回申报"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "补充说明（保留原订单与审核记录）"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "device.simulation",
+      "error": "",
+      "fields": [
+        {
+          "name": "deviceId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "设备"
+        },
+        {
+          "name": "enabled",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "是否开启"
+        },
+        {
+          "name": "metricId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "指标"
+        },
+        {
+          "name": "seconds",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "采样间隔秒数（30至3600）"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "admin1",
+      "action": "password.reset",
+      "error": "",
+      "fields": [
+        {
+          "name": "username",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "需要重置的登录账号"
+        },
+        {
+          "name": "newPassword",
+          "type": "password",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "临时密码（至少10个字符）"
+        },
+        {
+          "name": "confirmPassword",
+          "type": "password",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "再次输入临时密码"
+        },
+        {
+          "name": "operatorPassword",
+          "type": "password",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "你的当前密码"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "身份核实及重置原因"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "family1",
+      "action": "order.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "elderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "老人"
+        },
+        {
+          "name": "startsAt",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "预约时间"
+        },
+        {
+          "name": "itemId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "服务项目"
+        },
+        {
+          "name": "channel",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "下单渠道"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "family1",
+      "action": "order.confirm",
+      "error": "",
+      "fields": [
+        {
+          "name": "orderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "订单"
+        },
+        {
+          "name": "confirmation",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "确认说明"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "family1",
+      "action": "order.cancel",
+      "error": "",
+      "fields": [
+        {
+          "name": "orderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "订单"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "取消原因"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "family1",
+      "action": "complaint.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "orderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "订单"
+        },
+        {
+          "name": "rating",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "服务评分"
+        },
+        {
+          "name": "content",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "评价或问题"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "family1",
+      "action": "event.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "elderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "老人"
+        },
+        {
+          "name": "level",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "紧急等级"
+        },
+        {
+          "name": "description",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "事件说明"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "family1",
+      "action": "complaint.close",
+      "error": "",
+      "fields": [
+        {
+          "name": "complaintId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "投诉"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "结案说明"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "family1",
+      "action": "review.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "orderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "已完成订单"
+        },
+        {
+          "name": "rating",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "服务评分"
+        },
+        {
+          "name": "content",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "评价"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "caregiver1",
+      "action": "order.accept",
+      "error": "",
+      "fields": [
+        {
+          "name": "orderId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "订单"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "caregiver1",
+      "action": "order.checkin",
+      "error": "",
+      "fields": [
+        {
+          "name": "orderId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "订单"
+        },
+        {
+          "name": "location",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "位置说明"
+        },
+        {
+          "name": "x",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "当前横坐标（米）"
+        },
+        {
+          "name": "y",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "当前纵坐标（米）"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "caregiver1",
+      "action": "order.finish",
+      "error": "",
+      "fields": [
+        {
+          "name": "orderId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "订单"
+        },
+        {
+          "name": "notes",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "服务情况记录"
+        },
+        {
+          "name": "x",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "当前横坐标（米）"
+        },
+        {
+          "name": "y",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "当前纵坐标（米）"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "caregiver1",
+      "action": "event.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "elderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "老人"
+        },
+        {
+          "name": "level",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "紧急等级"
+        },
+        {
+          "name": "description",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "事件说明"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "caregiver1",
+      "action": "event.respond",
+      "error": "",
+      "fields": [
+        {
+          "name": "eventId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "事件"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "caregiver1",
+      "action": "event.close",
+      "error": "",
+      "fields": [
+        {
+          "name": "eventId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "事件"
+        },
+        {
+          "name": "result",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "到场处置结果"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "caregiver1",
+      "action": "order.reject",
+      "error": "",
+      "fields": [
+        {
+          "name": "orderId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "订单"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "退回原因"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "caregiver1",
+      "action": "event.confirm",
+      "error": "",
+      "fields": [
+        {
+          "name": "eventId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "事件"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "核实情况"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "caregiver1",
+      "action": "event.arrive",
+      "error": "",
+      "fields": [
+        {
+          "name": "eventId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "事件"
+        },
+        {
+          "name": "note",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "到场情况"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "manager1",
+      "action": "credential.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "caregiverId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "护工"
+        },
+        {
+          "name": "itemId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "适用服务项目"
+        },
+        {
+          "name": "certificateNo",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "证书编号"
+        },
+        {
+          "name": "certificateType",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "证书类型"
+        },
+        {
+          "name": "level",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "证书等级"
+        },
+        {
+          "name": "validFrom",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "生效时间"
+        },
+        {
+          "name": "validUntil",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "失效时间"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "manager1",
+      "action": "credential.type",
+      "error": "",
+      "fields": [
+        {
+          "name": "credentialId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "资格"
+        },
+        {
+          "name": "certificateType",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "证书类型"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "manager1",
+      "action": "caregiver.status",
+      "error": "",
+      "fields": [
+        {
+          "name": "caregiverId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "护工"
+        },
+        {
+          "name": "status",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "状态"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "manager1",
+      "action": "shift.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "caregiverId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "护工"
+        },
+        {
+          "name": "startsAt",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "开始时间"
+        },
+        {
+          "name": "endsAt",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "结束时间"
+        },
+        {
+          "name": "capacity",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "可接单量"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "manager1",
+      "action": "shift.delete",
+      "error": "",
+      "fields": [
+        {
+          "name": "shiftId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "班次"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "manager1",
+      "action": "hours.review",
+      "error": "",
+      "fields": [
+        {
+          "name": "attendanceId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "工时"
+        },
+        {
+          "name": "approve",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "是否通过"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "复核理由"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "manager1",
+      "action": "order.release",
+      "error": "",
+      "fields": [
+        {
+          "name": "orderId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "订单"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "退回原因"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "manager1",
+      "action": "caregiver.area",
+      "error": "",
+      "fields": [
+        {
+          "name": "caregiverId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "护工"
+        },
+        {
+          "name": "communityId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "社区"
+        },
+        {
+          "name": "enabled",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "是否可以在该社区服务"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "manager1",
+      "action": "recruitment.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "name",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "应聘人姓名"
+        },
+        {
+          "name": "phone",
+          "type": "tel",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "联系电话"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "manager1",
+      "action": "recruitment.review",
+      "error": "",
+      "fields": [
+        {
+          "name": "recruitmentId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "招聘申请"
+        },
+        {
+          "name": "approve",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "是否录用"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "审核说明"
+        },
+        {
+          "name": "username",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "录用后的登录账号"
+        },
+        {
+          "name": "password",
+          "type": "password",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "初始密码（至少 10 个字符）"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "manager1",
+      "action": "training.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "title",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "培训名称"
+        },
+        {
+          "name": "startsAt",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "开始时间"
+        },
+        {
+          "name": "endsAt",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "结束时间"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "manager1",
+      "action": "training.enroll",
+      "error": "",
+      "fields": [
+        {
+          "name": "trainingId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "培训"
+        },
+        {
+          "name": "caregiverId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "护工"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "manager1",
+      "action": "training.result",
+      "error": "",
+      "fields": [
+        {
+          "name": "recordId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "参训记录"
+        },
+        {
+          "name": "score",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "成绩（课程规则60分通过）"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "manager1",
+      "action": "complaint.reply",
+      "error": "",
+      "fields": [
+        {
+          "name": "complaintId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "投诉"
+        },
+        {
+          "name": "result",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "调查情况与处理结果"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "manager1",
+      "action": "rectification.submit",
+      "error": "",
+      "fields": [
+        {
+          "name": "inspectionId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "抽查"
+        },
+        {
+          "name": "measures",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "整改措施"
+        },
+        {
+          "name": "evidence",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "整改证据与关联记录"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "manager1",
+      "action": "organization.submit",
+      "error": "",
+      "fields": [
+        {
+          "name": "period",
+          "type": "month",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "考核月份"
+        },
+        {
+          "name": "summary",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "本月服务与问题处理情况"
+        },
+        {
+          "name": "evidence",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "相关服务和整改记录"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "manager1",
+      "action": "password.reset",
+      "error": "",
+      "fields": [
+        {
+          "name": "username",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "需要重置的登录账号"
+        },
+        {
+          "name": "newPassword",
+          "type": "password",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "临时密码（至少10个字符）"
+        },
+        {
+          "name": "confirmPassword",
+          "type": "password",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "再次输入临时密码"
+        },
+        {
+          "name": "operatorPassword",
+          "type": "password",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "你的当前密码"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "身份核实及重置原因"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "street1",
+      "action": "claim.review",
+      "error": "",
+      "fields": [
+        {
+          "name": "claimId",
+          "type": "select-one",
+          "disabled": true,
+          "hidden": false,
+          "required": true,
+          "caption": "申报"
+        },
+        {
+          "name": "approve",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "是否通过"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "审核意见"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "regulator1",
+      "action": "claim.review",
+      "error": "",
+      "fields": [
+        {
+          "name": "claimId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "申报"
+        },
+        {
+          "name": "approve",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "是否通过"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "审核意见"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "regulator1",
+      "action": "claim.pay",
+      "error": "",
+      "fields": [
+        {
+          "name": "claimId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "申报"
+        },
+        {
+          "name": "reference",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "模拟拨付凭证编号"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "regulator1",
+      "action": "inspection.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "caregiverId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "护工"
+        },
+        {
+          "name": "method",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "方式"
+        },
+        {
+          "name": "score",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "评分"
+        },
+        {
+          "name": "issue",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "发现的问题"
+        },
+        {
+          "name": "requiresRectification",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "是否需要整改"
+        },
+        {
+          "name": "rectification",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "整改要求"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "regulator1",
+      "action": "inspection.order",
+      "error": "",
+      "fields": [
+        {
+          "name": "orderId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "订单"
+        },
+        {
+          "name": "method",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "方式"
+        },
+        {
+          "name": "score",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "评分"
+        },
+        {
+          "name": "issue",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "发现的问题"
+        },
+        {
+          "name": "requiresRectification",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "是否需要整改"
+        },
+        {
+          "name": "rectification",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "整改要求"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "regulator1",
+      "action": "inspection.close",
+      "error": "",
+      "fields": [
+        {
+          "name": "inspectionId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "抽查"
+        },
+        {
+          "name": "approve",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "是否通过"
+        },
+        {
+          "name": "result",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "复核意见"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "regulator1",
+      "action": "policy.create",
+      "error": "",
+      "fields": [
+        {
+          "name": "name",
+          "type": "text",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "政策名称（课程演示）"
+        },
+        {
+          "name": "itemId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "服务项目"
+        },
+        {
+          "name": "level",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "适用能力等级"
+        },
+        {
+          "name": "rate",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "补贴标准（元）"
+        },
+        {
+          "name": "startsAt",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "生效时间"
+        },
+        {
+          "name": "endsAt",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "失效时间"
+        },
+        {
+          "name": "cycle",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "结算周期"
+        },
+        {
+          "name": "minimumAge",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "最低年龄"
+        },
+        {
+          "name": "tag",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "附加对象标签（可选无）"
+        },
+        {
+          "name": "communityIds",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": false,
+          "caption": "适用社区"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "regulator1",
+      "action": "inspection.batch",
+      "error": "",
+      "fields": [
+        {
+          "name": "communityId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "社区"
+        },
+        {
+          "name": "target",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "抽查对象"
+        },
+        {
+          "name": "startsAt",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "服务开始时间"
+        },
+        {
+          "name": "endsAt",
+          "type": "datetime-local",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "服务截止时间（不含）"
+        },
+        {
+          "name": "ratio",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "抽查比例（0至1，如0.2）"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "regulator1",
+      "action": "inspection.record",
+      "error": "",
+      "fields": [
+        {
+          "name": "inspectionId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "抽查"
+        },
+        {
+          "name": "method",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "抽查方式"
+        },
+        {
+          "name": "score",
+          "type": "number",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "评分"
+        },
+        {
+          "name": "issue",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "发现的问题"
+        },
+        {
+          "name": "requiresRectification",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "是否需要整改"
+        },
+        {
+          "name": "rectification",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "整改要求"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "regulator1",
+      "action": "organization.review",
+      "error": "",
+      "fields": [
+        {
+          "name": "reportId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "材料"
+        },
+        {
+          "name": "approve",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "是否通过"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "考核意见"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "regulator1",
+      "action": "notice.publish",
+      "error": "",
+      "fields": [
+        {
+          "name": "inspectionId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "抽查"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "account": "regulator1",
+      "action": "notice.withdraw",
+      "error": "",
+      "fields": [
+        {
+          "name": "noticeId",
+          "type": "select-one",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "公示"
+        },
+        {
+          "name": "reason",
+          "type": "textarea",
+          "disabled": false,
+          "hidden": false,
+          "required": true,
+          "caption": "撤回原因"
+        }
+      ],
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "requests": []
+}

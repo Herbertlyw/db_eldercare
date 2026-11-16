@@ -1,0 +1,11 @@
+{
+  "time": "2026-11-16T08:33:28.483Z",
+  "checks": [
+    "36 unique portraits",
+    "dots pause resume and autoplay",
+    "reduced motion pauses carousel",
+    "image failure fallback",
+    "mobile record cards and details"
+  ],
+  "pageErrors": []
+}

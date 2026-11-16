@@ -10,9 +10,14 @@ public interface WorkforceRepository {
             Number caregiverId,
             Number itemId,
             String certificateNo,
+            String certificateType,
             String certificateLevel,
             String validFrom,
             String validUntil);
+
+    Map<String, Object> findCredentialForUpdate(Number credentialId);
+
+    int updateCredentialType(String certificateType, Number credentialId);
 
     int updateCaregiverStatus(String status, Number caregiverId);
 

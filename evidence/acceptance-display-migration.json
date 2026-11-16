@@ -1,0 +1,8 @@
+{
+  "database": "eldercare",
+  "tables_preserved": 47,
+  "all_existing_column_contents_equal": true,
+  "indexes_match_fresh": true,
+  "course_certificate_types": 50,
+  "backup_sha256": "a354334d11dbf953e39b0141f5d2a8447b4a1863b0fac6f494efa3c68d7fdcc8"
+}

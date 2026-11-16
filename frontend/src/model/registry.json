@@ -1,0 +1,1177 @@
+{
+  "names": {
+    "elders": "老人档案",
+    "assessments": "能力评估",
+    "plans": "照护计划",
+    "orders": "服务订单",
+    "caregivers": "护工档案",
+    "credentials": "职业证书",
+    "shifts": "护工排班",
+    "hours": "服务工时",
+    "devices": "监测设备",
+    "vitals": "体征数据",
+    "events": "应急事件",
+    "claims": "补贴申报",
+    "policies": "补贴政策",
+    "inspections": "质量抽查",
+    "catalog": "服务项目",
+    "bundles": "照护服务包",
+    "notifications": "通知消息",
+    "assessmentDue": "评估到期提醒",
+    "dispatchPool": "超时调度池",
+    "activePlans": "当前有效计划",
+    "familyCare": "家属照护查询",
+    "waitingConfirmation": "待确认服务",
+    "reassignments": "改派记录",
+    "credentialDue": "证书到期提醒",
+    "shiftCapacity": "班次余量",
+    "hoursReview": "异常工时",
+    "currentDevices": "当前设备绑定",
+    "abnormalVitals": "异常体征",
+    "pendingEvents": "待处理应急",
+    "eligibleClaims": "可申报订单",
+    "claimProgress": "补贴进度",
+    "rectifications": "待完成整改",
+    "monthlyHours": "月度有效工时",
+    "quality": "护工服务评价",
+    "organizationQuality": "机构抽查评价",
+    "selfPay": "服务费用",
+    "complaints": "评价与投诉",
+    "recruitments": "护工招聘",
+    "trainings": "岗前培训",
+    "trainingRecords": "培训成绩",
+    "inspectionBatches": "抽查批次",
+    "organizationReports": "机构考核材料",
+    "publicNotices": "质量公示",
+    "jurisdictionStats": "辖区服务统计",
+    "communities": "社区服务范围",
+    "accounts": "家属账号",
+    "metrics": "监测指标",
+    "areas": "护工服务区域",
+    "managerDispatchPool": "本机构超时订单"
+  },
+  "menus": {
+    "ADMIN": [
+      "elders",
+      "assessments",
+      "plans",
+      "orders",
+      "caregivers",
+      "shifts",
+      "hours",
+      "devices",
+      "vitals",
+      "events",
+      "claims",
+      "policies",
+      "inspections",
+      "catalog",
+      "bundles",
+      "notifications",
+      "assessmentDue",
+      "dispatchPool",
+      "activePlans",
+      "waitingConfirmation",
+      "reassignments",
+      "currentDevices",
+      "abnormalVitals",
+      "pendingEvents",
+      "eligibleClaims",
+      "claimProgress",
+      "rectifications",
+      "monthlyHours",
+      "quality",
+      "organizationQuality",
+      "complaints",
+      "communities",
+      "accounts",
+      "metrics",
+      "publicNotices"
+    ],
+    "FAMILY": [
+      "elders",
+      "assessments",
+      "plans",
+      "orders",
+      "devices",
+      "vitals",
+      "events",
+      "claims",
+      "policies",
+      "catalog",
+      "notifications",
+      "familyCare",
+      "waitingConfirmation",
+      "abnormalVitals",
+      "claimProgress",
+      "selfPay",
+      "complaints",
+      "publicNotices"
+    ],
+    "CAREGIVER": [
+      "orders",
+      "shifts",
+      "hours",
+      "credentials",
+      "elders",
+      "events",
+      "notifications",
+      "monthlyHours",
+      "trainingRecords",
+      "trainings",
+      "areas",
+      "publicNotices"
+    ],
+    "MANAGER": [
+      "caregivers",
+      "credentials",
+      "shifts",
+      "hours",
+      "inspections",
+      "notifications",
+      "credentialDue",
+      "shiftCapacity",
+      "hoursReview",
+      "monthlyHours",
+      "quality",
+      "organizationQuality",
+      "complaints",
+      "recruitments",
+      "trainings",
+      "trainingRecords",
+      "organizationReports",
+      "areas",
+      "managerDispatchPool",
+      "communities",
+      "publicNotices"
+    ],
+    "STREET": [
+      "claims",
+      "policies",
+      "notifications",
+      "claimProgress",
+      "jurisdictionStats",
+      "communities",
+      "publicNotices"
+    ],
+    "REGULATOR": [
+      "claims",
+      "policies",
+      "inspections",
+      "events",
+      "notifications",
+      "pendingEvents",
+      "claimProgress",
+      "rectifications",
+      "quality",
+      "organizationQuality",
+      "complaints",
+      "inspectionBatches",
+      "organizationReports",
+      "jurisdictionStats",
+      "communities",
+      "publicNotices"
+    ]
+  },
+  "actions": {
+    "elder.create": [
+      "建立老人档案",
+      ["ADMIN"],
+      [
+        "name:姓名",
+        "identity:身份编号",
+        "birthDate:出生日期:date",
+        "address:住址",
+        "x:住址横坐标（米）:number",
+        "y:住址纵坐标（米）:number"
+      ]
+    ],
+    "elder.update": [
+      "更新老人住址",
+      ["ADMIN"],
+      [
+        "elderId:老人编号:number",
+        "address:新住址",
+        "x:住址横坐标（米）:number",
+        "y:住址纵坐标（米）:number"
+      ]
+    ],
+    "elder.transfer": [
+      "迁移所属社区",
+      ["ADMIN"],
+      [
+        "elderId:老人编号:number",
+        "communityId:目标社区编号:number",
+        "address:新住址",
+        "x:住址横坐标（米）:number",
+        "y:住址纵坐标（米）:number"
+      ]
+    ],
+    "elder.deactivate": [
+      "停用老人档案",
+      ["ADMIN"],
+      ["elderId:老人编号:number"]
+    ],
+    "guardian.create": [
+      "关联家属账号",
+      ["ADMIN"],
+      [
+        "elderId:老人编号:number",
+        "accountId:家属账号编号:number",
+        "relation:与老人关系",
+        "phone:联系电话"
+      ]
+    ],
+    "assessment.create": [
+      "登记能力评估",
+      ["ADMIN"],
+      [
+        "elderId:老人编号:number",
+        "scale:评估量表",
+        "score:得分:number",
+        "level:能力等级（SELF/PARTIAL/SEVERE）",
+        "validUntil:有效期截止:datetime-local"
+      ]
+    ],
+    "plan.create": [
+      "制定照护计划",
+      ["ADMIN"],
+      [
+        "elderId:老人编号:number",
+        "assessmentId:评估编号:number",
+        "bundleId:服务包编号:number",
+        "caregiverId:责任护工编号:number",
+        "startsAt:开始时间:datetime-local",
+        "endsAt:结束时间:datetime-local"
+      ]
+    ],
+    "order.create": [
+      "预约上门服务",
+      ["ADMIN", "FAMILY"],
+      [
+        "elderId:老人编号:number",
+        "startsAt:预约时间:datetime-local",
+        "itemId:服务项目编号:number",
+        "channel:下单渠道"
+      ]
+    ],
+    "order.recommend": ["查询可派班次", ["ADMIN"], ["orderId:订单编号:number"]],
+    "order.assign": [
+      "派单或改派",
+      ["ADMIN"],
+      [
+        "orderId:订单编号:number",
+        "shiftId:班次编号:number",
+        "reason:派单或改派原因"
+      ]
+    ],
+    "order.accept": ["接受派单", ["CAREGIVER"], ["orderId:订单编号:number"]],
+    "order.checkin": [
+      "上门签到",
+      ["CAREGIVER"],
+      [
+        "orderId:订单编号:number",
+        "location:位置说明",
+        "x:当前横坐标（米）:number",
+        "y:当前纵坐标（米）:number"
+      ]
+    ],
+    "order.finish": [
+      "结束服务并签退",
+      ["CAREGIVER"],
+      [
+        "orderId:订单编号:number",
+        "notes:服务情况记录",
+        "x:当前横坐标（米）:number",
+        "y:当前纵坐标（米）:number"
+      ]
+    ],
+    "order.confirm": [
+      "确认服务完成",
+      ["FAMILY"],
+      ["orderId:订单编号:number", "confirmation:确认说明"]
+    ],
+    "order.cancel": [
+      "取消未开始的订单",
+      ["ADMIN", "FAMILY"],
+      ["orderId:订单编号:number", "reason:取消原因"]
+    ],
+    "complaint.create": [
+      "提交服务投诉",
+      ["FAMILY"],
+      [
+        "orderId:订单编号:number",
+        "rating:评分（1至5）:number",
+        "content:评价或问题"
+      ]
+    ],
+    "credential.create": [
+      "登记护工资格",
+      ["MANAGER"],
+      [
+        "caregiverId:护工编号:number",
+        "itemId:适用服务项目编号:number",
+        "certificateNo:证书编号",
+        "certificateType:证书类型",
+        "level:证书等级",
+        "validFrom:生效时间:datetime-local",
+        "validUntil:失效时间:datetime-local"
+      ]
+    ],
+    "credential.type": [
+      "补录证书类型",
+      ["MANAGER"],
+      ["credentialId:资格编号:number", "certificateType:证书类型"]
+    ],
+    "caregiver.status": [
+      "更新在岗状态",
+      ["MANAGER"],
+      ["caregiverId:护工编号:number", "status:状态（ACTIVE/LEAVE/LEFT）"]
+    ],
+    "shift.create": [
+      "新增班次",
+      ["MANAGER", "ADMIN"],
+      [
+        "caregiverId:护工编号:number",
+        "startsAt:开始时间:datetime-local",
+        "endsAt:结束时间:datetime-local",
+        "capacity:可接单量:number"
+      ]
+    ],
+    "shift.delete": [
+      "删除未使用的未来班次",
+      ["MANAGER"],
+      ["shiftId:班次编号:number"]
+    ],
+    "hours.review": [
+      "复核异常工时",
+      ["MANAGER"],
+      [
+        "attendanceId:工时编号:number",
+        "approve:是否通过（true/false）",
+        "reason:复核理由"
+      ]
+    ],
+    "device.create": [
+      "登记设备",
+      ["ADMIN"],
+      ["serial:设备序列号", "type:设备类型", "location:安装位置"]
+    ],
+    "device.bind": [
+      "绑定或换绑设备",
+      ["ADMIN"],
+      ["deviceId:设备编号:number", "elderId:老人编号:number"]
+    ],
+    "vital.upload": [
+      "批量上传体征记录",
+      ["ADMIN"],
+      ["samples:采样数组（见运行文档示例）:json"]
+    ],
+    "event.create": [
+      "登记应急上报",
+      ["ADMIN", "FAMILY", "CAREGIVER"],
+      [
+        "elderId:老人编号:number",
+        "level:紧急等级（1至3）:number",
+        "description:事件说明"
+      ]
+    ],
+    "event.respond": [
+      "响应应急事件",
+      ["ADMIN", "CAREGIVER"],
+      ["eventId:事件编号:number"]
+    ],
+    "event.close": [
+      "填写应急处置结果",
+      ["ADMIN", "CAREGIVER"],
+      ["eventId:事件编号:number", "result:到场处置结果"]
+    ],
+    "claim.submit": [
+      "提交补贴申报",
+      ["ADMIN"],
+      [
+        "elderId:老人编号:number",
+        "policyId:政策编号:number",
+        "period:结算周期（月2026-11、季2026-Q4、年2026）",
+        "orderIds:订单编号列表（例如 [1,3]）:json"
+      ]
+    ],
+    "claim.review": [
+      "审核补贴申报",
+      ["STREET", "REGULATOR"],
+      [
+        "claimId:申报编号:number",
+        "approve:是否通过（true/false）",
+        "reason:审核意见"
+      ]
+    ],
+    "claim.pay": [
+      "登记拨付记录",
+      ["REGULATOR"],
+      ["claimId:申报编号:number", "reference:拨付凭证编号"]
+    ],
+    "inspection.create": [
+      "发起质量抽查",
+      ["REGULATOR"],
+      [
+        "caregiverId:护工编号:number",
+        "method:方式（PHONE/VISIT）",
+        "score:评分:number",
+        "issue:发现的问题",
+        "rectification:整改要求",
+        "requiresRectification:是否需要整改"
+      ]
+    ],
+    "inspection.order": [
+      "抽查指定服务订单",
+      ["REGULATOR"],
+      [
+        "orderId:订单编号:number",
+        "method:方式（PHONE/VISIT）",
+        "score:评分:number",
+        "issue:发现的问题",
+        "rectification:整改要求",
+        "requiresRectification:是否需要整改"
+      ]
+    ],
+    "inspection.close": [
+      "复核机构整改结果",
+      ["REGULATOR"],
+      ["inspectionId:抽查编号:number", "approve:是否通过", "result:复核意见"]
+    ],
+    "maintenance.run": ["检查到期和超时事项", ["ADMIN"], []],
+    "account.create": [
+      "创建家属账号",
+      ["ADMIN"],
+      ["username:登录账号", "password:初始密码（至少10个字符）:password"]
+    ],
+    "elder.tags": [
+      "维护老人标签",
+      ["ADMIN"],
+      ["elderId:老人编号:number", "tag:特殊标签", "enabled:是否保留此标签"]
+    ],
+    "guardian.update": [
+      "维护家属联系方式",
+      ["ADMIN"],
+      [
+        "elderId:老人编号:number",
+        "guardianId:家属关联编号:number",
+        "relation:与老人关系",
+        "phone:联系电话",
+        "active:关联是否有效"
+      ]
+    ],
+    "plan.revise": [
+      "调整照护计划",
+      ["ADMIN"],
+      [
+        "planId:原计划编号:number",
+        "elderId:老人编号:number",
+        "assessmentId:评估编号:number",
+        "bundleId:服务包编号:number",
+        "caregiverId:责任护工编号:number",
+        "startsAt:新计划开始时间:datetime-local",
+        "endsAt:新计划结束时间:datetime-local",
+        "items:项目和每周次数（留空沿用服务包）:json:optional",
+        "reason:调整原因"
+      ]
+    ],
+    "plan.state": [
+      "暂停、恢复或终止计划",
+      ["ADMIN"],
+      ["planId:计划编号:number", "status:计划状态", "reason:操作原因"]
+    ],
+    "catalog.create": [
+      "登记服务项目",
+      ["ADMIN"],
+      [
+        "name:项目名称",
+        "category:服务类别",
+        "unit:计价单位",
+        "price:指导价（元）:number",
+        "duration:标准时长（分钟）:number",
+        "subsidizable:是否可补贴"
+      ]
+    ],
+    "bundle.create": [
+      "登记照护服务包",
+      ["ADMIN"],
+      ["name:服务包名称", "level:适用能力等级", "items:服务项目与每周次数:json"]
+    ],
+    "metric.create": [
+      "登记监测指标",
+      ["ADMIN"],
+      [
+        "name:指标名称与单位",
+        "low:下限:number",
+        "high:上限:number",
+        "seconds:初始响应时限（秒）:number"
+      ]
+    ],
+    "order.release": [
+      "将订单退回社区调度",
+      ["MANAGER"],
+      ["orderId:订单编号:number", "reason:退回原因"]
+    ],
+    "order.reject": [
+      "退回无法承接的订单",
+      ["CAREGIVER"],
+      ["orderId:订单编号:number", "reason:退回原因"]
+    ],
+    "caregiver.area": [
+      "维护护工服务区域",
+      ["MANAGER"],
+      [
+        "caregiverId:护工编号:number",
+        "communityId:社区编号:number",
+        "enabled:是否可以在该社区服务"
+      ]
+    ],
+    "recruitment.create": [
+      "登记应聘人员",
+      ["MANAGER"],
+      ["name:应聘人姓名", "phone:联系电话"]
+    ],
+    "recruitment.review": [
+      "处理招聘申请",
+      ["MANAGER"],
+      [
+        "recruitmentId:招聘申请编号:number",
+        "approve:是否录用",
+        "reason:审核说明",
+        "username:录用后的登录账号:text:optional",
+        "password:录用后的初始密码:password:optional"
+      ]
+    ],
+    "training.create": [
+      "安排岗前培训",
+      ["MANAGER"],
+      [
+        "title:培训名称",
+        "startsAt:开始时间:datetime-local",
+        "endsAt:结束时间:datetime-local"
+      ]
+    ],
+    "training.enroll": [
+      "登记参训人员",
+      ["MANAGER"],
+      ["trainingId:培训编号:number", "caregiverId:护工编号:number"]
+    ],
+    "training.result": [
+      "登记培训成绩",
+      ["MANAGER"],
+      ["recordId:参训记录编号:number", "score:成绩（60分通过）:number"]
+    ],
+    "complaint.assign": [
+      "受理并交机构处理",
+      ["ADMIN"],
+      [
+        "complaintId:投诉编号:number",
+        "organizationId:承接机构编号（社区自办留空）:number:optional",
+        "reason:受理意见"
+      ]
+    ],
+    "complaint.reply": [
+      "回复投诉处理结果",
+      ["MANAGER", "ADMIN"],
+      ["complaintId:投诉编号:number", "result:调查情况与处理结果"]
+    ],
+    "complaint.close": [
+      "确认投诉处理结束",
+      ["ADMIN", "FAMILY"],
+      ["complaintId:投诉编号:number", "reason:结案说明"]
+    ],
+    "device.unbind": ["解除设备绑定", ["ADMIN"], ["deviceId:设备编号:number"]],
+    "device.status": [
+      "更新设备状态",
+      ["ADMIN"],
+      ["deviceId:设备编号:number", "status:设备状态"]
+    ],
+    "simulator.run": [
+      "生成采样记录",
+      ["ADMIN"],
+      ["metricId:监测指标编号:number"]
+    ],
+    "event.confirm": [
+      "确认异常告警",
+      ["ADMIN", "CAREGIVER"],
+      ["eventId:事件编号:number", "reason:核实情况"]
+    ],
+    "event.dismiss": [
+      "登记误报",
+      ["ADMIN"],
+      ["eventId:事件编号:number", "reason:误报核实依据"]
+    ],
+    "event.arrive": [
+      "登记应急处置到场",
+      ["ADMIN", "CAREGIVER"],
+      ["eventId:事件编号:number", "note:到场情况"]
+    ],
+    "claim.evidence": [
+      "归档补贴证明材料",
+      ["ADMIN"],
+      ["claimId:申报编号:number", "name:材料名称", "content:证明内容与关联编号"]
+    ],
+    "claim.resubmit": [
+      "补充材料重新申报",
+      ["ADMIN"],
+      [
+        "claimId:已驳回申报编号:number",
+        "reason:补充说明（保留原订单与审核记录）"
+      ]
+    ],
+    "policy.create": [
+      "登记补贴政策",
+      ["REGULATOR"],
+      [
+        "name:政策名称",
+        "itemId:服务项目编号:number",
+        "level:适用能力等级",
+        "rate:补贴标准（元）:number",
+        "startsAt:生效时间:datetime-local",
+        "endsAt:失效时间:datetime-local",
+        "cycle:结算周期",
+        "minimumAge:最低年龄:number",
+        "tag:附加对象标签（可选无）",
+        "communityIds:适用社区编号（如 [1,2]）:json"
+      ]
+    ],
+    "inspection.batch": [
+      "建立比例抽查批次",
+      ["REGULATOR"],
+      [
+        "communityId:社区编号:number",
+        "target:抽查对象",
+        "startsAt:服务开始时间:datetime-local",
+        "endsAt:服务截止时间（不含）:datetime-local",
+        "ratio:抽查比例（0至1，如0.2）:number"
+      ]
+    ],
+    "inspection.record": [
+      "登记批次抽查结果",
+      ["REGULATOR"],
+      [
+        "inspectionId:抽查编号:number",
+        "method:抽查方式",
+        "score:评分:number",
+        "issue:发现的问题",
+        "requiresRectification:是否需要整改",
+        "rectification:整改要求（无需整改可填无）"
+      ]
+    ],
+    "rectification.submit": [
+      "提交整改材料",
+      ["MANAGER"],
+      [
+        "inspectionId:抽查编号:number",
+        "measures:整改措施",
+        "evidence:整改证据与关联记录"
+      ]
+    ],
+    "organization.submit": [
+      "提交机构考核材料",
+      ["MANAGER"],
+      [
+        "period:考核月份（YYYY-MM）",
+        "summary:本月服务与问题处理情况",
+        "evidence:相关服务和整改记录"
+      ]
+    ],
+    "organization.review": [
+      "审核机构考核材料",
+      ["REGULATOR"],
+      ["reportId:材料编号:number", "approve:是否通过", "reason:考核意见"]
+    ],
+    "notice.publish": [
+      "公示已完成抽查结果",
+      ["REGULATOR"],
+      ["inspectionId:抽查编号:number"]
+    ],
+    "notice.withdraw": [
+      "撤回公示并留存原因",
+      ["REGULATOR"],
+      ["noticeId:公示编号:number", "reason:撤回原因"]
+    ],
+    "review.create": [
+      "服务评价",
+      ["FAMILY"],
+      [
+        "orderId:已完成订单编号:number",
+        "rating:评分（1至5）:number",
+        "content:评价"
+      ]
+    ],
+    "device.simulation": [
+      "设置定时模拟采样",
+      ["ADMIN"],
+      [
+        "deviceId:设备编号:number",
+        "enabled:是否开启",
+        "metricId:指标编号:number",
+        "seconds:采样间隔秒数（30至3600）:number"
+      ]
+    ],
+    "password.reset": [
+      "重置用户密码",
+      ["ADMIN", "MANAGER"],
+      [
+        "username:需要重置的登录账号",
+        "newPassword:临时密码（至少10个字符）:password",
+        "confirmPassword:再次输入临时密码:password",
+        "operatorPassword:你的当前密码:password",
+        "reason:身份核实及重置原因"
+      ]
+    ]
+  },
+  "columns": {
+    "id": "编号",
+    "name": "名称",
+    "elder_id": "老人编号",
+    "elder_name": "老人",
+    "community_id": "社区",
+    "status": "状态",
+    "starts_at": "开始时间",
+    "ends_at": "结束时间",
+    "amount": "金额（元）",
+    "period": "周期",
+    "caregiver_id": "护工编号",
+    "caregiver_name": "护工",
+    "item_id": "项目编号",
+    "address": "地址",
+    "birth_date": "出生日期",
+    "valid_until": "有效期截止",
+    "score": "得分",
+    "ability_level": "能力等级",
+    "created_at": "创建时间",
+    "effective_minutes": "有效分钟",
+    "capacity": "可接单量",
+    "used_count": "已接单量",
+    "deadline": "响应截止",
+    "level": "等级",
+    "issue": "问题",
+    "rectification": "整改要求",
+    "result": "处理结果",
+    "organization_id": "机构编号",
+    "check_in": "签到",
+    "check_out": "签退",
+    "fence_ok": "围栏结果",
+    "notes": "服务记录",
+    "reference_no": "凭证号",
+    "report_note": "上报说明",
+    "available": "剩余名额",
+    "service_rating": "家属评分（5分制）",
+    "inspection_score": "抽查评分（100分制）",
+    "paid_subsidy": "本月已拨付（元）",
+    "self_pay": "扣除已拨补贴后金额（元）",
+    "remaining_seconds": "剩余响应时间（秒）",
+    "assessment_id": "评估编号",
+    "bundle_id": "服务包编号",
+    "created_by": "登记账号",
+    "channel": "预约渠道",
+    "order_id": "订单编号",
+    "shift_id": "班次编号",
+    "dispatch_id": "派单编号",
+    "record_id": "记录编号",
+    "binding_id": "绑定编号",
+    "device_id": "设备编号",
+    "serial_no": "设备序列号",
+    "type_name": "设备类型",
+    "location_note": "位置说明",
+    "metric_rule_id": "指标编号",
+    "sample_key": "采样编号",
+    "collected_at": "采样时间",
+    "metric_value": "指标值",
+    "abnormal": "是否异常",
+    "source": "数据来源",
+    "vital_id": "体征编号",
+    "responded_by": "响应人",
+    "responded_at": "响应时间",
+    "arrived_at": "到场时间",
+    "inspector_id": "检查人",
+    "method": "抽查方式",
+    "closed_at": "关闭时间",
+    "certificate_type": "证书类型",
+    "certificate_level": "证书等级",
+    "certificate_no": "证书编号",
+    "valid_from": "生效时间",
+    "reviewer_id": "复核人",
+    "review_reason": "复核说明",
+    "scale_name": "量表名称",
+    "assessor_id": "评估人",
+    "assessed_at": "评估时间",
+    "unit": "计费单位",
+    "rate": "补贴单价",
+    "item_name": "服务项目",
+    "duration_minutes": "服务时长（分钟）",
+    "price": "价格（元）",
+    "category": "类别",
+    "subsidizable": "可否补贴",
+    "account_id": "账号编号",
+    "message": "通知内容",
+    "tag": "标签",
+    "tags": "老人标签",
+    "phone": "联系电话",
+    "relation_name": "家属关系",
+    "active": "是否有效",
+    "position_x": "住址横坐标（米）",
+    "position_y": "住址纵坐标（米）",
+    "center_x": "社区中心横坐标",
+    "center_y": "社区中心纵坐标",
+    "radius_m": "服务范围半径（米）",
+    "fence_m": "打卡范围半径（米）",
+    "district": "所属区县",
+    "street_name": "所属街道",
+    "title": "名称",
+    "body": "公示内容",
+    "candidate_name": "应聘人",
+    "review_note": "审核意见",
+    "reviewed_at": "复核时间",
+    "training_id": "培训编号",
+    "recorded_at": "成绩登记时间",
+    "weekly_frequency": "每周次数",
+    "handler_id": "经办人",
+    "content": "内容",
+    "batch_id": "抽查批次",
+    "target_type": "抽查对象",
+    "ratio": "抽查比例",
+    "population": "符合条件数量",
+    "sample_count": "抽中数量",
+    "sample_seed": "抽样复核编号",
+    "initial_deadline": "首次响应截止",
+    "checkout_fence_ok": "签退围栏结果",
+    "checkin_x": "签到横坐标",
+    "checkin_y": "签到纵坐标",
+    "checkout_x": "签退横坐标",
+    "checkout_y": "签退纵坐标",
+    "period_start": "周期开始",
+    "period_end": "周期截止（不含）",
+    "settlement_cycle": "结算周期",
+    "minimum_age": "最低年龄",
+    "required_tag": "对象标签",
+    "published_at": "公示时间",
+    "summary": "情况说明",
+    "evidence": "证明材料",
+    "measures": "整改措施",
+    "decision": "复核结论",
+    "active_elders": "在册老人数",
+    "served_elders": "本月已服务老人数",
+    "events_total": "本月预警数",
+    "response_denominator": "有原始时限的非误报预警数",
+    "timely_responses": "按时响应数",
+    "coverage_rate": "服务覆盖率（%）",
+    "response_rate": "及时响应率（%）",
+    "confirmation": "家属确认说明",
+    "confirmed_at": "家属确认时间",
+    "reviewer_name": "审核人",
+    "actor_name": "经办人",
+    "hours_status": "工时状态",
+    "kind": "反馈类型",
+    "simulation_enabled": "定时采样开关",
+    "simulation_metric_id": "模拟指标",
+    "simulation_seconds": "采样间隔（秒）",
+    "last_simulated_at": "上次模拟采样",
+    "rating": "家属评分",
+    "updated_at": "更新时间",
+    "complaint_id": "投诉编号",
+    "actor_id": "经办账号",
+    "recorded_by": "成绩登记人",
+    "submitted_by": "提交账号",
+    "publisher_id": "发布账号",
+    "withdrawn_at": "撤回时间",
+    "withdraw_reason": "撤回原因",
+    "inspection_id": "抽查编号",
+    "content_sha256": "材料摘要",
+    "action": "操作",
+    "username": "登录账号"
+  },
+  "values": {
+    "ACTIVE": "正常",
+    "INACTIVE": "停用",
+    "TRANSFERRED": "已迁出",
+    "SELF": "自理",
+    "PARTIAL": "部分失能",
+    "SEVERE": "重度失能",
+    "PENDING": "待处理",
+    "ASSIGNED": "已派单",
+    "ACCEPTED": "已接单",
+    "SERVING": "服务中",
+    "CONFIRM": "待确认",
+    "COMPLETED": "已完成",
+    "CANCELLED": "已取消",
+    "FINISHED": "已结束",
+    "REASSIGNED": "已改派",
+    "REJECTED": "已驳回",
+    "PAUSED": "已暂停",
+    "EXPIRED": "已过期",
+    "ENDED": "已结束",
+    "OPEN": "开放",
+    "CLOSED": "已关闭",
+    "REVIEW": "待复核",
+    "VALID": "有效",
+    "INVALID": "无效",
+    "UNCONFIRMED": "待确认",
+    "RESPONDED": "已响应",
+    "FALSE_ALARM": "误报",
+    "DRAFT": "草稿",
+    "SUBMITTED": "已提交",
+    "STREET_APPROVED": "街道已审核",
+    "APPROVED": "已通过",
+    "PAID": "已拨付",
+    "OFFLINE": "离线",
+    "RETIRED": "已停用",
+    "LEAVE": "请假",
+    "LEFT": "离职",
+    "VISIT": "次",
+    "HOUR": "小时",
+    "MONTH": "月度",
+    "PHONE": "电话",
+    "COMMUNITY": "社区",
+    "FAMILY": "家属",
+    "SIMULATOR": "模拟采样",
+    "DEVICE": "设备采样",
+    "PASS": "通过",
+    "FAIL": "未通过",
+    "APPLIED": "待审查",
+    "HIRED": "已录用",
+    "REPLIED": "已回复",
+    "RETURNED": "已退回",
+    "ORDER": "服务订单",
+    "CAREGIVER": "护工",
+    "QUARTER": "季度",
+    "YEAR": "年度",
+    "ALONE": "独居",
+    "DISABLED": "失能",
+    "LOW_INCOME": "低保",
+    "ACCEPT": "通过",
+    "RETURN": "退回",
+    "COMPLAINT": "投诉",
+    "WAITING": "待接单",
+    "APPROVE": "通过",
+    "REJECT": "驳回",
+    "MANUAL": "人工上报",
+    "FAMILY_CALL": "家属求助"
+  },
+  "groups": [
+    ["档案与照护", ["elders", "assessments", "plans"]],
+    ["服务管理", ["orders", "caregivers", "credentials", "shifts", "hours"]],
+    ["健康监测", ["devices", "vitals", "events"]],
+    ["补贴与监管", ["claims", "policies", "inspections"]],
+    ["基础资料", ["catalog", "bundles", "notifications"]],
+    [
+      "业务汇总与待办",
+      [
+        "assessmentDue",
+        "dispatchPool",
+        "activePlans",
+        "familyCare",
+        "waitingConfirmation",
+        "reassignments",
+        "credentialDue",
+        "shiftCapacity",
+        "hoursReview",
+        "currentDevices",
+        "abnormalVitals",
+        "pendingEvents",
+        "eligibleClaims",
+        "claimProgress",
+        "rectifications",
+        "monthlyHours",
+        "quality",
+        "organizationQuality",
+        "selfPay"
+      ]
+    ],
+    [
+      "人员与服务质量",
+      [
+        "recruitments",
+        "trainings",
+        "trainingRecords",
+        "areas",
+        "managerDispatchPool",
+        "complaints",
+        "inspectionBatches",
+        "organizationReports",
+        "jurisdictionStats",
+        "publicNotices"
+      ]
+    ],
+    ["资料维护", ["communities", "accounts", "metrics"]]
+  ],
+  "roleNames": {
+    "ADMIN": "社区管理员",
+    "FAMILY": "老人及家属",
+    "CAREGIVER": "护工",
+    "MANAGER": "机构负责人",
+    "STREET": "街道审核",
+    "REGULATOR": "民政监管"
+  },
+  "errors": {
+    "PLAN_OVERLAP": "该老人已有时间重叠的照护计划。",
+    "SHIFT_OVERLAP": "该护工已有时间重叠的班次。",
+    "PLAN_ASSESSMENT_INVALID": "评估结果或有效期不符合计划要求。",
+    "WORKER_NOT_QUALIFIED": "护工资质或服务区域不符合要求。",
+    "WORKER_TIME_CONFLICT": "护工在该时间段已有服务安排。",
+    "SHIFT_FULL_OR_OUTSIDE": "班次名额已满，或预约时间不在班次内。",
+    "ORDER_PLAN_INVALID": "请检查预约时间和照护计划。老人复评后，需要根据最新评估调整计划。",
+    "CONFIRMATION_REQUIRED": "请先由老人或家属确认服务。",
+    "RECTIFICATION_REQUIRED": "该护工存在未完成的整改事项。",
+    "CLAIM_ORDER_INELIGIBLE": "订单不符合本次补贴申报条件。",
+    "CLAIM_EVIDENCE_MISSING": "服务确认或有效工时记录不完整。",
+    "CLAIM_STATE_INVALID": "当前申报状态不支持此操作。",
+    "HISTORY_DELETE_FORBIDDEN": "历史记录不能删除。",
+    "VITAL_BINDING_TIME_INVALID": "采样时间不在设备绑定期间内。",
+    "PLAN_ASSESSMENT_SUPERSEDED": "已有新的能力评估，请根据最新评估调整照护计划。",
+    "TRANSFER_DEVICE_BOUND": "请先解绑原社区设备，再迁移老人档案。",
+    "BINDING_COMMUNITY_INVALID": "当前绑定要求设备和老人在同一社区，且老人档案有效。",
+    "HISTORICAL_FACT_IMMUTABLE": "已归档的业务记录不能改写。",
+    "DISPATCH_STATE_INVALID": "当前派单状态不支持此操作。"
+  },
+  "actionPrefixes": {
+    "elders": ["elder.", "guardian.", "account."],
+    "assessments": ["assessment."],
+    "assessmentDue": ["assessment."],
+    "plans": ["plan."],
+    "activePlans": ["plan."],
+    "familyCare": ["order."],
+    "orders": ["order.", "review.", "complaint.create"],
+    "dispatchPool": ["order."],
+    "managerDispatchPool": ["order."],
+    "waitingConfirmation": ["order.confirm", "review."],
+    "reassignments": ["order.assign"],
+    "caregivers": ["caregiver.", "recruitment.", "password.reset"],
+    "credentials": ["credential."],
+    "credentialDue": ["credential."],
+    "shifts": ["shift."],
+    "shiftCapacity": ["shift."],
+    "hours": ["hours."],
+    "hoursReview": ["hours."],
+    "devices": ["device."],
+    "currentDevices": ["device."],
+    "vitals": ["vital.", "simulator."],
+    "abnormalVitals": ["event."],
+    "events": ["event."],
+    "pendingEvents": ["event."],
+    "claims": ["claim."],
+    "claimProgress": ["claim."],
+    "eligibleClaims": ["claim."],
+    "policies": ["policy."],
+    "inspections": ["inspection.", "rectification."],
+    "rectifications": ["rectification.", "inspection.close"],
+    "complaints": ["complaint."],
+    "recruitments": ["recruitment."],
+    "trainings": ["training."],
+    "trainingRecords": ["training."],
+    "inspectionBatches": ["inspection.batch", "inspection.record"],
+    "organizationReports": ["organization."],
+    "publicNotices": ["notice."],
+    "catalog": ["catalog."],
+    "bundles": ["bundle."],
+    "metrics": ["metric."],
+    "areas": ["caregiver.area"],
+    "accounts": ["account.", "guardian.", "password.reset"]
+  },
+  "detailKinds": {
+    "elders": "elders",
+    "plans": "plans",
+    "orders": "orders",
+    "claims": "claims",
+    "claimProgress": "claims",
+    "complaints": "complaints",
+    "devices": "devices",
+    "currentDevices": "devices",
+    "events": "events",
+    "pendingEvents": "events",
+    "inspections": "inspections",
+    "rectifications": "inspections",
+    "inspectionBatches": "inspectionBatches",
+    "caregivers": "caregivers",
+    "bundles": "bundles"
+  },
+  "statusLabels": {
+    "orders": {
+      "PENDING": "待派单",
+      "CONFIRM": "待家属确认"
+    },
+    "complaints": {
+      "SUBMITTED": "待受理",
+      "ASSIGNED": "已受理",
+      "REPLIED": "已回复",
+      "CLOSED": "已结案"
+    },
+    "events": {
+      "UNCONFIRMED": "待核实",
+      "OPEN": "待响应",
+      "CLOSED": "已结案"
+    },
+    "pendingEvents": {
+      "UNCONFIRMED": "待核实",
+      "OPEN": "待响应",
+      "CLOSED": "已结案"
+    },
+    "inspections": {
+      "PENDING": "待抽查",
+      "OPEN": "待整改",
+      "REVIEW": "待复核",
+      "CLOSED": "已结案"
+    },
+    "rectifications": {
+      "PENDING": "待抽查",
+      "OPEN": "待整改",
+      "REVIEW": "待复核",
+      "CLOSED": "已结案"
+    },
+    "organizationReports": {
+      "SUBMITTED": "待审核",
+      "ACCEPTED": "已采纳",
+      "RETURNED": "已退回"
+    },
+    "caregivers": {
+      "ACTIVE": "在岗",
+      "LEAVE": "请假",
+      "LEFT": "离职"
+    },
+    "reassignments": {
+      "REJECTED": "已退单",
+      "REASSIGNED": "已改派"
+    }
+  },
+  "tasks": {
+    "ADMIN": [
+      ["待派单", "orders", "PENDING"],
+      ["待受理投诉", "complaints", "SUBMITTED"],
+      ["待处理应急", "pendingEvents", ""],
+      ["评估到期", "assessmentDue", ""]
+    ],
+    "FAMILY": [
+      ["待确认服务", "waitingConfirmation", ""],
+      ["预约记录", "orders", ""],
+      ["投诉进度", "complaints", ""],
+      ["补贴进度", "claimProgress", ""]
+    ],
+    "CAREGIVER": [
+      ["待接单", "orders", "ASSIGNED"],
+      ["待上门", "orders", "ACCEPTED"],
+      ["服务中", "orders", "SERVING"],
+      ["应急待响应", "events", "OPEN"]
+    ],
+    "MANAGER": [
+      ["工时待复核", "hoursReview", ""],
+      ["待回复投诉", "complaints", "ASSIGNED"],
+      ["待整改", "inspections", "OPEN"],
+      ["待审应聘", "recruitments", "APPLIED"]
+    ],
+    "STREET": [
+      ["待初审", "claims", "SUBMITTED"],
+      ["已初审", "claims", "STREET_APPROVED"],
+      ["辖区服务", "jurisdictionStats", ""],
+      ["通知", "notifications", ""]
+    ],
+    "REGULATOR": [
+      ["待终审", "claims", "STREET_APPROVED"],
+      ["待拨付", "claims", "APPROVED"],
+      ["整改待复核", "inspections", "REVIEW"],
+      ["机构材料待审", "organizationReports", "SUBMITTED"]
+    ]
+  }
+}
