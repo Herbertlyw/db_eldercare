@@ -31,12 +31,12 @@ Maven 自动执行 `npm ci` 和生产构建，将 `frontend/dist` 放入 JAR 的
 | `src/api` | 请求、会话、统一错误和分页查询 |
 | `src/model` | 角色菜单、字段定义、状态动作、中文显示和详情阶段 |
 | `src/forms` | 字段控件、联动查询、条件校验、草稿及提交 |
-| `src/pages` | 登录、角色工作台和列表布局 |
+| `src/pages` | 登录、六角色首页、业务列表和共用布局 |
 | `src/components` | 详情、密码维护、照片与头像 |
 | `src/hooks` | 可取消的异步加载和响应式布局 |
 | `tests` | 角色动作、依赖清空、字段和提交规则测试 |
 
-`registry.json` 保存查询名称、角色菜单和 73 种业务操作的字段元数据。修改 API 或业务规则时，需要同步元数据、`rules.ts`、`schema.ts` 及相应测试。SQL 投影的动态行结构在 `model/types.ts` 中统一表示，组件在对应字段处解释值。
+`registry.json` 保存查询名称、角色菜单和 74 种业务操作的字段元数据。修改 API 或业务规则时，需要同步元数据、`rules.ts`、`schema.ts` 及相应测试。SQL 投影的动态行结构在 `model/types.ts` 中统一表示，组件在对应字段处解释值。
 
 ## 浏览器验证
 
@@ -54,7 +54,13 @@ TEST_DATABASE=eldercare_example_test TEST_PORT=18087 node scripts/react/verify_c
 
 工作流、档案和密码脚本会写入虚构数据；不得连接展示库运行。页面检查覆盖全部角色入口，表单检查涵盖前置依赖、失败重试、草稿和条件字段。真实业务约束仍由 Java/MySQL 回归验证。结果保存在 `evidence/react`，可通过 `EVIDENCE_DIR` 指定其他目录。
 
-`node scripts/react/run.cjs` 按顺序执行整组浏览器检查。场景枚举检查应在业务写入前执行；整组测试使用新建的测试库，避免重复审核已处理的种子业务。根目录下同名 `scripts/verify_*.cjs` 入口调用对应的 React 检查。
+`node scripts/react/verify_workforce.cjs` 检查三个授权角色的工时汇总与筛选，以及护工、机构负责人的证书图片预览和下载、次级导航及手机布局；设置 DESKTOP_ONLY=1 时只检查桌面布局。浏览器响应夹具核对分页切换、失败重试和服务端汇总，页面只请求当前页明细，不写入业务库。`src/pages/workforce` 存放上述专用组件和展示计算。
+
+`node scripts/react/verify_designed_records.cjs` 检查排班、培训、消息、公示及费用页面的详情、办理入口、关联事件跳转、筛选恢复和手机布局；专用列表组件位于 `src/pages/records`。
+
+`node scripts/react/verify_layout.cjs` 检查六角色列表在不同宽度下的布局、筛选空结果恢复、手机详情和办理对象提示。
+
+`node scripts/react/run.cjs` 按顺序执行六角色首页及业务浏览器检查；`node scripts/react/verify_workspaces.cjs` 单独验证六个角色的工作台首页。场景枚举检查应在业务写入前执行；整组测试使用新建的测试库，避免重复审核已处理的种子业务。根目录下同名 `scripts/verify_*.cjs` 入口调用对应的 React 检查。
 
 ## 页面与数据链路
 
@@ -77,3 +83,13 @@ node scripts/react/verify_pages.cjs
 ```
 
 这些命令需要先启动连接该测试库的 Java 应用；端口和库名不能只填写变量而不核实实际连接。Windows 实机验收仍需在目标电脑完成。
+
+## 角色工作台
+
+默认路由 `#home` 按登录角色选择 `pages/workspaces` 中的页面。常用导航由 `primaryNavigation` 定义，未列为常用的原有菜单保留在“更多业务”的分组中；进入常用页面时不展开无关业务分组，直接访问其他查询时展开所属分组。业务列表的 URL 保存筛选条件和页码；家属当前老人选择仅保存在当前标签页的历史状态中，服务端每次读取仍检查有效关联。
+
+工作台数据来自只读 API，费用和监管汇总在 MySQL 完成。新增依赖为零；React、Arco、Vite 与 Node 版本及安装方式沿用本页说明。首页的照片复用仓库现有资源，设计效果图不作为网页背景或业务数据使用。
+
+工作台的共用细节样式在 `styles/workspace-polish.css`，导航图标在 `components/NavigationIcon.tsx`。业务列表使用全宽表格和顶部快捷操作，详情与表单沿用 Arco 的键盘操作、校验及状态反馈。
+
+五个非管理员角色的首页布局与响应式样式在 `styles/role-personas.css`：家属照护资料、护工日程、机构人员管理、街道申报核验单和民政辖区统计共用现有权限与查询接口。

@@ -22,7 +22,11 @@ module.exports = { run };
 if (require.main === module)
   run([
     "verify_scenarios",
+    "verify_workspaces",
     "verify_pages",
+    "verify_layout",
+    "verify_workforce",
+    "verify_designed_records",
     "verify_forms",
     "verify_media",
     "verify_passwords",

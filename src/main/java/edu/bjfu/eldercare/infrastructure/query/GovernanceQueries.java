@@ -37,6 +37,7 @@ public class GovernanceQueries implements QueryModule {
                 Map.entry("organizationReports", this::organizationReports),
                 Map.entry("publicNotices", this::publicNotices),
                 Map.entry("jurisdictionStats", this::jurisdictionStats),
+                Map.entry("jurisdictionSummary", this::jurisdictionSummary),
                 Map.entry("communities", this::communities));
     }
 
@@ -127,6 +128,23 @@ public class GovernanceQueries implements QueryModule {
         Auth.role(user, "STREET", "REGULATOR");
         sql = stats(user, parameters);
         return new PageQuery(sql, parameters, this::addRates);
+    }
+
+    private PageQuery jurisdictionSummary(Auth.User user) {
+        Auth.role(user, "STREET", "REGULATOR");
+        var parameters = new ArrayList<Object>();
+        String scoped = stats(user, parameters);
+        return new PageQuery(
+                "SELECT 1 id,DATE_FORMAT(CURRENT_DATE,'%Y-%m') period,COUNT(*)"
+                        + " community_count,COALESCE(SUM(active_elders),0)"
+                        + " active_elders,COALESCE(SUM(served_elders),0)"
+                        + " served_elders,COALESCE(SUM(response_denominator),0)"
+                        + " response_denominator,COALESCE(SUM(timely_responses),0) timely_responses"
+                        + " FROM ("
+                        + scoped
+                        + ") region",
+                parameters,
+                this::addRates);
     }
 
     private PageQuery communities(Auth.User user) {

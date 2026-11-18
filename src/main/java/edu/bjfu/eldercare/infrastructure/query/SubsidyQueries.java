@@ -45,8 +45,10 @@ public class SubsidyQueries implements QueryModule {
         String sql;
         Auth.role(user, "ADMIN", "FAMILY", "STREET", "REGULATOR");
         sql =
-                "SELECT c.*,e.name elder_name,p.reference_no,p.paid_at FROM claim c JOIN elder e ON"
-                        + " e.id=c.elder_id LEFT JOIN payment p ON p.claim_id=c.id WHERE "
+                "SELECT c.*,e.name elder_name,(SELECT co.name FROM community co WHERE"
+                    + " co.id=c.community_id) community_name,p.reference_no,p.paid_at FROM claim c"
+                    + " JOIN elder e ON e.id=c.elder_id LEFT JOIN payment p ON p.claim_id=c.id"
+                    + " WHERE "
                         + scope.claimFilter(user, parameters);
         return new PageQuery(sql, parameters);
     }
@@ -65,12 +67,13 @@ public class SubsidyQueries implements QueryModule {
         String sql;
         Auth.role(user, "FAMILY");
         sql =
-                "SELECT o.id,e.name elder_name,o.amount,COALESCE((SELECT SUM(ci.amount) FROM"
-                    + " claim_item ci JOIN claim cl ON cl.id=ci.claim_id WHERE ci.order_id=o.id AND"
-                    + " cl.status='PAID'),0) paid_subsidy,o.amount-COALESCE((SELECT SUM(ci.amount)"
+                "SELECT o.id,o.elder_id,e.name elder_name,o.amount,COALESCE((SELECT SUM(ci.amount)"
                     + " FROM claim_item ci JOIN claim cl ON cl.id=ci.claim_id WHERE"
-                    + " ci.order_id=o.id AND cl.status='PAID'),0) self_pay FROM service_order o"
-                    + " JOIN elder e ON e.id=o.elder_id WHERE o.status='COMPLETED' AND "
+                    + " ci.order_id=o.id AND cl.status='PAID'),0)"
+                    + " paid_subsidy,o.amount-COALESCE((SELECT SUM(ci.amount) FROM claim_item ci"
+                    + " JOIN claim cl ON cl.id=ci.claim_id WHERE ci.order_id=o.id AND"
+                    + " cl.status='PAID'),0) self_pay FROM service_order o JOIN elder e ON"
+                    + " e.id=o.elder_id WHERE o.status='COMPLETED' AND "
                         + scope.elderFilter(user, parameters);
         return new PageQuery(sql, parameters);
     }

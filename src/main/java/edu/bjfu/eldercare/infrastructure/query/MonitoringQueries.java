@@ -104,8 +104,9 @@ public class MonitoringQueries implements QueryModule {
         String sql;
         Auth.role(user, "ADMIN", "REGULATOR");
         sql =
-                "SELECT * FROM v_emergency_pending WHERE "
-                        + scope.communityFilter(user, "community_id", parameters);
+                "SELECT p.*,x.responded_at,x.responded_by,x.arrived_at FROM v_emergency_pending p"
+                        + " JOIN emergency x ON x.id=p.id WHERE "
+                        + scope.communityFilter(user, "p.community_id", parameters);
         return new PageQuery(sql, parameters);
     }
 

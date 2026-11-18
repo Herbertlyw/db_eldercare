@@ -58,14 +58,17 @@ public class GovernanceService implements ActionModule {
     private Object closeInspection(Auth.User user, Map<String, Object> input) {
         Auth.role(user, "REGULATOR");
         long recordId = number(input, "inspectionId");
-        Map<String, Object> record = scope.inspection(user, recordId);
         repository.lockInspection(recordId);
+        var record = scope.inspection(user, recordId);
         if (!record.get("status").equals("REVIEW")) {
             throw new Rule("请先由机构提交整改材料");
         }
         boolean approve = flag(input, "approve");
         String result = text(input, "result");
-        repository.reviewRectification(approve ? "ACCEPT" : "RETURN", user.id(), result, recordId);
+        int reviewed =
+                repository.reviewRectification(
+                        approve ? "ACCEPT" : "RETURN", user.id(), result, recordId);
+        if (reviewed != 1) throw new Rule("待复核材料数量异常，请刷新核对");
         return repository.updateInspectionResult(approve ? "CLOSED" : "OPEN", result, recordId);
     }
 
@@ -112,8 +115,8 @@ public class GovernanceService implements ActionModule {
     private Object recordInspection(Auth.User user, Map<String, Object> input) {
         Auth.role(user, "REGULATOR");
         long recordId = number(input, "inspectionId");
-        Map<String, Object> record = scope.inspection(user, recordId);
         repository.lockInspection(recordId);
+        var record = scope.inspection(user, recordId);
         if (!record.get("status").equals("PENDING")) {
             throw new Rule("抽查结果已经登记");
         }
@@ -132,8 +135,8 @@ public class GovernanceService implements ActionModule {
     private Object submitRectification(Auth.User user, Map<String, Object> input) {
         Auth.role(user, "MANAGER");
         long recordId = number(input, "inspectionId");
-        Map<String, Object> record = scope.inspection(user, recordId);
         repository.lockInspection(recordId);
+        var record = scope.inspection(user, recordId);
         if (!record.get("status").equals("OPEN")) {
             throw new Rule("当前没有待提交整改");
         }

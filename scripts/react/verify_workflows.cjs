@@ -272,14 +272,16 @@ const { start } = require("./browser.cjs"),
     await h.nav(p, "elders");
     await p.locator("#record-search").fill("查询无匹配记录");
     await h.quiet(p);
-    assert(await p.getByText("暂无记录", { exact: true }).isVisible());
+    const emptyResults = p.locator(".records-empty");
+    await emptyResults.getByText("没有符合条件的记录", { exact: true }).waitFor();
+    assert.equal(await p.locator("tr[data-id]").count(), 0);
     await p.locator("#refresh").click();
     await h.quiet(p);
     assert.equal(
       await p.locator("#record-search").inputValue(),
       "查询无匹配记录",
     );
-    await p.getByRole("button", { name: "清除筛选", exact: true }).click();
+    await emptyResults.getByRole("button", { name: "清除筛选", exact: true }).click();
     await h.quiet(p);
     assert(await p.locator(".detail-link").count());
     const forbidden = await h.request(p, "/actions/claim.pay", {

@@ -214,22 +214,34 @@ export function OperationDrawer({
       }
     >
       <div id="operation-dialog" data-action={op.action} aria-busy={busy}>
-        <Form layout="vertical">
-          <Form.Item label="业务类型">
-            <Select
-              id="action"
-              aria-label="业务类型"
-              value={op.action}
-              disabled={busy}
-              showSearch
-              options={allowedActions(user.role).map((action) => ({
-                value: action,
-                label: actions[action][0],
-              }))}
-              onChange={switchAction}
-            />
-          </Form.Item>
-        </Form>
+        {!(user.role === "FAMILY" && op.action === "order.create") && (
+          <Form layout="vertical">
+            <Form.Item label="业务类型">
+              <Select
+                id="action"
+                aria-label="业务类型"
+                value={op.action}
+                disabled={busy}
+                showSearch
+                options={allowedActions(user.role).map((action) => ({
+                  value: action,
+                  label: actions[action][0],
+                }))}
+                onChange={switchAction}
+              />
+            </Form.Item>
+          </Form>
+        )}
+        {op.context &&
+          !receipt &&
+          (values[primaryKey(op.context.kind)] == null ||
+            String(values[primaryKey(op.context.kind)]) ===
+              String(op.context.row.id)) && (
+            <div className="operation-context">
+              <span>当前办理对象</span>
+              <strong>{recordLabel(op.context.row, op.context.kind)}</strong>
+            </div>
+          )}
         {receipt ? (
           <div id="operation-receipt">
             <Alert

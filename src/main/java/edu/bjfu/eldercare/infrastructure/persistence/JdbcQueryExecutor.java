@@ -4,6 +4,7 @@ import edu.bjfu.eldercare.application.port.QueryExecutor;
 import edu.bjfu.eldercare.application.port.query.ListFilter;
 import edu.bjfu.eldercare.application.port.query.PageQuery;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
@@ -27,30 +28,43 @@ public class JdbcQueryExecutor implements QueryExecutor {
         var prepared = filtering.prepare(source, filter);
         var query = prepared.query();
         List<Object> parameters = new ArrayList<>(query.parameters());
-        long total = db.count("SELECT COUNT(*) FROM (" + query.sql() + ") q", parameters.toArray());
+        String columns =
+                query.summaryColumns().isEmpty()
+                        ? "COUNT(*) total"
+                        : "COUNT(*) total," + query.summaryColumns();
+        var aggregate =
+                new LinkedHashMap<>(
+                        db.one(
+                                "SELECT " + columns + " FROM (" + query.sql() + ") q",
+                                parameters.toArray()));
+        Object total = aggregate.remove("total");
         parameters.add(size);
         parameters.add(page * size);
         var rows =
                 db
                         .rows(
-                                query.sql() + " ORDER BY 1 DESC LIMIT ? OFFSET ?",
+                                query.sql() + " ORDER BY " + query.orderBy() + " LIMIT ? OFFSET ?",
                                 parameters.toArray())
                         .stream()
                         .map(query.rowMapper())
                         .toList();
-        return Map.of(
-                "rows",
-                rows,
-                "total",
-                total,
-                "page",
-                page,
-                "size",
-                size,
-                "dateField",
-                prepared.dateField(),
-                "states",
-                prepared.states());
+        var result =
+                new LinkedHashMap<String, Object>(
+                        Map.of(
+                                "rows",
+                                rows,
+                                "total",
+                                total,
+                                "page",
+                                page,
+                                "size",
+                                size,
+                                "dateField",
+                                prepared.dateField(),
+                                "states",
+                                prepared.states()));
+        if (!aggregate.isEmpty()) result.put("summary", aggregate);
+        return result;
     }
 
     public Object publicNotices() {

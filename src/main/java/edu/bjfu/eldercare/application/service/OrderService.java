@@ -19,6 +19,7 @@ import edu.bjfu.eldercare.domain.repository.OrderRepository;
 import edu.bjfu.eldercare.domain.shared.Position;
 import edu.bjfu.eldercare.domain.shared.Rule;
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +44,7 @@ public class OrderService implements ActionModule {
     public Map<String, ActionHandler> actions() {
         return Map.ofEntries(
                 Map.entry("order.create", this::createOrder),
+                Map.entry("order.reschedule", this::reschedule),
                 Map.entry("order.recommend", this::recommendOrder),
                 Map.entry("order.assign", this::assignOrder),
                 Map.entry("order.accept", this::acceptOrder),
@@ -85,6 +87,25 @@ public class OrderService implements ActionModule {
                 (Number) e.get("position_y"));
     }
 
+    private Object reschedule(Auth.User user, Map<String, Object> input) {
+        Auth.role(user, "ADMIN");
+        long orderId = number(input, "orderId");
+        var order = access.activeOrder(user, orderId);
+        if (!"PENDING".equals(order.get("status")) || repository.windowOpen(orderId)) {
+            throw new Rule("只能改约已错过时段的待派订单");
+        }
+        var start = parseTime(text(input, "startsAt"));
+        var duration =
+                Duration.between(
+                        (LocalDateTime) order.get("starts_at"),
+                        (LocalDateTime) order.get("ends_at"));
+        var end = start.plus(duration);
+        repository.assertOrderEligible(
+                id(order, "elder_id"), id(order, "item_id"), id(order, "community_id"), start, end);
+        if (repository.reschedule(orderId, start, end) != 1) throw new Rule("请选择将来的预约时间");
+        return "已更新预约时间";
+    }
+
     private Object recommendOrder(Auth.User user, Map<String, Object> input) {
         Auth.role(user, "ADMIN");
         return recommend(user, rawNumber(input, "orderId"));
@@ -94,6 +115,7 @@ public class OrderService implements ActionModule {
         Auth.role(user, "ADMIN");
         long recordId = rawNumber(input, "orderId");
         access.activeOrder(user, recordId);
+        requireOpenWindow(recordId);
         repository.assignOrder(recordId, rawNumber(input, "shiftId"), rawText(input, "reason"));
         return "派单成功";
     }
@@ -142,8 +164,8 @@ public class OrderService implements ActionModule {
     private Object releaseOrder(Auth.User user, Map<String, Object> input) {
         Auth.role(user, "MANAGER", "CAREGIVER");
         long recordId = number(input, "orderId");
-        Map<String, Object> record = scope.order(user, recordId);
         repository.lockOrder(recordId);
+        var record = scope.order(user, recordId);
         orderState(record).requireReleasable();
         var dispatch = repository.findActiveDispatch(recordId);
         scope.worker(user, id(dispatch, "caregiver_id"));
@@ -165,8 +187,8 @@ public class OrderService implements ActionModule {
     private Object attendance(Auth.User user, Map<String, Object> input, boolean finish) {
         Auth.role(user, "CAREGIVER");
         long orderId = number(input, "orderId");
-        var order = scope.order(user, orderId);
         repository.lockOrder(orderId);
+        var order = scope.order(user, orderId);
         orderState(order).requireServiceStage(finish);
         var dispatch = repository.findAcceptedDispatch(orderId);
         scope.worker(user, id(dispatch, "caregiver_id"));
@@ -203,6 +225,7 @@ public class OrderService implements ActionModule {
     private List<Map<String, Object>> recommend(Auth.User user, long orderId) {
         var order = access.activeOrder(user, orderId);
         orderState(order).requireDispatchable();
+        requireOpenWindow(orderId);
         repository.assertOrderEligible(
                 (Number) order.get("elder_id"),
                 (Number) order.get("item_id"),
@@ -221,6 +244,10 @@ public class OrderService implements ActionModule {
                 orderId,
                 (LocalDateTime) order.get("ends_at"),
                 (LocalDateTime) order.get("starts_at"));
+    }
+
+    private void requireOpenWindow(long orderId) {
+        if (!repository.windowOpen(orderId)) throw new Rule("预约时段已结束，请联系改约或取消");
     }
 
     private ServiceOrder orderState(Map<String, Object> row) {

@@ -116,6 +116,7 @@ const { start } = require("./browser.cjs"),
         mimeType: "application/json",
         buffer: Buffer.from(samples),
       });
+    await box("samples").getByText("1 条采样记录", { exact: true }).waitFor();
     assert.equal(
       JSON.parse(await box("samples").locator("textarea").inputValue()).length,
       1,
@@ -127,6 +128,7 @@ const { start } = require("./browser.cjs"),
         mimeType: "application/json",
         buffer: Buffer.from("{bad"),
       });
+    await box("samples").getByText(/已保留原内容/).waitFor();
     assert.equal(
       JSON.parse(await box("samples").locator("textarea").inputValue()).length,
       1,

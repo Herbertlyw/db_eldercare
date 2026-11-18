@@ -42,11 +42,12 @@ public class OrderQueries implements QueryModule {
         List<Object> parameters = new ArrayList<>();
         String sql;
         sql =
-                "SELECT o.*,e.name elder_name,s.name item_name,(SELECT c.account_id FROM"
-                        + " v_dispatch_context d JOIN caregiver c ON c.id=d.caregiver_id WHERE"
-                        + " d.order_id=o.id AND d.status IN ('WAITING','ACCEPTED') LIMIT 1)"
-                        + " current_worker_account FROM service_order o JOIN service_item s ON"
-                        + " s.id=o.item_id JOIN elder e ON e.id=o.elder_id WHERE "
+                "SELECT o.*,IF(o.ends_at>NOW(),1,2) dispatch_window,e.name elder_name,s.name"
+                    + " item_name,(SELECT c.account_id FROM v_dispatch_context d JOIN caregiver c"
+                    + " ON c.id=d.caregiver_id WHERE d.order_id=o.id AND d.status IN"
+                    + " ('WAITING','ACCEPTED') LIMIT 1) current_worker_account FROM service_order o"
+                    + " JOIN service_item s ON s.id=o.item_id JOIN elder e ON e.id=o.elder_id WHERE"
+                    + " "
                         + scope.orderFilter(user, parameters);
         return new PageQuery(sql, parameters);
     }
@@ -55,7 +56,9 @@ public class OrderQueries implements QueryModule {
         List<Object> parameters = new ArrayList<>();
         String sql;
         Auth.role(user, "ADMIN");
-        sql = "SELECT * FROM v_dispatch_overdue WHERE community_id=?";
+        sql =
+                "SELECT v.* FROM v_dispatch_overdue v JOIN service_order o ON o.id=v.id WHERE"
+                        + " v.community_id=? AND o.ends_at>NOW()";
         parameters.add(user.community());
         return new PageQuery(sql, parameters);
     }

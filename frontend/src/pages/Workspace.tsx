@@ -14,7 +14,6 @@ import {
   Spin,
   Select,
   Space,
-  Statistic,
   Table,
   Tag,
   Tooltip,
@@ -28,13 +27,15 @@ import {
   IconFile,
   IconHeart,
   IconMenu,
+  IconMore,
+  IconLock,
+  IconExport,
   IconNotification,
   IconPlus,
   IconRefresh,
   IconSafe,
   IconSettings,
   IconUserGroup,
-  IconThunderbolt,
 } from "@arco-design/web-react/icon";
 import type { Criteria, Operation, Row, User, Values } from "../model/types";
 import {
@@ -49,19 +50,38 @@ import {
 } from "../model/registry";
 import { choices, preset } from "../model/rules";
 import {
+  appointmentSlot,
+  orderStatusLabel,
   closedStates,
   columnTitle,
   displayValue,
   pageHint,
   pendingStates,
   recordColumns,
+  recordKey,
 } from "../model/presentation";
 import { list } from "../api/client";
 import { useMobile } from "../hooks/useMobile";
 import { useResource } from "../hooks/useResource";
-import { CommunityCard, Person } from "../components/Media";
+import { Person } from "../components/Media";
 import { Details } from "../components/Details";
+import { NavigationIcon } from "../components/NavigationIcon";
 import { OperationDrawer } from "../forms/OperationDrawer";
+import { BusinessRecords, designedRecords } from "./records/BusinessRecords";
+import "../styles/business-records.css";
+import { Certificates } from "./workforce/Certificates";
+import { HoursSummary } from "./workforce/HoursSummary";
+import { duration } from "./workforce/metrics";
+import "../styles/workforce.css";
+import { RoleHome } from "./workspaces/RoleHome";
+import {
+  primaryNavigation,
+  readLocation,
+  writeLocation,
+} from "./workspaces/navigation";
+import { dateTitle, dateText, todayInShanghai } from "./workspaces/shared";
+import "../styles/workspace-polish.css";
+import "../styles/role-personas.css";
 const icons = [
   IconBook,
   IconFile,
@@ -72,10 +92,6 @@ const icons = [
   IconUserGroup,
   IconSettings,
 ];
-const initialKind = (user: User) =>
-  menus[user.role].includes(location.hash.slice(1))
-    ? location.hash.slice(1)
-    : menus[user.role][0];
 export function Workspace({
   user,
   onPassword,
@@ -85,10 +101,14 @@ export function Workspace({
   onPassword: () => void;
   onLogout: () => void;
 }) {
-  const [kind, setKind] = useState(() => initialKind(user)),
-    [criteria, setCriteria] = useState<Criteria>({}),
-    [search, setSearch] = useState(""),
-    [page, setPage] = useState(1),
+  const [kind, setKind] = useState(() => readLocation(user.role).kind),
+    [criteria, setCriteria] = useState<Criteria>(
+      () => readLocation(user.role).criteria,
+    ),
+    [search, setSearch] = useState(
+      () => readLocation(user.role).criteria.search || "",
+    ),
+    [page, setPage] = useState(() => readLocation(user.role).page),
     [size, setSize] = useState(10),
     [revision, setRevision] = useState(0),
     [poll, setPoll] = useState(0),
@@ -96,25 +116,56 @@ export function Workspace({
     [expanded, setExpanded] = useState<string[]>([]),
     [operation, setOperation] = useState<Operation>(),
     [detail, setDetail] = useState<{ kind: string; row: Row }>();
+  const [selectedElder, setSelectedElder] = useState<number>(() =>
+    history.state?.homeUser === user.id ? history.state.homeElder : undefined,
+  );
+  function selectElder(id: number) {
+    setSelectedElder(id);
+    history.replaceState(
+      { ...history.state, homeUser: user.id, homeElder: id },
+      "",
+    );
+  }
   const opSerial = useRef(0);
   const mobile = useMobile();
+  function dispatchCriteria(k: string, c: Criteria): Criteria {
+    return user.role === "ADMIN" &&
+      k === "orders" &&
+      c.status === "PENDING" &&
+      !c.field
+      ? { ...c, field: "dispatch_window", value: 1 }
+      : c;
+  }
   const key = JSON.stringify([user.id, kind, criteria, page, size, revision]);
-  const resource = useResource(key, (signal) =>
-    list(kind, { ...criteria, page: page - 1, size }, signal),
+  const resource = useResource(kind === "home" ? null : key, (signal) =>
+    list(
+      kind,
+      { ...dispatchCriteria(kind, criteria), page: page - 1, size },
+      signal,
+    ),
   );
   const data = resource.data;
   const counts = useResource(
-    "counts:" + user.id + ":" + revision + ":" + poll,
+    kind === "home" ? null : "counts:" + user.id + ":" + revision + ":" + poll,
     async (signal) =>
       Promise.all(
         tasks[user.role].map(async ([, k, status]) => {
           try {
-            return (await list(k, { size: 1, status }, signal)).total;
+            return (
+              await list(
+                k,
+                { size: 1, ...dispatchCriteria(k, { status }) },
+                signal,
+              )
+            ).total;
           } catch {
             return null;
           }
         }),
       ),
+  );
+  const profile = useResource("profile:" + user.id + ":" + poll, (signal) =>
+    list("workspaceProfile", { size: 1 }, signal),
   );
   const notifications = useResource(
     "notifications:" + user.id + ":" + revision + ":" + poll,
@@ -126,30 +177,48 @@ export function Workspace({
   }, []);
   useEffect(() => {
     const t = setTimeout(() => {
-      setCriteria((old) =>
-        old.search === (search.trim() || undefined)
-          ? old
-          : { ...old, search: search.trim() || undefined },
-      );
-      setPage(1);
+      const value = search.trim() || undefined;
+      if (criteria.search !== value) {
+        setCriteria((old) => ({ ...old, search: value }));
+        setPage(1);
+      }
     }, 280);
     return () => clearTimeout(t);
-  }, [search]);
+  }, [search, criteria.search]);
   useEffect(() => {
     const index = groups.findIndex(([, items]) => items.includes(kind));
-    setExpanded((old) => [...new Set([...old, String(index)])]);
-    location.hash = kind;
-  }, [kind]);
+    const primary = primaryNavigation[user.role].some(([k]) => k === kind);
+    setExpanded(index >= 0 && !primary ? ["more", String(index)] : []);
+  }, [kind, user.role]);
+  useEffect(() => {
+    const hash = writeLocation(kind, criteria, page);
+    if (location.hash !== hash) history.replaceState(history.state, "", hash);
+  }, [kind, criteria, page]);
   useEffect(() => {
     const handler = () => {
-      const next = location.hash.slice(1);
-      if (menus[user.role].includes(next) && next !== kind) navigate(next);
+      const next = readLocation(user.role);
+      if (history.state?.homeUser === user.id)
+        setSelectedElder(history.state.homeElder);
+      setKind(next.kind);
+      setCriteria(next.criteria);
+      setSearch(next.criteria.search || "");
+      setPage(next.page);
+      setOpenMenu(false);
     };
     window.addEventListener("hashchange", handler);
-    return () => window.removeEventListener("hashchange", handler);
-  }, [kind, user.role]);
+    window.addEventListener("popstate", handler);
+    return () => {
+      window.removeEventListener("hashchange", handler);
+      window.removeEventListener("popstate", handler);
+    };
+  }, [user.role]);
   function navigate(next: string, filter: Criteria = {}) {
-    if (!menus[user.role].includes(next)) return;
+    if (next !== "home" && !menus[user.role].includes(next)) return;
+    history.pushState(
+      { homeUser: user.id, homeElder: selectedElder },
+      "",
+      writeLocation(next, filter, 1),
+    );
     setKind(next);
     setPage(1);
     setSearch(filter.search || "");
@@ -197,20 +266,44 @@ export function Workspace({
     );
   }
   function cell(key: string, value: any, row: Row) {
+    if (kind === "orders" && !mobile) {
+      if (key === "item_name")
+        return (
+          <span className="order-list-project">
+            <strong>{value}</strong>
+            <small>订单 #{row.id}</small>
+          </span>
+        );
+      if (key === "elder_name")
+        return <Person id={row.elder_id} name={value} />;
+      if (key === "starts_at") {
+        const slot = appointmentSlot(row);
+        return (
+          <span className="order-list-slot">
+            <strong>{slot.date || "—"}</strong>
+            <small>{slot.time}</small>
+          </span>
+        );
+      }
+    }
     if (key === "name" && kind === "elders")
       return <Person id={row.id} name={value} />;
     if (key === "status")
       return (
         <Tag
           color={
-            pendingStates.includes(value)
-              ? "orange"
-              : closedStates.includes(value)
-                ? undefined
-                : "arcoblue"
+            kind === "hours" && value === "INVALID"
+              ? "gray"
+              : pendingStates.includes(value)
+                ? "orange"
+                : closedStates.includes(value)
+                  ? undefined
+                  : "arcoblue"
           }
         >
-          {displayValue(key, value, kind)}
+          {kind === "orders"
+            ? orderStatusLabel(row)
+            : displayValue(key, value, kind)}
         </Tag>
       );
     if (key === "tags" && value)
@@ -223,11 +316,49 @@ export function Workspace({
             ))}
         </Space>
       );
+    if (
+      (/_at$/.test(key) ||
+        ["check_in", "check_out", "valid_from", "valid_until"].includes(key)) &&
+      typeof value === "string" &&
+      /^\d{4}-\d{2}-\d{2}[T ]/.test(value)
+    ) {
+      const date = displayValue(key, value);
+      return (
+        <span className="attendance-time">
+          <span>{date.slice(0, 10)}</span>
+          <small>{date.slice(11, 19)}</small>
+        </span>
+      );
+    }
+    if (["hours", "monthlyHours"].includes(kind) && key === "effective_minutes")
+      return duration(Number(value));
+    if (key === "id") return <span className="business-cell-id">{value}</span>;
+    if (
+      ["name", "elder_name", "caregiver_name", "candidate_name"].includes(key)
+    )
+      return <span className="business-cell-name">{value || "—"}</span>;
+    if (["amount", "self_pay", "paid_subsidy"].includes(key) && value != null)
+      return (
+        <span className="business-cell-money">
+          ¥{" "}
+          {Number(value).toLocaleString("zh-CN", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+        </span>
+      );
     return displayValue(key, value, kind);
   }
+  const listKeys =
+    kind === "orders" && !mobile
+      ? ["item_name", "elder_name", "starts_at", "status", "amount"]
+      : recordColumns(kind, data?.rows[0] || {});
   const tableColumns = data?.rows.length
-    ? recordColumns(kind, data.rows[0]).map((key) => ({
-        title: columnTitle(key, kind),
+    ? listKeys.map((key) => ({
+        title:
+          kind === "orders" && key === "starts_at"
+            ? "预约时段"
+            : columnTitle(key, kind),
         dataIndex: key,
         width:
           kind === "elders"
@@ -254,7 +385,11 @@ export function Workspace({
   const tableActions = {
     title: "操作",
     dataIndex: "_actions",
-    width: 240,
+    width: data?.rows.some((row) => choices(kind, row, user).length > 1)
+      ? 240
+      : data?.rows.some((row) => choices(kind, row, user).length)
+        ? 180
+        : 100,
     fixed: "right" as const,
     render: (_: any, row: Row) => (
       <Space size={0}>
@@ -289,42 +424,77 @@ export function Workspace({
       ...(criteria.status ? [criteria.status] : []),
     ]),
   ];
+  const filtered = Object.values(criteria).some(Boolean);
+  const quickActions = related
+    .filter((a) => a !== primary && !/deactivate|delete|withdraw/.test(a))
+    .slice(0, 4);
+  function clearFilters() {
+    setSearch("");
+    setCriteria({});
+    setPage(1);
+  }
   const group = groups.find(([_, items]) => items.includes(kind));
   const nav = (
     <Menu
       id="nav"
+      levelIndent={12}
       selectedKeys={[kind]}
       openKeys={expanded}
       onClickSubMenu={(_, keys) => setExpanded(keys)}
       onClickMenuItem={(next) => navigate(next)}
     >
-      {groups.map(([label, items], i) => {
-        const visible = items.filter((k) => menus[user.role].includes(k));
-        const Icon = icons[i] || IconApps;
-        return visible.length ? (
-          <Menu.SubMenu
-            key={String(i)}
-            title={
-              <>
-                <Icon />
-                {label}
-              </>
-            }
-          >
-            {visible.map((k) => (
-              <Menu.Item key={k}>
-                <span data-kind={k}>{names[k]}</span>
-              </Menu.Item>
-            ))}
-          </Menu.SubMenu>
-        ) : null;
-      })}
+      <Menu.Item key="home">
+        <IconApps />
+        <span data-kind="home">工作台</span>
+      </Menu.Item>
+      {primaryNavigation[user.role].map(([k, label]) => (
+        <Menu.Item key={k}>
+          <NavigationIcon kind={k} />
+          <span data-kind={k}>{label}</span>
+        </Menu.Item>
+      ))}
+      <Menu.SubMenu
+        key="more"
+        className="more-navigation"
+        title={
+          <>
+            <IconMore />
+            更多业务
+          </>
+        }
+      >
+        {groups.map(([label, items], i) => {
+          const visible = items.filter(
+            (k) =>
+              menus[user.role].includes(k) &&
+              !primaryNavigation[user.role].some(([p]) => p === k),
+          );
+          const Icon = icons[i] || IconApps;
+          return visible.length ? (
+            <Menu.SubMenu
+              key={String(i)}
+              title={
+                <>
+                  <Icon />
+                  <span className="nav-group-label">{label}</span>
+                </>
+              }
+            >
+              {visible.map((k) => (
+                <Menu.Item key={k}>
+                  <span data-kind={k}>{names[k]}</span>
+                </Menu.Item>
+              ))}
+            </Menu.SubMenu>
+          ) : null;
+        })}
+      </Menu.SubMenu>
     </Menu>
   );
   return (
     <Layout id="workspace" className="app-layout">
       <Layout.Sider
-        width={220}
+        width={232}
         className={"sidebar" + (openMenu ? " nav-open" : "")}
       >
         <div className="sidebar-brand">
@@ -356,15 +526,32 @@ export function Workspace({
             <div>
               <Typography.Text bold>{roleNames[user.role]}</Typography.Text>
               <p id="identity">
-                {user.name} · 社区 {user.community}
+                <span>{profile.data?.rows[0]?.display_name || user.name}</span>
+                <span className="identity-scope">
+                  {(user.role === "MANAGER" || user.role === "CAREGIVER"
+                    ? profile.data?.rows[0]?.organization_name
+                    : undefined) ||
+                    profile.data?.rows[0]?.community_name ||
+                    ""}
+                </span>
               </p>
             </div>
           </Space>
           <div className="account-actions">
-            <Button id="change-password" type="text" onClick={onPassword}>
+            <Button
+              id="change-password"
+              type="text"
+              icon={<IconLock />}
+              onClick={onPassword}
+            >
               修改密码
             </Button>
-            <Button id="logout" type="text" onClick={onLogout}>
+            <Button
+              id="logout"
+              type="text"
+              icon={<IconExport />}
+              onClick={onLogout}
+            >
               退出登录
             </Button>
           </div>
@@ -373,8 +560,16 @@ export function Workspace({
       <Layout.Content className="workspace-content">
         <header className="workspace-topline">
           <Breadcrumb>
-            <Breadcrumb.Item>工作台</Breadcrumb.Item>
-            <Breadcrumb.Item>{group?.[0] || "业务查询"}</Breadcrumb.Item>
+            <Breadcrumb.Item onClick={() => navigate("home")}>
+              工作台
+            </Breadcrumb.Item>
+            <Breadcrumb.Item>
+              {kind === "home"
+                ? dateTitle(
+                    dateText(profile.data?.rows[0]?.today || todayInShanghai()),
+                  )
+                : group?.[0] || "业务查询"}
+            </Breadcrumb.Item>
           </Breadcrumb>
           <Space>
             <Tooltip content="业务数据为课程示例，人物与场景照片由 AI 生成">
@@ -390,294 +585,385 @@ export function Workspace({
           </Space>
         </header>
         <main>
-          <header className="page-header">
-            <div>
-              <Typography.Title heading={4} id="title">
-                {names[kind]}
-              </Typography.Title>
-              {pageHint(kind, user.role) && (
-                <Typography.Text type="secondary" id="page-description">
-                  {pageHint(kind, user.role)}
-                </Typography.Text>
-              )}
-            </div>
-            <Space>
-              <Button
-                id="refresh"
-                loading={resource.loading}
-                icon={<IconRefresh />}
-                onClick={refresh}
-              >
-                刷新
-              </Button>
-              {primary && (
-                <Button
-                  id="open-operation"
-                  type="primary"
-                  icon={<IconPlus />}
-                  onClick={() => open(primary)}
-                >
-                  {actions[primary][0]}
-                </Button>
-              )}
-            </Space>
-          </header>
-          <Card bordered={false} className="role-tasks">
-            <div className="task-grid">
-              {tasks[user.role].map(([label, k, status], i) => (
-                <button
-                  key={label}
-                  className="task-card"
-                  type="button"
-                  aria-label={`${label}，${counts.data?.[i] ?? "加载中"} 条，点击查看`}
-                  onClick={() => navigate(k, { status: status || undefined })}
-                >
-                  <span className="task-icon">
-                    {k.includes("vent") ? (
-                      <IconHeart />
-                    ) : k.includes("laim") ? (
-                      <IconSafe />
-                    ) : (
-                      <IconFile />
-                    )}
+          {kind === "home" ? (
+            <RoleHome
+              selectedElder={selectedElder}
+              selectElder={selectElder}
+              user={user}
+              revision={revision + poll}
+              profile={profile.data?.rows[0]}
+              navigate={navigate}
+              open={open}
+              details={showDetails}
+              refresh={refresh}
+            />
+          ) : (
+            <>
+              <header className="page-header">
+                <div className="page-title-group">
+                  <span className="page-title-icon" aria-hidden>
+                    <NavigationIcon kind={kind} />
                   </span>
-                  <Statistic title={label} value={counts.data?.[i] ?? "—"} />
-                  <IconArrowRight />
-                </button>
-              ))}
-            </div>
-          </Card>
-          <div className="content-grid">
-            <Card
-              className="records"
-              bordered={false}
-              title={
-                <Space>
-                  全部记录 <Tag id="total">{data?.total ?? "—"}</Tag>
-                </Space>
-              }
-              extra={
-                <Input.Search
-                  id="record-search"
-                  aria-label="搜索姓名、名称或编号"
-                  placeholder="搜索姓名、名称或编号"
-                  value={search}
-                  onChange={setSearch}
-                  allowClear
-                />
-              }
-            >
-              <div className="record-filters">
-                {statuses.length > 0 && (
-                  <Select
-                    id="record-state"
-                    aria-label="按状态筛选"
-                    value={criteria.status || ""}
-                    style={{ width: 160 }}
-                    options={[
-                      { value: "", label: "全部状态" },
-                      ...statuses.map((s) => ({
-                        value: s,
-                        label: displayValue("status", s, kind),
-                      })),
-                    ]}
-                    onChange={(status) => {
-                      setPage(1);
-                      setCriteria((old) => ({
-                        ...old,
-                        status: status || undefined,
-                      }));
-                    }}
-                  />
-                )}
-                {data?.dateField && (
-                  <Space className="date-filter">
-                    <Typography.Text type="secondary">
-                      {columns[data.dateField] || "日期"}
-                    </Typography.Text>
-                    <DatePicker.RangePicker
-                      aria-label="按日期范围筛选"
-                      value={
-                        criteria.from && criteria.to
-                          ? [criteria.from, criteria.to]
-                          : undefined
-                      }
-                      onChange={(dates) => {
-                        setPage(1);
-                        setCriteria((old) => ({
-                          ...old,
-                          from: dates?.[0],
-                          to: dates?.[1],
-                        }));
-                      }}
-                    />
-                  </Space>
-                )}
-                {criteria.field && (
-                  <Tag
-                    closable
-                    onClose={() => {
-                      setCriteria(({ field, value, ...rest }) => rest);
-                      setPage(1);
-                    }}
-                  >
-                    {columns[criteria.field] || criteria.field} #
-                    {criteria.value}
-                  </Tag>
-                )}
-                {Object.values(criteria).some(Boolean) && (
-                  <Button
-                    type="text"
-                    onClick={() => {
-                      setSearch("");
-                      setCriteria({});
-                      setPage(1);
-                    }}
-                  >
-                    清除筛选
-                  </Button>
-                )}
-              </div>
-              {resource.error ? (
-                <Alert
-                  id="page-error"
-                  type="error"
-                  content={resource.error}
-                  action={<Button onClick={refresh}>重试</Button>}
-                />
-              ) : !resource.loading && !data?.rows.length ? (
-                <Empty description="暂无记录" style={{ padding: "32px 0" }} />
-              ) : mobile ? (
-                <Spin loading={resource.loading} style={{ width: "100%" }}>
-                  <div className="business-cards">
-                    {(data?.rows || []).map((row, index) => {
-                      const keys = recordColumns(kind, row).filter(
-                        (k) => k !== "id",
-                      );
-                      const titleKey = keys.find((k) =>
-                        [
-                          "elder_name",
-                          "name",
-                          "candidate_name",
-                          "title",
-                          "caregiver_name",
-                        ].includes(k),
-                      );
-                      return (
-                        <article
-                          className="record-card"
-                          data-id={row.id}
-                          key={row.id ?? index}
-                        >
-                          <div className="record-card-heading">
-                            <strong>
-                              {titleKey
-                                ? cell(titleKey, row[titleKey], row)
-                                : names[kind]}
-                            </strong>
-                            <span>#{row.id ?? index + 1}</span>
-                          </div>
-                          <dl>
-                            {keys
-                              .filter((k) => k !== titleKey)
-                              .slice(0, 6)
-                              .map((k) => (
-                                <div key={k}>
-                                  <dt>{columnTitle(k, kind)}</dt>
-                                  <dd>{cell(k, row[k], row)}</dd>
-                                </div>
-                              ))}
-                          </dl>
-                          <Space wrap size={4} className="record-card-actions">
-                            <Button
-                              className="detail-link"
-                              size="small"
-                              onClick={() => showDetails(kind, row)}
-                            >
-                              详情
-                            </Button>
-                            {choices(kind, row, user).map((c) =>
-                              rowButton(row, c.action, c.label, c.preset),
-                            )}
-                          </Space>
-                        </article>
-                      );
-                    })}
-                    {!resource.loading && !data?.rows.length && (
-                      <Empty description="暂无记录" />
+                  <div>
+                    <Typography.Title heading={4} id="title">
+                      {names[kind]}
+                    </Typography.Title>
+                    {pageHint(kind, user.role) && (
+                      <Typography.Text type="secondary" id="page-description">
+                        {pageHint(kind, user.role)}
+                      </Typography.Text>
                     )}
                   </div>
-                  <Pagination
-                    simple
-                    current={page}
-                    pageSize={size}
-                    total={data?.total || 0}
-                    onChange={setPage}
-                    style={{ justifyContent: "center", marginTop: 16 }}
-                  />
-                </Spin>
-              ) : (
-                <Table
-                  className="business-table"
-                  rowKey={(row) => String(row.id ?? JSON.stringify(row))}
-                  border={false}
-                  loading={resource.loading}
-                  columns={
-                    tableColumns.length ? [...tableColumns, tableActions] : []
-                  }
-                  data={data?.rows || []}
-                  scroll={{ x: true }}
-                  onRow={(row) =>
-                    ({
-                      "data-id": row.id,
-                    }) as React.HTMLAttributes<HTMLTableRowElement>
-                  }
-                  pagination={{
-                    current: page,
-                    pageSize: size,
-                    total: data?.total || 0,
-                    showTotal: true,
-                    sizeCanChange: true,
-                    sizeOptions: [10, 20, 50],
-                    onChange: (page, size) => {
-                      setPage(page);
-                      setSize(size);
-                    },
-                  }}
-                  noDataElement={<Empty description="暂无记录" />}
-                />
+                </div>
+                <Space>
+                  <Button
+                    id="refresh"
+                    loading={resource.loading}
+                    icon={<IconRefresh />}
+                    onClick={refresh}
+                  >
+                    刷新
+                  </Button>
+                  {primary && (
+                    <Button
+                      id="open-operation"
+                      type="primary"
+                      icon={<IconPlus />}
+                      onClick={() => open(primary)}
+                    >
+                      {actions[primary][0]}
+                    </Button>
+                  )}
+                </Space>
+              </header>
+              {!["hours", "credentials", ...designedRecords].includes(kind) && (
+                <div className="business-summary" aria-label="角色待办">
+                  <span className="business-summary-label">待办</span>
+                  {tasks[user.role].map(([label, k, status], i) => (
+                    <button
+                      className="task-card"
+                      key={label}
+                      type="button"
+                      aria-label={`${label}，${counts.data?.[i] ?? "加载中"} 条，点击查看`}
+                      onClick={() =>
+                        navigate(k, { status: status || undefined })
+                      }
+                    >
+                      <span>{label}</span>
+                      <strong>{counts.data?.[i] ?? "—"}</strong>
+                      <IconArrowRight />
+                    </button>
+                  ))}
+                </div>
               )}
-            </Card>
-            <aside className="workspace-side">
-              <CommunityCard />
-              {related.length > 1 && (
+              {quickActions.length > 0 && (
+                <div className="quick-action-bar" aria-label="快捷办理">
+                  <span>快捷办理</span>
+                  {quickActions.map((action) => (
+                    <Button
+                      key={action}
+                      size="small"
+                      onClick={() => open(action)}
+                    >
+                      {actions[action][0]} <IconArrowRight />
+                    </Button>
+                  ))}
+                </div>
+              )}
+              <div className="content-grid records-layout">
                 <Card
+                  className="records"
+                  bordered={false}
                   title={
                     <Space>
-                      <IconThunderbolt />
-                      快捷办理
+                      <span>{filtered ? "筛选结果" : "全部记录"}</span>
+                      <span className="record-count">
+                        <b id="total">{data?.total ?? "—"}</b> 条
+                      </span>
                     </Space>
                   }
-                  bordered={false}
+                  extra={
+                    <Input.Search
+                      id="record-search"
+                      aria-label="搜索姓名、名称或编号"
+                      placeholder="搜索姓名、名称或编号"
+                      value={search}
+                      onChange={setSearch}
+                      allowClear
+                    />
+                  }
                 >
-                  <div className="quick-actions">
-                    {related
-                      .filter(
-                        (a) =>
-                          a !== primary &&
-                          !/deactivate|delete|withdraw/.test(a),
-                      )
-                      .slice(0, 4)
-                      .map((action) => (
-                        <Button key={action} onClick={() => open(action)}>
-                          {actions[action][0]}
-                        </Button>
-                      ))}
+                  <div className="record-filters">
+                    {statuses.length > 0 && (
+                      <Select
+                        id="record-state"
+                        aria-label="按状态筛选"
+                        value={criteria.status || ""}
+                        style={{ width: 160 }}
+                        options={[
+                          { value: "", label: "全部状态" },
+                          ...statuses.map((s) => ({
+                            value: s,
+                            label: displayValue("status", s, kind),
+                          })),
+                        ]}
+                        onChange={(status) => {
+                          setPage(1);
+                          setCriteria((old) => ({
+                            ...old,
+                            ...(old.field === "dispatch_window"
+                              ? { field: undefined, value: undefined }
+                              : {}),
+                            status: status || undefined,
+                          }));
+                        }}
+                      />
+                    )}
+                    {data?.dateField && (
+                      <Space className="date-filter">
+                        <Typography.Text type="secondary">
+                          {columns[data.dateField] || "日期"}
+                        </Typography.Text>
+                        <DatePicker.RangePicker
+                          aria-label="按日期范围筛选"
+                          value={
+                            criteria.from && criteria.to
+                              ? [criteria.from, criteria.to]
+                              : undefined
+                          }
+                          onChange={(dates) => {
+                            setPage(1);
+                            setCriteria((old) => ({
+                              ...old,
+                              from: dates?.[0],
+                              to: dates?.[1],
+                            }));
+                          }}
+                        />
+                      </Space>
+                    )}
+                    {kind === "orders" &&
+                      user.role === "ADMIN" &&
+                      criteria.status === "PENDING" &&
+                      (!criteria.field ||
+                        criteria.field === "dispatch_window") && (
+                        <Select
+                          aria-label="预约时段"
+                          value={Number(criteria.value || 1)}
+                          options={[
+                            { value: 1, label: "可继续派单" },
+                            { value: 2, label: "已过预约时段 · 待联系" },
+                          ]}
+                          onChange={(value) => {
+                            setPage(1);
+                            setCriteria((old) => ({
+                              ...old,
+                              field: "dispatch_window",
+                              value,
+                            }));
+                          }}
+                        />
+                      )}
+                    {criteria.field && criteria.field !== "dispatch_window" && (
+                      <Tag
+                        closable
+                        onClose={() => {
+                          setCriteria(({ field, value, ...rest }) => rest);
+                          setPage(1);
+                        }}
+                      >
+                        {columns[criteria.field] || criteria.field} #
+                        {criteria.value}
+                      </Tag>
+                    )}
+                    {filtered && (
+                      <Button type="text" onClick={clearFilters}>
+                        清除筛选
+                      </Button>
+                    )}
                   </div>
+                  {kind === "hours" && !resource.error && (
+                    <HoursSummary
+                      stats={data?.summary}
+                      loading={resource.loading}
+                    />
+                  )}
+                  {resource.error ? (
+                    <Alert
+                      id="page-error"
+                      type="error"
+                      content={resource.error}
+                      action={<Button onClick={refresh}>重试</Button>}
+                    />
+                  ) : !resource.loading && !data?.rows.length ? (
+                    <div className="records-empty">
+                      <Empty
+                        description={
+                          filtered ? "没有符合条件的记录" : "暂无记录"
+                        }
+                      />
+                      {filtered ? (
+                        <Button onClick={clearFilters}>清除筛选</Button>
+                      ) : primary ? (
+                        <Button type="primary" onClick={() => open(primary)}>
+                          {actions[primary][0]}
+                        </Button>
+                      ) : null}
+                    </div>
+                  ) : kind === "credentials" ? (
+                    <Certificates
+                      rows={data?.rows || []}
+                      loading={resource.loading}
+                      total={data?.total || 0}
+                      page={page}
+                      size={size}
+                      onPage={(p, s) => {
+                        setPage(p);
+                        setSize(s);
+                      }}
+                      details={(row) => showDetails(kind, row)}
+                    />
+                  ) : designedRecords.includes(kind) ? (
+                    <BusinessRecords
+                      kind={kind}
+                      rows={data?.rows || []}
+                      loading={resource.loading}
+                      total={data?.total || 0}
+                      page={page}
+                      size={size}
+                      onPage={(p, s) => {
+                        setPage(p);
+                        setSize(s);
+                      }}
+                      actions={(row) => tableActions.render(undefined, row)}
+                      navigate={
+                        menus[user.role].includes("events")
+                          ? navigate
+                          : undefined
+                      }
+                    />
+                  ) : mobile ? (
+                    <Spin loading={resource.loading} style={{ width: "100%" }}>
+                      <div className="business-cards">
+                        {(data?.rows || []).map((row, index) => {
+                          const keys = recordColumns(kind, row).filter(
+                            (k) => k !== "id",
+                          );
+                          const titleKey = keys.find((k) =>
+                            [
+                              "elder_name",
+                              "name",
+                              "candidate_name",
+                              "title",
+                              "caregiver_name",
+                            ].includes(k),
+                          );
+                          return (
+                            <article
+                              className="record-card"
+                              data-id={row.id}
+                              key={recordKey(kind, row)}
+                            >
+                              <div className="record-card-heading">
+                                <strong>
+                                  {titleKey
+                                    ? cell(titleKey, row[titleKey], row)
+                                    : names[kind]}
+                                </strong>
+                                <span>#{row.id ?? index + 1}</span>
+                              </div>
+                              <dl>
+                                {keys
+                                  .filter((k) => k !== titleKey)
+                                  .slice(0, 6)
+                                  .map((k) => (
+                                    <div key={k}>
+                                      <dt>{columnTitle(k, kind)}</dt>
+                                      <dd>{cell(k, row[k], row)}</dd>
+                                    </div>
+                                  ))}
+                              </dl>
+                              <Space
+                                wrap
+                                size={4}
+                                className="record-card-actions"
+                              >
+                                <Button
+                                  className="detail-link"
+                                  size="small"
+                                  onClick={() => showDetails(kind, row)}
+                                >
+                                  详情
+                                </Button>
+                                {choices(kind, row, user)
+                                  .slice(0, 2)
+                                  .map((c) =>
+                                    rowButton(row, c.action, c.label, c.preset),
+                                  )}
+                                {choices(kind, row, user).length > 2 && (
+                                  <Button
+                                    type="text"
+                                    size="small"
+                                    className="record-more"
+                                    onClick={() => showDetails(kind, row)}
+                                  >
+                                    更多操作
+                                  </Button>
+                                )}
+                              </Space>
+                            </article>
+                          );
+                        })}
+                        {!resource.loading && !data?.rows.length && (
+                          <Empty description="暂无记录" />
+                        )}
+                      </div>
+                      <Pagination
+                        simple
+                        current={page}
+                        pageSize={size}
+                        total={data?.total || 0}
+                        onChange={setPage}
+                        style={{ justifyContent: "center", marginTop: 16 }}
+                      />
+                    </Spin>
+                  ) : (
+                    <Table
+                      className="business-table"
+                      rowKey={(row) => recordKey(kind, row)}
+                      border={false}
+                      loading={resource.loading}
+                      columns={
+                        tableColumns.length
+                          ? [...tableColumns, tableActions]
+                          : []
+                      }
+                      data={data?.rows || []}
+                      scroll={{ x: true }}
+                      onRow={(row) =>
+                        ({
+                          "data-id": row.id,
+                        }) as React.HTMLAttributes<HTMLTableRowElement>
+                      }
+                      pagination={{
+                        current: page,
+                        pageSize: size,
+                        total: data?.total || 0,
+                        showTotal: true,
+                        sizeCanChange: true,
+                        sizeOptions: [10, 20, 50],
+                        onChange: (page, size) => {
+                          setPage(page);
+                          setSize(size);
+                        },
+                      }}
+                      noDataElement={<Empty description="暂无记录" />}
+                    />
+                  )}
                 </Card>
-              )}
-            </aside>
-          </div>
+              </div>
+            </>
+          )}
           <footer className="workspace-footer">
             <img src="/brand-mark.svg" alt="" />
             左邻右舍

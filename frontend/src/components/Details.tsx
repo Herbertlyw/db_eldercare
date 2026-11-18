@@ -11,21 +11,33 @@ import {
   Tag,
   Typography,
 } from "@arco-design/web-react";
-import { api } from "../api/client";
+import { useMobile } from "../hooks/useMobile";
+import { OrderVisitDetails } from "./OrderVisitDetails";
+import { NavigationIcon } from "./NavigationIcon";
+import { api, list } from "../api/client";
 import { useResource } from "../hooks/useResource";
 import { columns, detailKinds, menus, names } from "../model/registry";
-import { displayValue, flowSteps } from "../model/presentation";
+import {
+  displayValue,
+  recordKey,
+  flowSteps,
+  pendingStates,
+  closedStates,
+} from "../model/presentation";
 import { choices, entity, preset } from "../model/rules";
 import type { Criteria, Operation, Row, User, Values } from "../model/types";
 export function DetailSections({
   data,
   kind = "",
+  className = "detail-content",
 }: {
   data: Record<string, Row | Row[]>;
   kind?: string;
+  className?: string;
 }) {
+  const mobile = useMobile();
   return (
-    <div className="detail-content">
+    <div className={className}>
       {Object.entries(data).map(([title, part]) => (
         <section className="detail-section" key={title}>
           <Typography.Title heading={6}>{title}</Typography.Title>
@@ -59,11 +71,15 @@ export function DetailSections({
             )
           ) : (
             <Descriptions
-              column={2}
+              column={mobile ? 1 : 2}
               layout="vertical"
-              border
               data={Object.entries(part || {})
-                .filter(([key]) => key !== "current_worker_account")
+                .filter(
+                  ([key]) =>
+                    !["current_worker_account", "dispatch_window"].includes(
+                      key,
+                    ),
+                )
                 .map(([key, value]) => ({
                   label: columns[key] || key,
                   value: displayValue(key, value, kind),
@@ -95,12 +111,24 @@ export function Details({
   onOpen,
   onNavigate,
 }: Props) {
+  const isOrder = entity(kind) === "orders";
+  const detailKind = isOrder ? "orders" : detailKinds[kind];
   const resource = useResource<Record<string, Row | Row[]>>(
-    kind + ":" + row.id,
-    (signal) =>
-      detailKinds[kind]
-        ? api("/details/" + detailKinds[kind] + "/" + row.id, { signal })
-        : Promise.resolve({ 记录: row }),
+    kind + ":" + recordKey(kind, row),
+    async (signal) => {
+      if (!detailKind) return { 记录: row };
+      const detail = api<Record<string, Row | Row[]>>(
+        "/details/" + detailKind + "/" + row.id,
+        { signal },
+      );
+      if (!isOrder || kind === "orders") return detail;
+      // 待办队列只含订单编号，用同一账号可查的订单补齐姓名、项目和调度时段。
+      const [parts, result] = await Promise.all([
+        detail,
+        list("orders", { field: "id", value: row.id, size: 1 }, signal),
+      ]);
+      return { ...parts, 订单: { ...result.rows[0], ...parts["订单"] } };
+    },
   );
   const main =
     Object.values(resource.data || {}).find(
@@ -122,13 +150,57 @@ export function Details({
             ["职业证书", "credentials", "caregiver_id"],
           ]
         : [];
+  const options = choices(kind, record, user);
+  const primaryAction = isOrder
+    ? options.find((choice) =>
+        [
+          "order.confirm",
+          "order.accept",
+          "order.checkin",
+          "order.finish",
+          "order.assign",
+          "order.reschedule",
+        ].includes(choice.action),
+      )?.action
+    : undefined;
+  const actionButtons = options.map((c) => (
+    <Button
+      key={c.action}
+      data-action={c.action}
+      type={c.action === primaryAction ? "primary" : "secondary"}
+      onClick={() => {
+        onClose();
+        onOpen(
+          c.action,
+          { ...preset(kind, record), ...c.preset },
+          { kind, row: record },
+        );
+      }}
+    >
+      {c.label}
+    </Button>
+  ));
   return (
     <Modal
-      className="detail-dialog"
-      title={(row.elder_name || row.name || names[kind]) + " · 详情"}
+      className={isOrder ? "detail-dialog order-visit-dialog" : "detail-dialog"}
+      title={
+        isOrder
+          ? "服务订单详情"
+          : (row.elder_name || row.name || names[kind]) + " · 详情"
+      }
       visible
-      footer={null}
-      style={{ width: "min(1100px, calc(100vw - 32px))" }}
+      footer={
+        isOrder && resource.data && !resource.error && actionButtons.length ? (
+          <Space className="detail-actions" wrap>
+            {actionButtons}
+          </Space>
+        ) : null
+      }
+      style={{
+        width: isOrder
+          ? "min(840px, calc(100vw - 32px))"
+          : "min(1100px, calc(100vw - 32px))",
+      }}
       onCancel={onClose}
       unmountOnExit
     >
@@ -140,25 +212,55 @@ export function Details({
             action={<Button onClick={resource.retry}>重试</Button>}
           />
         ) : (
-          resource.data && (
+          resource.data &&
+          (isOrder ? (
+            <OrderVisitDetails
+              order={record}
+              visits={
+                Array.isArray(resource.data["派单与服务过程"])
+                  ? resource.data["派单与服务过程"]
+                  : []
+              }
+            >
+              <DetailSections
+                data={{ 订单: main }}
+                kind="orders"
+                className="visit-registered-data"
+              />
+            </OrderVisitDetails>
+          ) : (
             <>
-              <Space className="detail-actions" wrap>
-                {choices(kind, record, user).map((c) => (
-                  <Button
-                    key={c.action}
-                    data-action={c.action}
-                    onClick={() => {
-                      onClose();
-                      onOpen(
-                        c.action,
-                        { ...preset(kind, record), ...c.preset },
-                        { kind, row: record },
-                      );
-                    }}
+              <div className="detail-overview">
+                <span className="detail-overview-icon">
+                  <NavigationIcon kind={entity(kind)} />
+                </span>
+                <div className="detail-overview-copy">
+                  <strong>
+                    {record.elder_name ||
+                      record.name ||
+                      record.candidate_name ||
+                      names[kind]}
+                  </strong>
+                  <span>
+                    {names[kind]} · #{record.id}
+                  </span>
+                </div>
+                {record.status && (
+                  <Tag
+                    color={
+                      pendingStates.includes(record.status)
+                        ? "orange"
+                        : closedStates.includes(record.status)
+                          ? undefined
+                          : "arcoblue"
+                    }
                   >
-                    {c.label}
-                  </Button>
-                ))}
+                    {displayValue("status", record.status, entity(kind))}
+                  </Tag>
+                )}
+              </div>
+              <Space className="detail-actions" wrap>
+                {actionButtons}
                 {links
                   .filter(([, target]) => menus[user.role].includes(target))
                   .map(([label, target, field]) => (
@@ -191,7 +293,7 @@ export function Details({
                 ))}
               <DetailSections data={resource.data} kind={entity(kind)} />
             </>
-          )
+          ))
         )}
       </Spin>
     </Modal>

@@ -9,7 +9,11 @@ import {
   periodRange,
   validate,
 } from "../src/forms/schema";
-import { displayValue } from "../src/model/presentation";
+import {
+  appointmentSlot,
+  displayValue,
+  orderStatusLabel,
+} from "../src/model/presentation";
 import { choices } from "../src/model/rules";
 import { actions, menus } from "../src/model/registry";
 import type { User } from "../src/model/types";
@@ -20,9 +24,53 @@ const user = (role: User["role"], id = 8): User => ({
   community: 1,
 });
 describe("角色与状态操作", () => {
-  it("保留六类角色和73种业务操作", () => {
+  it("保留六类角色和74种业务操作", () => {
     expect(Object.keys(menus)).toHaveLength(6);
-    expect(Object.keys(actions)).toHaveLength(73);
+    expect(Object.keys(actions)).toHaveLength(74);
+  });
+  it("过期的待派单可联系改约或取消", () => {
+    const missed = { status: "PENDING", dispatch_window: 2 };
+    const picks = (role: User["role"], row = missed) =>
+      choices("orders", row, user(role)).map((c) => c.action);
+    expect(picks("ADMIN")).toEqual(
+      expect.arrayContaining(["order.cancel", "order.reschedule"]),
+    );
+    expect(picks("ADMIN")).not.toContain("order.assign");
+    expect(picks("FAMILY")).not.toContain("order.reschedule");
+    expect(picks("ADMIN", { ...missed, dispatch_window: 1 })).toContain(
+      "order.assign",
+    );
+  });
+  it("预约时段保留跨日结束日期，过期提示仅用于待派订单", () => {
+    const start = { starts_at: "2026-11-18T23:30:00" };
+    expect(
+      appointmentSlot({ ...start, ends_at: "2026-11-19T00:30:00" }),
+    ).toEqual({ date: "2026-11-18", time: "23:30 至 2026-11-19 00:30" });
+    expect(
+      appointmentSlot({ ...start, ends_at: "2026-11-18T23:55:00" }).time,
+    ).toBe("23:30 至 23:55");
+    expect(orderStatusLabel({ status: "PENDING", dispatch_window: 2 })).toBe(
+      "已过预约时段",
+    );
+    expect(orderStatusLabel({ status: "COMPLETED", dispatch_window: 2 })).toBe(
+      "已完成",
+    );
+  });
+  it("待办列表内的订单已办结时不再显示确认或退回按钮", () => {
+    expect(
+      choices(
+        "waitingConfirmation",
+        { status: "COMPLETED" },
+        user("FAMILY"),
+      ).map((c) => c.action),
+    ).not.toContain("order.confirm");
+    expect(
+      choices(
+        "managerDispatchPool",
+        { status: "COMPLETED" },
+        user("MANAGER"),
+      ).map((c) => c.action),
+    ).not.toContain("order.release");
   });
   it("家属不能派单，护工不能替他人签到", () => {
     expect(

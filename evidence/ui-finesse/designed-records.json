@@ -1,0 +1,188 @@
+{
+  "checks": [
+    {
+      "account": "caregiver1",
+      "kind": "shifts",
+      "rows": 2,
+      "widths": [
+        1600,
+        1280,
+        768,
+        390,
+        320
+      ],
+      "emptyRecovery": true
+    },
+    {
+      "account": "caregiver1",
+      "kind": "trainingRecords",
+      "rows": 2,
+      "widths": [
+        1600,
+        1280,
+        768,
+        390,
+        320
+      ],
+      "emptyRecovery": true
+    },
+    {
+      "account": "caregiver1",
+      "kind": "notifications",
+      "rows": 2,
+      "widths": [
+        1600,
+        1280,
+        768,
+        390,
+        320
+      ],
+      "emptyRecovery": true
+    },
+    {
+      "account": "manager1",
+      "kind": "shifts",
+      "rows": 25,
+      "widths": [
+        1600,
+        1280,
+        768,
+        390,
+        320
+      ],
+      "emptyRecovery": true
+    },
+    {
+      "account": "manager1",
+      "kind": "trainings",
+      "rows": 8,
+      "widths": [
+        1600,
+        1280,
+        768,
+        390,
+        320
+      ],
+      "emptyRecovery": true
+    },
+    {
+      "account": "manager1",
+      "kind": "trainingRecords",
+      "rows": 8,
+      "widths": [
+        1600,
+        1280,
+        768,
+        390,
+        320
+      ],
+      "emptyRecovery": true
+    },
+    {
+      "account": "manager1",
+      "kind": "hoursReview",
+      "rows": 1,
+      "widths": [
+        1600,
+        1280,
+        768,
+        390,
+        320
+      ],
+      "emptyRecovery": true
+    },
+    {
+      "account": "family1",
+      "kind": "selfPay",
+      "rows": 16,
+      "widths": [
+        1600,
+        1280,
+        768,
+        390,
+        320
+      ],
+      "emptyRecovery": true
+    },
+    {
+      "account": "family1",
+      "kind": "claimProgress",
+      "rows": 8,
+      "widths": [
+        1600,
+        1280,
+        768,
+        390,
+        320
+      ],
+      "emptyRecovery": true
+    },
+    {
+      "account": "family1",
+      "kind": "notifications",
+      "rows": 10,
+      "widths": [
+        1600,
+        1280,
+        768,
+        390,
+        320
+      ],
+      "emptyRecovery": true
+    },
+    {
+      "account": "street1",
+      "kind": "publicNotices",
+      "rows": 26,
+      "widths": [
+        1600,
+        1280,
+        768,
+        390,
+        320
+      ],
+      "emptyRecovery": true
+    },
+    {
+      "account": "street1",
+      "kind": "notifications",
+      "rows": 0,
+      "widths": [
+        1600,
+        1280,
+        768,
+        390,
+        320
+      ],
+      "emptyRecovery": true
+    },
+    {
+      "account": "regulator1",
+      "kind": "publicNotices",
+      "rows": 26,
+      "widths": [
+        1600,
+        1280,
+        768,
+        390,
+        320
+      ],
+      "emptyRecovery": true
+    },
+    {
+      "account": "regulator1",
+      "kind": "notifications",
+      "rows": 2,
+      "widths": [
+        1600,
+        1280,
+        768,
+        390,
+        320
+      ],
+      "emptyRecovery": true
+    }
+  ],
+  "errors": [],
+  "businessWrites": []
+}

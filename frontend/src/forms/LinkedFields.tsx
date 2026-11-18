@@ -144,7 +144,7 @@ export function LinkedSelect({
         {...resource}
         empty={
           !key
-            ? hint
+            ? undefined
             : !rows.length
               ? mode === "appointment"
                 ? "该时段没有可预约的计划项目"

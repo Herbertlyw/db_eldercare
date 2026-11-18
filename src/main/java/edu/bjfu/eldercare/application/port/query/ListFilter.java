@@ -19,6 +19,7 @@ public record ListFilter(
         if (!field.isEmpty()
                 && !Set.of(
                                 "id",
+                                "dispatch_window",
                                 "elder_id",
                                 "caregiver_id",
                                 "order_id",

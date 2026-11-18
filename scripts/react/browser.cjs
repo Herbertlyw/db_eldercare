@@ -64,10 +64,16 @@ async function start() {
       const group = registry.groups.find(([, items]) =>
         items.includes(kind),
       )[0];
-      await p
+      const header = p
         .locator("#nav .arco-menu-inline-header")
-        .filter({ hasText: group })
-        .click();
+        .filter({ hasText: group });
+      if (!(await header.isVisible())) {
+        await p
+          .locator("#nav .arco-menu-inline-header")
+          .filter({ hasText: "更多业务" })
+          .click();
+      }
+      await header.click();
     }
     await node.click();
     await quiet(p);
@@ -90,6 +96,23 @@ async function start() {
           }[me.data.role],
         );
       }
+      await p.locator("#open-operation").click();
+    }
+    const dialog = p.locator("#operation-dialog");
+    if ((await dialog.getAttribute("data-action")) === action) {
+      await quiet(p);
+      return;
+    }
+    if (!(await p.locator("#action").count())) {
+      // 家属的预约抽屉专办预约，其他事项从对应页面进入。
+      await close(p);
+      const kind =
+        action.startsWith("complaint.") || action === "review.create"
+          ? "complaints"
+          : action === "event.create"
+            ? "events"
+            : "waitingConfirmation";
+      await nav(p, kind);
       await p.locator("#open-operation").click();
     }
     await p.locator("#action").click();

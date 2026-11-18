@@ -1,0 +1,17 @@
+{
+  "time": "2026-11-17T03:31:04.064Z",
+  "database": "eldercare_home_ui20261117_test",
+  "checks": [
+    "appointment top-down dependencies and no-availability",
+    "linked data error visible and retry recovers",
+    "assessment and bundle scoped to selected elder",
+    "guardian details prefill and clear",
+    "service items prevent duplicates",
+    "JSON import validates without erasing existing input",
+    "draft close/switch cancel and failed submit retains values",
+    "conditional recruitment secrets cleared",
+    "low inspection score requires rectification",
+    "community selection survives search"
+  ],
+  "pageErrors": []
+}

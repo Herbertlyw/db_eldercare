@@ -1,0 +1,34 @@
+[
+  {
+    "id": "01-family",
+    "title": "老人及家属工作台",
+    "target": "docs/design/role-workspaces/01-family.png"
+  },
+  {
+    "id": "02-caregiver",
+    "title": "护工工作台",
+    "target": "docs/design/role-workspaces/02-caregiver-refined.png",
+    "initialTarget": "docs/design/role-workspaces/02-caregiver.png"
+  },
+  {
+    "id": "03-admin",
+    "title": "社区管理员工作台",
+    "target": "docs/design/role-workspaces/03-admin.png"
+  },
+  {
+    "id": "04-manager",
+    "title": "机构负责人工作台",
+    "target": "docs/design/role-workspaces/04-manager-refined.png",
+    "initialTarget": "docs/design/role-workspaces/04-manager.png"
+  },
+  {
+    "id": "05-street",
+    "title": "街道审核工作台",
+    "target": "docs/design/role-workspaces/05-street.png"
+  },
+  {
+    "id": "06-regulator",
+    "title": "民政监管工作台",
+    "target": "docs/design/role-workspaces/06-regulator.png"
+  }
+]

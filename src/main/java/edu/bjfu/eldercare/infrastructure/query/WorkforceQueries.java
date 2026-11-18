@@ -88,7 +88,14 @@ public class WorkforceQueries implements QueryModule {
                         + " v_dispatch_context d ON d.id=h.dispatch_id JOIN caregiver c ON"
                         + " c.id=d.caregiver_id JOIN account a ON a.id=c.account_id WHERE "
                         + scope.workerFilter(user, parameters);
-        return new PageQuery(sql, parameters);
+        return new PageQuery(sql, parameters)
+                .withSummary(
+                        """
+COALESCE(SUM(CASE WHEN status='VALID' THEN effective_minutes ELSE 0 END),0) minutes,
+COUNT(CASE WHEN status='VALID' THEN 1 END) valid,
+COUNT(CASE WHEN status IN ('PENDING','REVIEW') THEN 1 END) pending,
+COUNT(CASE WHEN status='INVALID' THEN 1 END) invalid
+""");
     }
 
     private PageQuery credentialDue(Auth.User user) {
@@ -129,7 +136,7 @@ public class WorkforceQueries implements QueryModule {
                     + " ON a.id=c.account_id WHERE h.status='VALID' AND "
                         + scope.workerFilter(user, parameters)
                         + " GROUP BY c.id,c.name,DATE_FORMAT(h.check_in,'%Y-%m')";
-        return new PageQuery(sql, parameters);
+        return new PageQuery(sql, parameters).orderedBy("period DESC,id ASC");
     }
 
     private PageQuery quality(Auth.User user) {

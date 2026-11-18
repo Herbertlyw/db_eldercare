@@ -128,57 +128,6 @@ a {
 #page-description {
   font-size: 13px;
 }
-.role-tasks {
-  margin-bottom: 20px;
-  border-radius: 4px;
-}
-.role-tasks > .arco-card-body {
-  padding: 20px 0;
-}
-.task-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-.task-card {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 0 24px;
-  border: 0;
-  border-right: 1px solid var(--color-border);
-  background: transparent;
-  text-align: left;
-  cursor: pointer;
-  color: var(--color-text-3);
-}
-.task-card:last-child {
-  border-right: 0;
-}
-.task-card:hover {
-  background: var(--color-fill-1);
-}
-.task-card > .arco-icon:last-child {
-  margin-left: auto;
-  flex-shrink: 0;
-}
-.task-icon {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--color-primary-light-1);
-  color: rgb(var(--primary-6));
-  font-size: 22px;
-}
-.task-card .arco-statistic-title {
-  font-size: 13px;
-  color: var(--color-text-2);
-}
-.task-card .arco-statistic-value {
-  font-size: 28px;
-}
 .content-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 240px;
@@ -433,17 +382,7 @@ fieldset:disabled {
   outline: 2px solid rgb(var(--primary-6));
   outline-offset: 2px;
 }
-@media (max-width: 1280px) {
-  .task-card {
-    padding: 0 16px;
-    gap: 12px;
-  }
-  .task-icon {
-    width: 36px;
-    height: 36px;
-    font-size: 20px;
-  }
-}
+
 @media (max-width: 1200px) {
   .content-grid {
     grid-template-columns: minmax(0, 1fr);
@@ -457,9 +396,6 @@ fieldset:disabled {
   .community-photo {
     height: 220px;
     aspect-ratio: auto;
-  }
-  .task-icon {
-    display: none;
   }
 }
 @media (max-width: 760px) {
@@ -526,25 +462,6 @@ fieldset:disabled {
   }
   .page-header .arco-btn {
     min-height: 40px;
-  }
-  .role-tasks > .arco-card-body {
-    padding: 0;
-  }
-  .task-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .task-card {
-    padding: 16px;
-    border-bottom: 1px solid var(--color-border);
-  }
-  .task-card:nth-child(even) {
-    border-right: 0;
-  }
-  .task-card:nth-child(n + 3) {
-    border-bottom: 0;
-  }
-  .task-card .arco-statistic-value {
-    font-size: 26px;
   }
   .records > .arco-card-header {
     padding: 0 14px;

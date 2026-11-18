@@ -1,0 +1,213 @@
+.order-visit-dialog .arco-modal-content {
+  padding: 20px 24px;
+  max-height: calc(100dvh - 190px);
+  overflow: auto;
+  background: #f4f6fa;
+}
+.order-visit-details {
+  display: grid;
+  gap: 16px;
+  color: #263750;
+}
+.order-visit-details .visit-ticket {
+  display: block;
+  margin: 0;
+  padding: 20px 24px 0;
+  background: linear-gradient(108deg, #edf4ff, #f8fbff 78%);
+  border: 1px solid #d5e2f5;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.visit-ticket-heading,
+.visit-ticket-main,
+.visit-entry-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.visit-reference,
+.visit-entry-heading span,
+.visit-fee > span {
+  font-size: 13px;
+  color: #526783;
+}
+.visit-reference b {
+  font-variant-numeric: tabular-nums;
+  margin-left: 4px;
+}
+.visit-ticket-main {
+  margin: 13px 0 18px;
+}
+.visit-ticket-main h2 {
+  margin: 0;
+  color: #18375d;
+  font-size: 24px;
+  line-height: 1.35;
+}
+.visit-ticket-main p,
+.visit-appointment > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.visit-ticket-main p {
+  margin: 6px 0 0;
+}
+.visit-ticket-main svg,
+.visit-appointment svg {
+  flex: none;
+  color: #456994;
+}
+.visit-fee {
+  display: grid;
+  gap: 4px;
+  text-align: right;
+}
+.visit-fee b {
+  font-size: 23px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.visit-appointment {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  padding: 12px 0;
+  border-top: 1px solid #d7e4f3;
+}
+.visit-log {
+  padding: 18px 24px;
+  background: white;
+  border: 1px solid #dfe5ee;
+  border-radius: 12px;
+  min-width: 0;
+}
+.visit-log h3 {
+  margin: 0 0 15px;
+  font-size: 16px;
+}
+.visit-entry-heading > div {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.visit-entry-heading strong {
+  font-size: 17px;
+}
+.visit-trace {
+  margin: 16px 0;
+}
+.visit-trace-day {
+  color: #576a83;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.visit-times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 0;
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+}
+.visit-times li {
+  flex: 1 1 110px;
+  display: grid;
+  gap: 5px;
+  border-left: 2px solid #b7cbeb;
+  padding: 0 10px;
+}
+.visit-times b {
+  color: #354c6a;
+  font-weight: 500;
+}
+.visit-times time {
+  color: #425774;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.visit-note {
+  margin: 14px 0;
+}
+.visit-note h4 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: #556980;
+  font-weight: 500;
+}
+.visit-note p {
+  margin: 0;
+  line-height: 1.65;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+.visit-disclosure > summary {
+  cursor: pointer;
+  color: #3c5f8c;
+  padding: 8px 0;
+  width: fit-content;
+}
+.visit-disclosure > summary:focus-visible {
+  outline: 2px solid #165dff;
+  outline-offset: 2px;
+}
+.visit-history,
+.visit-history .visit-entry + .visit-entry {
+  margin-top: 12px;
+  border-top: 1px solid #e3e9f1;
+  padding-top: 8px;
+}
+.visit-history .visit-entry {
+  padding: 10px 0 0 14px;
+  border-left: 2px solid #e3e9f1;
+}
+.visit-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin: 4px 0;
+  gap: 12px;
+}
+.visit-facts dt,
+.visit-empty {
+  color: #5e6d81;
+}
+.visit-facts dd {
+  margin: 4px 0 0;
+  overflow-wrap: anywhere;
+}
+.visit-order-fields > summary {
+  padding: 4px 2px;
+}
+.visit-order-fields[open] > summary {
+  margin-bottom: 8px;
+}
+.order-visit-dialog .detail-actions {
+  margin: 0;
+}
+.order-visit-dialog .detail-actions .arco-btn-primary {
+  color: white;
+  border-color: #165dff;
+  background: #165dff;
+}
+.order-visit-dialog .detail-actions .arco-btn-primary:hover {
+  background: #114bc9;
+}
+
+.order-list-project,
+.order-list-slot {
+  display: grid;
+  gap: 4px;
+}
+.order-list-project strong,
+.order-list-slot strong {
+  font-size: 14px;
+  font-weight: 600;
+  color: #263b59;
+}
+.order-list-project small,
+.order-list-slot small {
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  color: #526783;
+}

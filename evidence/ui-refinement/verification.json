@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-17",
+  "base": "57b731e",
+  "branch": "codex/role-interactions",
+  "workingTree": "local uncommitted UI refinement",
+  "frontendTests": 26,
+  "jarSha256": "fe240316d7408a866589d11e59270a502fd869d77dea56f4aed6bf5456b63f95",
+  "testFrontendPort": 18089,
+  "testApiPort": 18086,
+  "testDatabase": "eldercare_home_ui20261117_test",
+  "previewPort": 18080,
+  "newDatabaseChanges": false,
+  "newDependencies": false
+}

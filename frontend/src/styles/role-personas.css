@@ -1,0 +1,587 @@
+/* Role-specific compositions share the existing blue workspace palette. */
+.role-family .elder-overview {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(220px, 0.75fr);
+  padding: 0;
+  overflow: hidden;
+  gap: 26px;
+  background: #fbfcff;
+}
+.family-person {
+  padding: 26px 0 26px 26px;
+}
+.profile-caption {
+  display: block;
+  font-size: 12px;
+  color: #7d8eaa;
+  margin-bottom: 13px;
+  letter-spacing: 0.08em;
+}
+.role-family .elder-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.elder-facts > div {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.elder-facts > div > span {
+  font-size: 12px;
+  color: #7d8eaa;
+}
+.elder-facts > div > strong {
+  font-size: 14px;
+  color: #405879;
+  font-weight: 500;
+}
+.role-family .elder-plan {
+  padding: 26px;
+  align-content: center;
+  height: 100%;
+  box-sizing: border-box;
+  background: #edf3fd;
+  border: 0;
+  gap: 10px;
+}
+.role-family .elder-plan > span:first-child {
+  font-size: 15px;
+  color: #2d4d7b;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.role-family .elder-plan > span:nth-child(2) {
+  color: #6486b7;
+  font-size: 12px;
+}
+.role-family .family-alert {
+  border-color: #f1dccd;
+  background: #fffdfa;
+}
+.role-family .family-alert > .arco-card-header {
+  height: 46px;
+  margin-bottom: 0;
+  border-color: #f4e9df;
+}
+.role-family .family-alert > .arco-card-body {
+  padding-top: 12px;
+  padding-bottom: 14px;
+}
+.role-family .family-grid {
+  grid-template-columns: minmax(0, 1.65fr) minmax(300px, 1fr);
+}
+.role-family .family-next-panel {
+  border-top: 3px solid #789bd7;
+}
+.family-next-panel > .arco-card-body > .arco-btn {
+  margin: 0 0 4px;
+}
+.role-family .next-visit > div {
+  padding: 24px 18px;
+  background: #f3f7fd;
+  border: 0;
+  border-radius: 10px;
+}
+.role-family .family-cost-panel .amount-total {
+  border: 0;
+  background: #edf3fd;
+  margin: 8px -4px;
+  padding: 18px 14px;
+  border-radius: 8px;
+  align-items: center;
+}
+.role-family .family-cost-panel .amount-total dd {
+  font-size: 26px;
+  color: #315faa;
+}
+.role-family .family-contact-panel .home-shortcuts .arco-btn {
+  height: 40px;
+  justify-content: flex-start;
+  padding-inline: 16px;
+  border-color: #e4ebf5;
+}
+.role-family .community-card {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* Caregivers work from a dated schedule; credentials and field help sit beside it. */
+.role-caregiver > .home-metrics {
+  margin-bottom: 22px;
+}
+.role-caregiver .caregiver-grid {
+  grid-template-columns: minmax(0, 1.85fr) minmax(280px, 0.85fr);
+}
+.duty-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: #eef3fc;
+  border-radius: 10px;
+}
+.duty-heading > div {
+  display: grid;
+  gap: 7px;
+}
+.duty-heading span {
+  color: #7287a8;
+  font-size: 12px;
+}
+.duty-heading strong {
+  color: #315484;
+  font-size: 32px;
+  line-height: 1.1;
+}
+.duty-heading small {
+  font-size: 14px;
+  margin-left: 9px;
+  font-weight: 400;
+}
+.role-caregiver .caregiver-schedule .home-toolbar {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #edf1f7;
+}
+.role-caregiver .visit-row {
+  border: 1px solid #e6ebf4;
+  border-radius: 10px;
+  padding: 18px;
+  margin: 12px 0;
+  background: #fff;
+}
+.role-caregiver .visit-row.next {
+  border-left: 4px solid #487bd3;
+  background: #f7faff;
+}
+.role-caregiver .visit-time {
+  color: #4c6f9f;
+}
+.role-caregiver .shift-summary {
+  padding: 16px;
+  background: #f5f8fd;
+  border: 1px solid #e6edf7;
+  border-radius: 9px;
+  margin: 0 0 12px;
+}
+.role-caregiver .credential-row {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  column-gap: 14px;
+  align-items: center;
+  padding-block: 14px;
+}
+.credential-thumb {
+  grid-row: 1/4;
+  padding: 0;
+  border: 1px solid #dae4f3;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #f7f9fd;
+}
+.credential-thumb img {
+  display: block;
+  width: 100%;
+}
+.role-caregiver .credential-row > strong {
+  font-size: 14px;
+}
+.role-caregiver .credential-row > span {
+  font-size: 12px;
+}
+.role-caregiver .credential-row > .arco-btn {
+  justify-self: start;
+  padding-inline: 0;
+}
+.role-caregiver .caregiver-help .arco-card-body {
+  display: grid;
+  gap: 10px;
+}
+.role-caregiver .caregiver-help .report-shortcut {
+  min-height: 44px;
+  height: auto;
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+/* Institution management separates the daily roster from staff development. */
+.role-manager .home-grid {
+  grid-template-columns: minmax(0, 1.75fr) minmax(300px, 1fr);
+}
+.roster-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px;
+  background: #edf3fc;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+.roster-heading > span {
+  font-size: 13px;
+  color: #6d83a4;
+}
+.roster-heading > strong {
+  font-size: 25px;
+  color: #2f5ba1;
+}
+.roster-heading small {
+  font-weight: 400;
+  font-size: 12px;
+  color: #7b8eac;
+}
+.roster-worker {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  white-space: nowrap;
+}
+.roster-worker > span {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: #edf2fa;
+  color: #6d85ab;
+}
+.roster-worker > strong {
+  color: #3e587c;
+  font-size: 13px;
+  font-weight: 500;
+}
+.role-manager .manager-roster .arco-table-th {
+  background: #f3f6fb;
+  color: #6d7e96;
+}
+.role-manager .manager-roster .arco-table-td {
+  padding-block: 17px;
+}
+.role-manager .manager-attention .section-label {
+  background: #f6f8fc;
+  border-left: 3px solid #8ca9d5;
+  padding: 8px 12px;
+  color: #5c7495;
+}
+.role-manager .manager-rectification .home-row {
+  align-items: flex-start;
+}
+
+/* Street reviewers read a queue and an actual application dossier. */
+.role-street .review-grid {
+  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.8fr);
+}
+.role-street .review-sheet {
+  border-radius: 12px;
+  border: 1px solid #e1e7f0;
+  box-shadow: 0 4px 20px #213d5f08;
+  padding: 0;
+  overflow: hidden;
+}
+.role-street .claim-preview {
+  padding: 0 26px 26px;
+}
+.review-document-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 26px;
+  margin: 0 -26px 24px;
+  background: #edf3fc;
+  color: #54749f;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+.role-street .claim-heading h2 {
+  color: #2d4262;
+  font-size: 23px;
+}
+.queue-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  color: #8a98ad;
+  font-size: 12px;
+}
+.queue-caption strong {
+  color: #5576a3;
+  font-size: 20px;
+}
+.queue-caption small {
+  font-size: 12px;
+  font-weight: 400;
+}
+.role-street .claim-selection {
+  margin: 16px 0;
+  display: grid;
+  gap: 10px;
+}
+.role-street .claim-selection button {
+  border: 1px solid #e6ebf4;
+  border-radius: 8px;
+  padding: 18px 14px;
+}
+.role-street .claim-selection button[aria-pressed="true"] {
+  border-color: #8eade0;
+  background: #eef4ff;
+  box-shadow: inset 3px 0 #4a79c9;
+}
+.role-street .claim-selection button strong {
+  color: #355078;
+}
+.role-street .claim-selection button b {
+  color: #4c6c9a;
+  font-weight: 500;
+}
+.role-street .claim-numbers {
+  border: 0;
+  background: #f5f7fb;
+  border-radius: 10px;
+  padding: 22px 0;
+}
+.role-street .claim-numbers span {
+  font-size: 12px;
+  color: #72839b;
+}
+.role-street .claim-numbers strong {
+  color: #3a629f;
+}
+.review-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #405775;
+  font-size: 14px;
+  text-align: left;
+  margin: 22px 0 16px;
+}
+.review-section-title > span,
+.review-section-number {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  background: #edf2fa;
+  border-radius: 5px;
+  color: #7893b8;
+  font-size: 11px;
+  margin-right: 2px;
+}
+.role-street .review-footer {
+  text-align: left;
+}
+.role-street .review-footer > .arco-space {
+  display: flex;
+  justify-content: flex-end;
+}
+.role-street .claim-evidence summary {
+  color: #405775;
+  font-size: 14px;
+}
+
+/* Regulatory overview uses the recorded rates, with no invented trend data. */
+.role-regulator .regulator-scope {
+  background: #fff;
+  border: 1px solid #e4eaf3;
+  border-radius: 10px;
+  padding: 14px 18px;
+}
+.role-regulator .regulator-summary {
+  display: grid;
+  grid-template-columns: 0.85fr 1.2fr 1.2fr;
+  gap: 16px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  box-shadow: none;
+}
+.role-regulator .regulator-summary > div:not(.home-loading):not(.arco-alert) {
+  border: 1px solid #e4eaf3 !important;
+  border-radius: 12px;
+  padding: 24px;
+  background: white;
+  box-shadow: 0 3px 16px #233e6808;
+}
+.role-regulator .regulator-summary > .scope-stat {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  background: #2d568f !important;
+  color: #eaf2ff;
+}
+.role-regulator .scope-stat strong {
+  color: white;
+  font-size: 36px;
+}
+.role-regulator .scope-stat small {
+  color: #c2d4ef;
+}
+.role-regulator .regulator-summary > .rate-stat {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+.rate-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.rate-copy > span {
+  font-size: 13px;
+  color: #6e809a;
+}
+.role-regulator .rate-copy strong {
+  color: #315d9d;
+  font-size: 30px;
+}
+.rate-ring {
+  flex-shrink: 0;
+}
+.role-regulator .regulator-grid {
+  grid-template-columns: minmax(0, 1.7fr) minmax(300px, 1fr);
+}
+.regulator-action-title {
+  font-size: 14px;
+  color: #7b8ba3;
+  font-weight: 500;
+  margin: 0;
+}
+.role-regulator .regulator-actions {
+  gap: 12px;
+}
+.role-regulator .regulator-actions .home-metric {
+  min-height: 84px;
+  box-shadow: none;
+  padding: 18px 20px;
+}
+.role-regulator .regulator-coverage .arco-table-th {
+  background: #f1f5fb;
+  color: #6f819c;
+}
+.role-regulator .regulator-coverage .arco-table-td {
+  padding-block: 18px;
+}
+.role-regulator .regulator-review {
+  border-top: 3px solid #91a7ce;
+}
+@media (max-width: 1200px) {
+  .role-family .elder-overview {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .role-family .elder-plan {
+    grid-column: 1/-1;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    padding: 18px 26px;
+  }
+  .role-family .elder-facts {
+    padding-right: 20px;
+  }
+  .role-regulator .regulator-summary {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .role-regulator .regulator-summary > .rate-stat {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .role-regulator .rate-ring {
+    display: none;
+  }
+}
+@media (max-width: 1000px) {
+  .role-family .family-grid,
+  .role-caregiver .caregiver-grid,
+  .role-manager .home-grid,
+  .role-regulator .regulator-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .role-street .review-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .role-street .review-queue .claim-selection {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 760px) {
+  .role-family .elder-overview {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+  .family-person {
+    padding: 22px;
+  }
+  .role-family .elder-facts {
+    padding: 0 22px 22px;
+    gap: 12px;
+  }
+  .role-family .elder-facts > div > strong {
+    font-size: 12px;
+  }
+  .role-family .elder-plan {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 20px 22px;
+  }
+  .role-caregiver > .home-metrics {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .role-caregiver > .home-metrics > .home-metric:last-child {
+    grid-column: 1/-1;
+  }
+  .role-caregiver > .home-metrics .home-metric strong {
+    font-size: 22px;
+  }
+  .duty-heading {
+    padding: 16px;
+  }
+  .duty-heading strong {
+    font-size: 28px;
+  }
+  .duty-heading small {
+    font-size: 12px;
+  }
+  .role-street .claim-preview {
+    padding: 0 16px 20px;
+  }
+  .review-document-label {
+    margin-inline: -16px;
+    padding: 14px 16px;
+  }
+  .role-street .claim-numbers {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .role-street .claim-numbers > div {
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .role-street .review-queue .claim-selection {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .role-regulator .regulator-summary {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .role-regulator .regulator-summary > .rate-stat {
+    flex-direction: row;
+    align-items: center;
+  }
+  .role-regulator .rate-ring {
+    display: block;
+  }
+  .role-regulator .regulator-scope {
+    gap: 12px;
+  }
+  .role-regulator .regulator-scope > span {
+    margin-left: 0;
+  }
+}
