@@ -19,7 +19,13 @@ export function pageHint(recordKind: string, role: string) {
       role === "ADMIN"
         ? "计划须与最新评估一致，服务项目和时间均在计划内安排。"
         : "查看照护项目、责任护工和计划有效期。",
+    hours: "按签到日期查询服务记录，待核验与无效记录不计入有效工时。",
     credentials: "证书类型、等级和有效期用于核验护工的服务资格。",
+    trainingRecords: "查看培训课程、考核结果和已登记的成绩。",
+    trainings: "安排培训课程，登记参训人员并记录考核成绩。",
+    notifications: "查看应急和评估提醒，进入关联业务跟进处理。",
+    publicNotices: "查看已发布的服务质量公示。",
+    selfPay: "核对服务费用、已拨付补贴和个人承担金额。",
     shifts: "同一护工的班次不能重叠，派单时还会核验资质和名额。",
     complaints: "评价与投诉分别记录；投诉可查看受理、回复和结案过程。",
     claims:
@@ -34,7 +40,7 @@ export function pageHint(recordKind: string, role: string) {
     events: "按事件当前阶段核实、响应、登记到场和处置结果。",
     inspections: "抽查发现问题后交机构整改，再由监管人员复核。",
     recruitments: "录用时创建护工账号，随后安排岗前培训与资质登记。",
-    trainings: "先安排培训和参训人员，培训结束后登记成绩。",
+
     policies: "政策包含适用项目、对象条件、社区范围和结算周期。",
   };
   return hints[recordKind] || "";
@@ -87,6 +93,23 @@ export function displayValue(key: string, value: any, kind = ""): string {
     return value.replace("T", " ").slice(0, 19);
   return typeof value === "object" ? JSON.stringify(value) : String(value);
 }
+export function appointmentSlot(row: Row) {
+  if (!row.starts_at) return { date: "", time: "" };
+  const start = displayValue("starts_at", row.starts_at).slice(0, 16);
+  const date = start.slice(0, 10),
+    from = start.slice(11);
+  if (!row.ends_at) return { date, time: from };
+  const end = displayValue("ends_at", row.ends_at).slice(0, 16);
+  return {
+    date,
+    time: from + " 至 " + (date === end.slice(0, 10) ? end.slice(11) : end),
+  };
+}
+export function orderStatusLabel(row: Row) {
+  return row.status === "PENDING" && Number(row.dispatch_window) === 2
+    ? "已过预约时段"
+    : displayValue("status", row.status, "orders");
+}
 export function recordLabel(row: Row, kind = "") {
   const parts = [
     row.elder_name,
@@ -130,6 +153,26 @@ const leading: Record<string, string[]> = {
   recruitments: ["id", "candidate_name", "status", "review_note", "created_at"],
   trainingRecords: ["id", "name", "title", "result", "score"],
   organizationReports: ["id", "period", "status", "summary", "review_note"],
+  selfPay: ["id", "elder_name", "amount", "paid_subsidy", "self_pay"],
+  claimProgress: [
+    "id",
+    "elder_name",
+    "community_name",
+    "period",
+    "status",
+    "amount",
+    "paid_at",
+  ],
+  areas: ["id", "name", "community_name"],
+  monthlyHours: ["name", "period", "effective_minutes"],
+  hoursReview: [
+    "id",
+    "order_id",
+    "status",
+    "check_in",
+    "check_out",
+    "location_note",
+  ],
   hours: [
     "id",
     "caregiver_name",
@@ -150,12 +193,20 @@ const leading: Record<string, string[]> = {
     "paid_subsidy",
   ],
 };
+export const recordKey = (kind: string, row: Row) =>
+  kind === "monthlyHours"
+    ? [row.id, row.period].join(":")
+    : String(row.id ?? JSON.stringify(row));
 export const recordColumns = (kind: string, row: Row) =>
   (leading[kind] || Object.keys(row)).filter(
     (k) => k !== "current_worker_account" && k in row,
   );
 export const columnTitle = (key: string, kind = "") =>
-  kind === "elders" && key === "name" ? "姓名" : columns[key] || key;
+  ["hours", "monthlyHours"].includes(kind) && key === "effective_minutes"
+    ? "有效工时"
+    : kind === "elders" && key === "name"
+      ? "姓名"
+      : columns[key] || key;
 export const pendingStates = [
   "PENDING",
   "CONFIRM",

@@ -72,7 +72,11 @@ public class ListFiltering {
         if (filter.from() != null || filter.to() != null) {
             if (date.isEmpty()) throw new Rule("当前列表不支持日期筛选");
             if (filter.from() != null) {
-                conditions.add("q.`" + date + "`>=?");
+                // 班次投影可声明区间结束点，跨午夜的班次也属于次日。
+                conditions.add(
+                        columns.contains("overlap_ends_at")
+                                ? "q.overlap_ends_at>?"
+                                : "q.`" + date + "`>=?");
                 parameters.add(filter.from().atStartOfDay());
             }
             if (filter.to() != null) {
@@ -105,6 +109,14 @@ public class ListFiltering {
                         + (conditions.isEmpty()
                                 ? ""
                                 : " WHERE " + String.join(" AND ", conditions));
-        return new Prepared(new PageQuery(sql, parameters, source.rowMapper()), date, states);
+        return new Prepared(
+                new PageQuery(
+                        sql,
+                        parameters,
+                        source.rowMapper(),
+                        source.orderBy(),
+                        source.summaryColumns()),
+                date,
+                states);
     }
 }

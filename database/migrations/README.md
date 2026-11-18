@@ -34,3 +34,5 @@ MySQL DDL 可能隐式提交，失败后不能假定整份脚本自动回滚。�
 4. 构建并启动当前源码对应的 JAR。新安装直接使用当前 `01_schema.sql`、`02_routines.sql`、`03_views.sql` 和 Seed，不额外重放旧版本迁移。
 
 上述步骤都需先备份并在副本演练。名称迁移的 47 表逐字段核对、重复执行与人工编辑保护记录见 `evidence/natural-names-migration.json`，本地应用记录见 `evidence/natural-names-display.json`；密码迁移记录见 `evidence/password-migration.json`。React 构建本身不修改 MySQL 数据。
+
+- 20261118_dispatch_window.sql 更新派单过程，派单或改派时核对预约结束时间。已有库先备份，在副本执行并验证后，于暂停派单期间执行脚本。新库直接使用 02_routines.sql。

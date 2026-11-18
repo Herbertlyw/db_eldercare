@@ -1,0 +1,12 @@
+{
+  "frontend/src/pages/workspaces/CaregiverHome.tsx": "bf7c537aaee8405ac4923b23276d60a7236d202eddd2f2f31ce9404153a74ef0",
+  "frontend/src/pages/workspaces/RegulatorHome.tsx": "8edae7242ca96e5d65f012e494762066796554ec895ee2cce9dc29a11b50528d",
+  "frontend/src/pages/workspaces/StreetHome.tsx": "91c9b01d9883d75cc6383100b03eb65e1ddd51d71cf425fda34cc1dc5a193123",
+  "frontend/src/pages/workspaces/AdminHome.tsx": "606ed121a997d2d54ac6f24951f871d36302d43882e6333089f62e13633636f3",
+  "frontend/src/pages/workspaces/ManagerHome.tsx": "e105234432d047221a7499291d46cc67d339624e4bc6423f60ba81e97f0da735",
+  "frontend/src/pages/workspaces/RoleHome.tsx": "99eae9205b3c2b1422edd067e280e902e360894a56e356fa4637a4519cad3fbe",
+  "frontend/src/pages/workspaces/FamilyHome.tsx": "b386143de177f42ad199990be1484e6c4c210556cfec9efa3dfe691fe1b47b70",
+  "frontend/src/styles/role-personas.css": "c2ec7c9a12c2a53bce5b41a026382ea75901f0a8f2fd9e39bc65dc821ddb7221",
+  "frontend/src/pages/Workspace.tsx": "0becbfe49c20859cdfdb8e5d2df8e44fc34f2377ceeaea9deb803d17f28903d2",
+  "scripts/react/verify_workspaces.cjs": "eb39aa5b20356084755444ead7106481383d3122d19e906a8485fb7ff28181a0"
+}

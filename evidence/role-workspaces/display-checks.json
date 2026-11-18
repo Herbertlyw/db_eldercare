@@ -1,0 +1,37 @@
+{
+  "time": "2026-11-17T02:45:50.346Z",
+  "checked": [
+    {
+      "account": "admin1",
+      "role": "ADMIN",
+      "title": "社区工作台"
+    },
+    {
+      "account": "family1",
+      "role": "FAMILY",
+      "title": "老人照护"
+    },
+    {
+      "account": "caregiver1",
+      "role": "CAREGIVER",
+      "title": "今日服务"
+    },
+    {
+      "account": "manager1",
+      "role": "MANAGER",
+      "title": "机构工作台"
+    },
+    {
+      "account": "street1",
+      "role": "STREET",
+      "title": "补贴审核工作台"
+    },
+    {
+      "account": "regulator1",
+      "role": "REGULATOR",
+      "title": "辖区监管"
+    }
+  ],
+  "errors": [],
+  "businessWrites": []
+}

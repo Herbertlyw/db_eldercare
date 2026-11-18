@@ -1,0 +1,206 @@
+/* Secondary navigation reserves a separate lane for disclosure arrows. */
+.app-layout .sidebar .more-navigation .arco-menu-inline-header {
+  display: flex;
+  align-items: center;
+  padding-right: 30px !important;
+  font-size: 13px;
+  min-height: 40px;
+  line-height: 40px;
+}
+.app-layout .sidebar .more-navigation .nav-group-label {
+  min-width: 0;
+  white-space: nowrap;
+}
+.app-layout .sidebar .more-navigation .arco-menu-inline-header .arco-icon {
+  font-size: 16px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+.app-layout
+  .sidebar
+  .more-navigation
+  .arco-menu-inline-header
+  .arco-menu-icon-suffix {
+  right: 8px;
+}
+.app-layout .sidebar .more-navigation .arco-menu-icon-suffix .arco-icon {
+  font-size: 12px;
+  margin-right: 0;
+}
+.hours-overview {
+  margin: 4px 0 24px;
+}
+.hours-overview-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.hours-overview-heading strong {
+  color: #263957;
+  font-size: 15px;
+}
+.hours-overview-heading span {
+  color: #8693a6;
+  font-size: 12px;
+}
+.hours-metrics {
+  display: grid;
+  grid-template-columns: 1.5fr repeat(3, 1fr);
+  border: 1px solid #e5ebf5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.hours-metric {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  border-right: 1px solid #e5ebf5;
+  background: #fafbfd;
+}
+.hours-metric:last-child {
+  border-right: 0;
+}
+.hours-metric > svg {
+  color: #4277d4;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+.hours-metric > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.hours-metric span {
+  color: #68788e;
+  font-size: 13px;
+}
+.hours-metric strong {
+  color: #263957;
+  font-size: 25px;
+  font-weight: 600;
+}
+.hours-metric small {
+  font-size: 12px;
+  font-weight: 400;
+  color: #8693a6;
+}
+.hours-metric.primary {
+  background: #f0f5ff;
+}
+.hours-metric.primary strong {
+  color: #165dff;
+}
+.hours-metric.pending > svg {
+  color: #cb944b;
+}
+.hours-metric.muted > svg {
+  color: #8e9bb0;
+}
+.certificate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 24px;
+  padding: 6px 0 24px;
+}
+.certificate-card {
+  border: 1px solid #e1e7f0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  max-width: 670px;
+}
+.certificate-image {
+  display: block;
+  padding: 16px;
+  border: 0;
+  background: #f5f7fb;
+  width: 100%;
+  cursor: zoom-in;
+}
+.certificate-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-shadow: 0 3px 12px #243d5e0d;
+}
+.certificate-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  flex-wrap: wrap;
+}
+.certificate-card-footer > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.certificate-card-footer strong {
+  color: #283e5e;
+  font-size: 16px;
+}
+.certificate-card-footer > div:first-child > span {
+  color: #8190a5;
+  font-size: 12px;
+}
+.certificate-pagination {
+  justify-content: flex-end;
+}
+.certificate-preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+@media (max-width: 1100px) {
+  .hours-metric {
+    padding: 18px 14px;
+    gap: 10px;
+  }
+  .hours-metric strong {
+    font-size: 20px;
+  }
+}
+@media (max-width: 700px) {
+  .hours-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+  .hours-metric {
+    border-bottom: 1px solid #e5ebf5;
+  }
+  .hours-metric:nth-child(2) {
+    border-right: 0;
+  }
+  .hours-metric:nth-child(n + 3) {
+    border-bottom: 0;
+  }
+  .hours-metric > svg {
+    font-size: 20px;
+  }
+  .hours-metric strong {
+    font-size: 18px;
+  }
+  .certificate-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+  .certificate-image {
+    padding: 8px;
+  }
+  .certificate-card-footer {
+    padding: 14px;
+  }
+}
+.attendance-time {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  white-space: nowrap;
+}
+.attendance-time small {
+  color: #8693a6;
+  font-size: 12px;
+}

@@ -32,7 +32,8 @@ const { start } = require("./browser.cjs"),
           ? route.continue()
           : route.abort(),
       );
-      assert.equal(await p.locator(".task-card").count(), 4);
+      assert.equal(await p.locator(".role-home").getAttribute("data-role"), role);
+      assert.equal(await p.locator("#nav [data-kind=home]").count(), 1);
       await h.screenshot(p, "workspace-" + account);
       let detailCount = 0;
       for (const kind of h.registry.menus[role]) {
@@ -48,7 +49,7 @@ const { start } = require("./browser.cjs"),
           ),
           account + " " + kind + " overflow",
         );
-        const detail = p.locator(".business-table .detail-link").first();
+        const detail = p.locator(".business-table .detail-link, .certificate-card .detail-link, .designed-records .detail-link").first();
         if (await detail.count()) {
           await detail.click();
           await p.locator(".detail-dialog").waitFor();

@@ -1,0 +1,83 @@
+{
+  "checks": [
+    {
+      "account": "admin1",
+      "role": "ADMIN",
+      "title": "社区工作台",
+      "widths": [
+        1600,
+        1280,
+        768,
+        390
+      ],
+      "reload": true,
+      "retry": true
+    },
+    {
+      "account": "family1",
+      "role": "FAMILY",
+      "title": "老人照护",
+      "widths": [
+        1600,
+        1280,
+        768,
+        390
+      ],
+      "reload": true,
+      "retry": true
+    },
+    {
+      "account": "caregiver1",
+      "role": "CAREGIVER",
+      "title": "今日服务",
+      "widths": [
+        1600,
+        1280,
+        768,
+        390
+      ],
+      "reload": true,
+      "retry": true
+    },
+    {
+      "account": "manager1",
+      "role": "MANAGER",
+      "title": "机构工作台",
+      "widths": [
+        1600,
+        1280,
+        768,
+        390
+      ],
+      "reload": true,
+      "retry": true
+    },
+    {
+      "account": "street1",
+      "role": "STREET",
+      "title": "补贴审核工作台",
+      "widths": [
+        1600,
+        1280,
+        768,
+        390
+      ],
+      "reload": true,
+      "retry": true
+    },
+    {
+      "account": "regulator1",
+      "role": "REGULATOR",
+      "title": "辖区监管",
+      "widths": [
+        1600,
+        1280,
+        768,
+        390
+      ],
+      "reload": true,
+      "retry": true
+    }
+  ],
+  "pageErrors": []
+}

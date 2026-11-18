@@ -1,6 +1,6 @@
 {
-  "time": "2026-11-16T17:08:39.038301",
-  "database": "eldercare_names_20261116_test",
+  "time": "2026-11-18T14:11:12+08:00",
+  "database": "eldercare_pub_jdbc_938717d2_test",
   "engine": "native MySQL 8.4.11",
   "suites": [
     {
@@ -183,6 +183,21 @@
       ]
     },
     {
+      "suite": "edu.bjfu.eldercare.ReviewConsistencyIntegrationTest",
+      "kind": "integration",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "checkinWinsAgainstWaitingReleaseWithoutLosingCapacity",
+        "missedOrderStaysPendingUntilContactAndCanBeMovedToAnEligibleSlot",
+        "contradictoryReviewsCannotOverwriteApprovedMaterial",
+        "missingMaterialLeavesReviewOpen",
+        "hourAggregateCoversAllFilteredRowsIncludingOtherPagesAndRespectsScope"
+      ]
+    },
+    {
       "suite": "edu.bjfu.eldercare.RouteContractIntegrationTest",
       "kind": "integration",
       "tests": 1,
@@ -249,6 +264,22 @@
       ]
     },
     {
+      "suite": "edu.bjfu.eldercare.WorkspaceIntegrationTest",
+      "kind": "integration",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "profileIsAlwaysTheSignedInAccountAndHoursAreCurrentMonthOnly",
+        "overnightShiftAppearsOnBothDaysButNotAtItsExclusiveEnd",
+        "workspaceReadersEnforceRoleCommunityAndInstitutionBoundaries",
+        "scheduleSortIsAppliedBeforePaginationAndDateBoundariesAreExclusive",
+        "jurisdictionSummaryUsesAllAuthorizedCommunitiesAndWeightedRates",
+        "familyMoneyUsesAllCompletedOrdersAndPaidAllocationsForThatElder"
+      ]
+    },
+    {
       "suite": "edu.bjfu.eldercare.application.RoutingTest",
       "kind": "unit",
       "tests": 4,
@@ -302,7 +333,7 @@
       ]
     }
   ],
-  "tests": 188,
+  "tests": 199,
   "failures": 0,
   "errors": 0,
   "skipped": 0

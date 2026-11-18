@@ -66,7 +66,7 @@ export default function App() {
       setUser(undefined);
       setPasswordMode(null);
       setNotice("");
-      location.hash = "";
+      history.replaceState(null, "", location.pathname + location.search);
     }
   }
   return (

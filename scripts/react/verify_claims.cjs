@@ -10,20 +10,46 @@ const { start } = require("./browser.cjs"),
   let p;
   try {
     p = await u.login("admin1");
-    const rows = (await u.data("eligibleClaims", "&field=elder_id&value=1"))
-      .rows;
+    const rows = (await u.data("eligibleClaims")).rows;
+    const existing = (await u.data("claims")).rows;
     const eligible = rows.find(
-      (r) => r.item_id === 1 && r.effective_minutes > 0,
+      (r) =>
+        r.effective_minutes > 0 &&
+        !existing.some(
+          (c) => c.elder_id === r.elder_id && c.item_id === r.item_id,
+        ),
     );
     assert(
       eligible,
-      "fresh seed needs an unclaimed completed service for elder 1",
+      "Scenario seed needs an unclaimed service with valid hours",
     );
     const order = (await u.data("orders", "&field=id&value=" + eligible.id))
       .rows[0];
+    const assessments = (
+      await u.data("assessments", "&field=elder_id&value=" + eligible.elder_id)
+    ).rows;
+    assert(assessments.length, "Subsidy applicant needs an ability assessment");
+    const assessment = assessments.sort((a, b) =>
+      b.assessed_at.localeCompare(a.assessed_at),
+    )[0];
+    p = await u.login("regulator1");
+    // Own policy fixture avoids relying on a specific seed person's eligibility or policy id.
+    const policyId = await u.act("policy.create", {
+      name: "申报流程核验 " + Date.now(),
+      itemId: eligible.item_id,
+      level: assessment.ability_level,
+      rate: 10,
+      startsAt: "2025-01-01T00:00",
+      endsAt: "2027-12-31T00:00",
+      cycle: "MONTH",
+      minimumAge: 0,
+      tag: "NONE",
+      communityIds: [1],
+    });
+    p = await u.login("admin1");
     await h.open(p, "claim.submit");
-    await u.fill("elderId", 1);
-    await u.fill("policyId", 1);
+    await u.fill("elderId", eligible.elder_id);
+    await u.fill("policyId", policyId);
     await u.fill("period", order.starts_at.slice(0, 7));
     await u.fill("orderIds", [order.id]);
     const response = p.waitForResponse((r) =>
@@ -46,8 +72,12 @@ const { start } = require("./browser.cjs"),
       .getByRole("button", { name: "完成", exact: true })
       .click();
     u.actionsDone.push("claim.submit");
-    const claim = (await u.data("claims", "&field=elder_id&value=1")).rows.find(
-      (r) => r.period === order.starts_at.slice(0, 7) && r.item_id === 1,
+    const claim = (
+      await u.data("claims", "&field=elder_id&value=" + eligible.elder_id)
+    ).rows.find(
+      (r) =>
+        r.period === order.starts_at.slice(0, 7) &&
+        r.item_id === eligible.item_id,
     );
     assert.equal(claim.status, "SUBMITTED");
     await u.act("claim.evidence", {

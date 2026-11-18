@@ -255,6 +255,11 @@
         "channel:下单渠道"
       ]
     ],
+    "order.reschedule": [
+      "联系后改约",
+      ["ADMIN"],
+      ["orderId:订单编号:number", "startsAt:新预约时间:datetime-local"]
+    ],
     "order.recommend": ["查询可派班次", ["ADMIN"], ["orderId:订单编号:number"]],
     "order.assign": [
       "派单或改派",
@@ -1007,6 +1012,7 @@
     "REGULATOR": "民政监管"
   },
   "errors": {
+    "ORDER_WINDOW_ENDED": "预约时段已结束，请联系改约或取消。",
     "PLAN_OVERLAP": "该老人已有时间重叠的照护计划。",
     "SHIFT_OVERLAP": "该护工已有时间重叠的班次。",
     "PLAN_ASSESSMENT_INVALID": "评估结果或有效期不符合计划要求。",

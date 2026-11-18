@@ -57,6 +57,7 @@ BEGIN
  DECLARE v_state VARCHAR(30);
  SELECT elder_id,item_id,community_id,starts_at,ends_at,status INTO v_elder,v_item,v_community,v_start,v_end,v_state FROM service_order WHERE id=p_order FOR UPDATE;
  IF v_state IS NULL OR v_state NOT IN ('PENDING','ASSIGNED','ACCEPTED') THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='ORDER_NOT_DISPATCHABLE'; END IF;
+ IF v_end<=NOW() THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='ORDER_WINDOW_ENDED'; END IF;
  CALL assert_worker_order(p_order,p_shift);
  SET v_old_shift=(SELECT shift_id FROM v_dispatch_context WHERE order_id=p_order AND active_order IS NOT NULL);
  IF v_old_shift IS NOT NULL THEN

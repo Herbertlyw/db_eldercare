@@ -12,7 +12,14 @@ export interface User {
 export type Row = Record<string, any>;
 export type Values = Record<string, any>;
 export type ActionDefinition = [string, Role[], string[]];
+export interface HoursTotals {
+  minutes: number;
+  valid: number;
+  pending: number;
+  invalid: number;
+}
 export interface ListResult {
+  summary?: HoursTotals;
   rows: Row[];
   total: number;
   states?: string[];

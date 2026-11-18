@@ -1,0 +1,10 @@
+{
+  "frontend/src/pages/Workspace.tsx": "40b6938d69410a89811830c54ad2e35cdae489a288a872890046680ac501442b",
+  "frontend/src/model/presentation.ts": "614657d73a28806622e654c126dcd5551a6f9da28dea2d15d10d42f518680d8c",
+  "frontend/src/pages/workforce/Certificates.tsx": "d592009dfbfb587bdf74105f913aa4734b458a5bd25b4705dff914db4443b04b",
+  "frontend/src/pages/workforce/HoursSummary.tsx": "9d6af24cfd39019c694a37ebabadbf815ae9167c59cfd163349dc2ef53c206bd",
+  "frontend/src/pages/workforce/metrics.ts": "f74994b5c4faa41cdb1c703a4c1e51868d9f014917eafd3d8e998343d2ece720",
+  "frontend/src/pages/records/BusinessRecords.tsx": "c4ad287a1d9fa836632000df3ed4ec883bfa48b8baf5695fbf5a2cc1d6be0ca4",
+  "frontend/src/styles/workforce.css": "03cd5370c10cb4f103cc29c624079c73063ebdb3f1f186e42943a0eacfb631e0",
+  "frontend/src/styles/business-records.css": "ad4e5519d03babb033cbcab35c76bd40d8ad854c098dc916e3622dbedf9461a6"
+}

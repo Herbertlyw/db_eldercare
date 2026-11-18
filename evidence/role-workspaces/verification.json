@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-17",
+  "base": "57b731e",
+  "branch": "codex/role-interactions",
+  "workingTree": "local uncommitted implementation",
+  "javaMysql": {
+    "tests": 194,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "frontendTests": 26,
+  "jarSha256": "be12b44e3ec6c75db8c7b2f2b96c4ff858dfe383f3da0300558173472f49ee6c",
+  "integrationDatabase": "eldercare_home_accept20261117_test",
+  "browserDatabase": "eldercare_home_ui20261117_test",
+  "browserPort": 18086,
+  "previewPort": 18080,
+  "previewDatabaseRebuilt": false,
+  "dependenciesAdded": false
+}

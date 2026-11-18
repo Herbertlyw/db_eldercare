@@ -1,0 +1,1006 @@
+.role-home {
+  --home-border: #e5e6eb;
+  padding: 26px 0 4px;
+  color: #1d2129;
+}
+.home-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.home-header h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 650;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+.home-subtitle {
+  color: #86909c;
+  font-size: 13px;
+  margin-top: 6px;
+}
+.home-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.9fr) minmax(280px, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.home-stack {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+.home-panel {
+  border: 1px solid var(--home-border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px #1d212902;
+  min-width: 0;
+}
+.home-panel > .arco-card-header {
+  height: 58px;
+  border-bottom: 0;
+  padding: 0 20px;
+}
+.home-panel .arco-card-header-title {
+  font-size: 17px;
+  font-weight: 600;
+}
+.home-panel > .arco-card-body {
+  padding: 0 20px 20px;
+}
+.home-panel .arco-empty {
+  padding: 25px 0;
+}
+.home-loading {
+  min-height: 115px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #86909c;
+}
+.home-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.home-metrics.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.home-metric {
+  background: white;
+  border: 1px solid var(--home-border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 108px;
+  padding: 20px;
+  text-align: left;
+  cursor: pointer;
+  color: #1d2129;
+  min-width: 0;
+  transition: border-color 0.15s;
+}
+.home-metric:hover {
+  border-color: #94bfff;
+}
+.home-metric:focus-visible,
+.claim-selection button:focus-visible {
+  outline: 2px solid #165dff;
+  outline-offset: 3px;
+}
+.home-metric-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  background: #e8f3ff;
+  color: #165dff;
+  font-size: 24px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.home-metric > span:nth-child(2) {
+  min-width: 0;
+}
+.metric-label {
+  display: block;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.home-metric strong {
+  font-size: 28px;
+  font-weight: 600;
+  color: #165dff;
+  line-height: 1.2;
+}
+.home-metric > .arco-icon:last-child {
+  margin-left: auto;
+  color: #a9aeb8;
+}
+.home-toolbar {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.home-rows {
+  display: grid;
+}
+.home-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid #f2f3f5;
+}
+.home-row:first-child {
+  padding-top: 4px;
+}
+.home-row:last-child {
+  border-bottom: 0;
+}
+.home-row-copy {
+  min-width: 0;
+}
+.home-row strong {
+  font-size: 14px;
+  font-weight: 550;
+  overflow-wrap: anywhere;
+}
+.home-row p,
+.home-note {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #86909c;
+  margin: 7px 0 0;
+  overflow-wrap: anywhere;
+}
+.home-row > .arco-space {
+  flex-shrink: 0;
+  justify-content: flex-end;
+}
+.home-panel .arco-pagination {
+  margin-top: 16px;
+  justify-content: flex-end;
+}
+.home-shortcuts {
+  display: grid;
+  gap: 12px;
+}
+.home-bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.section-label {
+  font-size: 13px;
+  color: #86909c;
+  font-weight: 500;
+  margin: 8px 0 18px;
+}
+.section-label:not(:first-child) {
+  border-top: 1px solid #f2f3f5;
+  padding-top: 20px;
+}
+.elder-picker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.elder-picker label {
+  font-size: 13px;
+  color: #86909c;
+}
+.elder-picker .arco-select {
+  width: 230px;
+}
+.elder-overview {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  background: white;
+  border: 1px solid var(--home-border);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.elder-overview > .arco-space {
+  flex-shrink: 0;
+}
+.elder-overview .arco-avatar {
+  width: 64px !important;
+  height: 64px !important;
+  font-size: 24px;
+}
+.elder-overview .arco-typography {
+  font-size: 21px;
+}
+.elder-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  color: #4e5969;
+  font-size: 13px;
+  flex: 1;
+}
+.elder-plan {
+  display: grid;
+  gap: 7px;
+  justify-items: start;
+  border-left: 1px solid #e5e6eb;
+  padding-left: 22px;
+  font-size: 13px;
+}
+.next-visit > div {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #f5f9ff;
+  border: 1px solid #e8f3ff;
+  border-radius: 6px;
+  padding: 18px;
+}
+.date-tile {
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  min-width: 64px;
+  text-align: center;
+  border: 1px solid #c9ddff;
+}
+.date-tile span {
+  display: block;
+  background: #165dff;
+  color: white;
+  padding: 5px;
+}
+.date-tile strong {
+  display: block;
+  font-size: 24px;
+  color: #165dff;
+  padding: 10px 6px;
+}
+.next-copy {
+  flex: 1;
+}
+.next-copy h3 {
+  font-size: 16px;
+  margin: 10px 0;
+}
+.next-copy > span {
+  color: #86909c;
+  font-size: 13px;
+}
+.next-visit > div > div:last-child {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+.amount-caption {
+  font-size: 12px;
+  color: #86909c;
+}
+.amount-list {
+  margin: 12px 0;
+}
+.amount-list > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+}
+.amount-list dt {
+  color: #4e5969;
+}
+.amount-list dd {
+  margin: 0;
+  font-weight: 600;
+}
+.amount-total {
+  border-top: 1px solid #e5e6eb;
+}
+.amount-total dd {
+  font-size: 22px;
+  color: #165dff;
+}
+.role-family > .home-panel {
+  margin-bottom: 20px;
+}
+.family-grid .home-note {
+  margin-bottom: 14px;
+}
+.family-grid .community-card {
+  border-radius: 8px;
+  border: 1px solid #e5e6eb;
+}
+.caregiver-grid {
+  grid-template-columns: minmax(0, 2.45fr) minmax(280px, 1fr);
+}
+.caregiver-grid .home-metrics {
+  margin: 0;
+}
+.caregiver-grid .home-metric {
+  padding: 18px 14px;
+  gap: 12px;
+}
+.caregiver-grid .home-metric strong {
+  font-size: 24px;
+}
+.schedule-list {
+  display: grid;
+  gap: 12px;
+}
+.visit-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 16px;
+  border: 1px solid #e5e6eb;
+  border-radius: 6px;
+}
+.visit-row.next {
+  border-color: #b3d4ff;
+  background: #fafcff;
+}
+.visit-time {
+  display: grid;
+  gap: 5px;
+  color: #165dff;
+  min-width: 64px;
+  font-size: 15px;
+}
+.visit-time strong {
+  font-size: 20px;
+}
+.visit-time small {
+  font-size: 11px;
+  color: #86909c;
+}
+.visit-person {
+  flex: 1;
+  min-width: 0;
+}
+.visit-service {
+  display: block;
+  color: #165dff;
+  font-size: 13px;
+  margin-top: 6px;
+}
+.visit-person p {
+  font-size: 12px;
+  color: #86909c;
+  margin: 8px 0 0;
+  overflow-wrap: anywhere;
+}
+.visit-action {
+  display: grid;
+  gap: 14px;
+  justify-items: end;
+}
+.shift-summary {
+  padding: 14px 0;
+  border-bottom: 1px solid #f2f3f5;
+}
+.shift-summary > strong {
+  font-size: 22px;
+  color: #165dff;
+}
+.shift-summary > div {
+  padding: 16px 0;
+  font-size: 14px;
+}
+.shift-summary > div span {
+  margin-left: 20px;
+}
+.credential-row {
+  display: grid;
+  gap: 10px;
+  padding: 12px 0;
+  font-size: 14px;
+}
+.credential-row > span {
+  color: #86909c;
+  font-size: 12px;
+}
+.credential-row .arco-btn {
+  justify-self: start;
+  padding-left: 0;
+}
+.report-shortcut {
+  background: white;
+  border: 1px solid #e5e6eb;
+  height: 74px;
+  justify-content: flex-start;
+  font-size: 16px;
+  padding: 20px;
+}
+.report-shortcut .arco-icon {
+  color: #165dff;
+  font-size: 23px;
+}
+.emergency-strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: #fff1f0;
+  border: 1px solid #fbdad8;
+  border-radius: 6px;
+  padding: 10px 18px;
+  margin-bottom: 20px;
+  min-height: 52px;
+  color: #c45656;
+}
+.emergency-strip .arco-empty {
+  padding: 0;
+  width: auto;
+  color: #86909c;
+}
+.emergency-strip .arco-empty-image {
+  display: none;
+}
+.emergency-strip .home-loading {
+  min-height: 28px;
+}
+.emergency-strip .arco-btn:last-child {
+  margin-left: auto;
+}
+.panel-context {
+  font-size: 13px;
+  color: #165dff;
+  border-bottom: 1px solid #f2f3f5;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.claim-ready {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+.claim-ready p {
+  font-size: 13px;
+  color: #86909c;
+  line-height: 1.7;
+}
+.claim-ready strong {
+  font-size: 18px;
+}
+.capacity-count {
+  color: #165dff;
+  font-weight: 600;
+}
+.review-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(0, 2fr);
+  gap: 20px;
+  align-items: start;
+}
+.review-sheet {
+  background: white;
+  border: 1px solid #e5e6eb;
+  border-radius: 8px;
+  padding: 24px;
+  min-height: 550px;
+  min-width: 0;
+}
+.claim-selection {
+  margin: 18px -10px 12px;
+}
+.claim-selection button {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 14px;
+  border: 0;
+  border-bottom: 1px solid #f2f3f5;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+  color: #1d2129;
+}
+.claim-selection button[aria-pressed="true"] {
+  background: #e8f3ff;
+  border-radius: 6px;
+  border-color: transparent;
+}
+.claim-selection button > div {
+  display: grid;
+  gap: 8px;
+}
+.claim-selection button span {
+  font-size: 12px;
+  color: #86909c;
+}
+.claim-selection button strong {
+  font-size: 15px;
+}
+.claim-heading {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.claim-heading h2 {
+  font-size: 22px;
+  margin: 0;
+}
+.claim-numbers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: #f7f9fc;
+  border: 1px solid #e5e6eb;
+  border-radius: 6px;
+  padding: 18px 0;
+  margin: 24px 0;
+}
+.claim-numbers > div {
+  padding: 0 20px;
+  border-right: 1px solid #e5e6eb;
+  display: grid;
+  gap: 10px;
+}
+.claim-numbers > div:last-child {
+  border: 0;
+}
+.claim-numbers strong {
+  font-size: 25px;
+  color: #165dff;
+}
+.claim-checks {
+  margin-bottom: 20px;
+}
+.claim-evidence {
+  margin: 24px 0;
+  border-top: 1px solid #e5e6eb;
+  padding-top: 16px;
+}
+.claim-evidence summary {
+  cursor: pointer;
+  color: #165dff;
+  padding: 8px 0;
+}
+.review-footer {
+  border-top: 1px solid #e5e6eb;
+  margin-top: 22px;
+  padding-top: 18px;
+  text-align: right;
+}
+.review-footer p {
+  font-size: 13px;
+  color: #86909c;
+  margin: 0 0 16px;
+}
+.regulator-scope {
+  justify-content: flex-start;
+  gap: 16px;
+}
+.regulator-scope .arco-select {
+  width: 240px;
+}
+.regulator-scope > span {
+  margin-left: 20px;
+  color: #4e5969;
+  font-size: 13px;
+}
+.regulator-summary {
+  display: flex;
+  background: white;
+  border: 1px solid #e5e6eb;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 22px;
+  gap: 0;
+}
+.regulator-summary > div:not(.home-loading):not(.arco-alert):not(.arco-empty) {
+  flex: 1;
+  border-right: 1px solid #e5e6eb;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  align-content: start;
+  gap: 8px 12px;
+  padding: 0 25px;
+}
+.regulator-summary > div:last-child {
+  border-right: 0 !important;
+}
+.regulator-summary .arco-icon {
+  grid-row: 1/4;
+  font-size: 25px;
+}
+.regulator-summary strong {
+  font-size: 30px;
+  color: #165dff;
+}
+.regulator-summary small {
+  color: #86909c;
+  font-size: 12px;
+}
+.regulator-summary .home-loading {
+  width: 100%;
+}
+.regulator-actions .home-metric {
+  min-height: 100px;
+}
+.coverage-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 155px;
+}
+.coverage-cell > span {
+  min-width: 45px;
+}
+.coverage-cell .arco-progress {
+  flex: 1;
+}
+.role-home .arco-btn-primary {
+  box-shadow: 0 2px 4px #165dff10;
+}
+.role-home .arco-table-th {
+  background: #f5f6f8;
+}
+.role-home .arco-table-td {
+  font-size: 13px;
+}
+.role-home .arco-btn {
+  border-radius: 5px;
+}
+.role-home .arco-table {
+  max-width: 100%;
+}
+@media (min-width: 1700px) {
+  .role-home {
+    max-width: 1640px;
+    margin: auto;
+  }
+}
+@media (max-width: 1250px) {
+  .home-grid,
+  .caregiver-grid {
+    grid-template-columns: minmax(0, 1.65fr) minmax(260px, 1fr);
+  }
+  .home-metric-icon {
+    display: none;
+  }
+  .home-metric {
+    padding: 16px;
+    gap: 8px;
+  }
+  .home-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .home-row > .arco-space {
+    justify-content: flex-start;
+  }
+  .visit-row {
+    gap: 12px;
+    padding: 14px;
+  }
+  .visit-action {
+    max-width: 130px;
+  }
+  .visit-action .arco-space {
+    justify-content: flex-end;
+  }
+  .home-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+  .claim-ready {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .elder-overview {
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .elder-plan {
+    margin-left: auto;
+  }
+  .review-grid {
+    grid-template-columns: 260px minmax(0, 1fr);
+  }
+  .claim-numbers > div {
+    padding: 0 12px;
+  }
+  .claim-numbers strong {
+    font-size: 22px;
+  }
+  .regulator-summary
+    > div:not(.home-loading):not(.arco-alert):not(.arco-empty) {
+    padding: 0 12px;
+  }
+}
+@media (max-width: 1000px) {
+  .home-grid,
+  .caregiver-grid {
+    grid-template-columns: 1fr;
+  }
+  .home-stack {
+    gap: 18px;
+  }
+  .home-grid > aside {
+    grid-template-columns: 1fr 1fr;
+  }
+  .home-metrics {
+    gap: 12px;
+  }
+  .home-metric strong {
+    font-size: 25px;
+  }
+  .review-grid {
+    grid-template-columns: 1fr;
+  }
+  .claim-selection {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .claim-selection button {
+    border: 1px solid #e5e6eb;
+    border-radius: 6px;
+  }
+  .home-row {
+    flex-direction: row;
+    align-items: center;
+  }
+  .caregiver-grid .home-metric-icon {
+    display: grid;
+  }
+  .elder-facts {
+    min-width: 220px;
+  }
+  .elder-plan {
+    border: 0;
+    padding: 0;
+  }
+  .regulator-summary {
+    padding: 20px 10px;
+  }
+}
+@media (max-width: 760px) {
+  .role-home {
+    padding-top: 20px;
+  }
+  .home-header {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .home-header h1 {
+    font-size: 24px;
+  }
+  .home-grid > aside {
+    grid-template-columns: 1fr;
+  }
+  .home-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .home-metrics.three {
+    grid-template-columns: 1fr;
+  }
+  .caregiver-grid .home-metrics.three {
+    grid-template-columns: 1fr;
+  }
+  .home-metric {
+    min-height: 84px;
+  }
+  .home-metric-icon {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+  .home-metric strong {
+    font-size: 25px;
+  }
+  .home-panel > .arco-card-header {
+    padding: 0 16px;
+  }
+  .home-panel > .arco-card-body {
+    padding: 0 16px 16px;
+  }
+  .home-panel .arco-card-header-title {
+    font-size: 16px;
+  }
+  .elder-overview {
+    padding: 20px;
+  }
+  .elder-facts {
+    flex-direction: column;
+  }
+  .elder-plan {
+    border-top: 1px solid #e5e6eb;
+    width: 100%;
+    padding-top: 16px;
+    grid-template-columns: 1fr auto;
+  }
+  .elder-plan .arco-btn {
+    grid-column: 1/-1;
+  }
+  .next-visit > div {
+    padding: 14px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .next-visit > div > div:last-child {
+    grid-auto-flow: column;
+    width: 100%;
+    align-items: center;
+  }
+  .next-copy h3 {
+    font-size: 14px;
+  }
+  .home-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .visit-row {
+    flex-wrap: wrap;
+  }
+  .visit-person {
+    min-width: 150px;
+  }
+  .visit-action {
+    max-width: none;
+    grid-template-columns: auto 1fr;
+    width: 100%;
+    align-items: center;
+    justify-items: start;
+    border-top: 1px solid #f2f3f5;
+    padding-top: 12px;
+  }
+  .visit-action .arco-space {
+    justify-self: end;
+  }
+  .claim-selection {
+    grid-template-columns: 1fr;
+  }
+  .review-sheet {
+    padding: 20px 16px;
+    min-height: 200px;
+  }
+  .claim-heading h2 {
+    font-size: 20px;
+  }
+  .claim-numbers {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 16px;
+  }
+  .claim-numbers > div {
+    border: 0;
+    padding: 0;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+  .claim-numbers strong {
+    font-size: 22px;
+  }
+  .regulator-scope {
+    gap: 12px;
+  }
+  .regulator-scope .arco-select {
+    flex: 1;
+    min-width: 140px;
+  }
+  .regulator-scope > span {
+    margin: 0;
+    width: 100%;
+  }
+  .regulator-summary {
+    display: grid;
+    gap: 20px;
+  }
+  .regulator-summary
+    > div:not(.home-loading):not(.arco-alert):not(.arco-empty) {
+    border-right: 0;
+    border-bottom: 1px solid #e5e6eb;
+    padding: 0 10px 18px;
+  }
+  .regulator-summary > div:last-child {
+    border-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .home-header > .arco-space {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .home-toolbar {
+    gap: 12px;
+  }
+  .home-toolbar .arco-picker {
+    max-width: 100%;
+  }
+  .home-metric > .arco-icon:last-child {
+    display: none;
+  }
+  .role-home .arco-alert {
+    max-width: 100%;
+  }
+}
+.sidebar .arco-menu-item.arco-menu-selected {
+  background: #e8f3ff;
+  color: #165dff;
+  font-weight: 600;
+}
+.sidebar .arco-menu-item,
+.sidebar .arco-menu-inline-header {
+  border-radius: 6px;
+  min-height: 42px;
+  font-size: 14px;
+}
+.sidebar .arco-menu-item > .arco-icon {
+  font-size: 17px;
+}
+.sidebar-brand strong {
+  font-size: 23px;
+}
+.sidebar-brand img {
+  width: 38px;
+  height: 38px;
+}
+.role-home .home-panel .arco-empty {
+  padding: 16px 0;
+}
+.role-home .home-panel .arco-empty-image {
+  font-size: 35px;
+  margin-bottom: 8px;
+}
+.role-home .report-shortcut.arco-btn {
+  background: #fff;
+  border: 1px solid #e5e6eb;
+  border-radius: 8px;
+}
+.role-home .report-shortcut.arco-btn:hover {
+  border-color: #94bfff;
+  background: #f7faff;
+}
+.home-panel .arco-card-header-title {
+  font-size: 18px;
+}
+.home-row strong {
+  font-size: 15px;
+}
+.role-family .home-panel .arco-empty {
+  padding: 18px 0;
+}
+.role-home .arco-btn-secondary {
+  background: white;
+  border: 1px solid #dcdfe6;
+}
+.role-home .arco-btn-secondary:hover {
+  background: #f2f6ff;
+  border-color: #94bfff;
+}
+.role-home .arco-select-view,
+.role-home .arco-input-wrapper,
+.role-home .arco-picker {
+  background: white;
+  border: 1px solid #dcdfe6;
+  border-radius: 5px;
+}
+.role-home .arco-tag {
+  border-radius: 4px;
+}
+.role-home .arco-typography {
+  color: #1d2129;
+}

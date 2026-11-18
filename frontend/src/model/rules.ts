@@ -50,10 +50,12 @@ export function choices(k: string, r: Row, user: User) {
       const owns =
         role !== "CAREGIVER" ||
         Number(r.current_worker_account) === Number(user.id);
+      const missed = Number(r.dispatch_window) === 2;
+      add("order.reschedule", "联系后改约", missed && state === "PENDING");
       add(
         "order.assign",
         state === "PENDING" ? "派单" : "改派",
-        ["PENDING", "ASSIGNED", "ACCEPTED"].includes(state),
+        !missed && ["PENDING", "ASSIGNED", "ACCEPTED"].includes(state),
       );
       add("order.accept", "接单", state === "ASSIGNED" && owns);
       add("order.checkin", "签到", state === "ACCEPTED" && owns);
@@ -61,7 +63,7 @@ export function choices(k: string, r: Row, user: User) {
       add(
         "order.confirm",
         "确认服务",
-        state === "CONFIRM" || k === "waitingConfirmation",
+        state === "CONFIRM" || (k === "waitingConfirmation" && state == null),
       );
       add("review.create", "评价", state === "COMPLETED");
       add("complaint.create", "投诉");
@@ -70,7 +72,11 @@ export function choices(k: string, r: Row, user: User) {
         "退回调度",
         ["ASSIGNED", "ACCEPTED"].includes(state) && owns,
       );
-      add("order.release", "退回调度", k === "managerDispatchPool");
+      add(
+        "order.release",
+        "退回调度",
+        k === "managerDispatchPool" && (state == null || state === "ASSIGNED"),
+      );
       add(
         "order.cancel",
         "取消预约",

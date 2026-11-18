@@ -24,6 +24,10 @@ public interface OrderRepository {
             Number x,
             Number y);
 
+    boolean windowOpen(Number orderId);
+
+    int reschedule(Number orderId, LocalDateTime start, LocalDateTime end);
+
     void assignOrder(Number orderId, Number shiftId, String reason);
 
     Map<String, Object> findWaitingDispatch(Number orderId);

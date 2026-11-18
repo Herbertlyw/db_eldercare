@@ -27,6 +27,7 @@ const { start } = require("./browser.cjs"),
     );
     checks.push(people.length + " unique portraits");
     p = await h.login("admin1");
+    await h.nav(p, "elders");
     await p.locator("#record-search").fill("周惠琴");
     await h.quiet(p);
     const first = people.find((x) => x.id === 1);
@@ -35,6 +36,8 @@ const { start } = require("./browser.cjs"),
     const portrait = p.locator('tr[data-id="1"] img');
     assert.equal(await portrait.getAttribute("src"), "/images/" + first.avatar);
     await portrait.evaluate((i) => i.decode());
+    await p.close();
+    p = await h.login("family1");
     const dots = p.locator(".photo-dots button");
     assert.equal(await dots.count(), 4);
     await dots.nth(2).click();
@@ -44,14 +47,27 @@ const { start } = require("./browser.cjs"),
       await p.locator("#photo-pause").getAttribute("aria-pressed"),
       "true",
     );
-    await p.locator("#record-search").focus();
+    // Move keyboard focus without scrolling the carousel out of view.
+    await p
+      .locator("#refresh")
+      .evaluate((e) => e.focus({ preventScroll: true }));
     await p.mouse.move(0, 0);
     await p.waitForTimeout(5700);
     assert.equal(await dots.nth(2).getAttribute("aria-current"), "true");
     await p.locator("#photo-pause").click();
-    await p.locator("#record-search").focus();
+    // Move keyboard focus without scrolling the carousel out of view.
+    await p
+      .locator("#refresh")
+      .evaluate((e) => e.focus({ preventScroll: true }));
     await p.mouse.move(0, 0);
-    await p.waitForTimeout(5900);
+    await p.waitForFunction(
+      () =>
+        document
+          .querySelectorAll(".photo-dots button")[3]
+          .getAttribute("aria-current") === "true",
+      undefined,
+      { timeout: 8000 },
+    );
     assert.equal(await dots.nth(3).getAttribute("aria-current"), "true");
     checks.push("dots pause resume and autoplay");
     await p.emulateMedia({ reducedMotion: "reduce" });
@@ -76,6 +92,7 @@ const { start } = require("./browser.cjs"),
     await p.reload();
     await p.locator("#workspace").waitFor();
     await h.quiet(p);
+    await h.nav(p, "elders");
     await p.setViewportSize({ width: 390, height: 844 });
     assert(await p.locator(".record-card").count());
     const card = p.locator(".record-card").first();

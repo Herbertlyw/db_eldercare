@@ -56,6 +56,23 @@ public class JdbcOrderRepository implements OrderRepository {
     }
 
     @Override
+    public boolean windowOpen(Number orderId) {
+        return db.count("SELECT COUNT(*) FROM service_order WHERE id=? AND ends_at>NOW()", orderId)
+                == 1;
+    }
+
+    @Override
+    public int reschedule(Number orderId, LocalDateTime start, LocalDateTime end) {
+        return db.update(
+                "UPDATE service_order SET starts_at=?,ends_at=? WHERE id=? AND status='PENDING' AND"
+                        + " ends_at<=NOW() AND ?>NOW()",
+                start,
+                end,
+                orderId,
+                start);
+    }
+
+    @Override
     public void assignOrder(Number orderId, Number shiftId, String reason) {
         db.call("assign_order", orderId, shiftId, reason);
     }

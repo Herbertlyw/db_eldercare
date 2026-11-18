@@ -1,0 +1,37 @@
+{
+  "time": "2026-11-17T07:51:50.353Z",
+  "checked": [
+    {
+      "account": "admin1",
+      "role": "ADMIN",
+      "title": "老人档案"
+    },
+    {
+      "account": "family1",
+      "role": "FAMILY",
+      "title": "老人档案"
+    },
+    {
+      "account": "caregiver1",
+      "role": "CAREGIVER",
+      "title": "服务订单"
+    },
+    {
+      "account": "manager1",
+      "role": "MANAGER",
+      "title": "护工档案"
+    },
+    {
+      "account": "street1",
+      "role": "STREET",
+      "title": "补贴申报"
+    },
+    {
+      "account": "regulator1",
+      "role": "REGULATOR",
+      "title": "补贴申报"
+    }
+  ],
+  "errors": [],
+  "businessWrites": []
+}

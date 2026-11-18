@@ -132,6 +132,7 @@ export function fieldsFor(action: string, role: Role, v: Values = {}): Field[] {
         ["QUARTER", "季度"],
         ["YEAR", "年度"],
       ]);
+    if (key === "channel" && role === "FAMILY") field.hidden = true;
     if (key === "channel")
       field.options =
         role === "FAMILY"

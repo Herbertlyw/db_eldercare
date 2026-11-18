@@ -55,6 +55,7 @@
     "order.finish",
     "order.recommend",
     "order.reject",
+    "order.reschedule",
     "order.release",
     "organization.review",
     "organization.submit",
@@ -105,6 +106,7 @@
     "inspectionBatches",
     "inspections",
     "jurisdictionStats",
+    "jurisdictionSummary",
     "managerDispatchPool",
     "metrics",
     "monthlyHours",
@@ -126,7 +128,15 @@
     "trainingRecords",
     "trainings",
     "vitals",
-    "waitingConfirmation"
+    "waitingConfirmation",
+    "workspaceCarryover",
+    "workspaceEvents",
+    "workspaceFamily",
+    "workspaceHours",
+    "workspaceProfile",
+    "workspaceSchedule",
+    "workspaceShifts",
+    "workspaceUpcoming"
   ],
   "details": [
     "bundles",

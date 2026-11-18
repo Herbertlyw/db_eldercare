@@ -42,7 +42,7 @@ public class FeedbackQueries implements QueryModule {
         String sql;
         Auth.role(user, "ADMIN", "FAMILY", "MANAGER", "REGULATOR");
         sql =
-                "SELECT c.*,e.name elder_name FROM complaint c JOIN service_order o ON"
+                "SELECT c.*,o.elder_id,e.name elder_name FROM complaint c JOIN service_order o ON"
                         + " o.id=c.order_id JOIN elder e ON e.id=o.elder_id WHERE ";
         if (user.role().equals("MANAGER")) {
             sql += "c.organization_id=?";

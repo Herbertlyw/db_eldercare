@@ -85,7 +85,7 @@ mvn spotless:check
 
 ## 验证方式
 
-`src/test/java/edu/bjfu/eldercare/domain/DomainRulesTest.java` 验证纯业务规则；`ArchitectureTest` 检查依赖方向；`application/RoutingTest` 检查重复注册、未知操作和分页拒绝；MySQL 业务集成测试检查权限、触发器、回滚、并发与历史保护。`RouteContractIntegrationTest` 在 Spring 启动后核对 75 个操作（含仅供离线维护的 password.recover）、49 个列表和 15 类详情。
+`src/test/java/edu/bjfu/eldercare/domain/DomainRulesTest.java` 验证纯业务规则；`ArchitectureTest` 检查依赖方向；`application/RoutingTest` 检查重复注册、未知操作和分页拒绝；MySQL 业务集成测试检查权限、触发器、回滚、并发与历史保护。`RouteContractIntegrationTest` 在 Spring 启动后核对 75 个操作（含仅供离线维护的 password.recover）、58 个列表和 15 类详情。
 
 本机可用以下命令选择单独测试库。脚本会删除并重建该库，运行前确认没有其他任务使用它；数据库名仅允许 `eldercare_test` 或 `eldercare_<名称>_test`。
 
@@ -108,3 +108,5 @@ TEST_PORT=18082 TEST_DATABASE=eldercare_refactor_test node scripts/verify_browse
 ## 前端与后端边界
 
 浏览器使用 React、TypeScript 和 Arco Design React，通过同源 API 调用接口层。前端源码在 `frontend`，由 Vite 构建；Maven 在 `generate-resources` 阶段执行 npm 依赖安装和构建，将产物放入 JAR 的 `static` 目录。Java 层继续使用 Spring JDBC，不引入 ORM，不把授权或业务事务移到浏览器。前端约定与验证方式见 [前端开发说明](../frontend/README.md)。
+
+工作台的只读投影位于 `WorkspaceQueries`；完整辖区统计位于 `GovernanceQueries`。`PageQuery.orderBy` 仅由服务端查询模块指定，并在筛选包装后保留，确保时间排序发生在分页前。班次投影使用内部 `overlap_ends_at` 字段表达时间区间相交，返回客户端前去除该内部字段。没有新增写事务或业务表。
