@@ -486,6 +486,8 @@ export function payload(action: string, role: Role, v: Values): Values {
   return body;
 }
 export const consequences: Record<string, string> = {
+  "maintenance.run":
+    "根据评估和计划有效期更新照护计划，升级超时仍未响应的应急事件。",
   "assessment.create":
     "复评登记后，旧评估对应的照护计划会暂停。请先处理未完成订单，再按最新评估调整计划。",
   "elder.transfer":

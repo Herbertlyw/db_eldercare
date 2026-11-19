@@ -146,20 +146,7 @@ const { start } = require("./browser.cjs"),
       await box("username").locator("input").inputValue(),
       "react_draft",
     );
-    await p.locator("#action").click();
-    await p
-      .locator("#action input")
-      .fill(h.registry.actions["elder.create"][0]);
-    await p
-      .getByRole("option", {
-        name: h.registry.actions["elder.create"][0],
-        exact: true,
-      })
-      .click();
-    await p
-      .locator(".arco-modal-simple")
-      .getByRole("button", { name: "返回", exact: true })
-      .click();
+    assert.equal(await p.getByLabel("业务类型", { exact: true }).count(), 0);
     assert.equal(
       await p.locator("#operation-dialog").getAttribute("data-action"),
       "account.create",
@@ -183,7 +170,13 @@ const { start } = require("./browser.cjs"),
       "Course-form-123",
     );
     await p.unroute("**/api/actions/account.create");
-    checks.push("draft close/switch cancel and failed submit retains values");
+    checks.push("focused form keeps its draft after cancelling close or failing submission");
+    await discard();
+    await h.open(p, "maintenance.run");
+    assert.equal(await p.locator("#title").innerText(), "评估到期提醒");
+    assert.match(await p.locator("#action-form").innerText(), /超时仍未响应/);
+    assert.equal(await p.locator("#submit-operation").innerText(), "开始检查");
+    checks.push("manual checks are available on the assessment reminders page");
     await discard();
     p = await u.login("manager1");
     await h.open(p, "recruitment.review");

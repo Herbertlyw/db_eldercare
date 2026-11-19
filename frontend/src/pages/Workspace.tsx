@@ -6,6 +6,7 @@ import {
   Button,
   Card,
   DatePicker,
+  Dropdown,
   Empty,
   Input,
   Layout,
@@ -24,6 +25,7 @@ import {
   IconArrowRight,
   IconBook,
   IconCalendar,
+  IconDown,
   IconFile,
   IconHeart,
   IconMenu,
@@ -428,6 +430,9 @@ export function Workspace({
   const quickActions = related
     .filter((a) => a !== primary && !/deactivate|delete|withdraw/.test(a))
     .slice(0, 4);
+  const moreActions = related.filter(
+    (action) => action !== primary && !quickActions.includes(action),
+  );
   function clearFilters() {
     setSearch("");
     setCriteria({});
@@ -656,7 +661,7 @@ export function Workspace({
                   ))}
                 </div>
               )}
-              {quickActions.length > 0 && (
+              {related.length > 1 && (
                 <div className="quick-action-bar" aria-label="快捷办理">
                   <span>快捷办理</span>
                   {quickActions.map((action) => (
@@ -668,6 +673,24 @@ export function Workspace({
                       {actions[action][0]} <IconArrowRight />
                     </Button>
                   ))}
+                  {moreActions.length > 0 && (
+                    <Dropdown
+                      trigger="click"
+                      droplist={
+                        <Menu onClickMenuItem={(action) => open(action)}>
+                          {moreActions.map((action) => (
+                            <Menu.Item key={action}>
+                              {actions[action][0]}
+                            </Menu.Item>
+                          ))}
+                        </Menu>
+                      }
+                    >
+                      <Button size="small" aria-haspopup="menu">
+                        更多办理 <IconDown />
+                      </Button>
+                    </Dropdown>
+                  )}
                 </div>
               )}
               <div className="content-grid records-layout">

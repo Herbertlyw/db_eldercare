@@ -5,11 +5,10 @@ import {
   Drawer,
   Form,
   Message,
-  Select,
   Space,
   Typography,
 } from "@arco-design/web-react";
-import { actions, allowedActions, detailKinds } from "../model/registry";
+import { actions, detailKinds } from "../model/registry";
 import { command, messageOf } from "../api/client";
 import { primaryKey } from "../model/rules";
 import { recordLabel } from "../model/presentation";
@@ -94,16 +93,6 @@ export function OperationDrawer({
     )
       return;
     onClose();
-  }
-  async function switchAction(action: string) {
-    if (action === op.action || sending.current) return;
-    if (
-      dirty &&
-      !receipt &&
-      !(await confirm("切换办理业务？", "当前未提交的填写内容将被清空。"))
-    )
-      return;
-    onOpen(action);
   }
   async function submit() {
     if (sending.current || receipt) return;
@@ -207,31 +196,13 @@ export function OperationDrawer({
               loading={busy}
               onClick={submit}
             >
-              确认提交
+              {op.action === "maintenance.run" ? "开始检查" : "确认提交"}
             </Button>
           </Space>
         )
       }
     >
       <div id="operation-dialog" data-action={op.action} aria-busy={busy}>
-        {!(user.role === "FAMILY" && op.action === "order.create") && (
-          <Form layout="vertical">
-            <Form.Item label="业务类型">
-              <Select
-                id="action"
-                aria-label="业务类型"
-                value={op.action}
-                disabled={busy}
-                showSearch
-                options={allowedActions(user.role).map((action) => ({
-                  value: action,
-                  label: actions[action][0],
-                }))}
-                onChange={switchAction}
-              />
-            </Form.Item>
-          </Form>
-        )}
         {op.context &&
           !receipt &&
           (values[primaryKey(op.context.kind)] == null ||
