@@ -81,48 +81,27 @@ async function start() {
       throw Error("Navigation failed " + kind);
   }
   async function open(p, action) {
-    if (!(await p.locator("#operation-dialog").count())) {
-      if (!(await p.locator("#open-operation").count())) {
-        const me = await request(p, "/me");
-        await nav(
-          p,
-          {
-            ADMIN: "elders",
-            FAMILY: "orders",
-            CAREGIVER: "orders",
-            MANAGER: "caregivers",
-            STREET: "claims",
-            REGULATOR: "claims",
-          }[me.data.role],
-        );
-      }
-      await p.locator("#open-operation").click();
-    }
     const dialog = p.locator("#operation-dialog");
-    if ((await dialog.getAttribute("data-action")) === action) {
-      await quiet(p);
-      return;
+    if (await dialog.isVisible()) await close(p);
+    const { data: user } = await request(p, "/me");
+    const pages = registry.menus[user.role].filter((kind) =>
+      registry.actionPrefixes[kind]?.some((prefix) => action.startsWith(prefix)),
+    );
+    if (!registry.actions[action]?.[1].includes(user.role) || !pages.length)
+      throw Error("No authorized page for " + user.role + " " + action);
+    const current = new URL(p.url()).hash.slice(1).split("?")[0];
+    if (!pages.includes(current)) await nav(p, pages[0]);
+    const label = registry.actions[action][0];
+    const button = p
+      .locator(".page-header, .quick-action-bar")
+      .getByRole("button", { name: label, exact: true });
+    if (await button.isVisible()) {
+      await button.click();
+    } else {
+      await p.getByRole("button", { name: "更多办理", exact: true }).click();
+      await p.getByRole("menuitem", { name: label, exact: true }).click();
     }
-    if (!(await p.locator("#action").count())) {
-      // 家属的预约抽屉专办预约，其他事项从对应页面进入。
-      await close(p);
-      const kind =
-        action.startsWith("complaint.") || action === "review.create"
-          ? "complaints"
-          : action === "event.create"
-            ? "events"
-            : "waitingConfirmation";
-      await nav(p, kind);
-      await p.locator("#open-operation").click();
-    }
-    await p.locator("#action").click();
-    await p.locator("#action input").fill(registry.actions[action][0]);
-    await p
-      .getByRole("option", { name: registry.actions[action][0], exact: true })
-      .click();
-    await p
-      .locator('#operation-dialog[data-action="' + action + '"]')
-      .waitFor();
+    await p.locator('#operation-dialog[data-action="' + action + '"]').waitFor();
     await quiet(p);
   }
   async function close(p) {

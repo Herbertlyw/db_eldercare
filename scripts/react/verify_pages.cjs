@@ -81,7 +81,14 @@ const { start } = require("./browser.cjs"),
             0,
             action + " initial error",
           );
-          const expected = def[2].map((s) => s.split(":")[0]);
+          assert.equal(await p.locator("#operation-title").innerText(), def[0]);
+          assert.equal(await p.getByLabel("业务类型", { exact: true }).count(), 0);
+          const expected = def[2]
+            .map((s) => s.split(":")[0])
+            .filter(
+              (key) =>
+                !(role === "FAMILY" && action === "order.create" && key === "channel"),
+            );
           const present = await p
             .locator("#fields [data-field]")
             .evaluateAll((es) => es.map((e) => e.dataset.field));

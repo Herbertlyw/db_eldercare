@@ -53,12 +53,19 @@ const { start } = require("./browser.cjs"),
       active: true,
     });
     await act("elder.tags", { elderId: elder, tag: "ALONE", enabled: true });
-    await act("elder.update", {
-      elderId: elder,
+    await u.rowAction("elders", elder, "elder.update");
+    assert.equal(await p.locator("#operation-title").innerText(), "更新老人住址");
+    assert.equal(await p.getByLabel("业务类型", { exact: true }).count(), 0);
+    assert.match(await p.locator(".operation-context").innerText(), /沈惠芳/);
+    await u.submit("elder.update", {
       address: "邻里小区一号楼202室",
       x: home.position_x,
       y: home.position_y,
     });
+    assert.equal(
+      (await u.data("elders", "&field=id&value=" + elder)).rows[0].address,
+      "邻里小区一号楼202室",
+    );
     const assessment = await act("assessment.create", {
       elderId: elder,
       scale: "课程能力评估",

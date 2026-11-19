@@ -1036,7 +1036,7 @@
   "actionPrefixes": {
     "elders": ["elder.", "guardian.", "account."],
     "assessments": ["assessment."],
-    "assessmentDue": ["assessment."],
+    "assessmentDue": ["assessment.", "maintenance.run"],
     "plans": ["plan."],
     "activePlans": ["plan."],
     "familyCare": ["order."],
