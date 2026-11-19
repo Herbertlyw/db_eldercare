@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" width="1000" height="921" viewBox="0 0 1000 921"><title id="title">图 15　从招聘、排班到核定有效工时</title><desc id="desc">只有有效分钟计入工时。两次打卡须在围栏内，签到不能早于预约前 30 分钟，签退不能晚于预约后 30 分钟，时长须达到预约时长的 80%。零分钟不能核定为有效。</desc>
+<defs><marker id="forward" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#354953"/></marker><marker id="branch" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#926a4e"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;text-anchor:middle;fill:#1e3038}</style>
+<rect width="1000" height="921" fill="white"/>
+<rect x="20" y="5" width="320" height="911" fill="#f7f9fa"/>
+<path d="M20 5 V916" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="20" y="5" width="320" height="49" fill="#e7eef0"/>
+<text x="180" y="37" style="font-size:23px;font-weight:600">机构负责人</text>
+<rect x="340" y="5" width="320" height="911" fill="#ffffff"/>
+<path d="M340 5 V916" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="340" y="5" width="320" height="49" fill="#e7eef0"/>
+<text x="500" y="37" style="font-size:23px;font-weight:600">护工</text>
+<rect x="660" y="5" width="320" height="911" fill="#f7f9fa"/>
+<path d="M660 5 V916" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="660" y="5" width="320" height="49" fill="#e7eef0"/>
+<text x="820" y="37" style="font-size:23px;font-weight:600">平台</text>
+<path d="M980 5 V916 H20 M20 55 H980" fill="none" stroke="#c2d0d5"/>
+<polyline points="302,109 665,109 665,203 698,203" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>登记应聘人作出录用决定 → 录用后建立账号、档案及默认服务区域</title></polyline>
+<polyline points="698,203 690,203 690,297 302,297" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>录用后建立账号、档案及默认服务区域 → 登记岗前培训结果项目证书及有效期</title></polyline>
+<polyline points="180,327 180,361" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>登记岗前培训结果项目证书及有效期 → 维护在岗状态、区域发布班次与名额</title></polyline>
+<polyline points="302,391 665,391 665,485 698,485" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>维护在岗状态、区域发布班次与名额 → 核对人员资格、班次容量与时间冲突</title></polyline>
+<polyline points="698,485 690,485 690,579 622,579" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>核对人员资格、班次容量与时间冲突 → 查看班次、接单上门完成两次打卡</title></polyline>
+<polyline points="622,579 630,579 630,673 698,673" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>查看班次、接单上门完成两次打卡 → 按围栏、预约时间窗和实际时长认定</title></polyline>
+<polyline points="820,703 820,831" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>按围栏、预约时间窗和实际时长认定 → 按签到月份加总有效分钟</title></polyline>
+<polyline points="698,861 622,861" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>按签到月份加总有效分钟 → 查明细、月工时和累计工时</title></polyline>
+<polyline points="302,109 310,109 310,71 690,71 690,109 698,109" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>登记应聘人作出录用决定 → 未录用保留审核记录</title></polyline>
+<polyline points="698,673 690,673 690,767 302,767" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>按围栏、预约时间窗和实际时长认定 → 异常工时复核填理由、判有效或无效</title></polyline>
+<polyline points="302,767 310,767 310,823 690,823 690,861 698,861" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>异常工时复核填理由、判有效或无效 → 按签到月份加总有效分钟</title></polyline>
+<rect x="58" y="79" width="244" height="60" rx="17" fill="#edf4f4" stroke="#809e9e" stroke-width="1.6"/>
+<text x="180" y="104.76" style="font-size:22px;font-weight:400">登记应聘人</text>
+<text x="180" y="127.76" style="font-size:22px;font-weight:400">作出录用决定</text>
+<rect x="698" y="79" width="244" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
+<text x="820" y="104.76" style="font-size:22px;font-weight:400">未录用</text>
+<text x="820" y="127.76" style="font-size:22px;font-weight:400">保留审核记录</text>
+<rect x="698" y="173" width="244" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="820" y="198.76" style="font-size:22px;font-weight:400">录用后建立账号、档案</text>
+<text x="820" y="221.76" style="font-size:22px;font-weight:400">及默认服务区域</text>
+<rect x="58" y="267" width="244" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="180" y="292.76" style="font-size:22px;font-weight:400">登记岗前培训结果</text>
+<text x="180" y="315.76" style="font-size:22px;font-weight:400">项目证书及有效期</text>
+<rect x="58" y="361" width="244" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="180" y="386.76" style="font-size:22px;font-weight:400">维护在岗状态、区域</text>
+<text x="180" y="409.76" style="font-size:22px;font-weight:400">发布班次与名额</text>
+<rect x="698" y="455" width="244" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="820" y="480.76" style="font-size:22px;font-weight:400">核对人员资格、班次</text>
+<text x="820" y="503.76" style="font-size:22px;font-weight:400">容量与时间冲突</text>
+<rect x="378" y="549" width="244" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="500" y="574.76" style="font-size:22px;font-weight:400">查看班次、接单上门</text>
+<text x="500" y="597.76" style="font-size:22px;font-weight:400">完成两次打卡</text>
+<rect x="698" y="643" width="244" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="820" y="668.76" style="font-size:22px;font-weight:400">按围栏、预约时间窗</text>
+<text x="820" y="691.76" style="font-size:22px;font-weight:400">和实际时长认定</text>
+<rect x="58" y="737" width="244" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
+<text x="180" y="762.76" style="font-size:22px;font-weight:400">异常工时复核</text>
+<text x="180" y="785.76" style="font-size:22px;font-weight:400">填理由、判有效或无效</text>
+<rect x="698" y="831" width="244" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="820" y="856.76" style="font-size:22px;font-weight:400">按签到月份</text>
+<text x="820" y="879.76" style="font-size:22px;font-weight:400">加总有效分钟</text>
+<rect x="378" y="831" width="244" height="60" rx="17" fill="#e8f1ed" stroke="#779488" stroke-width="1.6"/>
+<text x="500" y="856.76" style="font-size:22px;font-weight:400">查明细、月工时</text>
+<text x="500" y="879.76" style="font-size:22px;font-weight:400">和累计工时</text>
+</svg>

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" width="1000" height="921" viewBox="0 0 1000 921"><title id="title">图 13　预约、调度、上门与确认</title><desc id="desc">时段未过、待派或待接超过 15 分钟的订单进入调度池。错过整个时段的待派单可改约或取消。机构也可退回本机构派单。改派须记原因。服务开始前，家属或社区按订单状态办理取消。</desc>
+<defs><marker id="forward" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#354953"/></marker><marker id="branch" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#926a4e"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;text-anchor:middle;fill:#1e3038}</style>
+<rect width="1000" height="921" fill="white"/>
+<rect x="20" y="5" width="240" height="911" fill="#f7f9fa"/>
+<path d="M20 5 V916" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="20" y="5" width="240" height="49" fill="#e7eef0"/>
+<text x="140" y="37" style="font-size:23px;font-weight:600">老人及家属</text>
+<rect x="260" y="5" width="240" height="911" fill="#ffffff"/>
+<path d="M260 5 V916" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="260" y="5" width="240" height="49" fill="#e7eef0"/>
+<text x="380" y="37" style="font-size:23px;font-weight:600">社区管理员</text>
+<rect x="500" y="5" width="240" height="911" fill="#f7f9fa"/>
+<path d="M500 5 V916" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="500" y="5" width="240" height="49" fill="#e7eef0"/>
+<text x="620" y="37" style="font-size:23px;font-weight:600">平台</text>
+<rect x="740" y="5" width="240" height="911" fill="#ffffff"/>
+<path d="M740 5 V916" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="740" y="5" width="240" height="49" fill="#e7eef0"/>
+<text x="860" y="37" style="font-size:23px;font-weight:600">护工</text>
+<path d="M980 5 V916 H20 M20 55 H980" fill="none" stroke="#c2d0d5"/>
+<polyline points="140,139 140,160 620,160 620,173" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>选老人、时间和项目 → 核对地址、评估和计划创建待派订单</title></polyline>
+<polyline points="620,233 620,267" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>核对地址、评估和计划创建待派订单 → 筛出合格班次核对剩余名额</title></polyline>
+<polyline points="620,327 620,391 487,391" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>筛出合格班次核对剩余名额 → 选择班次并派单</title></polyline>
+<polyline points="487,391 495,391 495,429 735,429 735,391 753,391" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>选择班次并派单 → 接单</title></polyline>
+<polyline points="967,391 975,391 975,579 967,579" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>接单 → 到户签到记录服务并签退</title></polyline>
+<polyline points="860,609 860,673 727,673" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>到户签到记录服务并签退 → 保存服务记录订单待家属确认</title></polyline>
+<polyline points="620,703 620,767 247,767" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>保存服务记录订单待家属确认 → 查看本次服务确认完成</title></polyline>
+<polyline points="140,797 140,861 513,861" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>查看本次服务确认完成 → 订单完成供评价和补贴核验</title></polyline>
+<polyline points="487,109 495,109 495,203 513,203" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>代录电话或社区预约 → 核对地址、评估和计划创建待派订单</title></polyline>
+<polyline points="513,203 505,203 505,297 487,297" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>核对地址、评估和计划创建待派订单 → 已过时段：联系家属</title></polyline>
+<polyline points="380,267 380,233" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>已过时段：联系家属 → 原单改约重验计划</title></polyline>
+<polyline points="487,203 495,203 495,297 513,297" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>原单改约重验计划 → 筛出合格班次核对剩余名额</title></polyline>
+<polyline points="273,297 247,297" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>已过时段：联系家属 → 取消订单</title></polyline>
+<polyline points="860,421 860,455" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>接单 → 签到前拒接或退单</title></polyline>
+<polyline points="753,485 727,485" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>签到前拒接或退单 → 释放名额退回待派</title></polyline>
+<polyline points="620,455 620,327" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>释放名额退回待派 → 筛出合格班次核对剩余名额</title></polyline>
+<rect x="33" y="79" width="214" height="60" rx="17" fill="#edf4f4" stroke="#809e9e" stroke-width="1.6"/>
+<text x="140" y="116.26" style="font-size:22px;font-weight:400">选老人、时间和项目</text>
+<rect x="273" y="79" width="214" height="60" rx="17" fill="#edf4f4" stroke="#809e9e" stroke-width="1.6"/>
+<text x="380" y="116.26" style="font-size:22px;font-weight:400">代录电话或社区预约</text>
+<rect x="513" y="173" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="620" y="199.1" style="font-size:20px;font-weight:400">核对地址、评估和计划</text>
+<text x="620" y="220.1" style="font-size:20px;font-weight:400">创建待派订单</text>
+<rect x="513" y="267" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="620" y="292.76" style="font-size:22px;font-weight:400">筛出合格班次</text>
+<text x="620" y="315.76" style="font-size:22px;font-weight:400">核对剩余名额</text>
+<rect x="273" y="361" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="380" y="398.26" style="font-size:22px;font-weight:400">选择班次并派单</text>
+<rect x="753" y="361" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="860" y="398.26" style="font-size:22px;font-weight:400">接单</text>
+<rect x="273" y="267" width="214" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
+<text x="380" y="304.26" style="font-size:22px;font-weight:400">已过时段：联系家属</text>
+<rect x="273" y="173" width="214" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
+<text x="380" y="198.76" style="font-size:22px;font-weight:400">原单改约</text>
+<text x="380" y="221.76" style="font-size:22px;font-weight:400">重验计划</text>
+<rect x="33" y="267" width="214" height="60" rx="17" fill="#e8f1ed" stroke="#779488" stroke-width="1.6"/>
+<text x="140" y="304.26" style="font-size:22px;font-weight:400">取消订单</text>
+<rect x="753" y="455" width="214" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
+<text x="860" y="492.26" style="font-size:22px;font-weight:400">签到前拒接或退单</text>
+<rect x="513" y="455" width="214" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
+<text x="620" y="480.76" style="font-size:22px;font-weight:400">释放名额</text>
+<text x="620" y="503.76" style="font-size:22px;font-weight:400">退回待派</text>
+<rect x="753" y="549" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="860" y="574.76" style="font-size:22px;font-weight:400">到户签到</text>
+<text x="860" y="597.76" style="font-size:22px;font-weight:400">记录服务并签退</text>
+<rect x="513" y="643" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="620" y="668.76" style="font-size:22px;font-weight:400">保存服务记录</text>
+<text x="620" y="691.76" style="font-size:22px;font-weight:400">订单待家属确认</text>
+<rect x="33" y="737" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="140" y="762.76" style="font-size:22px;font-weight:400">查看本次服务</text>
+<text x="140" y="785.76" style="font-size:22px;font-weight:400">确认完成</text>
+<rect x="513" y="831" width="214" height="60" rx="17" fill="#e8f1ed" stroke="#779488" stroke-width="1.6"/>
+<text x="620" y="856.76" style="font-size:22px;font-weight:400">订单完成</text>
+<text x="620" y="879.76" style="font-size:22px;font-weight:400">供评价和补贴核验</text>
+</svg>

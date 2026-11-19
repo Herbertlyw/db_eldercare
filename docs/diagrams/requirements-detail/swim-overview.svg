@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" width="1000" height="1015" viewBox="0 0 1000 1015"><title id="title">图 11　一笔上门服务怎样走到补贴拨付</title><desc id="desc">社区也可代家属预约。申报同时需要已完成的订单、家属确认和有效工时。设备告警、人工求助、投诉和监管抽查各有自己的入口。</desc>
+<defs><marker id="forward" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#354953"/></marker><marker id="branch" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#926a4e"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;text-anchor:middle;fill:#1e3038}</style>
+<rect width="1000" height="1015" fill="white"/>
+<rect x="20" y="5" width="137" height="1005" fill="#f7f9fa"/>
+<path d="M20 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="20" y="5" width="137" height="49" fill="#e7eef0"/>
+<text x="89" y="37" style="font-size:23px;font-weight:600">老人及家属</text>
+<rect x="157" y="5" width="137" height="1005" fill="#ffffff"/>
+<path d="M157 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="157" y="5" width="137" height="49" fill="#e7eef0"/>
+<text x="226" y="37" style="font-size:23px;font-weight:600">社区管理员</text>
+<rect x="294" y="5" width="137" height="1005" fill="#f7f9fa"/>
+<path d="M294 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="294" y="5" width="137" height="49" fill="#e7eef0"/>
+<text x="363" y="37" style="font-size:23px;font-weight:600">平台</text>
+<rect x="431" y="5" width="138" height="1005" fill="#ffffff"/>
+<path d="M431 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="431" y="5" width="138" height="49" fill="#e7eef0"/>
+<text x="500" y="37" style="font-size:23px;font-weight:600">护工</text>
+<rect x="569" y="5" width="137" height="1005" fill="#f7f9fa"/>
+<path d="M569 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="569" y="5" width="137" height="49" fill="#e7eef0"/>
+<text x="637" y="37" style="font-size:23px;font-weight:600">机构负责人</text>
+<rect x="706" y="5" width="137" height="1005" fill="#ffffff"/>
+<path d="M706 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="706" y="5" width="137" height="49" fill="#e7eef0"/>
+<text x="774" y="37" style="font-size:23px;font-weight:600">街道审核</text>
+<rect x="843" y="5" width="137" height="1005" fill="#f7f9fa"/>
+<path d="M843 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="843" y="5" width="137" height="49" fill="#e7eef0"/>
+<text x="911" y="37" style="font-size:23px;font-weight:600">民政监管</text>
+<path d="M980 5 V1010 H20 M20 55 H980" fill="none" stroke="#c2d0d5"/>
+<polyline points="226,139 226,160 89,160 89,173" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>建档评估制定计划 → 提交预约</title></polyline>
+<polyline points="89,233 89,254 363,254 363,267" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>提交预约 → 核对计划筛选班次</title></polyline>
+<polyline points="363,327 363,348 226,348 226,361" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>核对计划筛选班次 → 派给护工</title></polyline>
+<polyline points="226,421 226,442 500,442 500,455" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>派给护工 → 接单上门签到签退</title></polyline>
+<polyline points="500,515 500,536 89,536 89,549" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>接单上门签到签退 → 确认服务</title></polyline>
+<polyline points="89,609 89,630 226,630 226,643" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>确认服务 → 申报补贴</title></polyline>
+<polyline points="226,703 226,724 774,724 774,737" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>申报补贴 → 初审</title></polyline>
+<polyline points="774,797 774,818 911,818 911,831" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>初审 → 终审通过登记拨付</title></polyline>
+<polyline points="911,891 911,912 89,912 89,925" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>终审通过登记拨付 → 查补贴与自付额</title></polyline>
+<polyline points="637,139 637,259 363,259 363,267" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>管资质排班次 → 核对计划筛选班次</title></polyline>
+<polyline points="500,515 500,523 363,523 363,549" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>接单上门签到签退 → 认定工时</title></polyline>
+<polyline points="363,609 363,635 226,635 226,643" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>认定工时 → 申报补贴</title></polyline>
+<polyline points="420,579 580,579" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>认定工时 → 复核异常工时</title></polyline>
+<polyline points="637,609 637,673 283,673" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>复核异常工时 → 申报补贴</title></polyline>
+<rect x="169" y="79" width="114" height="60" rx="17" fill="#edf4f4" stroke="#809e9e" stroke-width="1.6"/>
+<text x="226" y="104.76" style="font-size:22px;font-weight:400">建档评估</text>
+<text x="226" y="127.76" style="font-size:22px;font-weight:400">制定计划</text>
+<rect x="580" y="79" width="114" height="60" rx="17" fill="#edf4f4" stroke="#809e9e" stroke-width="1.6"/>
+<text x="637" y="104.76" style="font-size:22px;font-weight:400">管资质</text>
+<text x="637" y="127.76" style="font-size:22px;font-weight:400">排班次</text>
+<rect x="32" y="173" width="114" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="89" y="210.26" style="font-size:22px;font-weight:400">提交预约</text>
+<rect x="306" y="267" width="114" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="363" y="292.76" style="font-size:22px;font-weight:400">核对计划</text>
+<text x="363" y="315.76" style="font-size:22px;font-weight:400">筛选班次</text>
+<rect x="169" y="361" width="114" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="226" y="398.26" style="font-size:22px;font-weight:400">派给护工</text>
+<rect x="443" y="455" width="114" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="500" y="480.76" style="font-size:22px;font-weight:400">接单上门</text>
+<text x="500" y="503.76" style="font-size:22px;font-weight:400">签到签退</text>
+<rect x="32" y="549" width="114" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="89" y="586.26" style="font-size:22px;font-weight:400">确认服务</text>
+<rect x="306" y="549" width="114" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="363" y="586.26" style="font-size:22px;font-weight:400">认定工时</text>
+<rect x="580" y="549" width="114" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
+<text x="637" y="574.76" style="font-size:22px;font-weight:400">复核异常</text>
+<text x="637" y="597.76" style="font-size:22px;font-weight:400">工时</text>
+<rect x="169" y="643" width="114" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="226" y="680.26" style="font-size:22px;font-weight:400">申报补贴</text>
+<rect x="717" y="737" width="114" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="774" y="774.26" style="font-size:22px;font-weight:400">初审</text>
+<rect x="854" y="831" width="114" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="911" y="856.76" style="font-size:22px;font-weight:400">终审通过</text>
+<text x="911" y="879.76" style="font-size:22px;font-weight:400">登记拨付</text>
+<rect x="32" y="925" width="114" height="60" rx="17" fill="#e8f1ed" stroke="#779488" stroke-width="1.6"/>
+<text x="89" y="950.76" style="font-size:22px;font-weight:400">查补贴</text>
+<text x="89" y="973.76" style="font-size:22px;font-weight:400">与自付额</text>
+</svg>
