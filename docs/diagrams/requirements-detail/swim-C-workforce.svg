@@ -1,62 +1,146 @@
-<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" width="1000" height="921" viewBox="0 0 1000 921"><title id="title">图 15　从招聘、排班到核定有效工时</title><desc id="desc">只有有效分钟计入工时。两次打卡须在围栏内，签到不能早于预约前 30 分钟，签退不能晚于预约后 30 分钟，时长须达到预约时长的 80%。零分钟不能核定为有效。</desc>
-<defs><marker id="forward" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#354953"/></marker><marker id="branch" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#926a4e"/></marker></defs>
-<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;text-anchor:middle;fill:#1e3038}</style>
-<rect width="1000" height="921" fill="white"/>
-<rect x="20" y="5" width="320" height="911" fill="#f7f9fa"/>
-<path d="M20 5 V916" stroke="#d5dfe3" stroke-width="1.3"/>
-<rect x="20" y="5" width="320" height="49" fill="#e7eef0"/>
-<text x="180" y="37" style="font-size:23px;font-weight:600">机构负责人</text>
-<rect x="340" y="5" width="320" height="911" fill="#ffffff"/>
-<path d="M340 5 V916" stroke="#d5dfe3" stroke-width="1.3"/>
-<rect x="340" y="5" width="320" height="49" fill="#e7eef0"/>
-<text x="500" y="37" style="font-size:23px;font-weight:600">护工</text>
-<rect x="660" y="5" width="320" height="911" fill="#f7f9fa"/>
-<path d="M660 5 V916" stroke="#d5dfe3" stroke-width="1.3"/>
-<rect x="660" y="5" width="320" height="49" fill="#e7eef0"/>
-<text x="820" y="37" style="font-size:23px;font-weight:600">平台</text>
-<path d="M980 5 V916 H20 M20 55 H980" fill="none" stroke="#c2d0d5"/>
-<polyline points="302,109 665,109 665,203 698,203" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>登记应聘人作出录用决定 → 录用后建立账号、档案及默认服务区域</title></polyline>
-<polyline points="698,203 690,203 690,297 302,297" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>录用后建立账号、档案及默认服务区域 → 登记岗前培训结果项目证书及有效期</title></polyline>
-<polyline points="180,327 180,361" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>登记岗前培训结果项目证书及有效期 → 维护在岗状态、区域发布班次与名额</title></polyline>
-<polyline points="302,391 665,391 665,485 698,485" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>维护在岗状态、区域发布班次与名额 → 核对人员资格、班次容量与时间冲突</title></polyline>
-<polyline points="698,485 690,485 690,579 622,579" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>核对人员资格、班次容量与时间冲突 → 查看班次、接单上门完成两次打卡</title></polyline>
-<polyline points="622,579 630,579 630,673 698,673" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>查看班次、接单上门完成两次打卡 → 按围栏、预约时间窗和实际时长认定</title></polyline>
-<polyline points="820,703 820,831" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>按围栏、预约时间窗和实际时长认定 → 按签到月份加总有效分钟</title></polyline>
-<polyline points="698,861 622,861" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>按签到月份加总有效分钟 → 查明细、月工时和累计工时</title></polyline>
-<polyline points="302,109 310,109 310,71 690,71 690,109 698,109" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>登记应聘人作出录用决定 → 未录用保留审核记录</title></polyline>
-<polyline points="698,673 690,673 690,767 302,767" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>按围栏、预约时间窗和实际时长认定 → 异常工时复核填理由、判有效或无效</title></polyline>
-<polyline points="302,767 310,767 310,823 690,823 690,861 698,861" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>异常工时复核填理由、判有效或无效 → 按签到月份加总有效分钟</title></polyline>
-<rect x="58" y="79" width="244" height="60" rx="17" fill="#edf4f4" stroke="#809e9e" stroke-width="1.6"/>
-<text x="180" y="104.76" style="font-size:22px;font-weight:400">登记应聘人</text>
-<text x="180" y="127.76" style="font-size:22px;font-weight:400">作出录用决定</text>
-<rect x="698" y="79" width="244" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
-<text x="820" y="104.76" style="font-size:22px;font-weight:400">未录用</text>
-<text x="820" y="127.76" style="font-size:22px;font-weight:400">保留审核记录</text>
-<rect x="698" y="173" width="244" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
-<text x="820" y="198.76" style="font-size:22px;font-weight:400">录用后建立账号、档案</text>
-<text x="820" y="221.76" style="font-size:22px;font-weight:400">及默认服务区域</text>
-<rect x="58" y="267" width="244" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
-<text x="180" y="292.76" style="font-size:22px;font-weight:400">登记岗前培训结果</text>
-<text x="180" y="315.76" style="font-size:22px;font-weight:400">项目证书及有效期</text>
-<rect x="58" y="361" width="244" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
-<text x="180" y="386.76" style="font-size:22px;font-weight:400">维护在岗状态、区域</text>
-<text x="180" y="409.76" style="font-size:22px;font-weight:400">发布班次与名额</text>
-<rect x="698" y="455" width="244" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
-<text x="820" y="480.76" style="font-size:22px;font-weight:400">核对人员资格、班次</text>
-<text x="820" y="503.76" style="font-size:22px;font-weight:400">容量与时间冲突</text>
-<rect x="378" y="549" width="244" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
-<text x="500" y="574.76" style="font-size:22px;font-weight:400">查看班次、接单上门</text>
-<text x="500" y="597.76" style="font-size:22px;font-weight:400">完成两次打卡</text>
-<rect x="698" y="643" width="244" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
-<text x="820" y="668.76" style="font-size:22px;font-weight:400">按围栏、预约时间窗</text>
-<text x="820" y="691.76" style="font-size:22px;font-weight:400">和实际时长认定</text>
-<rect x="58" y="737" width="244" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
-<text x="180" y="762.76" style="font-size:22px;font-weight:400">异常工时复核</text>
-<text x="180" y="785.76" style="font-size:22px;font-weight:400">填理由、判有效或无效</text>
-<rect x="698" y="831" width="244" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
-<text x="820" y="856.76" style="font-size:22px;font-weight:400">按签到月份</text>
-<text x="820" y="879.76" style="font-size:22px;font-weight:400">加总有效分钟</text>
-<rect x="378" y="831" width="244" height="60" rx="17" fill="#e8f1ed" stroke="#779488" stroke-width="1.6"/>
-<text x="500" y="856.76" style="font-size:22px;font-weight:400">查明细、月工时</text>
-<text x="500" y="879.76" style="font-size:22px;font-weight:400">和累计工时</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="846" height="1144" viewBox="0 0 846.0 1144.0" role="img">
+  <title>图 15　从招聘、排班到核定有效工时</title>
+  <desc>已有班次可服务多笔订单。两次打卡均在围栏内、签到不早于预约前 30 分钟、签退不晚于预约后 30 分钟且时长达到 80%，才自动计为有效。零分钟不能复核为有效。</desc>
+  <rect width="100%" height="100%" fill="white"/>
+  <text x="18" y="24" style="font:600 20px &quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif;fill:#1e3e4f">录用与可用班次</text>
+  <g transform="translate(0.0 35)">
+    <g>
+      <rect fill="#E6EEF2" height="25.2" style="stroke:#E6EEF2;stroke-width:1;" width="813.497" x="15" y="14.62"/>
+      <ellipse cx="221" cy="54.82" fill="#263B48" rx="10" ry="10" style="stroke:#222222;stroke-width:1;"/>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="173" x="134.5" y="84.82"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="153" x="144.5" y="112.84">登记招聘申请并审核</text>
+      <polygon fill="#FFF5DD" points="197,151.22,245,151.22,257,163.22,245,175.22,197,175.22,185,163.22,197,151.22" style="stroke:#947442;stroke-width:0.5;"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" lengthAdjust="spacing" textLength="48" x="197" y="168.98">录用？</text>
+      <text fill="#253D50" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" lengthAdjust="spacing" textLength="15" x="170" y="158.12">是</text>
+      <text fill="#253D50" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" lengthAdjust="spacing" textLength="15" x="257" y="158.12">否</text>
+      <rect fill="#F2F6F8" height="67.6" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="207" x="21" y="259.02"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="187" x="31" y="287.04">登记培训成绩和项目证书</text>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="153" x="31" y="310.84">维护在岗状态与区域</text>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="173" x="38" y="346.62"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="153" x="48" y="374.64">发布班次和接单名额</text>
+      <line style="stroke:#CCD6DC;stroke-width:1.5;" x1="15" x2="15" y1="14.62" y2="512.22"/>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="224" x="317.5" y="195.22"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="204" x="327.5" y="223.24">建立账号、档案和服务区域</text>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="122" x="551.5" y="195.22"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="102" x="561.5" y="223.24">保留拒绝意见</text>
+      <ellipse cx="612.5" cy="270.02" fill="none" rx="11" ry="11" style="stroke:#222222;stroke-width:1;"/>
+      <ellipse cx="612.5" cy="270.02" fill="#222222" rx="6" ry="6" style="stroke:#222222;stroke-width:1;"/>
+      <line style="stroke:#CCD6DC;stroke-width:1.5;" x1="311.5" x2="311.5" y1="14.62" y2="512.22"/>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="139" x="683.5" y="410.42"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="119" x="693.5" y="438.44">查看自己的班次</text>
+      <ellipse cx="753" cy="485.22" fill="none" rx="11" ry="11" style="stroke:#222222;stroke-width:1;"/>
+      <ellipse cx="753" cy="485.22" fill="#222222" rx="6" ry="6" style="stroke:#222222;stroke-width:1;"/>
+      <line style="stroke:#CCD6DC;stroke-width:1.5;" x1="677.5" x2="677.5" y1="14.62" y2="512.22"/>
+      <line style="stroke:#CCD6DC;stroke-width:1.5;" x1="826.5" x2="826.5" y1="14.62" y2="512.22"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="221" x2="221" y1="64.82" y2="84.82"/>
+      <polygon fill="#405666" points="217,74.82,221,84.82,225,74.82,221,78.82" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="124.5" x2="124.5" y1="326.62" y2="346.62"/>
+      <polygon fill="#405666" points="120.5,336.62,124.5,346.62,128.5,336.62,124.5,340.62" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="221" x2="221" y1="128.62" y2="151.22"/>
+      <polygon fill="#405666" points="217,141.22,221,151.22,225,141.22,221,145.22" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="612.5" x2="612.5" y1="239.02" y2="259.02"/>
+      <polygon fill="#405666" points="608.5,249.02,612.5,259.02,616.5,249.02,612.5,253.02" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="753" x2="753" y1="454.22" y2="474.22"/>
+      <polygon fill="#405666" points="749,464.22,753,474.22,757,464.22,753,468.22" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="429.5" x2="429.5" y1="239.02" y2="244.02"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="429.5" x2="124.5" y1="244.02" y2="244.02"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="124.5" x2="124.5" y1="244.02" y2="259.02"/>
+      <polygon fill="#405666" points="120.5,249.02,124.5,259.02,128.5,249.02,124.5,253.02" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="124.5" x2="124.5" y1="390.42" y2="395.42"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="124.5" x2="753" y1="395.42" y2="395.42"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="753" x2="753" y1="395.42" y2="410.42"/>
+      <polygon fill="#405666" points="749,400.42,753,410.42,757,400.42,753,404.42" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="185" x2="173" y1="163.22" y2="163.22"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="173" x2="173" y1="163.22" y2="181.22"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="173" x2="429.5" y1="181.22" y2="181.22"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="429.5" x2="429.5" y1="181.22" y2="195.22"/>
+      <polygon fill="#405666" points="425.5,185.22,429.5,195.22,433.5,185.22,429.5,189.22" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="257" x2="612.5" y1="163.22" y2="163.22"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="612.5" x2="612.5" y1="163.22" y2="195.22"/>
+      <polygon fill="#405666" points="608.5,185.22,612.5,195.22,616.5,185.22,612.5,189.22" style="stroke:#405666;stroke-width:1;"/>
+      <text fill="#233D4B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" lengthAdjust="spacing" textLength="90" x="118.25" y="33.7">机构负责人</text>
+      <text fill="#233D4B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" lengthAdjust="spacing" textLength="36" x="476.5" y="33.7">平台</text>
+      <text fill="#233D4B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" lengthAdjust="spacing" textLength="36" x="734" y="33.7">护工</text>
+    </g>
+  </g>
+  <text x="18" y="598.0" style="font:600 20px &quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif;fill:#1e3e4f">一次服务的工时认定</text>
+  <g transform="translate(19.5 609.0)">
+    <g>
+      <rect fill="#E6EEF2" height="25.2" style="stroke:#E6EEF2;stroke-width:1;" width="774.997" x="15" y="14.62"/>
+      <ellipse cx="107.5" cy="54.82" fill="#263B48" rx="10" ry="10" style="stroke:#222222;stroke-width:1;"/>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="173" x="21" y="84.82"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="153" x="31" y="112.84">到户签到，离场签退</text>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="139" x="38" y="437.42"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="119" x="48" y="465.44">查月工时与合计</text>
+      <ellipse cx="107.5" cy="512.22" fill="none" rx="11" ry="11" style="stroke:#222222;stroke-width:1;"/>
+      <ellipse cx="107.5" cy="512.22" fill="#222222" rx="6" ry="6" style="stroke:#222222;stroke-width:1;"/>
+      <line style="stroke:#CCD6DC;stroke-width:1.5;" x1="15" x2="15" y1="14.62" y2="523.22"/>
+      <polygon fill="#FFF5DD" points="336.5,151.22,416.5,151.22,428.5,163.22,416.5,175.22,336.5,175.22,324.5,163.22,336.5,151.22" style="stroke:#947442;stroke-width:0.5;"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" lengthAdjust="spacing" textLength="80" x="336.5" y="168.98">打卡合规？</text>
+      <text fill="#253D50" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" lengthAdjust="spacing" textLength="15" x="309.5" y="158.12">是</text>
+      <text fill="#253D50" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" lengthAdjust="spacing" textLength="30" x="428.5" y="158.12">异常</text>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="122" x="204" y="195.22"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="102" x="214" y="223.24">登记有效分钟</text>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="122" x="356" y="305.62"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="102" x="366" y="333.64">登记核定分钟</text>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="122" x="488" y="305.62"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="102" x="498" y="333.64">保存无效记录</text>
+      <polygon fill="#FFF5DD" points="376.5,393.42,388.5,405.42,376.5,417.42,364.5,405.42,376.5,393.42" style="stroke:#947442;stroke-width:0.5;"/>
+      <line style="stroke:#CCD6DC;stroke-width:1.5;" x1="198" x2="198" y1="14.62" y2="523.22"/>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="139" x="631.5" y="195.22"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="119" x="641.5" y="223.24">复核并说明理由</text>
+      <polygon fill="#FFF5DD" points="661,261.62,741,261.62,753,273.62,741,285.62,661,285.62,649,273.62,661,261.62" style="stroke:#947442;stroke-width:0.5;"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" lengthAdjust="spacing" textLength="80" x="661" y="279.38">工时有效？</text>
+      <text fill="#253D50" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" lengthAdjust="spacing" textLength="30" x="619" y="268.52">有效</text>
+      <text fill="#253D50" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" lengthAdjust="spacing" textLength="30" x="753" y="268.52">无效</text>
+      <polygon fill="#FFF5DD" points="701,359.42,713,371.42,701,383.42,689,371.42,701,359.42" style="stroke:#947442;stroke-width:0.5;"/>
+      <line style="stroke:#CCD6DC;stroke-width:1.5;" x1="614" x2="614" y1="14.62" y2="523.22"/>
+      <line style="stroke:#CCD6DC;stroke-width:1.5;" x1="788" x2="788" y1="14.62" y2="523.22"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="107.5" x2="107.5" y1="64.82" y2="84.82"/>
+      <polygon fill="#405666" points="103.5,74.82,107.5,84.82,111.5,74.82,107.5,78.82" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="107.5" x2="107.5" y1="481.22" y2="501.22"/>
+      <polygon fill="#405666" points="103.5,491.22,107.5,501.22,111.5,491.22,107.5,495.22" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="324.5" x2="265" y1="163.22" y2="163.22"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="265" x2="265" y1="163.22" y2="195.22"/>
+      <polygon fill="#405666" points="261,185.22,265,195.22,269,185.22,265,189.22" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="265" x2="265" y1="239.02" y2="405.42"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="265" x2="364.5" y1="405.42" y2="405.42"/>
+      <polygon fill="#405666" points="354.5,401.42,364.5,405.42,354.5,409.42,358.5,405.42" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="701" x2="701" y1="239.02" y2="261.62"/>
+      <polygon fill="#405666" points="697,251.62,701,261.62,705,251.62,701,255.62" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="649" x2="417" y1="273.62" y2="273.62"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="417" x2="417" y1="273.62" y2="305.62"/>
+      <polygon fill="#405666" points="413,295.62,417,305.62,421,295.62,417,299.62" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="753" x2="765" y1="273.62" y2="273.62"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="765" x2="765" y1="273.62" y2="291.62"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="765" x2="549" y1="291.62" y2="291.62"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="549" x2="549" y1="291.62" y2="305.62"/>
+      <polygon fill="#405666" points="545,295.62,549,305.62,553,295.62,549,299.62" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="417" x2="417" y1="349.42" y2="371.42"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="417" x2="689" y1="371.42" y2="371.42"/>
+      <polygon fill="#405666" points="679,367.42,689,371.42,679,375.42,683,371.42" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="549" x2="549" y1="349.42" y2="353.42"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="549" x2="731" y1="353.42" y2="353.42"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="731" x2="731" y1="353.42" y2="371.42"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="731" x2="713" y1="371.42" y2="371.42"/>
+      <polygon fill="#405666" points="723,367.42,713,371.42,723,375.42,719,371.42" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="428.5" x2="701" y1="163.22" y2="163.22"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="701" x2="701" y1="163.22" y2="195.22"/>
+      <polygon fill="#405666" points="697,185.22,701,195.22,705,185.22,701,189.22" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="701" x2="701" y1="383.42" y2="405.42"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="701" x2="388.5" y1="405.42" y2="405.42"/>
+      <polygon fill="#405666" points="398.5,401.42,388.5,405.42,398.5,409.42,394.5,405.42" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="107.5" x2="107.5" y1="128.62" y2="133.72"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="107.5" x2="376.5" y1="133.72" y2="133.72"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="376.5" x2="376.5" y1="133.72" y2="151.22"/>
+      <polygon fill="#405666" points="372.5,141.22,376.5,151.22,380.5,141.22,376.5,145.22" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="376.5" x2="376.5" y1="417.42" y2="422.42"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="376.5" x2="107.5" y1="422.42" y2="422.42"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="107.5" x2="107.5" y1="422.42" y2="437.42"/>
+      <polygon fill="#405666" points="103.5,427.42,107.5,437.42,111.5,427.42,107.5,431.42" style="stroke:#405666;stroke-width:1;"/>
+      <text fill="#233D4B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" lengthAdjust="spacing" textLength="36" x="88.5" y="33.7">护工</text>
+      <text fill="#233D4B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" lengthAdjust="spacing" textLength="36" x="388" y="33.7">平台</text>
+      <text fill="#233D4B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" lengthAdjust="spacing" textLength="90" x="656" y="33.7">机构负责人</text>
+    </g>
+  </g>
 </svg>

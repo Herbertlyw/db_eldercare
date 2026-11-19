@@ -1,63 +1,121 @@
-<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" width="1000" height="1015" viewBox="0 0 1000 1015"><title id="title">图 18　服务抽查、整改复核与机构考核</title><desc id="desc">评分低于 60 分或监管明确要求时进入整改。材料与复核结论逐份保存。机构考核按月另行办理，可参考抽查评分。公开内容不含老人身份和病情。监管撤回公示须留原因。</desc>
-<defs><marker id="forward" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#354953"/></marker><marker id="branch" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#926a4e"/></marker></defs>
-<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;text-anchor:middle;fill:#1e3038}</style>
-<rect width="1000" height="1015" fill="white"/>
-<rect x="20" y="5" width="240" height="1005" fill="#f7f9fa"/>
-<path d="M20 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
-<rect x="20" y="5" width="240" height="49" fill="#e7eef0"/>
-<text x="140" y="37" style="font-size:23px;font-weight:600">民政监管人员</text>
-<rect x="260" y="5" width="240" height="1005" fill="#ffffff"/>
-<path d="M260 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
-<rect x="260" y="5" width="240" height="49" fill="#e7eef0"/>
-<text x="380" y="37" style="font-size:23px;font-weight:600">平台</text>
-<rect x="500" y="5" width="240" height="1005" fill="#f7f9fa"/>
-<path d="M500 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
-<rect x="500" y="5" width="240" height="49" fill="#e7eef0"/>
-<text x="620" y="37" style="font-size:23px;font-weight:600">机构负责人</text>
-<rect x="740" y="5" width="240" height="1005" fill="#ffffff"/>
-<path d="M740 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
-<rect x="740" y="5" width="240" height="49" fill="#e7eef0"/>
-<text x="860" y="37" style="font-size:23px;font-weight:600">公众</text>
-<path d="M980 5 V1010 H20 M20 55 H980" fill="none" stroke="#c2d0d5"/>
-<polyline points="140,139 140,203 273,203" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>按辖区、期间与比例抽订单或护工 → 保留抽查总体及选中的样本</title></polyline>
-<polyline points="380,233 380,297 247,297" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>保留抽查总体及选中的样本 → 电话回访或上门核查登记评分和问题</title></polyline>
-<polyline points="247,297 255,297 255,673 273,673" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>电话回访或上门核查登记评分和问题 → 无需整改或复核通过抽查结案</title></polyline>
-<polyline points="380,703 380,767 247,767" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>无需整改或复核通过抽查结案 → 对已结案且有评分的抽查发布公示</title></polyline>
-<polyline points="247,767 255,767 255,805 735,805 735,767 753,767" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>对已结案且有评分的抽查发布公示 → 查看公开结论</title></polyline>
-<polyline points="140,327 140,391 513,391" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>电话回访或上门核查登记评分和问题 → 须整改：提交措施与证明材料</title></polyline>
-<polyline points="620,421 620,485 247,485" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>须整改：提交措施与证明材料 → 复核整改材料</title></polyline>
-<polyline points="140,515 140,673 273,673" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>复核整改材料 → 无需整改或复核通过抽查结案</title></polyline>
-<polyline points="247,485 265,485 265,579 513,579" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>复核整改材料 → 被退回：按意见另交材料</title></polyline>
-<polyline points="620,549 620,523 140,523 140,515" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>被退回：按意见另交材料 → 复核整改材料</title></polyline>
-<polyline points="620,891 620,955 247,955" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>按月提交机构考核材料 → 审核材料记录采纳或退回意见</title></polyline>
-<rect x="33" y="79" width="214" height="60" rx="17" fill="#edf4f4" stroke="#809e9e" stroke-width="1.6"/>
-<text x="140" y="104.76" style="font-size:22px;font-weight:400">按辖区、期间与比例</text>
-<text x="140" y="127.76" style="font-size:22px;font-weight:400">抽订单或护工</text>
-<rect x="273" y="173" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
-<text x="380" y="198.76" style="font-size:22px;font-weight:400">保留抽查总体</text>
-<text x="380" y="221.76" style="font-size:22px;font-weight:400">及选中的样本</text>
-<rect x="33" y="267" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
-<text x="140" y="292.76" style="font-size:22px;font-weight:400">电话回访或上门核查</text>
-<text x="140" y="315.76" style="font-size:22px;font-weight:400">登记评分和问题</text>
-<rect x="513" y="361" width="214" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
-<text x="620" y="386.76" style="font-size:22px;font-weight:400">须整改：提交措施</text>
-<text x="620" y="409.76" style="font-size:22px;font-weight:400">与证明材料</text>
-<rect x="33" y="455" width="214" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
-<text x="140" y="492.26" style="font-size:22px;font-weight:400">复核整改材料</text>
-<rect x="513" y="549" width="214" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
-<text x="620" y="574.76" style="font-size:22px;font-weight:400">被退回：按意见</text>
-<text x="620" y="597.76" style="font-size:22px;font-weight:400">另交材料</text>
-<rect x="273" y="643" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
-<text x="380" y="668.76" style="font-size:22px;font-weight:400">无需整改或复核通过</text>
-<text x="380" y="691.76" style="font-size:22px;font-weight:400">抽查结案</text>
-<rect x="33" y="737" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
-<text x="140" y="762.76" style="font-size:22px;font-weight:400">对已结案且有评分的</text>
-<text x="140" y="785.76" style="font-size:22px;font-weight:400">抽查发布公示</text>
-<rect x="753" y="737" width="214" height="60" rx="17" fill="#e8f1ed" stroke="#779488" stroke-width="1.6"/>
-<text x="860" y="774.26" style="font-size:22px;font-weight:400">查看公开结论</text>
-<rect x="513" y="831" width="214" height="60" rx="17" fill="#edf4f4" stroke="#809e9e" stroke-width="1.6"/>
-<text x="620" y="867.6" style="font-size:20px;font-weight:400">按月提交机构考核材料</text>
-<rect x="33" y="925" width="214" height="60" rx="17" fill="#e8f1ed" stroke="#779488" stroke-width="1.6"/>
-<text x="140" y="950.76" style="font-size:22px;font-weight:400">审核材料</text>
-<text x="140" y="973.76" style="font-size:22px;font-weight:400">记录采纳或退回意见</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="617" height="1241" viewBox="0 0 617.0 1241.0" role="img">
+  <title>图 18　服务抽查、整改复核与机构考核</title>
+  <desc>抽查结案与机构月度考核分别办理。退回一份整改材料后，机构可另交一份，前次意见保留。公开结论隐去老人身份和病情，撤回公示须记原因。</desc>
+  <rect width="100%" height="100%" fill="white"/>
+  <text x="18" y="24" style="font:600 20px &quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif;fill:#1e3e4f">抽查、整改与公示</text>
+  <g transform="translate(0.0 35)">
+    <g>
+      <rect fill="#E6EEF2" height="25.2" style="stroke:#E6EEF2;stroke-width:1;" width="584.497" x="15" y="14.62"/>
+      <ellipse cx="150" cy="54.82" fill="#263B48" rx="10" ry="10" style="stroke:#222222;stroke-width:1;"/>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="207" x="46.5" y="84.82"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="187" x="56.5" y="112.84">按辖区、期间和比例抽样</text>
+      <rect fill="#F2F6F8" height="67.6" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="173" x="63.5" y="148.62"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="153" x="73.5" y="176.64">电话回访或上门核查</text>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="119" x="73.5" y="200.44">登记评分和问题</text>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="207" x="46.5" y="414.12"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="187" x="56.5" y="442.14">核对本次材料，记录意见</text>
+      <polygon fill="#FFF5DD" points="150,291.32,162,303.32,150,315.32,138,303.32,150,291.32" style="stroke:#947442;stroke-width:0.5;"/>
+      <polygon fill="#FFF5DD" points="110,480.52,190,480.52,202,492.52,190,504.52,110,504.52,98,492.52,110,480.52" style="stroke:#947442;stroke-width:0.5;"/>
+      <text fill="#253D50" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" lengthAdjust="spacing" textLength="30" x="154" y="520.42">通过</text>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" lengthAdjust="spacing" textLength="80" x="110" y="498.28">复核结果？</text>
+      <text fill="#253D50" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" lengthAdjust="spacing" textLength="60" x="202" y="487.42">退回补交</text>
+      <polygon fill="#FFF5DD" points="63.072,238.82,236.928,238.82,248.928,250.82,236.928,262.82,63.072,262.82,51.072,250.82,63.072,238.82" style="stroke:#947442;stroke-width:0.5;"/>
+      <text fill="#253D50" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" lengthAdjust="spacing" textLength="15" x="154" y="278.72">是</text>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" lengthAdjust="spacing" textLength="173.856" x="63.072" y="256.58">低于 60 分或要求整改？</text>
+      <text fill="#253D50" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" lengthAdjust="spacing" textLength="15" x="36.072" y="245.72">否</text>
+      <polygon fill="#FFF5DD" points="150,533.02,162,545.02,150,557.02,138,545.02,150,533.02" style="stroke:#947442;stroke-width:0.5;"/>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="88" x="106" y="577.02"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="68" x="116" y="605.04">抽查结案</text>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="258" x="21" y="695.92"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="238" x="31" y="723.94">公开已结案、有评分的抽查结论</text>
+      <polygon fill="#FFF5DD" points="110,643.42,190,643.42,202,655.42,190,667.42,110,667.42,98,655.42,110,643.42" style="stroke:#947442;stroke-width:0.5;"/>
+      <text fill="#253D50" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" lengthAdjust="spacing" textLength="30" x="154" y="683.32">发布</text>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" lengthAdjust="spacing" textLength="80" x="110" y="661.18">发布公示？</text>
+      <text fill="#253D50" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" lengthAdjust="spacing" textLength="60" x="202" y="650.32">暂不发布</text>
+      <line style="stroke:#CCD6DC;stroke-width:1.5;" x1="15" x2="15" y1="14.62" y2="874.02"/>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="173" x="290.5" y="335.32"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="153" x="300.5" y="363.34">提交整改措施和材料</text>
+      <line style="stroke:#CCD6DC;stroke-width:1.5;" x1="284.5" x2="284.5" y1="14.62" y2="874.02"/>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="88" x="473.5" y="759.72"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="68" x="483.5" y="787.74">查阅公示</text>
+      <ellipse cx="517.5" cy="834.52" fill="none" rx="11" ry="11" style="stroke:#222222;stroke-width:1;"/>
+      <ellipse cx="517.5" cy="834.52" fill="#222222" rx="6" ry="6" style="stroke:#222222;stroke-width:1;"/>
+      <ellipse cx="582.5" cy="655.42" fill="none" rx="11" ry="11" style="stroke:#222222;stroke-width:1;"/>
+      <ellipse cx="582.5" cy="655.42" fill="#222222" rx="6" ry="6" style="stroke:#222222;stroke-width:1;"/>
+      <line style="stroke:#CCD6DC;stroke-width:1.5;" x1="467.5" x2="467.5" y1="14.62" y2="874.02"/>
+      <line style="stroke:#CCD6DC;stroke-width:1.5;" x1="597.5" x2="597.5" y1="14.62" y2="874.02"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="150" x2="150" y1="64.82" y2="84.82"/>
+      <polygon fill="#405666" points="146,74.82,150,84.82,154,74.82,150,78.82" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="150" x2="150" y1="128.62" y2="148.62"/>
+      <polygon fill="#405666" points="146,138.62,150,148.62,154,138.62,150,142.62" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="202" x2="265.5" y1="492.52" y2="492.52"/>
+      <polygon fill="#405666" points="261.5,406.62,265.5,396.62,269.5,406.62,265.5,402.62" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="265.5" x2="265.5" y1="303.32" y2="492.52"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="265.5" x2="162" y1="303.32" y2="303.32"/>
+      <polygon fill="#405666" points="172,299.32,162,303.32,172,307.32,168,303.32" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="150" x2="150" y1="457.92" y2="480.52"/>
+      <polygon fill="#405666" points="146,470.52,150,480.52,154,470.52,150,474.52" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="150" x2="150" y1="262.82" y2="291.32"/>
+      <polygon fill="#405666" points="146,281.32,150,291.32,154,281.32,150,285.32" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="51.072" x2="36.5" y1="250.82" y2="250.82"/>
+      <polygon fill="#405666" points="32.5,386.62,36.5,396.62,40.5,386.62,36.5,390.62" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="36.5" x2="36.5" y1="250.82" y2="545.02"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="36.5" x2="138" y1="545.02" y2="545.02"/>
+      <polygon fill="#405666" points="128,541.02,138,545.02,128,549.02,132,545.02" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="150" x2="150" y1="504.52" y2="533.02"/>
+      <polygon fill="#405666" points="146,523.02,150,533.02,154,523.02,150,527.02" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="150" x2="150" y1="216.22" y2="238.82"/>
+      <polygon fill="#405666" points="146,228.82,150,238.82,154,228.82,150,232.82" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="150" x2="150" y1="557.02" y2="577.02"/>
+      <polygon fill="#405666" points="146,567.02,150,577.02,154,567.02,150,571.02" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="150" x2="150" y1="667.42" y2="695.92"/>
+      <polygon fill="#405666" points="146,685.92,150,695.92,154,685.92,150,689.92" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="150" x2="150" y1="620.82" y2="643.42"/>
+      <polygon fill="#405666" points="146,633.42,150,643.42,154,633.42,150,637.42" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="517.5" x2="517.5" y1="803.52" y2="823.52"/>
+      <polygon fill="#405666" points="513.5,813.52,517.5,823.52,521.5,813.52,517.5,817.52" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="377" x2="377" y1="379.12" y2="396.62"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="377" x2="150" y1="396.62" y2="396.62"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="150" x2="150" y1="396.62" y2="414.12"/>
+      <polygon fill="#405666" points="146,404.12,150,414.12,154,404.12,150,408.12" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="150" x2="150" y1="315.32" y2="320.32"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="150" x2="377" y1="320.32" y2="320.32"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="377" x2="377" y1="320.32" y2="335.32"/>
+      <polygon fill="#405666" points="373,325.32,377,335.32,381,325.32,377,329.32" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="150" x2="150" y1="739.72" y2="744.72"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="150" x2="517.5" y1="744.72" y2="744.72"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="517.5" x2="517.5" y1="744.72" y2="759.72"/>
+      <polygon fill="#405666" points="513.5,749.72,517.5,759.72,521.5,749.72,517.5,753.72" style="stroke:#405666;stroke-width:1;"/>
+      <text fill="#233D4B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" lengthAdjust="spacing" textLength="72" x="113.75" y="33.7">民政监管</text>
+      <text fill="#233D4B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" lengthAdjust="spacing" textLength="90" x="331" y="33.7">机构负责人</text>
+      <text fill="#233D4B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" lengthAdjust="spacing" textLength="36" x="514.5" y="33.7">公众</text>
+    </g>
+  </g>
+  <text x="18" y="960.0" style="font:600 20px &quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif;fill:#1e3e4f">机构月度考核</text>
+  <g transform="translate(100.0 971.0)">
+    <g>
+      <rect fill="#E6EEF2" height="25.2" style="stroke:#E6EEF2;stroke-width:1;" width="384.997" x="15" y="14.62"/>
+      <ellipse cx="116" cy="54.82" fill="#263B48" rx="10" ry="10" style="stroke:#222222;stroke-width:1;"/>
+      <rect fill="#F2F6F8" height="43.8" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="190" x="21" y="84.82"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="170" x="31" y="112.84">提交本月机构考核材料</text>
+      <line style="stroke:#CCD6DC;stroke-width:1.5;" x1="15" x2="15" y1="14.62" y2="258.22"/>
+      <rect fill="#F2F6F8" height="67.6" rx="12.5" ry="12.5" style="stroke:#657D8C;stroke-width:0.5;" width="173" x="221" y="148.62"/>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="153" x="231" y="176.64">结合材料及抽查情况</text>
+      <text fill="#142D3B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" lengthAdjust="spacing" textLength="153" x="231" y="200.44">登记采纳或退回意见</text>
+      <ellipse cx="307.5" cy="247.22" fill="none" rx="11" ry="11" style="stroke:#222222;stroke-width:1;"/>
+      <ellipse cx="307.5" cy="247.22" fill="#222222" rx="6" ry="6" style="stroke:#222222;stroke-width:1;"/>
+      <line style="stroke:#CCD6DC;stroke-width:1.5;" x1="215" x2="215" y1="14.62" y2="258.22"/>
+      <line style="stroke:#CCD6DC;stroke-width:1.5;" x1="398" x2="398" y1="14.62" y2="258.22"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="116" x2="116" y1="64.82" y2="84.82"/>
+      <polygon fill="#405666" points="112,74.82,116,84.82,120,74.82,116,78.82" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="307.5" x2="307.5" y1="216.22" y2="236.22"/>
+      <polygon fill="#405666" points="303.5,226.22,307.5,236.22,311.5,226.22,307.5,230.22" style="stroke:#405666;stroke-width:1;"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="116" x2="116" y1="128.62" y2="133.62"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="116" x2="307.5" y1="133.62" y2="133.62"/>
+      <line style="stroke:#405666;stroke-width:1;" x1="307.5" x2="307.5" y1="133.62" y2="148.62"/>
+      <polygon fill="#405666" points="303.5,138.62,307.5,148.62,311.5,138.62,307.5,142.62" style="stroke:#405666;stroke-width:1;"/>
+      <text fill="#233D4B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" lengthAdjust="spacing" textLength="90" x="70" y="33.7">机构负责人</text>
+      <text fill="#233D4B" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" lengthAdjust="spacing" textLength="72" x="270.5" y="33.7">民政监管</text>
+    </g>
+  </g>
 </svg>
