@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" width="1000" height="1015" viewBox="0 0 1000 1015"><title id="title">图 16　设备告警、人工求助与现场处置</title><desc id="desc">异常采样建立待核实事件时即通知相关人员。核实后可继续处理，工作人员也可直接响应。仅社区管理员可将误报关闭。人工上报不需要先有订单。升到二级后限时 180 秒，升到三级后限时 60 秒，已响应事件只跟进到场和结案。</desc>
+<defs><marker id="forward" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#354953"/></marker><marker id="branch" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#926a4e"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;text-anchor:middle;fill:#1e3038}</style>
+<rect width="1000" height="1015" fill="white"/>
+<rect x="20" y="5" width="240" height="1005" fill="#f7f9fa"/>
+<path d="M20 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="20" y="5" width="240" height="49" fill="#e7eef0"/>
+<text x="140" y="37" style="font-size:23px;font-weight:600">家属或护工</text>
+<rect x="260" y="5" width="240" height="1005" fill="#ffffff"/>
+<path d="M260 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="260" y="5" width="240" height="49" fill="#e7eef0"/>
+<text x="380" y="37" style="font-size:23px;font-weight:600">社区管理员</text>
+<rect x="500" y="5" width="240" height="1005" fill="#f7f9fa"/>
+<path d="M500 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="500" y="5" width="240" height="49" fill="#e7eef0"/>
+<text x="620" y="37" style="font-size:23px;font-weight:600">平台</text>
+<rect x="740" y="5" width="240" height="1005" fill="#ffffff"/>
+<path d="M740 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="740" y="5" width="240" height="49" fill="#e7eef0"/>
+<text x="860" y="37" style="font-size:21px;font-weight:600">社区管理员或责任护工</text>
+<path d="M980 5 V1010 H20 M20 55 H980" fill="none" stroke="#c2d0d5"/>
+<polyline points="380,139 380,203 513,203" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>登记并绑定设备设置监测指标 → 定时模拟采样或接收批量上传</title></polyline>
+<polyline points="620,233 620,267" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>定时模拟采样或接收批量上传 → 范围内：保存体征</title></polyline>
+<polyline points="727,203 735,203 735,391 727,391" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>定时模拟采样或接收批量上传 → 越界：创建待核实事件</title></polyline>
+<polyline points="620,421 620,455" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>越界：创建待核实事件 → 记录截止时间发送站内通知</title></polyline>
+<polyline points="727,485 735,485 735,767 753,767" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>记录截止时间发送站内通知 → 登记首次响应</title></polyline>
+<polyline points="860,797 860,831" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>登记首次响应 → 记录到场时间</title></polyline>
+<polyline points="860,891 860,925" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>记录到场时间 → 填处置结果并结案</title></polyline>
+<polyline points="620,515 620,579 753,579" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>记录截止时间发送站内通知 → 核实设备告警</title></polyline>
+<polyline points="860,609 860,737" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>核实设备告警 → 登记首次响应</title></polyline>
+<polyline points="860,609 860,617 380,617 380,643" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>核实设备告警 → 误报：说明原因终止处置</title></polyline>
+<polyline points="140,327 140,485 513,485" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>家属呼叫或护工上报异常、隐患 → 记录截止时间发送站内通知</title></polyline>
+<polyline points="620,515 620,643" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>记录截止时间发送站内通知 → 未响应且超时升级并再次通知</title></polyline>
+<polyline points="727,673 745,673 745,767 753,767" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>未响应且超时升级并再次通知 → 登记首次响应</title></polyline>
+<rect x="273" y="79" width="214" height="60" rx="17" fill="#edf4f4" stroke="#809e9e" stroke-width="1.6"/>
+<text x="380" y="104.76" style="font-size:22px;font-weight:400">登记并绑定设备</text>
+<text x="380" y="127.76" style="font-size:22px;font-weight:400">设置监测指标</text>
+<rect x="513" y="173" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="620" y="198.76" style="font-size:22px;font-weight:400">定时模拟采样</text>
+<text x="620" y="221.76" style="font-size:22px;font-weight:400">或接收批量上传</text>
+<rect x="513" y="267" width="214" height="60" rx="17" fill="#e8f1ed" stroke="#779488" stroke-width="1.6"/>
+<text x="620" y="304.26" style="font-size:22px;font-weight:400">范围内：保存体征</text>
+<rect x="513" y="361" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="620" y="397.6" style="font-size:20px;font-weight:400">越界：创建待核实事件</text>
+<rect x="33" y="267" width="214" height="60" rx="17" fill="#edf4f4" stroke="#809e9e" stroke-width="1.6"/>
+<text x="140" y="292.76" style="font-size:22px;font-weight:400">家属呼叫或护工</text>
+<text x="140" y="315.76" style="font-size:22px;font-weight:400">上报异常、隐患</text>
+<rect x="513" y="455" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="620" y="480.76" style="font-size:22px;font-weight:400">记录截止时间</text>
+<text x="620" y="503.76" style="font-size:22px;font-weight:400">发送站内通知</text>
+<rect x="753" y="549" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="860" y="586.26" style="font-size:22px;font-weight:400">核实设备告警</text>
+<rect x="273" y="643" width="214" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
+<text x="380" y="668.76" style="font-size:22px;font-weight:400">误报：说明原因</text>
+<text x="380" y="691.76" style="font-size:22px;font-weight:400">终止处置</text>
+<rect x="513" y="643" width="214" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
+<text x="620" y="668.76" style="font-size:22px;font-weight:400">未响应且超时</text>
+<text x="620" y="691.76" style="font-size:22px;font-weight:400">升级并再次通知</text>
+<rect x="753" y="737" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="860" y="774.26" style="font-size:22px;font-weight:400">登记首次响应</text>
+<rect x="753" y="831" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="860" y="868.26" style="font-size:22px;font-weight:400">记录到场时间</text>
+<rect x="753" y="925" width="214" height="60" rx="17" fill="#e8f1ed" stroke="#779488" stroke-width="1.6"/>
+<text x="860" y="962.26" style="font-size:22px;font-weight:400">填处置结果并结案</text>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" width="1000" height="1015" viewBox="0 0 1000 1015"><title id="title">图 18　服务抽查、整改复核与机构考核</title><desc id="desc">评分低于 60 分或监管明确要求时进入整改。材料与复核结论逐份保存。机构考核按月另行办理，可参考抽查评分。公开内容不含老人身份和病情。监管撤回公示须留原因。</desc>
+<defs><marker id="forward" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#354953"/></marker><marker id="branch" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#926a4e"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;text-anchor:middle;fill:#1e3038}</style>
+<rect width="1000" height="1015" fill="white"/>
+<rect x="20" y="5" width="240" height="1005" fill="#f7f9fa"/>
+<path d="M20 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="20" y="5" width="240" height="49" fill="#e7eef0"/>
+<text x="140" y="37" style="font-size:23px;font-weight:600">民政监管人员</text>
+<rect x="260" y="5" width="240" height="1005" fill="#ffffff"/>
+<path d="M260 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="260" y="5" width="240" height="49" fill="#e7eef0"/>
+<text x="380" y="37" style="font-size:23px;font-weight:600">平台</text>
+<rect x="500" y="5" width="240" height="1005" fill="#f7f9fa"/>
+<path d="M500 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="500" y="5" width="240" height="49" fill="#e7eef0"/>
+<text x="620" y="37" style="font-size:23px;font-weight:600">机构负责人</text>
+<rect x="740" y="5" width="240" height="1005" fill="#ffffff"/>
+<path d="M740 5 V1010" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="740" y="5" width="240" height="49" fill="#e7eef0"/>
+<text x="860" y="37" style="font-size:23px;font-weight:600">公众</text>
+<path d="M980 5 V1010 H20 M20 55 H980" fill="none" stroke="#c2d0d5"/>
+<polyline points="140,139 140,203 273,203" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>按辖区、期间与比例抽订单或护工 → 保留抽查总体及选中的样本</title></polyline>
+<polyline points="380,233 380,297 247,297" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>保留抽查总体及选中的样本 → 电话回访或上门核查登记评分和问题</title></polyline>
+<polyline points="247,297 255,297 255,673 273,673" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>电话回访或上门核查登记评分和问题 → 无需整改或复核通过抽查结案</title></polyline>
+<polyline points="380,703 380,767 247,767" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>无需整改或复核通过抽查结案 → 对已结案且有评分的抽查发布公示</title></polyline>
+<polyline points="247,767 255,767 255,805 735,805 735,767 753,767" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>对已结案且有评分的抽查发布公示 → 查看公开结论</title></polyline>
+<polyline points="140,327 140,391 513,391" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>电话回访或上门核查登记评分和问题 → 须整改：提交措施与证明材料</title></polyline>
+<polyline points="620,421 620,485 247,485" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>须整改：提交措施与证明材料 → 复核整改材料</title></polyline>
+<polyline points="140,515 140,673 273,673" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>复核整改材料 → 无需整改或复核通过抽查结案</title></polyline>
+<polyline points="247,485 265,485 265,579 513,579" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>复核整改材料 → 被退回：按意见另交材料</title></polyline>
+<polyline points="620,549 620,523 140,523 140,515" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>被退回：按意见另交材料 → 复核整改材料</title></polyline>
+<polyline points="620,891 620,955 247,955" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>按月提交机构考核材料 → 审核材料记录采纳或退回意见</title></polyline>
+<rect x="33" y="79" width="214" height="60" rx="17" fill="#edf4f4" stroke="#809e9e" stroke-width="1.6"/>
+<text x="140" y="104.76" style="font-size:22px;font-weight:400">按辖区、期间与比例</text>
+<text x="140" y="127.76" style="font-size:22px;font-weight:400">抽订单或护工</text>
+<rect x="273" y="173" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="380" y="198.76" style="font-size:22px;font-weight:400">保留抽查总体</text>
+<text x="380" y="221.76" style="font-size:22px;font-weight:400">及选中的样本</text>
+<rect x="33" y="267" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="140" y="292.76" style="font-size:22px;font-weight:400">电话回访或上门核查</text>
+<text x="140" y="315.76" style="font-size:22px;font-weight:400">登记评分和问题</text>
+<rect x="513" y="361" width="214" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
+<text x="620" y="386.76" style="font-size:22px;font-weight:400">须整改：提交措施</text>
+<text x="620" y="409.76" style="font-size:22px;font-weight:400">与证明材料</text>
+<rect x="33" y="455" width="214" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
+<text x="140" y="492.26" style="font-size:22px;font-weight:400">复核整改材料</text>
+<rect x="513" y="549" width="214" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
+<text x="620" y="574.76" style="font-size:22px;font-weight:400">被退回：按意见</text>
+<text x="620" y="597.76" style="font-size:22px;font-weight:400">另交材料</text>
+<rect x="273" y="643" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="380" y="668.76" style="font-size:22px;font-weight:400">无需整改或复核通过</text>
+<text x="380" y="691.76" style="font-size:22px;font-weight:400">抽查结案</text>
+<rect x="33" y="737" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="140" y="762.76" style="font-size:22px;font-weight:400">对已结案且有评分的</text>
+<text x="140" y="785.76" style="font-size:22px;font-weight:400">抽查发布公示</text>
+<rect x="753" y="737" width="214" height="60" rx="17" fill="#e8f1ed" stroke="#779488" stroke-width="1.6"/>
+<text x="860" y="774.26" style="font-size:22px;font-weight:400">查看公开结论</text>
+<rect x="513" y="831" width="214" height="60" rx="17" fill="#edf4f4" stroke="#809e9e" stroke-width="1.6"/>
+<text x="620" y="867.6" style="font-size:20px;font-weight:400">按月提交机构考核材料</text>
+<rect x="33" y="925" width="214" height="60" rx="17" fill="#e8f1ed" stroke="#779488" stroke-width="1.6"/>
+<text x="140" y="950.76" style="font-size:22px;font-weight:400">审核材料</text>
+<text x="140" y="973.76" style="font-size:22px;font-weight:400">记录采纳或退回意见</text>
+</svg>

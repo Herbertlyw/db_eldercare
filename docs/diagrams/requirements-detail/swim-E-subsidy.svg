@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" width="1000" height="921" viewBox="0 0 1000 921"><title id="title">图 17　一份补贴申报的两级审核与拨付</title><desc id="desc">街道和民政只审核授权社区的申报。退回后从街道初审重新办理，原订单明细和历次意见保留。家庭自付按已完成订单扣除已拨补贴计算。</desc>
+<defs><marker id="forward" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#354953"/></marker><marker id="branch" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#926a4e"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;text-anchor:middle;fill:#1e3038}</style>
+<rect width="1000" height="921" fill="white"/>
+<rect x="20" y="5" width="192" height="911" fill="#f7f9fa"/>
+<path d="M20 5 V916" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="20" y="5" width="192" height="49" fill="#e7eef0"/>
+<text x="116" y="37" style="font-size:23px;font-weight:600">社区管理员</text>
+<rect x="212" y="5" width="192" height="911" fill="#ffffff"/>
+<path d="M212 5 V916" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="212" y="5" width="192" height="49" fill="#e7eef0"/>
+<text x="308" y="37" style="font-size:23px;font-weight:600">平台</text>
+<rect x="404" y="5" width="192" height="911" fill="#f7f9fa"/>
+<path d="M404 5 V916" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="404" y="5" width="192" height="49" fill="#e7eef0"/>
+<text x="500" y="37" style="font-size:23px;font-weight:600">街道审核人员</text>
+<rect x="596" y="5" width="192" height="911" fill="#ffffff"/>
+<path d="M596 5 V916" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="596" y="5" width="192" height="49" fill="#e7eef0"/>
+<text x="692" y="37" style="font-size:23px;font-weight:600">民政监管人员</text>
+<rect x="788" y="5" width="192" height="911" fill="#f7f9fa"/>
+<path d="M788 5 V916" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="788" y="5" width="192" height="49" fill="#e7eef0"/>
+<text x="884" y="37" style="font-size:23px;font-weight:600">老人及家属</text>
+<path d="M980 5 V916 H20 M20 55 H980" fill="none" stroke="#c2d0d5"/>
+<polyline points="692,139 692,203 199,203" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>登记政策范围标准与有效期 → 选老人、政策、周期勾选订单和材料</title></polyline>
+<polyline points="116,233 116,297 225,297" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>选老人、政策、周期勾选订单和材料 → 核验服务与工时查重并核算金额</title></polyline>
+<polyline points="308,327 308,391 417,391" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>核验服务与工时查重并核算金额 → 核对明细和材料办理初审</title></polyline>
+<polyline points="500,421 500,485 609,485" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>核对明细和材料办理初审 → 初审通过办理终审</title></polyline>
+<polyline points="692,515 692,643" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>初审通过办理终审 → 终审通过后登记拨付凭证</title></polyline>
+<polyline points="692,703 692,767 391,767" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>终审通过后登记拨付凭证 → 校验核定金额保存唯一拨付</title></polyline>
+<polyline points="308,797 308,861 801,861" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>校验核定金额保存唯一拨付 → 查已拨补贴及个人自付</title></polyline>
+<polyline points="500,421 500,429 116,429 116,455" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>核对明细和材料办理初审 → 初审或终审驳回按理由补材料</title></polyline>
+<polyline points="116,515 116,549" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>初审或终审驳回按理由补材料 → 沿用原申报重报</title></polyline>
+<polyline points="199,579 409,579 409,391 417,391" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>沿用原申报重报 → 核对明细和材料办理初审</title></polyline>
+<polyline points="609,485 601,485 601,523 217,523 217,485 199,485" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>初审通过办理终审 → 初审或终审驳回按理由补材料</title></polyline>
+<rect x="609" y="79" width="166" height="60" rx="17" fill="#edf4f4" stroke="#809e9e" stroke-width="1.6"/>
+<text x="692" y="104.76" style="font-size:22px;font-weight:400">登记政策范围</text>
+<text x="692" y="127.76" style="font-size:22px;font-weight:400">标准与有效期</text>
+<rect x="33" y="173" width="166" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="116" y="199.61" style="font-size:17px;font-weight:400">选老人、政策、周期</text>
+<text x="116" y="217.61" style="font-size:17px;font-weight:400">勾选订单和材料</text>
+<rect x="225" y="267" width="166" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="308" y="292.76" style="font-size:22px;font-weight:400">核验服务与工时</text>
+<text x="308" y="315.76" style="font-size:22px;font-weight:400">查重并核算金额</text>
+<rect x="417" y="361" width="166" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="500" y="386.76" style="font-size:22px;font-weight:400">核对明细和材料</text>
+<text x="500" y="409.76" style="font-size:22px;font-weight:400">办理初审</text>
+<rect x="609" y="455" width="166" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="692" y="480.76" style="font-size:22px;font-weight:400">初审通过</text>
+<text x="692" y="503.76" style="font-size:22px;font-weight:400">办理终审</text>
+<rect x="33" y="455" width="166" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
+<text x="116" y="480.76" style="font-size:22px;font-weight:400">初审或终审驳回</text>
+<text x="116" y="503.76" style="font-size:22px;font-weight:400">按理由补材料</text>
+<rect x="33" y="549" width="166" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
+<text x="116" y="586.26" style="font-size:22px;font-weight:400">沿用原申报重报</text>
+<rect x="609" y="643" width="166" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="692" y="668.76" style="font-size:22px;font-weight:400">终审通过后</text>
+<text x="692" y="691.76" style="font-size:22px;font-weight:400">登记拨付凭证</text>
+<rect x="225" y="737" width="166" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="308" y="762.76" style="font-size:22px;font-weight:400">校验核定金额</text>
+<text x="308" y="785.76" style="font-size:22px;font-weight:400">保存唯一拨付</text>
+<rect x="801" y="831" width="166" height="60" rx="17" fill="#e8f1ed" stroke="#779488" stroke-width="1.6"/>
+<text x="884" y="856.76" style="font-size:22px;font-weight:400">查已拨补贴</text>
+<text x="884" y="879.76" style="font-size:22px;font-weight:400">及个人自付</text>
+</svg>

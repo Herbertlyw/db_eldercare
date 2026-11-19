@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" width="1000" height="733" viewBox="0 0 1000 733"><title id="title">图 14　评价与投诉如何分别办理</title><desc id="desc">投诉可以在服务完成前提出。尚未派过单的投诉由社区承办。只有承办方答复后才能结案，投诉评分与普通服务评价分开统计。</desc>
+<defs><marker id="forward" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#354953"/></marker><marker id="branch" markerWidth="8" markerHeight="8" refX="7.1" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#926a4e"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;text-anchor:middle;fill:#1e3038}</style>
+<rect width="1000" height="733" fill="white"/>
+<rect x="20" y="5" width="240" height="723" fill="#f7f9fa"/>
+<path d="M20 5 V728" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="20" y="5" width="240" height="49" fill="#e7eef0"/>
+<text x="140" y="37" style="font-size:23px;font-weight:600">老人及家属</text>
+<rect x="260" y="5" width="240" height="723" fill="#ffffff"/>
+<path d="M260 5 V728" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="260" y="5" width="240" height="49" fill="#e7eef0"/>
+<text x="380" y="37" style="font-size:23px;font-weight:600">社区管理员</text>
+<rect x="500" y="5" width="240" height="723" fill="#f7f9fa"/>
+<path d="M500 5 V728" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="500" y="5" width="240" height="49" fill="#e7eef0"/>
+<text x="620" y="37" style="font-size:23px;font-weight:600">机构负责人</text>
+<rect x="740" y="5" width="240" height="723" fill="#ffffff"/>
+<path d="M740 5 V728" stroke="#d5dfe3" stroke-width="1.3"/>
+<rect x="740" y="5" width="240" height="49" fill="#e7eef0"/>
+<text x="860" y="37" style="font-size:23px;font-weight:600">平台</text>
+<path d="M980 5 V728 H20 M20 55 H980" fill="none" stroke="#c2d0d5"/>
+<polyline points="247,109 753,109" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>已完成服务给出评分 → 计入护工评价均分</title></polyline>
+<polyline points="247,297 273,297" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>对一笔订单提交投诉 → 受理并决定承办方</title></polyline>
+<polyline points="380,327 380,361" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>受理并决定承办方 → 社区承办核实并答复</title></polyline>
+<polyline points="380,421 380,485 753,485" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>社区承办核实并答复 → 保存办理意见等候结案</title></polyline>
+<polyline points="860,515 860,536 140,536 140,549" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>保存办理意见等候结案 → 家属确认结案</title></polyline>
+<polyline points="140,609 140,673 753,673" fill="none" stroke="#354953" stroke-width="2" stroke-linejoin="round" marker-end="url(#forward)"><title>家属确认结案 → 记录结案人和时间保留历次意见</title></polyline>
+<polyline points="487,297 620,297 620,361" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>受理并决定承办方 → 转给承办过该单的机构核实并答复</title></polyline>
+<polyline points="727,391 860,391 860,455" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>转给承办过该单的机构核实并答复 → 保存办理意见等候结案</title></polyline>
+<polyline points="753,485 745,485 745,579 487,579" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>保存办理意见等候结案 → 社区办理结案</title></polyline>
+<polyline points="380,609 380,630 860,630 860,643" fill="none" stroke="#926a4e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#branch)"><title>社区办理结案 → 记录结案人和时间保留历次意见</title></polyline>
+<rect x="33" y="79" width="214" height="60" rx="17" fill="#edf4f4" stroke="#809e9e" stroke-width="1.6"/>
+<text x="140" y="104.76" style="font-size:22px;font-weight:400">已完成服务</text>
+<text x="140" y="127.76" style="font-size:22px;font-weight:400">给出评分</text>
+<rect x="753" y="79" width="214" height="60" rx="17" fill="#e8f1ed" stroke="#779488" stroke-width="1.6"/>
+<text x="860" y="116.26" style="font-size:22px;font-weight:400">计入护工评价均分</text>
+<rect x="33" y="267" width="214" height="60" rx="17" fill="#edf4f4" stroke="#809e9e" stroke-width="1.6"/>
+<text x="140" y="292.76" style="font-size:22px;font-weight:400">对一笔订单</text>
+<text x="140" y="315.76" style="font-size:22px;font-weight:400">提交投诉</text>
+<rect x="273" y="267" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="380" y="304.26" style="font-size:22px;font-weight:400">受理并决定承办方</text>
+<rect x="273" y="361" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="380" y="386.76" style="font-size:22px;font-weight:400">社区承办</text>
+<text x="380" y="409.76" style="font-size:22px;font-weight:400">核实并答复</text>
+<rect x="513" y="361" width="214" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
+<text x="620" y="387.1" style="font-size:20px;font-weight:400">转给承办过该单的机构</text>
+<text x="620" y="408.1" style="font-size:20px;font-weight:400">核实并答复</text>
+<rect x="753" y="455" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="860" y="480.76" style="font-size:22px;font-weight:400">保存办理意见</text>
+<text x="860" y="503.76" style="font-size:22px;font-weight:400">等候结案</text>
+<rect x="33" y="549" width="214" height="60" rx="5" fill="white" stroke="#90a4ad" stroke-width="1.6"/>
+<text x="140" y="586.26" style="font-size:22px;font-weight:400">家属确认结案</text>
+<rect x="273" y="549" width="214" height="60" rx="5" fill="#fff7ee" stroke="#b89573" stroke-width="1.6"/>
+<text x="380" y="586.26" style="font-size:22px;font-weight:400">社区办理结案</text>
+<rect x="753" y="643" width="214" height="60" rx="17" fill="#e8f1ed" stroke="#779488" stroke-width="1.6"/>
+<text x="860" y="668.76" style="font-size:22px;font-weight:400">记录结案人和时间</text>
+<text x="860" y="691.76" style="font-size:22px;font-weight:400">保留历次意见</text>
+</svg>
