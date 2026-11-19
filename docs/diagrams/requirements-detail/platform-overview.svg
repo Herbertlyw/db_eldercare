@@ -1,0 +1,258 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" role="img" aria-labelledby="figure-title figure-desc" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" height="1824" viewBox="0 0 1180 1824">
+  <title id="figure-title">左邻右舍 · 全平台业务泳道图</title>
+  <desc id="figure-desc">六类用户与服务平台的业务交接。主线包括建档、排班、预约、上门和补贴。评价投诉、应急处置和质量监管分别触发。每组从上往下阅读。</desc>
+  <rect x="0" y="0" width="1180" height="1824" fill="#ffffff" />
+  <text x="30" y="38" font-size="16" font-weight="550" fill="#2d638b" text-anchor="start">左邻右舍   /   社区居家养老服务平台</text>
+  <text x="28" y="84" font-size="37" font-weight="700" fill="#18334b" text-anchor="start">全平台业务泳道图</text>
+  <text x="30" y="116" font-size="16" font-weight="400" fill="#496478" text-anchor="start">横向找经办角色，向下读办理顺序。岗位之间的交接通过平台留痕。</text>
+  <line x1="843" y1="77" x2="885" y2="77" stroke="#18334b" stroke-width="1.55" />
+  <path d="M891,77 l-8,-4 v8 z" fill="#18334b" />
+  <text x="903" y="82" font-size="14" font-weight="400" fill="#496478" text-anchor="start">发起或移交</text>
+  <line x1="1000" y1="77" x2="1042" y2="77" stroke="#2d638b" stroke-width="1.55" stroke-dasharray="4 4" />
+  <path d="M1048,77 l-8,-4 v8 z" fill="#2d638b" />
+  <text x="1060" y="82" font-size="14" font-weight="400" fill="#496478" text-anchor="start">信息反馈</text>
+  <line x1="22" y1="134" x2="1158" y2="134" stroke="#b9c8d2" stroke-width="1" />
+  <text x="30" y="171" font-size="13" font-weight="600" fill="#496478" text-anchor="start">步骤</text>
+  <text x="72" y="171" font-size="13" font-weight="600" fill="#496478" text-anchor="start">条件</text>
+  <rect x="126" y="151" width="128" height="31" fill="#eef3f6" rx="4" />
+  <text x="190" y="172" font-size="15" font-weight="600" fill="#18334b" text-anchor="middle">老人及家属</text>
+  <rect x="278" y="151" width="128" height="31" fill="#eef3f6" rx="4" />
+  <text x="342" y="172" font-size="15" font-weight="600" fill="#18334b" text-anchor="middle">社区管理员</text>
+  <rect x="430" y="151" width="128" height="31" fill="#eef3f6" rx="4" />
+  <text x="494" y="172" font-size="15" font-weight="600" fill="#18334b" text-anchor="middle">机构负责人</text>
+  <rect x="582" y="151" width="128" height="31" fill="#18334b" rx="4" />
+  <text x="646" y="172" font-size="15" font-weight="600" fill="#ffffff" text-anchor="middle">服务平台</text>
+  <rect x="734" y="151" width="128" height="31" fill="#eef3f6" rx="4" />
+  <text x="798" y="172" font-size="15" font-weight="600" fill="#18334b" text-anchor="middle">护工</text>
+  <rect x="886" y="151" width="128" height="31" fill="#eef3f6" rx="4" />
+  <text x="950" y="172" font-size="15" font-weight="600" fill="#18334b" text-anchor="middle">街道审核人员</text>
+  <rect x="1038" y="151" width="128" height="31" fill="#eef3f6" rx="4" />
+  <text x="1102" y="172" font-size="15" font-weight="600" fill="#18334b" text-anchor="middle">民政监管人员</text>
+  <rect x="22" y="191" width="1136" height="32" fill="#e8f0f5" />
+  <rect x="22" y="191" width="3" height="32" fill="#2d638b" />
+  <text x="36" y="213" font-size="17" font-weight="650" fill="#18334b" text-anchor="start">服务准备</text>
+  <text x="245" y="212" font-size="14" font-weight="400" fill="#496478" text-anchor="start">社区、机构和民政分别维护资料</text>
+  <line x1="190" y1="223" x2="190" y2="350" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="342" y1="223" x2="342" y2="350" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="494" y1="223" x2="494" y2="350" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="646" y1="223" x2="646" y2="350" stroke="#a0b4c3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="798" y1="223" x2="798" y2="350" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="950" y1="223" x2="950" y2="350" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="1102" y1="223" x2="1102" y2="350" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <text x="32" y="247" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">01</text>
+  <line x1="342" y1="254" x2="640" y2="254" stroke="#18334b" stroke-width="1.55" />
+  <path d="M646,254 l-8,-4 v8 z" fill="#18334b" />
+  <text x="494.0" y="243" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="C" data-to="P">为老人建档，登记评估、照护计划和责任护工</text>
+  <text x="32" y="287" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">02</text>
+  <line x1="494" y1="294" x2="640" y2="294" stroke="#18334b" stroke-width="1.55" />
+  <path d="M646,294 l-8,-4 v8 z" fill="#18334b" />
+  <text x="570.0" y="283" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="O" data-to="P">录用护工，登记培训、项目证书和班次</text>
+  <text x="32" y="327" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">03</text>
+  <line x1="1102" y1="334" x2="652" y2="334" stroke="#18334b" stroke-width="1.55" />
+  <path d="M646,334 l8,-4 v8 z" fill="#18334b" />
+  <text x="874.0" y="323" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="R" data-to="P">登记补贴对象、辖区和核算标准</text>
+  <rect x="22" y="356" width="1136" height="32" fill="#e8f0f5" />
+  <rect x="22" y="356" width="3" height="32" fill="#2d638b" />
+  <text x="36" y="378" font-size="17" font-weight="650" fill="#18334b" text-anchor="start">预约与上门</text>
+  <text x="245" y="377" font-size="14" font-weight="400" fill="#496478" text-anchor="start">社区可代下单。家属确认和异常工时复核可分别办理</text>
+  <line x1="190" y1="388" x2="190" y2="675" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="342" y1="388" x2="342" y2="675" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="494" y1="388" x2="494" y2="675" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="646" y1="388" x2="646" y2="675" stroke="#a0b4c3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="798" y1="388" x2="798" y2="675" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="950" y1="388" x2="950" y2="675" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="1102" y1="388" x2="1102" y2="675" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <text x="32" y="412" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">04</text>
+  <line x1="190" y1="419" x2="640" y2="419" stroke="#18334b" stroke-width="1.55" />
+  <path d="M646,419 l-8,-4 v8 z" fill="#18334b" />
+  <text x="418.0" y="408" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="F" data-to="P">选择老人、时间和项目，提交预约</text>
+  <text x="32" y="452" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">05</text>
+  <line x1="646" y1="459" x2="348" y2="459" stroke="#2d638b" stroke-width="1.55" stroke-dasharray="4 4" />
+  <path d="M342,459 l8,-4 v8 z" fill="#2d638b" />
+  <text x="494.0" y="448" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="P" data-to="C">显示待派订单和符合条件的班次</text>
+  <text x="32" y="492" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">06</text>
+  <line x1="342" y1="499" x2="792" y2="499" stroke="#18334b" stroke-width="1.55" />
+  <path d="M798,499 l-8,-4 v8 z" fill="#18334b" />
+  <text x="570.0" y="488" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="C" data-to="W">选定班次，派发上门任务</text>
+  <text x="32" y="532" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">07</text>
+  <line x1="798" y1="539" x2="652" y2="539" stroke="#18334b" stroke-width="1.55" />
+  <path d="M646,539 l8,-4 v8 z" fill="#18334b" />
+  <text x="722.0" y="528" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="W" data-to="P">接单、到场签到，离场时签退并填写服务记录</text>
+  <text x="32" y="572" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">08</text>
+  <path d="M646,576 h42 v11 h-41" fill="none" stroke="#18334b" stroke-width="1.55" />
+  <path d="M647,587 l8,-4 v8 z" fill="#18334b" />
+  <text x="671" y="568" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="P" data-to="P">按打卡位置、时间和时长核定工时</text>
+  <text x="32" y="612" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">09</text>
+  <text x="70" y="612" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">工时异常</text>
+  <line x1="494" y1="619" x2="640" y2="619" stroke="#18334b" stroke-width="1.55" />
+  <path d="M646,619 l-8,-4 v8 z" fill="#18334b" />
+  <text x="570.0" y="608" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="O" data-to="P">复核工时并说明理由</text>
+  <text x="32" y="652" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">10</text>
+  <line x1="190" y1="659" x2="640" y2="659" stroke="#18334b" stroke-width="1.55" />
+  <path d="M646,659 l-8,-4 v8 z" fill="#18334b" />
+  <text x="418.0" y="648" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="F" data-to="P">核对服务记录，确认本次服务</text>
+  <rect x="22" y="681" width="1136" height="32" fill="#e8f0f5" />
+  <rect x="22" y="681" width="3" height="32" fill="#2d638b" />
+  <text x="36" y="703" font-size="17" font-weight="650" fill="#18334b" text-anchor="start">补贴申报与拨付</text>
+  <text x="245" y="702" font-size="14" font-weight="400" fill="#496478" text-anchor="start">订单已完成，有家属确认和有效工时才可申报</text>
+  <line x1="190" y1="713" x2="190" y2="920" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="342" y1="713" x2="342" y2="920" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="494" y1="713" x2="494" y2="920" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="646" y1="713" x2="646" y2="920" stroke="#a0b4c3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="798" y1="713" x2="798" y2="920" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="950" y1="713" x2="950" y2="920" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="1102" y1="713" x2="1102" y2="920" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <text x="32" y="737" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">11</text>
+  <line x1="342" y1="744" x2="944" y2="744" stroke="#18334b" stroke-width="1.55" />
+  <path d="M950,744 l-8,-4 v8 z" fill="#18334b" />
+  <text x="646.0" y="733" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="C" data-to="S">按政策和周期申报，提交订单明细和证明材料</text>
+  <text x="32" y="777" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">12</text>
+  <text x="70" y="777" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">初审通过</text>
+  <line x1="950" y1="784" x2="1096" y2="784" stroke="#18334b" stroke-width="1.55" />
+  <path d="M1102,784 l-8,-4 v8 z" fill="#18334b" />
+  <text x="1026.0" y="773" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="S" data-to="R">转交申报明细和初审意见，办理终审</text>
+  <text x="32" y="817" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">13</text>
+  <text x="70" y="817" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">任一级驳回</text>
+  <line x1="342" y1="824" x2="944" y2="824" stroke="#18334b" stroke-width="1.55" />
+  <path d="M950,824 l-8,-4 v8 z" fill="#18334b" />
+  <text x="646.0" y="813" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="C" data-to="S">按驳回理由补件重报，回到街道初审</text>
+  <text x="32" y="857" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">14</text>
+  <text x="70" y="857" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">终审通过</text>
+  <line x1="1102" y1="864" x2="652" y2="864" stroke="#18334b" stroke-width="1.55" />
+  <path d="M646,864 l8,-4 v8 z" fill="#18334b" />
+  <text x="874.0" y="853" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="R" data-to="P">登记拨付金额和凭证</text>
+  <text x="32" y="897" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">15</text>
+  <text x="70" y="897" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">终审通过</text>
+  <line x1="646" y1="904" x2="196" y2="904" stroke="#2d638b" stroke-width="1.55" stroke-dasharray="4 4" />
+  <path d="M190,904 l8,-4 v8 z" fill="#2d638b" />
+  <text x="418.0" y="893" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="P" data-to="F">查询时显示已拨补贴和自付额</text>
+  <rect x="22" y="940" width="1136" height="43" fill="#18334b" rx="3" />
+  <text x="36" y="968" font-size="18" font-weight="650" fill="#ffffff" text-anchor="start">独立办理</text>
+  <text x="152" y="967" font-size="15" font-weight="400" fill="#e2edf5" text-anchor="start">以下三类业务各有触发条件，与补贴拨付没有先后关系</text>
+  <text x="30" y="1015" font-size="13" font-weight="600" fill="#496478" text-anchor="start">步骤</text>
+  <text x="72" y="1015" font-size="13" font-weight="600" fill="#496478" text-anchor="start">条件</text>
+  <rect x="126" y="995" width="128" height="31" fill="#eef3f6" rx="4" />
+  <text x="190" y="1016" font-size="15" font-weight="600" fill="#18334b" text-anchor="middle">老人及家属</text>
+  <rect x="278" y="995" width="128" height="31" fill="#eef3f6" rx="4" />
+  <text x="342" y="1016" font-size="15" font-weight="600" fill="#18334b" text-anchor="middle">社区管理员</text>
+  <rect x="430" y="995" width="128" height="31" fill="#eef3f6" rx="4" />
+  <text x="494" y="1016" font-size="15" font-weight="600" fill="#18334b" text-anchor="middle">机构负责人</text>
+  <rect x="582" y="995" width="128" height="31" fill="#18334b" rx="4" />
+  <text x="646" y="1016" font-size="15" font-weight="600" fill="#ffffff" text-anchor="middle">服务平台</text>
+  <rect x="734" y="995" width="128" height="31" fill="#eef3f6" rx="4" />
+  <text x="798" y="1016" font-size="15" font-weight="600" fill="#18334b" text-anchor="middle">护工</text>
+  <rect x="886" y="995" width="128" height="31" fill="#eef3f6" rx="4" />
+  <text x="950" y="1016" font-size="15" font-weight="600" fill="#18334b" text-anchor="middle">街道审核人员</text>
+  <rect x="1038" y="995" width="128" height="31" fill="#eef3f6" rx="4" />
+  <text x="1102" y="1016" font-size="15" font-weight="600" fill="#18334b" text-anchor="middle">民政监管人员</text>
+  <rect x="22" y="1035" width="1136" height="32" fill="#e8f0f5" />
+  <rect x="22" y="1035" width="3" height="32" fill="#2d638b" />
+  <text x="36" y="1057" font-size="17" font-weight="650" fill="#18334b" text-anchor="start">评价与投诉</text>
+  <text x="245" y="1056" font-size="14" font-weight="400" fill="#496478" text-anchor="start">已完成的服务可评价，投诉在服务完成前也可提出</text>
+  <line x1="190" y1="1067" x2="190" y2="1314" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="342" y1="1067" x2="342" y2="1314" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="494" y1="1067" x2="494" y2="1314" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="646" y1="1067" x2="646" y2="1314" stroke="#a0b4c3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="798" y1="1067" x2="798" y2="1314" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="950" y1="1067" x2="950" y2="1314" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="1102" y1="1067" x2="1102" y2="1314" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <text x="32" y="1091" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">16</text>
+  <text x="70" y="1091" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">家属评价</text>
+  <line x1="190" y1="1098" x2="640" y2="1098" stroke="#18334b" stroke-width="1.55" />
+  <path d="M646,1098 l-8,-4 v8 z" fill="#18334b" />
+  <text x="418.0" y="1087" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="F" data-to="P">为本次服务评分</text>
+  <text x="32" y="1131" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">17</text>
+  <text x="70" y="1131" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">家属投诉</text>
+  <line x1="190" y1="1138" x2="336" y2="1138" stroke="#18334b" stroke-width="1.55" />
+  <path d="M342,1138 l-8,-4 v8 z" fill="#18334b" />
+  <text x="266.0" y="1127" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="F" data-to="C">选择订单，说明投诉原因</text>
+  <text x="32" y="1171" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">18</text>
+  <text x="70" y="1171" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">社区自办</text>
+  <line x1="342" y1="1178" x2="196" y2="1178" stroke="#2d638b" stroke-width="1.55" stroke-dasharray="4 4" />
+  <path d="M190,1178 l8,-4 v8 z" fill="#2d638b" />
+  <text x="266.0" y="1167" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="C" data-to="F">受理投诉并答复处理结果</text>
+  <text x="32" y="1211" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">19</text>
+  <text x="70" y="1211" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">转交机构</text>
+  <line x1="342" y1="1218" x2="488" y2="1218" stroke="#18334b" stroke-width="1.55" />
+  <path d="M494,1218 l-8,-4 v8 z" fill="#18334b" />
+  <text x="418.0" y="1207" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="C" data-to="O">受理后转交实际承办机构</text>
+  <text x="32" y="1251" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">20</text>
+  <text x="70" y="1251" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">转交机构</text>
+  <line x1="494" y1="1258" x2="196" y2="1258" stroke="#2d638b" stroke-width="1.55" stroke-dasharray="4 4" />
+  <path d="M190,1258 l8,-4 v8 z" fill="#2d638b" />
+  <text x="342.0" y="1247" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="O" data-to="F">通过平台答复处理结果</text>
+  <text x="32" y="1291" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">21</text>
+  <text x="70" y="1291" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">家属投诉</text>
+  <line x1="190" y1="1298" x2="640" y2="1298" stroke="#18334b" stroke-width="1.55" />
+  <path d="M646,1298 l-8,-4 v8 z" fill="#18334b" />
+  <text x="418.0" y="1287" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="F" data-to="P">核对答复后结案，社区也可办理结案</text>
+  <rect x="22" y="1320" width="1136" height="32" fill="#e8f0f5" />
+  <rect x="22" y="1320" width="3" height="32" fill="#2d638b" />
+  <text x="36" y="1342" font-size="17" font-weight="650" fill="#18334b" text-anchor="start">健康监测与应急</text>
+  <text x="245" y="1341" font-size="14" font-weight="400" fill="#496478" text-anchor="start">有告警或收到求助即可处置，无需服务订单</text>
+  <line x1="190" y1="1352" x2="190" y2="1559" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="342" y1="1352" x2="342" y2="1559" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="494" y1="1352" x2="494" y2="1559" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="646" y1="1352" x2="646" y2="1559" stroke="#a0b4c3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="798" y1="1352" x2="798" y2="1559" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="950" y1="1352" x2="950" y2="1559" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="1102" y1="1352" x2="1102" y2="1559" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <text x="32" y="1376" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">22</text>
+  <text x="70" y="1376" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">设备告警</text>
+  <path d="M646,1380 h42 v11 h-41" fill="none" stroke="#18334b" stroke-width="1.55" />
+  <path d="M647,1391 l8,-4 v8 z" fill="#18334b" />
+  <text x="671" y="1372" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="P" data-to="P">体征采样越过阈值，生成待核实事件</text>
+  <text x="32" y="1416" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">23</text>
+  <text x="70" y="1416" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">家属呼叫</text>
+  <line x1="190" y1="1423" x2="640" y2="1423" stroke="#18334b" stroke-width="1.55" />
+  <path d="M646,1423 l-8,-4 v8 z" fill="#18334b" />
+  <text x="418.0" y="1412" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="F" data-to="P">为老人发起应急求助</text>
+  <text x="32" y="1456" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">24</text>
+  <text x="70" y="1456" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">护工上报</text>
+  <line x1="798" y1="1463" x2="652" y2="1463" stroke="#18334b" stroke-width="1.55" />
+  <path d="M646,1463 l8,-4 v8 z" fill="#18334b" />
+  <text x="722.0" y="1452" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="W" data-to="P">上报健康异常或居家环境隐患</text>
+  <text x="32" y="1496" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">25</text>
+  <line x1="646" y1="1503" x2="348" y2="1503" stroke="#2d638b" stroke-width="1.55" stroke-dasharray="4 4" />
+  <path d="M342,1503 l8,-4 v8 z" fill="#2d638b" />
+  <text x="494.0" y="1492" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="P" data-to="C">通知社区值班人员，超时仍未响应则按级升级</text>
+  <text x="32" y="1536" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">26</text>
+  <line x1="342" y1="1543" x2="640" y2="1543" stroke="#18334b" stroke-width="1.55" />
+  <path d="M646,1543 l-8,-4 v8 z" fill="#18334b" />
+  <text x="494.0" y="1532" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="C" data-to="P">登记响应、到场与结案，责任护工也可处置</text>
+  <rect x="22" y="1565" width="1136" height="32" fill="#e8f0f5" />
+  <rect x="22" y="1565" width="3" height="32" fill="#2d638b" />
+  <text x="36" y="1587" font-size="17" font-weight="650" fill="#18334b" text-anchor="start">质量抽查与机构考核</text>
+  <text x="245" y="1586" font-size="14" font-weight="400" fill="#496478" text-anchor="start">民政在授权辖区内抽查订单或护工</text>
+  <line x1="190" y1="1597" x2="190" y2="1804" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="342" y1="1597" x2="342" y2="1804" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="494" y1="1597" x2="494" y2="1804" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="646" y1="1597" x2="646" y2="1804" stroke="#a0b4c3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="798" y1="1597" x2="798" y2="1804" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="950" y1="1597" x2="950" y2="1804" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <line x1="1102" y1="1597" x2="1102" y2="1804" stroke="#bac8d3" stroke-width="1" stroke-dasharray="3 5" />
+  <text x="32" y="1621" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">27</text>
+  <line x1="1102" y1="1628" x2="652" y2="1628" stroke="#18334b" stroke-width="1.55" />
+  <path d="M646,1628 l8,-4 v8 z" fill="#18334b" />
+  <text x="874.0" y="1617" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="R" data-to="P">按比例抽取样本，登记核查结果和评分</text>
+  <text x="32" y="1661" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">28</text>
+  <text x="70" y="1661" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">需要整改</text>
+  <line x1="1102" y1="1668" x2="500" y2="1668" stroke="#18334b" stroke-width="1.55" />
+  <path d="M494,1668 l8,-4 v8 z" fill="#18334b" />
+  <text x="798.0" y="1657" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="R" data-to="O">下达整改要求</text>
+  <text x="32" y="1701" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">29</text>
+  <text x="70" y="1701" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">需要整改</text>
+  <line x1="494" y1="1708" x2="1096" y2="1708" stroke="#18334b" stroke-width="1.55" />
+  <path d="M1102,1708 l-8,-4 v8 z" fill="#18334b" />
+  <text x="798.0" y="1697" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="O" data-to="R">提交整改材料，民政复核通过或退回</text>
+  <text x="32" y="1741" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">30</text>
+  <text x="70" y="1741" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">结案且有评分</text>
+  <line x1="1102" y1="1748" x2="652" y2="1748" stroke="#18334b" stroke-width="1.55" />
+  <path d="M646,1748 l8,-4 v8 z" fill="#18334b" />
+  <text x="874.0" y="1737" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="R" data-to="P">发布隐去老人身份的抽查结果</text>
+  <text x="32" y="1781" font-size="13" font-weight="500" fill="#617888" text-anchor="start" font-family="Menlo, Consolas, monospace">31</text>
+  <text x="70" y="1781" font-size="13" font-weight="500" fill="#2d638b" text-anchor="start">到考核周期</text>
+  <line x1="494" y1="1788" x2="1096" y2="1788" stroke="#18334b" stroke-width="1.55" />
+  <path d="M1102,1788 l-8,-4 v8 z" fill="#18334b" />
+  <text x="798.0" y="1777" font-size="15.6" font-weight="500" fill="#18334b" text-anchor="middle" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" class="message" data-from="O" data-to="R">提交机构考核材料，由民政登记采纳或退回意见</text>
+</svg>
