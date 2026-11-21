@@ -94,8 +94,8 @@ const { start } = require("./browser.cjs"),
     await h.quiet(p);
     await h.nav(p, "elders");
     await p.setViewportSize({ width: 390, height: 844 });
-    assert(await p.locator(".record-card").count());
     const card = p.locator(".record-card").first();
+    await card.waitFor({ state: "visible" });
     assert(
       (await card.locator("dl").innerText()).includes("住址") ||
         (await card.locator("dl").innerText()).includes("地址"),
