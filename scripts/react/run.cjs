@@ -33,4 +33,5 @@ if (require.main === module)
     "verify_records",
     "verify_workflows",
     "verify_claims",
+    "verify_manager_return",
   ]);

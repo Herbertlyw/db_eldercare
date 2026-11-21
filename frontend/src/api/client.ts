@@ -1,5 +1,6 @@
 import { errors } from "../model/registry";
 import type { ListResult, Row, Values } from "../model/types";
+const unknownActionResult = "未能读取办理结果，请先刷新并核对记录。";
 export class ApiError extends Error {
   constructor(
     public code: string,
@@ -26,26 +27,39 @@ export async function api<T = any>(
       ...options.headers,
     },
   });
-  const data = await response
-    .json()
-    .catch(() => ({ error: "服务器返回了无法读取的响应，请稍后重试。" }));
+  const data = await response.json().catch(() => undefined);
   if (!response.ok) {
-    if (response.status === 401 && path !== "/login") {
+    const sameSession = token !== null && token === session.get();
+    if (sameSession && response.status === 401 && path !== "/login") {
       session.clear();
       window.dispatchEvent(new Event("session-expired"));
     }
-    if (data.error === "PASSWORD_CHANGE_REQUIRED")
+    if (sameSession && data?.error === "PASSWORD_CHANGE_REQUIRED")
       window.dispatchEvent(new Event("password-required"));
-    throw new ApiError(data.error, response.status);
+    throw new ApiError(data?.error, response.status);
+  }
+  if (data == null) {
+    const message = path.startsWith("/actions/")
+      ? unknownActionResult
+      : "服务器返回的内容无法读取，请重新加载。";
+    throw new ApiError(message, response.status);
   }
   return data;
 }
-export const command = (action: string, body: Values, signal?: AbortSignal) =>
-  api<{ result: any }>("/actions/" + action, {
+export async function command(
+  action: string,
+  body: Values,
+  signal?: AbortSignal,
+) {
+  const data = await api<{ result: any }>("/actions/" + action, {
     method: "POST",
     body: JSON.stringify(body),
     signal,
   });
+  if (typeof data !== "object" || !Object.hasOwn(data, "result"))
+    throw new Error(unknownActionResult);
+  return data;
+}
 export function list(
   kind: string,
   query: Record<string, string | number | undefined> = {},
