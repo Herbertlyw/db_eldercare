@@ -106,9 +106,13 @@ java -jar eldercare.jar --app.demo-scenarios=true --app.jobs=false --spring.main
 
 本机 `python3 scripts/test.py` 会重新建立独立的 `eldercare_test` 数据库并运行 Maven 测试，绝不重置 `eldercare`。该辅助脚本依赖本机 `.local/config.json`，其他机器可用自己的测试库与环境变量执行 `mvn test`。
 
-`python3 scripts/recovery_drill.py` 在独立恢复库演练全量加实际 binlog 增量恢复。`python3 scripts/capture_evidence.py` 重新采集表结构、行数、视图和查询对比结果。
+恢复演练会在源库临时写入一条服务项目，再向独立目标库恢复全量快照和这条 binlog 增量。先准备本次独占的源库副本，暂停该副本的其他写入，选择尚不存在的目标库。例如：
 
-恢复演练需先停止本项目应用和其他写入，保证本次受控实验中的全量备份与 binlog 起点之间没有并发写入。真实生产备份应从一致性快照直接取得日志位置，不能照搬这个小型演示脚本作为灾备系统。
+```sh
+RECOVERY_SOURCE=eldercare_drill_test RECOVERY_TARGET=eldercare_drill_restore python3 scripts/recovery_drill.py
+```
+
+脚本从一致性快照取日志起点，核对恢复结果后删除源库中的演练记录。`python3 scripts/capture_evidence.py` 可另行采集表结构、行数、视图和查询对比结果。
 
 管理员界面的“批量上传模拟体征”接受 JSON 数组，例如 `[{"bindingId":1,"metricId":1,"sampleKey":"demo-001","collectedAt":"2026-11-12T18:30:00","value":80}]`。请将绑定编号、指标编号和采样时间改成当前库中有效的值；同一绑定下的采样键不得重复。
 

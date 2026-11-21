@@ -6,8 +6,10 @@ from pathlib import Path
 from db import sql as db_sql, CONFIG, ROOT
 import subprocess, os, json, hashlib, datetime, re, uuid, time
 
-source_database = os.environ.get('RECOVERY_SOURCE', 'eldercare')
+source_database = os.environ.get('RECOVERY_SOURCE', '')
 restore_database = os.environ.get('RECOVERY_TARGET', 'eldercare_restore')
+if not source_database:
+    raise SystemExit('请显式设置 RECOVERY_SOURCE 为本次独占的演练源库，脚本会在其中临时写入服务项目。')
 if not re.fullmatch(r'eldercare(?:_[a-z0-9_]+)?', source_database):
     raise SystemExit('Invalid RECOVERY_SOURCE')
 if not re.fullmatch(r'eldercare(?:_[a-z0-9_]+)?_restore', restore_database) or source_database == restore_database:
