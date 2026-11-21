@@ -18,6 +18,31 @@ const { start } = require("./browser.cjs"),
   }
   try {
     p = await u.login("admin1");
+    const [initialOrder, selectedOrder] = (
+      await u.data("orders", "&status=PENDING")
+    ).rows;
+    await u.rowAction("orders", initialOrder.id, "order.cancel");
+    await u.fill("orderId", selectedOrder.id);
+    await u.fill("reason", "已联系家属核对");
+    await p.locator("#submit-operation").click();
+    const dialog = p.locator(".arco-modal-simple");
+    const warning = await dialog.innerText();
+    assert(
+      warning.includes(`#${selectedOrder.id}）`) &&
+        !warning.includes(`#${initialOrder.id}）`),
+    );
+    assert(warning.includes("名额"));
+    await dialog.getByRole("button", { name: "返回", exact: true }).click();
+    assert.equal(
+      await p.locator("#field-reason").inputValue(),
+      "已联系家属核对",
+    );
+    assert(!h.writes.some((url) => url.endsWith("/order.cancel")));
+    await discard();
+    checks.push(
+      "confirmation names the current order and preserves input on return",
+    );
+
     await h.open(p, "order.create");
     assert.deepEqual(
       await p
@@ -128,7 +153,9 @@ const { start } = require("./browser.cjs"),
         mimeType: "application/json",
         buffer: Buffer.from("{bad"),
       });
-    await box("samples").getByText(/已保留原内容/).waitFor();
+    await box("samples")
+      .getByText(/已保留原内容/)
+      .waitFor();
     assert.equal(
       JSON.parse(await box("samples").locator("textarea").inputValue()).length,
       1,
@@ -170,7 +197,9 @@ const { start } = require("./browser.cjs"),
       "Course-form-123",
     );
     await p.unroute("**/api/actions/account.create");
-    checks.push("focused form keeps its draft after cancelling close or failing submission");
+    checks.push(
+      "focused form keeps its draft after cancelling close or failing submission",
+    );
     await discard();
     await h.open(p, "maintenance.run");
     assert.equal(await p.locator("#title").innerText(), "评估到期提醒");

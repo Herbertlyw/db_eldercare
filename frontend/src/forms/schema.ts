@@ -494,18 +494,23 @@ export const consequences: Record<string, string> = {
   "elder.transfer":
     "迁移前请处理未完成订单，并解绑原社区设备。迁移后重新安排照护计划和设备，历史记录保留。",
 };
-export const needsConfirmation = (action: string) =>
-  [
-    "order.cancel",
-    "order.reject",
-    "order.release",
-    "elder.deactivate",
-    "elder.transfer",
-    "shift.delete",
-    "claim.pay",
-    "notice.withdraw",
-    "device.unbind",
-  ].includes(action);
+export const confirmations: Record<string, [field: string, effect: string]> = {
+  "order.cancel": ["orderId", "订单将取消，已占用的班次名额会释放。"],
+  "order.reject": ["orderId", "订单将退回社区重新派单，并保留退回原因。"],
+  "order.release": ["orderId", "订单将退回社区重新派单，并释放本次名额。"],
+  "elder.deactivate": [
+    "elderId",
+    "停用后将暂停照护计划，无法再为这位老人预约。",
+  ],
+  "elder.transfer": ["elderId", consequences["elder.transfer"]],
+  "shift.delete": ["shiftId", "删除后，这个班次将不再参与派单。"],
+  "claim.pay": ["claimId", "登记后将标记为已拨付，拨付凭证无法修改。"],
+  "notice.withdraw": [
+    "noticeId",
+    "撤回后，公众将无法在公示列表中看到这条结果。",
+  ],
+  "device.unbind": ["deviceId", "解除当前绑定，已有采样仍归原老人。"],
+};
 export const createdKinds: Record<string, string> = {
   "elder.create": "elders",
   "order.create": "orders",

@@ -10,7 +10,7 @@ import {
 } from "@arco-design/web-react";
 import { actions, detailKinds } from "../model/registry";
 import { command, messageOf } from "../api/client";
-import { primaryKey } from "../model/rules";
+import { entity, primaryKey } from "../model/rules";
 import { recordLabel } from "../model/presentation";
 import { confirm } from "../components/confirm";
 import { BusinessField } from "./BusinessField";
@@ -20,8 +20,9 @@ import {
   createdKinds,
   fieldsFor,
   initialValues,
-  needsConfirmation,
+  confirmations,
   payload,
+  sourceFor,
   validate,
 } from "./schema";
 import type { Operation, Row, User, Values } from "../model/types";
@@ -121,14 +122,26 @@ export function OperationDrawer({
     sending.current = true;
     setBusy(true);
     try {
-      if (
-        needsConfirmation(op.action) &&
-        !(await confirm(
-          "确认" + actions[op.action][0] + "？",
-          op.context ? recordLabel(op.context.row) : undefined,
-        ))
-      )
-        return;
+      const warning = confirmations[op.action];
+      if (warning) {
+        const [key, effect] = warning;
+        const row = records[key];
+        const id = values[key];
+        const subject =
+          row && String(row.id) === String(id)
+            ? recordLabel(
+                row,
+                entity(sourceFor(key, op.action, user.role) || ""),
+              )
+            : `${fields.find((f) => f.key === key)?.label || "记录"} #${id}`;
+        if (
+          !(await confirm(
+            "确认" + actions[op.action][0] + "？",
+            `${subject}。${effect}`,
+          ))
+        )
+          return;
+      }
       const result = await command(
         op.action,
         payload(op.action, user.role, values),
