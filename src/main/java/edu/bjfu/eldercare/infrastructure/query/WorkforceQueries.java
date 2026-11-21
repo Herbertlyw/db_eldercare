@@ -62,8 +62,9 @@ public class WorkforceQueries implements QueryModule {
         String sql;
         Auth.role(user, "ADMIN", "MANAGER", "CAREGIVER");
         sql =
-                "SELECT s.*,c.name caregiver_name FROM shift s JOIN caregiver c ON"
-                        + " c.id=s.caregiver_id JOIN account a ON a.id=c.account_id WHERE "
+                "SELECT s.*,s.ends_at overlap_ends_at,c.name caregiver_name FROM shift s JOIN"
+                        + " caregiver c ON c.id=s.caregiver_id JOIN account a ON a.id=c.account_id"
+                        + " WHERE "
                         + scope.workerFilter(user, parameters);
         return new PageQuery(sql, parameters);
     }

@@ -122,11 +122,7 @@ LEFT JOIN caregiver c ON c.id=d.caregiver_id WHERE
                             + " worker_status FROM shift s JOIN caregiver c ON c.id=s.caregiver_id"
                             + " JOIN account a ON a.id=c.account_id WHERE "
                                 + scope.workerFilter(u, parameters),
-                        parameters,
-                        row -> {
-                            row.remove("overlap_ends_at");
-                            return row;
-                        })
+                        parameters)
                 .orderedBy("starts_at ASC,id ASC");
     }
 

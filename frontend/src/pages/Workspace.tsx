@@ -747,7 +747,9 @@ export function Workspace({
                     {data?.dateField && (
                       <Space className="date-filter">
                         <Typography.Text type="secondary">
-                          {columns[data.dateField] || "日期"}
+                          {kind === "shifts"
+                            ? "班次日期"
+                            : columns[data.dateField] || "日期"}
                         </Typography.Text>
                         <DatePicker.RangePicker
                           aria-label="按日期范围筛选"

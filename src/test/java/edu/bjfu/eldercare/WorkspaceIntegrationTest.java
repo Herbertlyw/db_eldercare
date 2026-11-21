@@ -8,9 +8,13 @@ import edu.bjfu.eldercare.application.security.Forbidden;
 import edu.bjfu.eldercare.infrastructure.persistence.Store;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
@@ -124,26 +128,40 @@ class WorkspaceIntegrationTest {
         assertEquals(expectedCount, rows.size());
     }
 
-    @Test
-    void overnightShiftAppearsOnBothDaysButNotAtItsExclusiveEnd() {
-        long id =
-                db.insert(
-                        "INSERT INTO shift(caregiver_id,starts_at,ends_at,capacity)"
-                                + " VALUES(1,'2031-01-01 23:00:00','2031-01-02 02:00:00',2)");
-        for (String date : List.of("2031-01-01", "2031-01-02")) {
-            var day = LocalDate.parse(date);
-            var matches =
-                    rows(
-                            "CAREGIVER",
-                            "workspaceShifts",
-                            new ListFilter("", "", day, day, "", null));
-            assertTrue(matches.stream().anyMatch(r -> ((Number) r.get("id")).longValue() == id));
-            assertTrue(matches.stream().noneMatch(r -> r.containsKey("overlap_ends_at")));
+    @ParameterizedTest
+    @ValueSource(strings = {"CAREGIVER", "MANAGER"})
+    void shiftListsPageAcrossMidnightWithExclusiveEnds(String role) {
+        var start = LocalDate.parse("2031-01-01");
+        long overnight = insertShift("2031-01-01 23:00:00", "2031-01-02 02:00:00");
+        long untilMidnight = insertShift("2031-01-02 22:00:00", "2031-01-03 00:00:00");
+        long fromMidnight = insertShift("2031-01-03 00:00:00", "2031-01-03 01:00:00");
+        for (String kind : List.of("workspaceShifts", "shifts")) {
+            var first = rows(role, kind, shiftDay(start));
+            assertEquals(List.of(overnight), first.stream().map(r -> r.get("id")).toList());
+            var middle = shiftDay(start.plusDays(1));
+            var ids = new HashSet<Long>();
+            for (int p = 0; p < 2; p++) {
+                var page = page(role, kind, p, 1, middle);
+                assertEquals(2, ((Number) page.get("total")).intValue());
+                var row = (Map<?, ?>) ((List<?>) page.get("rows")).get(0);
+                assertFalse(row.containsKey("overlap_ends_at"));
+                ids.add(((Number) row.get("id")).longValue());
+            }
+            assertEquals(Set.of(overnight, untilMidnight), ids);
+            var last = rows(role, kind, shiftDay(start.plusDays(2)));
+            assertEquals(List.of(fromMidnight), last.stream().map(r -> r.get("id")).toList());
         }
-        var next = LocalDate.parse("2031-01-03");
-        assertTrue(
-                rows("CAREGIVER", "workspaceShifts", new ListFilter("", "", next, next, "", null))
-                        .isEmpty());
+    }
+
+    private long insertShift(String startsAt, String endsAt) {
+        return db.insert(
+                "INSERT INTO shift(caregiver_id,starts_at,ends_at,capacity) VALUES(1,?,?,2)",
+                startsAt,
+                endsAt);
+    }
+
+    private ListFilter shiftDay(LocalDate day) {
+        return new ListFilter("", "", day, day, "caregiver_id", 1L);
     }
 
     @Test
