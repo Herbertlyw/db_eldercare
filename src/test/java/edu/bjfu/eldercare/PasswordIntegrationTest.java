@@ -90,6 +90,32 @@ class PasswordIntegrationTest {
     }
 
     @Test
+    void caseInsensitiveLoginKeepsTheAccountIdentityOnTheFamilyHomePage() throws Exception {
+        var family = account("FAMILY", 1, 1);
+        var login = auth.login(family.name().toUpperCase(Locale.ROOT), INITIAL);
+        String authorization = "Bearer " + login.get("token");
+
+        var me =
+                mvc.perform(get("/api/me").header("Authorization", authorization))
+                        .andReturn()
+                        .getResponse();
+        assertEquals(200, me.getStatus());
+        assertEquals(family, json.readValue(me.getContentAsByteArray(), Auth.User.class));
+        assertEquals(family, login.get("user"));
+
+        var profile =
+                mvc.perform(
+                                get("/api/data/workspaceProfile")
+                                        .header("Authorization", authorization))
+                        .andReturn()
+                        .getResponse();
+        assertEquals(200, profile.getStatus());
+        assertEquals(
+                family.name(),
+                json.readTree(profile.getContentAsByteArray()).at("/rows/0/display_name").asText());
+    }
+
+    @Test
     void selfChangeRevokesAllSessionsAndDoesNotRecordSecrets() throws Exception {
         var u = account("FAMILY", 1, 1);
         String first = token(u, INITIAL), second = token(u, INITIAL);
