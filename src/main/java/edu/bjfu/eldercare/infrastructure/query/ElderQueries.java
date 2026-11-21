@@ -51,7 +51,12 @@ public class ElderQueries implements QueryModule {
                 Map.entry("bundles", this::bundlesDetails));
     }
 
+    private static void requireCareReader(Auth.User user) {
+        Auth.role(user, "ADMIN", "FAMILY", "CAREGIVER");
+    }
+
     private PageQuery elders(Auth.User user) {
+        requireCareReader(user);
         List<Object> parameters = new ArrayList<>();
         String sql;
         sql =
@@ -64,6 +69,7 @@ public class ElderQueries implements QueryModule {
     }
 
     private PageQuery plans(Auth.User user) {
+        requireCareReader(user);
         List<Object> parameters = new ArrayList<>();
         String sql;
         sql =
@@ -74,6 +80,7 @@ public class ElderQueries implements QueryModule {
     }
 
     private PageQuery assessments(Auth.User user) {
+        requireCareReader(user);
         List<Object> parameters = new ArrayList<>();
         String sql;
         sql =
@@ -135,7 +142,7 @@ public class ElderQueries implements QueryModule {
 
     private Object eldersDetails(Auth.User user, long recordId) {
         LinkedHashMap<String, Object> out = new LinkedHashMap<>();
-        Auth.role(user, "ADMIN", "FAMILY", "CAREGIVER");
+        requireCareReader(user);
         scope.elder(user, recordId);
         out.put(
                 "档案",
@@ -158,6 +165,7 @@ public class ElderQueries implements QueryModule {
     }
 
     private Object plansDetails(Auth.User user, long recordId) {
+        requireCareReader(user);
         LinkedHashMap<String, Object> out = new LinkedHashMap<>();
         var plan =
                 db.one(
