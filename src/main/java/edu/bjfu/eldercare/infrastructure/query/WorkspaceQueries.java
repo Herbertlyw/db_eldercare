@@ -136,7 +136,7 @@ LEFT JOIN caregiver c ON c.id=d.caregiver_id WHERE
         return new PageQuery(
                         "SELECT x.*,e.name elder_name FROM emergency x JOIN elder e ON"
                             + " e.id=x.elder_id WHERE x.status NOT IN ('CLOSED','FALSE_ALARM') AND "
-                                + scope.elderFilter(u, parameters),
+                                + scope.eventFilter(u, parameters),
                         parameters)
                 .orderedBy("deadline ASC,id ASC");
     }

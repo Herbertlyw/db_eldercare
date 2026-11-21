@@ -11,6 +11,8 @@ public interface Scope {
 
     void elder(Auth.User u, long elder);
 
+    void event(Auth.User user, Map<String, Object> event);
+
     void worker(Auth.User u, long worker);
 
     Map<String, Object> order(Auth.User u, long order);

@@ -55,7 +55,7 @@ public class MonitoringQueries implements QueryModule {
                 "SELECT x.*,e.name elder_name,(SELECT el.message FROM emergency_log el WHERE"
                     + " el.event_id=x.id ORDER BY el.id LIMIT 1) report_note FROM emergency x JOIN"
                     + " elder e ON e.id=x.elder_id WHERE "
-                        + scope.elderFilter(user, parameters);
+                        + scope.eventFilter(user, parameters);
         return new PageQuery(sql, parameters);
     }
 
@@ -132,7 +132,7 @@ public class MonitoringQueries implements QueryModule {
     private Object eventsDetails(Auth.User user, long recordId) {
         LinkedHashMap<String, Object> out = new LinkedHashMap<>();
         var e = db.one("SELECT * FROM emergency WHERE id=?", recordId);
-        scope.elder(user, id(e, "elder_id"));
+        scope.event(user, e);
         out.put("应急事件", e);
         out.put(
                 "升级记录",
@@ -170,7 +170,7 @@ public class MonitoringQueries implements QueryModule {
                                     + " b.device_id=? AND "
                                     + filter,
                             parameters.toArray());
-            if (bindings.isEmpty()) {
+            if (bindings.stream().noneMatch(binding -> binding.get("unbound_at") == null)) {
                 throw new Forbidden();
             }
             out.put("本人的绑定历史", bindings);
