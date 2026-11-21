@@ -815,6 +815,142 @@ class WorkflowIntegrationTest {
     }
 
     @Test
+    void trainedNewHireCompletesReassignedVisitWithOriginalDispatchIntact() {
+        rollback(
+                () -> {
+                    long recruitment = recruitment();
+                    long caregiver = hire(recruitment);
+                    var now = LocalDateTime.now();
+                    long training =
+                            add(
+                                    manager,
+                                    "training.create",
+                                    "title",
+                                    "上门照护岗前培训",
+                                    "startsAt",
+                                    now.minusDays(3).toString(),
+                                    "endsAt",
+                                    now.minusDays(2).toString());
+                    long enrollment =
+                            add(
+                                    manager,
+                                    "training.enroll",
+                                    "trainingId",
+                                    training,
+                                    "caregiverId",
+                                    caregiver);
+                    run(manager, "training.result", "recordId", enrollment, "score", 86);
+                    run(
+                            manager,
+                            "credential.create",
+                            "caregiverId",
+                            caregiver,
+                            "itemId",
+                            1,
+                            "certificateNo",
+                            "CARE-" + recruitment,
+                            "certificateType",
+                            "养老护理员",
+                            "level",
+                            "初级",
+                            "validFrom",
+                            now.minusDays(1).toString(),
+                            "validUntil",
+                            now.plusMonths(1).toString());
+                    assertEquals(
+                            1,
+                            d.count(
+                                    "SELECT COUNT(*) FROM caregiver_area WHERE caregiver_id=? AND"
+                                            + " community_id=1",
+                                    caregiver));
+                    var visit =
+                            d.one(
+                                    "SELECT starts_at,ends_at,position_x,position_y FROM"
+                                            + " service_order WHERE id=2");
+                    long shift =
+                            add(
+                                    manager,
+                                    "shift.create",
+                                    "caregiverId",
+                                    caregiver,
+                                    "startsAt",
+                                    visit.get("starts_at").toString(),
+                                    "endsAt",
+                                    visit.get("ends_at").toString(),
+                                    "capacity",
+                                    1);
+                    run(admin, "order.assign", "orderId", 2, "shiftId", 2, "reason", "首次调度");
+                    run(worker, "order.reject", "orderId", 2, "reason", "无法上门");
+                    var eligible = (List<?>) run(admin, "order.recommend", "orderId", 2);
+                    assertTrue(
+                            eligible.stream()
+                                    .anyMatch(
+                                            row ->
+                                                    Long.valueOf(shift)
+                                                            .equals(
+                                                                    ((Map<?, ?>) row)
+                                                                            .get("shift_id"))));
+                    run(admin, "order.assign", "orderId", 2, "shiftId", shift, "reason", "由合格护工接替");
+                    long account =
+                            d.count("SELECT account_id FROM caregiver WHERE id=?", caregiver);
+                    var replacement =
+                            new Auth.User(account, "new-worker-" + recruitment, "CAREGIVER", 1, 1L);
+                    run(replacement, "order.accept", "orderId", 2);
+                    run(
+                            replacement,
+                            "order.checkin",
+                            "orderId",
+                            2,
+                            "location",
+                            "老人住址",
+                            "x",
+                            visit.get("position_x"),
+                            "y",
+                            visit.get("position_y"));
+                    run(
+                            replacement,
+                            "order.finish",
+                            "orderId",
+                            2,
+                            "notes",
+                            "已完成照护",
+                            "x",
+                            visit.get("position_x"),
+                            "y",
+                            visit.get("position_y"));
+                    run(family, "order.confirm", "orderId", 2, "confirmation", "已核对本次服务");
+                    long attendance =
+                            d.count(
+                                    "SELECT a.id FROM attendance a JOIN dispatch ds ON"
+                                            + " ds.id=a.dispatch_id WHERE ds.order_id=2 AND"
+                                            + " ds.shift_id=?",
+                                    shift);
+                    run(
+                            manager,
+                            "hours.review",
+                            "attendanceId",
+                            attendance,
+                            "approve",
+                            false,
+                            "reason",
+                            "本次操作时长不足");
+                    assertEquals("COMPLETED", state("service_order", 2));
+                    assertEquals("INVALID", state("attendance", attendance));
+                    assertEquals(
+                            1,
+                            d.count(
+                                    "SELECT COUNT(*) FROM dispatch WHERE order_id=2 AND shift_id=2"
+                                            + " AND status='REJECTED' AND reason='无法上门'"));
+                    assertEquals(
+                            1,
+                            d.count(
+                                    "SELECT COUNT(*) FROM dispatch WHERE order_id=2 AND shift_id=?"
+                                            + " AND status='FINISHED'",
+                                    shift));
+                });
+    }
+
+    @Test
     void complaintCompletesWithFourAppendOnlySteps() {
         rollback(
                 () -> {
