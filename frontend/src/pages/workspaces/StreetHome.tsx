@@ -1,3 +1,4 @@
+import { useAvailablePage } from "../../hooks/useAvailablePage";
 import { useEffect, useState } from "react";
 import {
   Alert,
@@ -185,6 +186,7 @@ export function StreetHome() {
     page: page - 1,
     search,
   });
+  useAvailablePage(claims.data, setPage);
   const row =
     claims.data?.rows.find((r) => r.id === selected) || claims.data?.rows[0];
   return (

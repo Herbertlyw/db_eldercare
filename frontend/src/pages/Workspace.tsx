@@ -65,6 +65,7 @@ import {
 import { list } from "../api/client";
 import { useMobile } from "../hooks/useMobile";
 import { useResource } from "../hooks/useResource";
+import { useAvailablePage } from "../hooks/useAvailablePage";
 import { Person } from "../components/Media";
 import { Details } from "../components/Details";
 import { NavigationIcon } from "../components/NavigationIcon";
@@ -147,6 +148,7 @@ export function Workspace({
     ),
   );
   const data = resource.data;
+  useAvailablePage(data, setPage);
   const counts = useResource(
     kind === "home" ? null : "counts:" + user.id + ":" + revision + ":" + poll,
     async (signal) =>
