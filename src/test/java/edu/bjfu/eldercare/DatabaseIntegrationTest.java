@@ -534,6 +534,28 @@ class DatabaseIntegrationTest {
     }
 
     @Test
+    void elapsedUnusedShiftCannotBeReportedAsDeleted() {
+        rollback(
+                () -> {
+                    long shift =
+                            d.insert(
+                                    "INSERT INTO shift(caregiver_id,starts_at,ends_at,capacity)"
+                                            + " VALUES(1,'2001-01-02 08:00','2001-01-02 09:00',1)");
+                    var manager = WorkflowIntegrationTest.u(1, "MANAGER");
+                    Rule failure =
+                            assertThrows(
+                                    Rule.class,
+                                    () ->
+                                            service.execute(
+                                                    manager,
+                                                    "shift.delete",
+                                                    Map.of("shiftId", shift)));
+                    assertTrue(failure.getMessage().contains("开始"));
+                    assertEquals(1, d.count("SELECT COUNT(*) FROM shift WHERE id=?", shift));
+                });
+    }
+
+    @Test
     void unusedShiftCanBeDeleted() {
         rollback(
                 () -> {

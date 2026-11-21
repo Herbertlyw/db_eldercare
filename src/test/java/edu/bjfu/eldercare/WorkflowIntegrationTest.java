@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.bjfu.eldercare.application.CareService;
 import edu.bjfu.eldercare.application.ReadService;
 import edu.bjfu.eldercare.application.port.Scope;
+import edu.bjfu.eldercare.application.port.query.ListFilter;
 import edu.bjfu.eldercare.application.security.Auth;
 import edu.bjfu.eldercare.application.security.Forbidden;
 import edu.bjfu.eldercare.infrastructure.persistence.Store;
@@ -909,7 +910,9 @@ class WorkflowIntegrationTest {
                 () -> {
                     invalid(() -> run(admin, "device.status", "deviceId", 1, "status", "RETIRED"));
                     long old = d.count("SELECT COUNT(*) FROM vital WHERE binding_id=1");
+                    assertNotNull(reads.details(family, "devices", 1));
                     run(admin, "device.unbind", "deviceId", 1);
+                    denied(() -> reads.details(family, "devices", 1));
                     run(admin, "device.status", "deviceId", 1, "status", "RETIRED");
                     assertEquals(old, d.count("SELECT COUNT(*) FROM vital WHERE binding_id=1"));
                     assertEquals(
@@ -1009,6 +1012,37 @@ class WorkflowIntegrationTest {
                                     .get("arrived_at"));
                     assertEquals("CLOSED", state("emergency", e));
                     assertEquals(4, d.count("SELECT COUNT(*) FROM event_step WHERE event_id=?", e));
+                });
+    }
+
+    @Test
+    void responderCanFinishTheirEventAfterCareEnds() {
+        rollback(
+                () -> {
+                    long eventId = event();
+                    run(worker, "event.confirm", "eventId", eventId, "reason", "已核实");
+                    run(worker, "event.respond", "eventId", eventId);
+                    d.update("UPDATE care_plan SET status='PAUSED' WHERE id=1");
+                    var filter = new ListFilter("", "", null, null, "elder_id", 1L);
+                    for (String kind : List.of("events", "workspaceEvents")) {
+                        var result = (Map<?, ?>) reads.list(worker, kind, 0, 100, filter);
+                        var records = (List<?>) result.get("rows");
+                        assertEquals(
+                                List.of(eventId),
+                                records.stream().map(row -> ((Map<?, ?>) row).get("id")).toList());
+                    }
+                    assertEquals(
+                            0,
+                            ((Number)
+                                            ((Map<?, ?>)
+                                                            reads.list(
+                                                                    worker, "vitals", 0, 10,
+                                                                    filter))
+                                                    .get("total"))
+                                    .intValue());
+                    run(worker, "event.arrive", "eventId", eventId, "note", "已到现场");
+                    run(worker, "event.close", "eventId", eventId, "result", "处置结束");
+                    assertNotNull(reads.details(worker, "events", eventId));
                 });
     }
 

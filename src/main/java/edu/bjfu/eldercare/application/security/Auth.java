@@ -74,7 +74,7 @@ public class Auth {
                             User user =
                                     new User(
                                             Rows.id(a, "id"),
-                                            username,
+                                            (String) a.get("username"),
                                             (String) a.get("role"),
                                             Rows.id(a, "community_id"),
                                             a.get("organization_id") == null

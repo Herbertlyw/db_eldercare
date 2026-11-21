@@ -54,15 +54,13 @@ public class JdbcScope implements QueryScope {
         if (u.role().equals("CAREGIVER")) {
             p.add(u.id());
             p.add(u.id());
-            p.add(u.id());
             return "(EXISTS(SELECT 1 FROM service_order o JOIN v_dispatch_context d ON"
                     + " d.order_id=o.id JOIN caregiver c ON c.id=d.caregiver_id WHERE"
                     + " o.elder_id=e.id AND c.account_id=? AND d.status"
                     + " IN('WAITING','ACCEPTED')) OR EXISTS(SELECT 1 FROM v_plan_context p JOIN"
                     + " caregiver c ON c.id=p.caregiver_id WHERE p.elder_id=e.id AND"
                     + " c.account_id=? AND p.status='ACTIVE' AND p.starts_at<=NOW() AND"
-                    + " p.ends_at>NOW()) OR EXISTS(SELECT 1 FROM emergency z WHERE"
-                    + " z.elder_id=e.id AND z.responded_by=?))";
+                    + " p.ends_at>NOW()))";
         }
         if (u.role().equals("MANAGER")) {
             p.add(u.organization());
@@ -71,6 +69,23 @@ public class JdbcScope implements QueryScope {
                     + " o.elder_id=e.id AND c.organization_id=?)";
         }
         return communityFilter(u, "e.community_id", p);
+    }
+
+    public String eventFilter(Auth.User user, List<Object> parameters) {
+        String currentCare = elderFilter(user, parameters);
+        if (!user.role().equals("CAREGIVER")) {
+            return currentCare;
+        }
+        parameters.add(user.id());
+        return "(" + currentCare + " OR x.responded_by=?)";
+    }
+
+    public void event(Auth.User user, Map<String, Object> event) {
+        if (user.role().equals("CAREGIVER")
+                && Objects.equals(event.get("responded_by"), user.id())) {
+            return;
+        }
+        elder(user, id(event, "elder_id"));
     }
 
     public void elder(Auth.User u, long elder) {
