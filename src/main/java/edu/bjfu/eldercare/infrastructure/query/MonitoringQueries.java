@@ -45,10 +45,15 @@ public class MonitoringQueries implements QueryModule {
                 Map.entry("events", this::eventsDetails),
                 Map.entry("devices", this::devicesDetails),
                 Map.entry("currentDevices", this::devicesDetails),
-                Map.entry("pendingEvents", this::eventsDetails));
+                Map.entry("pendingEvents", this::pendingEventsDetails));
+    }
+
+    private static void requireEventReader(Auth.User user) {
+        Auth.role(user, "ADMIN", "FAMILY", "CAREGIVER", "REGULATOR");
     }
 
     private PageQuery events(Auth.User user) {
+        requireEventReader(user);
         List<Object> parameters = new ArrayList<>();
         String sql;
         sql =
@@ -129,7 +134,13 @@ public class MonitoringQueries implements QueryModule {
         return new PageQuery(sql, parameters);
     }
 
+    private Object pendingEventsDetails(Auth.User user, long recordId) {
+        Auth.role(user, "ADMIN", "REGULATOR");
+        return eventsDetails(user, recordId);
+    }
+
     private Object eventsDetails(Auth.User user, long recordId) {
+        requireEventReader(user);
         LinkedHashMap<String, Object> out = new LinkedHashMap<>();
         var e = db.one("SELECT * FROM emergency WHERE id=?", recordId);
         scope.event(user, e);
