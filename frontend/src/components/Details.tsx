@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { IconClose } from "@arco-design/web-react/icon";
 import {
   Alert,
   Button,
@@ -113,6 +115,7 @@ export function Details({
   onOpen,
   onNavigate,
 }: Props) {
+  const [opener] = useState(() => document.activeElement);
   const isOrder = entity(kind) === "orders";
   const detailKind = isOrder ? "orders" : detailKinds[kind];
   const resource = useResource<Record<string, Row | Row[]>>(
@@ -203,7 +206,24 @@ export function Details({
           ? "min(840px, calc(100vw - 32px))"
           : "min(1100px, calc(100vw - 32px))",
       }}
-      onCancel={onClose}
+      focusLock
+      autoFocus
+      closeIcon={
+        <Button
+          type="text"
+          shape="circle"
+          size="mini"
+          aria-label="关闭详情"
+          icon={<IconClose />}
+        />
+      }
+      onCancel={() => {
+        onClose();
+        requestAnimationFrame(() => {
+          if (opener instanceof HTMLElement && opener.isConnected)
+            opener.focus({ preventScroll: true });
+        });
+      }}
       unmountOnExit
     >
       <Spin loading={resource.loading} style={{ width: "100%" }}>
