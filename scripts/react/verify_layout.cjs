@@ -52,6 +52,22 @@ const path = require("node:path");
       await h.quiet(p);
       assert.equal(await p.locator("#record-search").inputValue(), "");
       assert(await p.locator(".business-table tbody tr").count());
+      const detailLink = p.locator(".business-table .detail-link").first();
+      await detailLink.focus();
+      await p.keyboard.press("Enter");
+      const detailDialog = p.locator(".detail-dialog");
+      await detailDialog.waitFor();
+      for (const key of ["Tab", "Shift+Tab"]) {
+        await p.keyboard.press(key);
+        await p.waitForFunction(() =>
+          document.querySelector(".detail-dialog")?.contains(document.activeElement),
+        );
+      }
+      await p.keyboard.press("Escape");
+      await detailDialog.waitFor({ state: "hidden" });
+      await p.waitForFunction(() =>
+        document.activeElement?.matches(".business-table .detail-link"),
+      );
       if (account === "admin1") {
         const selected = await h.request(p, "/data/elders?size=10&status=ACTIVE");
         assert.equal(selected.status, 200);
