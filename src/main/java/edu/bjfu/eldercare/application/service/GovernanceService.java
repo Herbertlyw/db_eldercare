@@ -179,6 +179,7 @@ public class GovernanceService implements ActionModule {
     private Object publishNotice(Auth.User user, Map<String, Object> input) {
         Auth.role(user, "REGULATOR");
         long recordId = number(input, "inspectionId");
+        repository.lockInspection(recordId);
         Map<String, Object> record = scope.inspection(user, recordId);
         if (!record.get("status").equals("CLOSED") || record.get("score") == null) {
             throw new Rule("只公示已完成抽查和整改的结果");

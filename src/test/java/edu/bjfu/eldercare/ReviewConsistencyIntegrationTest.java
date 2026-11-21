@@ -29,7 +29,13 @@ class ReviewConsistencyIntegrationTest {
 
     // Keep the first write uncommitted until MySQL sees the second connection requesting the row
     // lock.
-    void whileLocked(String table, Runnable winner, Runnable contender) throws Exception {
+    static void whileLocked(
+            Store db,
+            PlatformTransactionManager tm,
+            String table,
+            Runnable winner,
+            Runnable contender)
+            throws Exception {
         var pool = Executors.newSingleThreadExecutor();
         try {
             Future<?> rejected =
@@ -53,8 +59,11 @@ class ReviewConsistencyIntegrationTest {
                                                             + " LIKE ?",
                                                         "%from " + table + " where id=%for update%")
                                                 == 0) {
-                                            if (System.nanoTime() >= until || attempt.isDone())
-                                                fail("第二个操作未进入数据库行锁等待");
+                                            if (attempt.isDone()) {
+                                                return CompletableFuture.failedFuture(
+                                                        new AssertionError("另一事务在首笔提交前已结束"));
+                                            }
+                                            if (System.nanoTime() >= until) fail("第二个操作未进入数据库行锁等待");
                                             java.util.concurrent.locks.LockSupport.parkNanos(
                                                     TimeUnit.MILLISECONDS.toNanos(10));
                                         }
@@ -88,6 +97,8 @@ class ReviewConsistencyIntegrationTest {
                 Map.of("orderId", order, "shiftId", shift, "reason", "并发签到"));
         service.execute(worker, "order.accept", Map.of("orderId", order));
         whileLocked(
+                db,
+                tm,
                 "service_order",
                 () ->
                         service.execute(
@@ -134,6 +145,8 @@ class ReviewConsistencyIntegrationTest {
                                                 "附件")))
                         .longValue();
         whileLocked(
+                db,
+                tm,
                 "inspection",
                 () ->
                         service.execute(

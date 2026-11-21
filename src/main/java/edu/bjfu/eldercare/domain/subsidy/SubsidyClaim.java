@@ -6,6 +6,7 @@ import edu.bjfu.eldercare.domain.shared.Rule;
 public record SubsidyClaim(long id, Status status) {
 
     public enum Status {
+        DRAFT,
         SUBMITTED,
         STREET_APPROVED,
         APPROVED,
@@ -31,6 +32,12 @@ public record SubsidyClaim(long id, Status status) {
     public void requirePayable() {
         if (status != Status.APPROVED) {
             throw new Rule("申报尚未审批完成");
+        }
+    }
+
+    public void requireEvidenceAllowed() {
+        if (status != Status.DRAFT && status != Status.SUBMITTED && status != Status.REJECTED) {
+            throw new Rule("此申报已通过初审，无法补充材料");
         }
     }
 

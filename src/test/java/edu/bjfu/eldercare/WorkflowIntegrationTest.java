@@ -175,20 +175,31 @@ class WorkflowIntegrationTest {
     }
 
     long completed(LocalDateTime start, long item) {
+        return completed(start, item, 1);
+    }
+
+    long completed(LocalDateTime start, long item, long community) {
+        var administrator = u(community, "ADMIN");
+        var guardian = u(community, "FAMILY");
         long sh =
                 d.insert(
                         "INSERT INTO shift(caregiver_id,starts_at,ends_at,capacity,used_count)"
-                                + " VALUES(1,?,?,1,1)",
+                                + " VALUES(?,?,?,1,1)",
+                        community,
                         start,
                         start.plusHours(1));
         long o =
                 d.insert(
                         "INSERT INTO"
                             + " service_order(elder_id,item_id,community_id,starts_at,ends_at,address,position_x,channel,amount,created_by)"
-                            + " VALUES(1,?,1,?,?,'模拟地址',10000,'COMMUNITY',80,1)",
+                            + " VALUES(?,?,?,?,?,'模拟地址',?,'COMMUNITY',80,?)",
+                        community,
                         item,
+                        community,
                         start,
-                        start.plusHours(1));
+                        start.plusHours(1),
+                        community * 10000,
+                        administrator.id());
         long ds =
                 d.insert(
                         "INSERT INTO dispatch(order_id,shift_id,status) VALUES(?,?,'FINISHED')",
@@ -204,8 +215,9 @@ class WorkflowIntegrationTest {
         d.insert(
                 "INSERT INTO"
                     + " service_record(dispatch_id,notes,confirmed_by,confirmed_at,confirmation)"
-                    + " VALUES(?,'模拟服务记录',2,?,'模拟家属确认')",
+                    + " VALUES(?,'模拟服务记录',?,?,'模拟家属确认')",
                 ds,
+                guardian.id(),
                 start.plusHours(1));
         d.update("UPDATE service_order SET status='COMPLETED' WHERE id=?", o);
         return o;
@@ -1077,6 +1089,124 @@ class WorkflowIntegrationTest {
                     run(street, "claim.review", "claimId", c, "approve", true, "reason", "补充材料通过");
                     assertEquals(
                             2, d.count("SELECT COUNT(*) FROM claim_review WHERE claim_id=?", c));
+                });
+    }
+
+    @Test
+    void simultaneousResubmissionsPreserveOneExplanationAndTheOriginalReview() throws Exception {
+        long community = 18;
+        var submitting = u(community, "ADMIN");
+        var start = LocalDateTime.now().minusDays(42).withNano(0);
+        long order = completed(start, community, community);
+        run(
+                submitting,
+                "claim.submit",
+                "elderId",
+                community,
+                "policyId",
+                community,
+                "period",
+                start.toLocalDate().toString().substring(0, 7),
+                "orderIds",
+                List.of(order));
+        long claim = d.count("SELECT claim_id FROM claim_item WHERE order_id=?", order);
+        run(
+                u(community, "STREET"),
+                "claim.review",
+                "claimId",
+                claim,
+                "approve",
+                false,
+                "reason",
+                "需补充家属确认说明");
+        ReviewConsistencyIntegrationTest.whileLocked(
+                d,
+                tm,
+                "claim",
+                () -> run(submitting, "claim.resubmit", "claimId", claim, "reason", "第一份补件"),
+                () -> run(submitting, "claim.resubmit", "claimId", claim, "reason", "第二份补件"));
+        assertEquals("SUBMITTED", state("claim", claim));
+        assertEquals(1, d.count("SELECT COUNT(*) FROM claim_evidence WHERE claim_id=?", claim));
+        assertEquals(
+                "第一份补件",
+                d.one("SELECT content FROM claim_evidence WHERE claim_id=?", claim).get("content"));
+        assertEquals(
+                1,
+                d.count(
+                        "SELECT COUNT(*) FROM claim_review WHERE claim_id=? AND decision='REJECT'",
+                        claim));
+        assertEquals(order, d.count("SELECT order_id FROM claim_item WHERE claim_id=?", claim));
+    }
+
+    @Test
+    void publishingAgainRequiresWithdrawingTheExistingNotice() throws Exception {
+        long inspection = manualInspection(false);
+        ReviewConsistencyIntegrationTest.whileLocked(
+                d,
+                tm,
+                "inspection",
+                () -> run(reg, "notice.publish", "inspectionId", inspection),
+                () -> run(reg, "notice.publish", "inspectionId", inspection));
+        assertEquals(
+                1, d.count("SELECT COUNT(*) FROM public_notice WHERE inspection_id=?", inspection));
+        long notice = d.count("SELECT id FROM public_notice WHERE inspection_id=?", inspection);
+        run(reg, "notice.withdraw", "noticeId", notice, "reason", "重新核对公示");
+        long republished = add(reg, "notice.publish", "inspectionId", inspection);
+        assertNotEquals(notice, republished);
+        assertEquals(
+                republished,
+                d.count(
+                        "SELECT id FROM public_notice WHERE inspection_id=? AND withdrawn_at IS"
+                                + " NULL",
+                        inspection));
+        assertEquals(
+                "重新核对公示",
+                d.one("SELECT withdraw_reason FROM public_notice WHERE id=?", notice)
+                        .get("withdraw_reason"));
+    }
+
+    @Test
+    void firstApprovalFreezesSubmittedEvidenceUntilRejection() {
+        rollback(
+                () -> {
+                    long claim = newClaim();
+                    run(
+                            street,
+                            "claim.review",
+                            "claimId",
+                            claim,
+                            "approve",
+                            true,
+                            "reason",
+                            "材料已核对");
+                    assertThrows(
+                            edu.bjfu.eldercare.domain.shared.Rule.class,
+                            () ->
+                                    run(
+                                            admin,
+                                            "claim.evidence",
+                                            "claimId",
+                                            claim,
+                                            "name",
+                                            "补件",
+                                            "content",
+                                            "审核后补件"));
+                    assertEquals(
+                            0,
+                            d.count("SELECT COUNT(*) FROM claim_evidence WHERE claim_id=?", claim));
+                    run(reg, "claim.review", "claimId", claim, "approve", false, "reason", "请补件");
+                    run(
+                            admin,
+                            "claim.evidence",
+                            "claimId",
+                            claim,
+                            "name",
+                            "补件",
+                            "content",
+                            "按意见补件");
+                    assertEquals(
+                            1,
+                            d.count("SELECT COUNT(*) FROM claim_evidence WHERE claim_id=?", claim));
                 });
     }
 

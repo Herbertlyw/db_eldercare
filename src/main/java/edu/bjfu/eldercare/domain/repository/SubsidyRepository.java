@@ -22,8 +22,6 @@ public interface SubsidyRepository {
     long insertEvidence(
             Number claimId, Number submittedBy, String name, String content, String hashContent);
 
-    Map<String, Object> lockClaim(Number claimId);
-
     int markSubmitted(Number claimId);
 
     long insertPolicy(
