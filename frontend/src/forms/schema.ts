@@ -35,12 +35,13 @@ export const sources: Record<string, string> = {
   organizationId: "organizationQuality",
   metricId: "metrics",
 };
-export const sourceFor = (key: string, action: string, role: Role) =>
-  key === "username" && action === "password.reset"
-    ? role === "ADMIN"
-      ? "accounts"
-      : "caregivers"
-    : sources[key];
+export function sourceFor(key: string, action: string, role: Role) {
+  if (key === "orderId" && action === "order.release")
+    return "managerDispatchPool";
+  if (key === "username" && action === "password.reset")
+    return role === "ADMIN" ? "accounts" : "caregivers";
+  return sources[key];
+}
 const options = (pairs: (string | number)[][]) =>
   pairs.map(([value, label]) => ({ label: String(label), value }));
 const yes = options([
