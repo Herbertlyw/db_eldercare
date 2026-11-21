@@ -2,6 +2,7 @@
 Run against the local course MySQL 8.4 instance with the application stopped.
 The snapshot's own source-data coordinates, not its completion time, anchor replay.
 """
+from pathlib import Path
 from db import sql as db_sql, CONFIG, ROOT
 import subprocess, os, json, hashlib, datetime, re, uuid, time
 
@@ -12,7 +13,7 @@ if not re.fullmatch(r'eldercare(?:_[a-z0-9_]+)?', source_database):
 if not re.fullmatch(r'eldercare(?:_[a-z0-9_]+)?_restore', restore_database) or source_database == restore_database:
     raise SystemExit('RECOVERY_TARGET must be a separate eldercare_*_restore database')
 # Never overwrite an existing restore database or touch another running application's target.
-if db_sql(f"SELECT COUNT(*) FROM information_schema.schemata WHERE schema_name='{restore_database}'").stdout.splitlines()[-1] != '0':
+if db_sql(f"SELECT COUNT(*) FROM information_schema.schemata WHERE schema_name='{restore_database}'", 'information_schema').stdout.splitlines()[-1] != '0':
     raise SystemExit('Restore target already exists; choose a new RECOVERY_TARGET')
 def sql(query, database=None):
     return db_sql(query, database or source_database)
@@ -20,6 +21,9 @@ if sql(f"SELECT COUNT(*) FROM information_schema.processlist WHERE db='{source_d
     raise SystemExit('Source database is in use; stop its application before this controlled drill')
 if sql('SELECT @@binlog_format').stdout.splitlines()[-1] != 'ROW':
     raise SystemExit('This controlled recovery drill requires ROW binlog format')
+binlog_directory = Path(sql('SELECT @@log_bin_basename').stdout.splitlines()[-1]).parent
+evidence = ROOT / os.environ.get('EVIDENCE_DIR', 'evidence')
+evidence.mkdir(parents=True, exist_ok=True)
 started = time.monotonic()
 out = ROOT / '.local/backups' / restore_database
 out.mkdir(parents=True, exist_ok=True)
@@ -47,7 +51,7 @@ try:
     replay = subprocess.run([CONFIG['mysqlbinlog'], '--no-defaults', '--start-position=' + str(pos),
                              '--stop-position=' + str(stop), f'--rewrite-db={source_database}->{restore_database}',
                              '--database=' + restore_database,
-                             *[str(ROOT / '.local/native-mysql' / name) for name in selected]], capture_output=True, check=True)
+                             *[str(binlog_directory / name) for name in selected]], capture_output=True, check=True)
     (out / 'incremental.sql').write_bytes(replay.stdout)
     sql(replay.stdout.decode(), restore_database)
     assert int(sql(f'SELECT COUNT(*) FROM service_item WHERE id={marker_id};', restore_database).stdout.splitlines()[-1]) == 1
@@ -70,7 +74,7 @@ try:
               'binlog_database_filter': restore_database,
               'base_service_items': base_count, 'incremental_marker_recovered': True, 'counts': counts,
               'restored_query_pairs': 15, 'scope': f'full snapshot plus actual binlog insert; {len(counts)} tables compared row by row in an independent database'}
-    (ROOT / 'evidence/recovery.json').write_text(json.dumps(report, ensure_ascii=False, indent=2))
+    (evidence / 'recovery.json').write_text(json.dumps(report, ensure_ascii=False, indent=2))
     print('Full + incremental recovery: all', len(counts), 'table contents and 15 query pairs verified')
 finally:
     sql(f'DELETE FROM service_item WHERE id={marker_id};')
