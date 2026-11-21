@@ -1,0 +1,265 @@
+{
+  "date": "2026-11-21",
+  "timezone": "Asia/Shanghai",
+  "platform": "macOS / Desktop Chrome / Java 17 / Spring JDBC / MySQL 8.4.11",
+  "revisions": {
+    "baseline": "0edf929048fca2f0460638f98eb83f29f66be822",
+    "firstMainDelivery": "a41c78ed211889f2707f6b08b8c845a06f243706",
+    "applicationAndBrowserChecks": "4dc6d6c31ae386b0ce53f1d2e3759f99b8e9dfc1",
+    "recoveryTool": "63a08f37b185e1a205f6b4a8ecc19ac8b3225ac5"
+  },
+  "java": {
+    "suiteRunTimeLocal": "2026-11-21T14:06:51.390407",
+    "database": "eldercare_quality_final_1121_test",
+    "engine": "MySQL 8.4.11",
+    "baselineTests": 199,
+    "firstIntegrationTests": 202,
+    "tests": 221,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "realMysqlIntegrationTests": 183,
+    "unitTests": 38,
+    "suites": {
+      "ArchitectureTest": 4,
+      "CarePlanConcurrencyIntegrationTest": 4,
+      "CareRecordRolesIntegrationTest": 6,
+      "CommunityMaintenanceIntegrationTest": 3,
+      "DatabaseIntegrationTest": 67,
+      "DemoContentIntegrationTest": 2,
+      "DemoScenariosIntegrationTest": 5,
+      "HistoryRulesIntegrationTest": 16,
+      "ListFilterIntegrationTest": 7,
+      "PasswordIntegrationTest": 10,
+      "ReviewConsistencyIntegrationTest": 5,
+      "RouteContractIntegrationTest": 1,
+      "WorkflowIntegrationTest": 50,
+      "WorkspaceIntegrationTest": 7,
+      "RoutingTest": 4,
+      "DomainRulesTest": 30
+    }
+  },
+  "frontend": {
+    "baselineTests": 32,
+    "finalTestsPassed": 36,
+    "typescript": "pass",
+    "prettier": "pass",
+    "javaSpotless": "pass",
+    "mavenCleanBuild": "pass",
+    "runtimeEntriesCompared": 150,
+    "mismatches": 0,
+    "cleanBuildJarSha256": "b5fa9cf67ec07d8005dc8c2cea513f93ba854af83b06073b0ccec247b5586bda"
+  },
+  "desktopChrome": {
+    "actualMysqlConnectionChecked": true,
+    "schedulerDuringBrowserTests": false,
+    "readPort": 18083,
+    "readDatabase": "eldercare_quality_ui_read_1121_test",
+    "writePort": 18085,
+    "writeDatabase": "eldercare_quality_ui_accept_1121_test",
+    "readJavaPidDuringTest": 84373,
+    "writeJavaPidDuringTest": 88575,
+    "pageSweepTimeUtc": "2026-11-21T06:07:00.060Z",
+    "roleCount": 6,
+    "accounts": 7,
+    "roleVisits": [
+      {
+        "account": "admin1",
+        "role": "ADMIN",
+        "routes": 35,
+        "details": 34,
+        "forms": 42
+      },
+      {
+        "account": "admin2",
+        "role": "ADMIN",
+        "routes": 35,
+        "details": 34,
+        "forms": 0
+      },
+      {
+        "account": "family1",
+        "role": "FAMILY",
+        "routes": 18,
+        "details": 18,
+        "forms": 7
+      },
+      {
+        "account": "caregiver1",
+        "role": "CAREGIVER",
+        "routes": 12,
+        "details": 12,
+        "forms": 9
+      },
+      {
+        "account": "manager1",
+        "role": "MANAGER",
+        "routes": 21,
+        "details": 20,
+        "forms": 17
+      },
+      {
+        "account": "street1",
+        "role": "STREET",
+        "routes": 7,
+        "details": 6,
+        "forms": 1
+      },
+      {
+        "account": "regulator1",
+        "role": "REGULATOR",
+        "routes": 16,
+        "details": 16,
+        "forms": 11
+      }
+    ],
+    "pageEntries": 144,
+    "detailEntries": 140,
+    "formEntries": 87,
+    "pageSweepErrors": 0,
+    "pageSweepFailedResponses": 0,
+    "scenarioListChecks": 186,
+    "scenarioAccounts": 10,
+    "verifiedScripts": {
+      "formCases": 12,
+      "workforceCases": 3,
+      "designedRecordViews": 14,
+      "roleWorkspaces": 6,
+      "layout": 6,
+      "media": 5,
+      "passwords": 3
+    },
+    "writeSuites": {
+      "standardWrites": {
+        "actionCount": 38,
+        "checks": [
+          "qualification recruitment training report",
+          "complaint full history",
+          "inspection rectification review public notice",
+          "device sampling emergency response arrival close",
+          "appointment dispatch accept checkin finish family confirmation review",
+          "hours review two-stage subsidy approval payment no-repeat",
+          "search refresh and role boundary",
+          "anonymous public notice"
+        ]
+      },
+      "recordLifecycle": {
+        "actionCount": 16,
+        "checks": [
+          "elder guardian assessment plan revise pause resume appointment cancel",
+          "family linked-elder scope and cross-community access",
+          "transfer updates visible community and deactivate"
+        ]
+      },
+      "subsidyResubmission": {
+        "actionCount": 6,
+        "checks": [
+          "policy-period eligible order selection submission evidence",
+          "rejected claim resubmission preserves evidence",
+          "policy creation and community multiselect"
+        ]
+      }
+    },
+    "managerReturnAndRedispatch": "pass",
+    "zoom125": [
+      {
+        "role": "street1",
+        "kind": "claims",
+        "dpr": 1.25,
+        "viewport": 1280,
+        "expectedLabel": "政策编号"
+      },
+      {
+        "role": "regulator1",
+        "kind": "events",
+        "dpr": 1.25,
+        "viewport": 1280,
+        "expectedLabel": "发生时间"
+      }
+    ],
+    "keyboardDetailsOriginsVerified": 6
+  },
+  "databaseMigration": {
+    "file": "database/migrations/20261121_community_maintenance.sql",
+    "stages": [
+      {
+        "stage": "before",
+        "routines": 10,
+        "tables": 47,
+        "views": 17,
+        "triggers": 74,
+        "data_sha256": "710de354a11b46adbd5d217d2aa08e8c0dae6443c74d9cb3598d2bd6cd8f2b04"
+      },
+      {
+        "stage": "after",
+        "routines": 12,
+        "tables": 47,
+        "views": 17,
+        "triggers": 74,
+        "data_sha256": "710de354a11b46adbd5d217d2aa08e8c0dae6443c74d9cb3598d2bd6cd8f2b04"
+      },
+      {
+        "stage": "reapplied",
+        "routines": 12,
+        "tables": 47,
+        "views": 17,
+        "triggers": 74,
+        "data_sha256": "710de354a11b46adbd5d217d2aa08e8c0dae6443c74d9cb3598d2bd6cd8f2b04"
+      }
+    ],
+    "newDatabaseRoutineDefinitionsCompared": 12,
+    "sourceVersion": "5b6617a"
+  },
+  "scheduler": {
+    "time": "2026-11-21T14:00:23.122521",
+    "database": "eldercare_quality_timers_final_1121_test",
+    "actual_scheduler": true,
+    "manual_procedure_calls": false,
+    "cycles": 2,
+    "assessment_reminder_deduplicated": true,
+    "expired_assessment_plan_paused": true,
+    "superseded_plan_paused": true,
+    "levels": [
+      2,
+      3
+    ],
+    "simulation_samples": 2,
+    "elapsed_seconds": 61.94,
+    "runtimeRevision": "aeb994f"
+  },
+  "recovery": {
+    "time": "2026-11-21T14:08:27.217705",
+    "source_database": "eldercare_quality_timers_final_1121_test",
+    "restore_database": "eldercare_quality_archive_1121_restore",
+    "backup_sha256": "672f5b210ddcbacd09ffaca06c6de0434f683ab48c750c832b82ad273bc2a52a",
+    "elapsed_seconds": 2.56,
+    "incremental_marker_recovered": true,
+    "restored_query_pairs": 15
+  },
+  "recoverySafety": {
+    "tablesComparedRowByRow": 47,
+    "explicitSourceRequired": true,
+    "sourceMarkerRemoved": true,
+    "existingTargetRejected": true,
+    "activeTestDatabaseRebuildRejected": true
+  },
+  "verificationCommands": [
+    "mvn spotless:check",
+    "npm --prefix frontend run check",
+    "npm --prefix frontend test",
+    "npm --prefix frontend run format:check",
+    "TEST_DATABASE=eldercare_quality_final_1121_test EVIDENCE_DIR=.local/accepted-mysql python3 scripts/test.py",
+    "node scripts/react/verify_pages.cjs; node scripts/react/verify_layout.cjs; node scripts/react/verify_workspaces.cjs",
+    "node scripts/react/verify_scenarios.cjs; node scripts/react/verify_forms.cjs; node scripts/react/verify_workforce.cjs; node scripts/react/verify_designed_records.cjs; node scripts/react/verify_media.cjs",
+    "node scripts/react/verify_passwords.cjs; node scripts/react/verify_records.cjs; node scripts/react/verify_workflows.cjs; node scripts/react/verify_claims.cjs; node scripts/react/verify_manager_return.cjs",
+    "TEST_DATABASE=eldercare_quality_timers_final_1121_test python3 scripts/verify_scheduled_jobs.py",
+    "RECOVERY_SOURCE=eldercare_quality_timers_final_1121_test RECOVERY_TARGET=eldercare_quality_archive_1121_restore EVIDENCE_DIR=.local/accepted-recovery python3 scripts/recovery_drill.py"
+  ],
+  "scopeNotes": [
+    "Browser commands above were grouped by read/write database with TEST_PORT, TEST_DATABASE and task-private EVIDENCE_DIR.",
+    "Counts of page entries include separate visits by both community administrators. These are not unique features.",
+    "Synthetic fixtures only. No live demo upgrade, real banking, Windows or production load acceptance.",
+    "Scheduler and JDBC sources are identical between aeb994f and 4dc6d6c. At 18083 the 150 active classes/resources compared byte-for-byte with the clean build served at 18085.",
+    "The 125% zoom check used a temporary Chrome profile and verified the actual devicePixelRatio. Windows and long-running production load were outside this run."
+  ]
+}
