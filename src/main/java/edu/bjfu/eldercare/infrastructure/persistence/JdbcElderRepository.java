@@ -120,8 +120,8 @@ public class JdbcElderRepository implements ElderRepository {
     }
 
     @Override
-    public Map<String, Object> findGuardianForUpdate(Number guardianId) {
-        return db.one("SELECT * FROM guardian WHERE id=? FOR UPDATE", guardianId);
+    public long guardianElderId(Number guardianId) {
+        return Store.id(db.one("SELECT elder_id FROM guardian WHERE id=?", guardianId), "elder_id");
     }
 
     @Override
@@ -195,8 +195,9 @@ public class JdbcElderRepository implements ElderRepository {
     }
 
     @Override
-    public Map<String, Object> lockElder(Number elderId) {
-        return db.one("SELECT id FROM elder WHERE id=? FOR UPDATE", elderId);
+    public long planElderId(Number planId) {
+        return Store.id(
+                db.one("SELECT elder_id FROM v_plan_context WHERE id=?", planId), "elder_id");
     }
 
     @Override

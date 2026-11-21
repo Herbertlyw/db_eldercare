@@ -40,7 +40,7 @@ public interface ElderRepository {
 
     int removeTag(Number elderId, String tag);
 
-    Map<String, Object> findGuardianForUpdate(Number guardianId);
+    long guardianElderId(Number guardianId);
 
     int updateGuardian(String relationName, String phoneCipher, Boolean active, Number guardianId);
 
@@ -64,7 +64,7 @@ public interface ElderRepository {
 
     Map<String, Object> findCommunity(Number communityId);
 
-    Map<String, Object> lockElder(Number elderId);
+    long planElderId(Number planId);
 
     long countAssessmentsForElder(Number assessmentId, Number elderId);
 

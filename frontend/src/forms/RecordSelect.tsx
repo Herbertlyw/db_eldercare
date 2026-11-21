@@ -140,6 +140,11 @@ export function RecordSelect({
   }, [key, page, revision]);
   const candidates = (state.key === key ? state.rows : []).filter(
     (r) =>
+      !(
+        action === "elder.transfer" &&
+        name === "communityId" &&
+        Number(r.id) === user.community
+      ) &&
       (!scope.level || r.ability_level === scope.level) &&
       (!scoped.includes(name) ||
         choices(source, r, user).some(
