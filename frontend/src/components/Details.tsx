@@ -48,21 +48,23 @@ export function DetailSections({
                 size="small"
                 rowKey={(row) => JSON.stringify(row)}
                 data={part}
-                columns={Object.keys(part[0]).map((key) => ({
-                  title: columns[key] || key,
-                  dataIndex: key,
-                  width: [
-                    "message",
-                    "content",
-                    "notes",
-                    "evidence",
-                    "measures",
-                    "result",
-                  ].includes(key)
-                    ? 280
-                    : 140,
-                  render: (value) => displayValue(key, value, kind),
-                }))}
+                columns={Object.keys(part[0])
+                  .filter((key) => key !== "active_device")
+                  .map((key) => ({
+                    title: columns[key] || key,
+                    dataIndex: key,
+                    width: [
+                      "message",
+                      "content",
+                      "notes",
+                      "evidence",
+                      "measures",
+                      "result",
+                    ].includes(key)
+                      ? 280
+                      : 140,
+                    render: (value) => displayValue(key, value, kind),
+                  }))}
                 scroll={{ x: true }}
                 pagination={part.length > 10 ? { pageSize: 10 } : false}
               />
