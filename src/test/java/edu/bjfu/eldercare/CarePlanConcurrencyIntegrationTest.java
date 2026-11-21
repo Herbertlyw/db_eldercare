@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
 @SpringBootTest(properties = "app.jobs=false")
@@ -209,6 +210,7 @@ class CarePlanConcurrencyIntegrationTest {
     }
 
     @Test
+    @Transactional
     void choosingTheCurrentCommunityCannotInterruptCare() {
         PlanCase example = prepareCarePlan();
         var admin = u(1, "ADMIN");
@@ -243,6 +245,7 @@ class CarePlanConcurrencyIntegrationTest {
     }
 
     @Test
+    @Transactional
     void transferredFileUsesItsNewCommunityForAddressAndPlanChanges() {
         PlanCase example = prepareCarePlan();
         var original = u(1, "ADMIN");
