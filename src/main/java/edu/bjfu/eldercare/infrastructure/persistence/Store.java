@@ -75,7 +75,9 @@ public class Store {
                         "verify_hours",
                         "submit_claim",
                         "expire_plans",
+                        "expire_community_plans",
                         "escalate_events",
+                        "escalate_community_events",
                         "remind_assessments")
                 .contains(name)) {
             throw new Rule("非法过程");

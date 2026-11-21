@@ -36,3 +36,5 @@ MySQL DDL 可能隐式提交，失败后不能假定整份脚本自动回滚。�
 上述步骤都需先备份并在副本演练。名称迁移的 47 表逐字段核对、重复执行与人工编辑保护记录见 `evidence/natural-names-migration.json`，本地应用记录见 `evidence/natural-names-display.json`；密码迁移记录见 `evidence/password-migration.json`。React 构建本身不修改 MySQL 数据。
 
 - 20261118_dispatch_window.sql 更新派单过程，派单或改派时核对预约结束时间。已有库先备份，在副本执行并验证后，于暂停派单期间执行脚本。新库直接使用 02_routines.sql。
+
+- `20261121_community_maintenance.sql` 适用于已有 `expire_plans()`、`escalate_events()` 的 47 表数据库。它增加按社区办理的两个过程，原无参过程仍供全平台定时任务使用。备份业务库及原过程定义，在独立副本先演练。正式升级时暂停定时和手动到期检查，执行脚本，核对四个过程后启动配套 JAR。脚本仅替换过程，重复执行可恢复完整定义；如需退回旧程序，恢复备份中的两个无参过程定义后再恢复服务。新库直接使用当前建库脚本。

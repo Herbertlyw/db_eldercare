@@ -34,9 +34,9 @@ public interface MonitoringRepository {
 
     int closeEmergency(String result, Number eventId);
 
-    void expirePlans();
+    void expirePlans(long communityId);
 
-    void escalateEvents();
+    void escalateEvents(long communityId);
 
     long insertMetric(String metric, Number lowValue, Number highValue, Number responseSeconds);
 
