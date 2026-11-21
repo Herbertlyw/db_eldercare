@@ -1,3 +1,4 @@
+import { useAvailablePage } from "../../hooks/useAvailablePage";
 import { useState } from "react";
 import { Button, DatePicker, Radio } from "@arco-design/web-react";
 import {
@@ -43,6 +44,7 @@ export function CaregiverHome() {
   const shifts = useRows("workspaceShifts", { from: day, to: day, size: 5 });
   const credentials = useRows("credentials", { size: 2 });
   const carryover = useRows("workspaceCarryover", { size: 3 });
+  useAvailablePage(schedule.data, setPage);
   const noDuties =
     tab === "today" &&
     [schedule, shifts, carryover].every(

@@ -19,6 +19,8 @@ export interface HoursTotals {
   invalid: number;
 }
 export interface ListResult {
+  page: number;
+  size: number;
   summary?: HoursTotals;
   rows: Row[];
   total: number;

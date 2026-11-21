@@ -53,6 +53,17 @@ const path = require("node:path");
       assert.equal(await p.locator("#record-search").inputValue(), "");
       assert(await p.locator(".business-table tbody tr").count());
       if (account === "admin1") {
+        const selected = await h.request(p, "/data/elders?size=10&status=ACTIVE");
+        assert.equal(selected.status, 200);
+        const last = Math.ceil(selected.data.total / 10);
+        assert.ok(last > 0, "需要在册老人验证过期分页链接");
+        await p.goto(h.env.base + "/#elders?status=ACTIVE&page=" + (last + 1));
+        await h.quiet(p);
+        const params = new URLSearchParams(new URL(p.url()).hash.split("?")[1]);
+        assert.equal(params.get("status"), "ACTIVE");
+        assert.equal(Number(params.get("page") || 1), last);
+        assert.ok(await p.locator(".business-table tbody tr[data-id]").count());
+        await h.nav(p, "elders");
         await p
           .locator('.business-table [data-action="order.create"]')
           .first()

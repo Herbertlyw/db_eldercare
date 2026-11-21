@@ -1,3 +1,4 @@
+import { useAvailablePage } from "../../hooks/useAvailablePage";
 import { useState } from "react";
 import { Button, Progress, Select, Table } from "@arco-design/web-react";
 import { IconPlus, IconUserGroup } from "@arco-design/web-react/icon";
@@ -27,6 +28,7 @@ export function RegulatorHome() {
     community ? "jurisdictionStats" : "jurisdictionSummary",
     { ...(community ? { field: "id", value: community } : {}), size: 1 },
   );
+  useAvailablePage(stats.data, setPage);
   const row = summary.data?.rows[0];
   const inspections = useRows("inspections", { status: "REVIEW", size: 3 });
   const events = useRows("pendingEvents", { ...filter, size: 2 });

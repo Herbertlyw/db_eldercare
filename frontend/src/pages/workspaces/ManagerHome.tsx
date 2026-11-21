@@ -1,3 +1,4 @@
+import { useAvailablePage } from "../../hooks/useAvailablePage";
 import { useState } from "react";
 import { Button, DatePicker, Space, Table, Tag } from "@arco-design/web-react";
 import { IconCalendar } from "@arco-design/web-react/icon";
@@ -30,6 +31,7 @@ export function ManagerHome() {
     recruitment = useRows("recruitments", { status: "APPLIED", size: 2 }),
     trainings = useRows("trainings", { size: 2 }),
     reports = useRows("organizationReports", { size: 2 });
+  useAvailablePage(shifts.data, setPage);
   return (
     <>
       <HomeHeader title="机构工作台" subtitle={h.profile?.organization_name}>
