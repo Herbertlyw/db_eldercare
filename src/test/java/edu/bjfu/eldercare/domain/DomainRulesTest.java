@@ -94,6 +94,13 @@ class DomainRulesTest {
                                 claim.review(SubsidyClaim.ReviewStage.REGULATOR, true)));
         check(status == SubsidyClaim.Status.APPROVED, claim::requirePayable);
         check(status == SubsidyClaim.Status.REJECTED, claim::requireResubmittable);
+        check(
+                Set.of(
+                                SubsidyClaim.Status.DRAFT,
+                                SubsidyClaim.Status.SUBMITTED,
+                                SubsidyClaim.Status.REJECTED)
+                        .contains(status),
+                claim::requireEvidenceAllowed);
     }
 
     @Test

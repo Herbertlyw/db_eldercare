@@ -70,8 +70,7 @@ public class SubsidyService implements ActionModule {
     private Object reviewClaim(Auth.User user, Map<String, Object> input) {
         Auth.role(user, "STREET", "REGULATOR");
         long recordId = rawNumber(input, "claimId");
-        var claim = repository.findClaimForUpdate(recordId);
-        scope.claim(user, recordId);
+        var claim = authorizedClaimForUpdate(user, recordId);
         boolean approve = rawFlag(input, "approve");
         var next = claimState(claim).review(SubsidyClaim.ReviewStage.valueOf(user.role()), approve);
         repository.appendReview(
@@ -86,8 +85,7 @@ public class SubsidyService implements ActionModule {
     private Object payClaim(Auth.User user, Map<String, Object> input) {
         Auth.role(user, "REGULATOR");
         long recordId = rawNumber(input, "claimId");
-        var claim = repository.findClaimForUpdate(recordId);
-        scope.claim(user, recordId);
+        var claim = authorizedClaimForUpdate(user, recordId);
         claimState(claim).requirePayable();
         repository.insertPayment(
                 recordId, rawText(input, "reference"), (Number) claim.get("amount"));
@@ -101,7 +99,7 @@ public class SubsidyService implements ActionModule {
     private Object addClaimEvidence(Auth.User user, Map<String, Object> input) {
         Auth.role(user, "ADMIN");
         long recordId = number(input, "claimId");
-        scope.claim(user, recordId);
+        claimState(authorizedClaimForUpdate(user, recordId)).requireEvidenceAllowed();
         String content = text(input, "content");
         return repository.insertEvidence(
                 recordId, user.id(), text(input, "name"), content, content);
@@ -110,12 +108,9 @@ public class SubsidyService implements ActionModule {
     private Object resubmitClaim(Auth.User user, Map<String, Object> input) {
         Auth.role(user, "ADMIN");
         long recordId = number(input, "claimId");
-        Map<String, Object> record = scope.claim(user, recordId);
-        repository.lockClaim(recordId);
-        claimState(record).requireResubmittable();
-        addClaimEvidence(
-                user,
-                Map.of("claimId", recordId, "name", "重新提交说明", "content", text(input, "reason")));
+        claimState(authorizedClaimForUpdate(user, recordId)).requireResubmittable();
+        String reason = text(input, "reason");
+        repository.insertEvidence(recordId, user.id(), "重新提交说明", reason, reason);
         return repository.markSubmitted(recordId);
     }
 
@@ -143,6 +138,12 @@ public class SubsidyService implements ActionModule {
             repository.addPolicyArea(policyId, c);
         }
         return policyId;
+    }
+
+    private Map<String, Object> authorizedClaimForUpdate(Auth.User user, long recordId) {
+        var claim = repository.findClaimForUpdate(recordId);
+        scope.claim(user, recordId);
+        return claim;
     }
 
     private SubsidyClaim claimState(Map<String, Object> row) {

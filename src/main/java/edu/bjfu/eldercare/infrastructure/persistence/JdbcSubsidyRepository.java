@@ -70,11 +70,6 @@ public class JdbcSubsidyRepository implements SubsidyRepository {
     }
 
     @Override
-    public Map<String, Object> lockClaim(Number claimId) {
-        return db.one("SELECT id FROM claim WHERE id=? FOR UPDATE", claimId);
-    }
-
-    @Override
     public int markSubmitted(Number claimId) {
         return db.update("UPDATE claim SET status='SUBMITTED' WHERE id=?", claimId);
     }
