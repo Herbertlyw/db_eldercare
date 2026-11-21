@@ -10,9 +10,16 @@ BEGIN
 END$$
 CREATE TRIGGER plan_before_insert BEFORE INSERT ON care_plan FOR EACH ROW BEGIN IF NEW.status='ACTIVE' THEN CALL assert_plan((SELECT elder_id FROM assessment WHERE id=NEW.assessment_id),NEW.assessment_id,NEW.bundle_id,NEW.starts_at,NEW.ends_at,0); END IF; END$$
 CREATE TRIGGER plan_before_update BEFORE UPDATE ON care_plan FOR EACH ROW BEGIN IF NEW.status='ACTIVE' THEN CALL assert_plan((SELECT elder_id FROM assessment WHERE id=NEW.assessment_id),NEW.assessment_id,NEW.bundle_id,NEW.starts_at,NEW.ends_at,NEW.id); END IF; END$$
+CREATE PROCEDURE expire_community_plans(IN p_community BIGINT)
+BEGIN
+ UPDATE care_plan p JOIN assessment a ON a.id=p.assessment_id JOIN elder e ON e.id=a.elder_id
+ SET p.status=CASE WHEN a.valid_until<=NOW() THEN 'PAUSED' WHEN p.ends_at<=NOW() THEN 'EXPIRED' ELSE 'PAUSED' END
+ WHERE p.status='ACTIVE' AND (p_community IS NULL OR e.community_id=p_community)
+ AND (a.valid_until<=NOW() OR p.ends_at<=NOW() OR EXISTS(SELECT 1 FROM assessment newer WHERE newer.elder_id=a.elder_id AND newer.assessed_at<=NOW() AND (newer.assessed_at>a.assessed_at OR (newer.assessed_at=a.assessed_at AND newer.id>a.id))));
+END$$
 CREATE PROCEDURE expire_plans()
 BEGIN
- UPDATE care_plan p JOIN assessment a ON a.id=p.assessment_id SET p.status=CASE WHEN a.valid_until<=NOW() THEN 'PAUSED' WHEN p.ends_at<=NOW() THEN 'EXPIRED' ELSE 'PAUSED' END WHERE p.status='ACTIVE' AND (a.valid_until<=NOW() OR p.ends_at<=NOW() OR EXISTS(SELECT 1 FROM assessment newer WHERE newer.elder_id=a.elder_id AND newer.assessed_at<=NOW() AND (newer.assessed_at>a.assessed_at OR (newer.assessed_at=a.assessed_at AND newer.id>a.id))));
+ CALL expire_community_plans(NULL);
 END$$
 CREATE PROCEDURE assert_shift(IN p_worker BIGINT,IN p_start DATETIME,IN p_end DATETIME,IN p_id BIGINT)
 BEGIN
@@ -88,19 +95,28 @@ BEGIN
  INSERT INTO emergency(elder_id,vital_id,source,deadline,status) SELECT b.elder_id,NEW.id,'DEVICE',DATE_ADD(NOW(),INTERVAL m.response_seconds SECOND),'UNCONFIRMED' FROM device_binding b JOIN metric_rule m ON m.id=NEW.metric_rule_id WHERE b.id=NEW.binding_id;
  END IF;
 END$$
-CREATE PROCEDURE escalate_events()
+CREATE PROCEDURE escalate_community_events(IN p_community BIGINT)
 BEGIN
- INSERT IGNORE INTO emergency_log(event_id,level,message) SELECT id,level+1,'响应超时，升级并通知值班主管' FROM emergency WHERE status IN('OPEN','UNCONFIRMED') AND deadline<=NOW() AND level<3;
- UPDATE emergency SET level=level+1,deadline=DATE_ADD(NOW(),INTERVAL IF(level=2,180,60) SECOND) WHERE status IN('OPEN','UNCONFIRMED') AND deadline<=NOW() AND level<3;
+ INSERT IGNORE INTO emergency_log(event_id,level,message)
+ SELECT e.id,e.level+1,'响应超时，升级并通知值班主管' FROM emergency e JOIN elder x ON x.id=e.elder_id
+ WHERE e.status IN('OPEN','UNCONFIRMED') AND e.deadline<=NOW() AND e.level<3
+ AND (p_community IS NULL OR x.community_id=p_community);
+ UPDATE emergency SET deadline=DATE_ADD(NOW(),INTERVAL IF(level=1,180,60) SECOND),level=level+1
+ WHERE status IN('OPEN','UNCONFIRMED') AND deadline<=NOW() AND level<3
+ AND (p_community IS NULL OR EXISTS(SELECT 1 FROM elder x WHERE x.id=emergency.elder_id AND x.community_id=p_community));
  INSERT IGNORE INTO notification(event_id,account_id,message)
  SELECT e.id,a.id,CONCAT('应急事件待处理，级别 ',e.level)
  FROM emergency e JOIN elder x ON x.id=e.elder_id JOIN account a ON a.active=1
- WHERE e.status IN('OPEN','UNCONFIRMED') AND (
+ WHERE e.status IN('OPEN','UNCONFIRMED') AND (p_community IS NULL OR x.community_id=p_community) AND (
   (a.community_id=x.community_id AND (a.role='ADMIN' OR (a.role='REGULATOR' AND e.level>=2)))
   OR EXISTS(SELECT 1 FROM guardian g WHERE g.elder_id=e.elder_id AND g.account_id=a.id AND g.active=1)
   OR EXISTS(SELECT 1 FROM v_plan_context p JOIN caregiver c ON c.id=p.caregiver_id WHERE p.elder_id=e.elder_id AND p.status='ACTIVE' AND p.starts_at<=NOW() AND p.ends_at>NOW() AND c.account_id=a.id AND c.status='ACTIVE')
   OR EXISTS(SELECT 1 FROM service_order o JOIN v_dispatch_context d ON d.order_id=o.id JOIN caregiver c ON c.id=d.caregiver_id WHERE o.elder_id=e.elder_id AND d.status IN('WAITING','ACCEPTED') AND c.account_id=a.id AND c.status='ACTIVE')
  );
+END$$
+CREATE PROCEDURE escalate_events()
+BEGIN
+ CALL escalate_community_events(NULL);
 END$$
 CREATE PROCEDURE submit_claim(IN p_elder BIGINT,IN p_policy BIGINT,IN p_period VARCHAR(10),IN p_orders JSON)
 BEGIN

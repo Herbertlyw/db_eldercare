@@ -117,13 +117,13 @@ public class JdbcMonitoringRepository implements MonitoringRepository {
     }
 
     @Override
-    public void expirePlans() {
-        db.call("expire_plans");
+    public void expirePlans(long communityId) {
+        db.call("expire_community_plans", communityId);
     }
 
     @Override
-    public void escalateEvents() {
-        db.call("escalate_events");
+    public void escalateEvents(long communityId) {
+        db.call("escalate_community_events", communityId);
     }
 
     @Override
@@ -172,8 +172,8 @@ public class JdbcMonitoringRepository implements MonitoringRepository {
     public List<Map<String, Object>> findSimulationBindings(Number communityId) {
         return db.rows(
                 "SELECT b.id FROM device_binding b JOIN device d ON d.id=b.device_id JOIN elder e"
-                        + " ON e.id=b.elder_id WHERE d.status='ACTIVE' AND e.community_id=? AND"
-                        + " b.unbound_at IS NULL",
+                        + " ON e.id=b.elder_id WHERE d.status='ACTIVE' AND e.status='ACTIVE' AND"
+                        + " e.community_id=? AND b.unbound_at IS NULL",
                 communityId);
     }
 

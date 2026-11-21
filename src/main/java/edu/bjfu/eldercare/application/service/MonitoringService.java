@@ -147,8 +147,8 @@ public class MonitoringService implements ActionModule {
 
     private Object runMaintenance(Auth.User user, Map<String, Object> input) {
         Auth.role(user, "ADMIN");
-        repository.expirePlans();
-        repository.escalateEvents();
+        repository.expirePlans(user.community());
+        repository.escalateEvents(user.community());
         return "到期及超时检查完成";
     }
 
