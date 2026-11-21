@@ -48,6 +48,8 @@ export function pageHint(recordKind: string, role: string) {
 export function displayValue(key: string, value: any, kind = ""): string {
   if (value == null) return "—";
   if (key === "kind" && value === "REVIEW") return "服务评价";
+  if (key === "stage" && value === "STREET") return "街道初审";
+  if (key === "stage" && value === "REGULATOR") return "民政终审";
   if (key === "method")
     return value === "VISIT"
       ? "上门抽查"
