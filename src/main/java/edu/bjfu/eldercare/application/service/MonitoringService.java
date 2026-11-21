@@ -259,7 +259,7 @@ public class MonitoringService implements ActionModule {
 
     private Map<String, Object> event(Auth.User user, long event) {
         var e = repository.findEmergencyForUpdate(event);
-        scope.elder(user, id(e, "elder_id"));
+        scope.event(user, e);
         return e;
     }
 

@@ -10,6 +10,8 @@ public interface QueryScope extends Scope {
 
     String elderFilter(Auth.User u, List<Object> p);
 
+    String eventFilter(Auth.User user, List<Object> parameters);
+
     String claimFilter(Auth.User user, List<Object> parameters);
 
     String organizationFilter(Auth.User user, List<Object> parameters, String column);
