@@ -115,7 +115,10 @@ public class WorkforceService implements ActionModule {
         if (id(sh, "used_count") != 0) {
             throw new Rule("已被使用的班次不能删除");
         }
-        return repository.deleteFutureShift(recordId);
+        if (repository.deleteFutureShift(recordId) == 0) {
+            throw new Rule("班次已经开始，不能删除");
+        }
+        return 1;
     }
 
     private Object reviewHours(Auth.User user, Map<String, Object> input) {
