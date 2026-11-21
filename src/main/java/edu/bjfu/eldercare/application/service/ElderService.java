@@ -148,7 +148,7 @@ public class ElderService implements ActionModule {
     private Object setElderTags(Auth.User user, Map<String, Object> input) {
         Auth.role(user, "ADMIN");
         long recordId = number(input, "elderId");
-        scope.elder(user, recordId);
+        access.elder(user, recordId);
         String tag = choice(input, "tag", "ALONE", "DISABLED", "LOW_INCOME");
         return flag(input, "enabled")
                 ? repository.addTag(recordId, tag)
@@ -158,8 +158,7 @@ public class ElderService implements ActionModule {
     private Object updateGuardian(Auth.User user, Map<String, Object> input) {
         Auth.role(user, "ADMIN");
         long recordId = number(input, "guardianId");
-        Map<String, Object> record = repository.findGuardianForUpdate(recordId);
-        scope.elder(user, id(record, "elder_id"));
+        access.elder(user, repository.guardianElderId(recordId));
         return repository.updateGuardian(
                 text(input, "relation"),
                 crypto.encrypt(text(input, "phone")),
@@ -174,9 +173,10 @@ public class ElderService implements ActionModule {
     private Object changePlanState(Auth.User user, Map<String, Object> input) {
         Auth.role(user, "ADMIN");
         long recordId = number(input, "planId");
+        long elder = repository.planElderId(recordId);
+        access.elder(user, elder);
         Map<String, Object> record = repository.findPlanForUpdate(recordId);
-        scope.elder(user, id(record, "elder_id"));
-        noPendingOrders(id(record, "elder_id"));
+        noPendingOrders(elder);
         String state = choice(input, "status", "ACTIVE", "PAUSED", "ENDED");
         String reason = text(input, "reason");
         new CarePlan(recordId, CarePlan.Status.valueOf((String) record.get("status")))
@@ -229,8 +229,7 @@ public class ElderService implements ActionModule {
     private Object plan(Auth.User user, Map<String, Object> input, boolean revise) {
         Auth.role(user, "ADMIN");
         long elder = number(input, "elderId");
-        scope.elder(user, elder);
-        repository.lockElder(elder);
+        access.elder(user, elder);
         scope.worker(user, number(input, "caregiverId"));
         if (repository.countAssessmentsForElder(number(input, "assessmentId"), elder) != 1) {
             throw new Rule("评估不属于此老人");
@@ -276,13 +275,15 @@ public class ElderService implements ActionModule {
     private Object saveAddress(Auth.User user, Map<String, Object> input, boolean transfer) {
         Auth.role(user, "ADMIN");
         long recordId = number(input, "elderId");
-        scope.elder(user, recordId);
-        repository.lockElder(recordId);
-        noPendingOrders(recordId);
+        access.elder(user, recordId);
         long community = transfer ? number(input, "communityId") : user.community();
+        if (transfer && community == user.community()) {
+            throw new Rule("目标社区与当前社区相同，请使用“更新老人住址”");
+        }
+        noPendingOrders(recordId);
         BigDecimal px = decimal(input, "x"), py = decimal(input, "y");
         coordinates(community, px, py);
-        if (community != user.community() && repository.countActiveDeviceBindings(recordId) > 0) {
+        if (transfer && repository.countActiveDeviceBindings(recordId) > 0) {
             throw new Rule("请先在设备管理中解绑原社区设备，再迁移老人档案");
         }
         if (transfer) {
