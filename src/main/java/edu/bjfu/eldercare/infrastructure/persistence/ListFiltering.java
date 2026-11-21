@@ -109,13 +109,17 @@ public class ListFiltering {
                         + (conditions.isEmpty()
                                 ? ""
                                 : " WHERE " + String.join(" AND ", conditions));
+        var rowMapper = source.rowMapper();
+        if (columns.contains("overlap_ends_at")) {
+            rowMapper =
+                    row -> {
+                        row.remove("overlap_ends_at");
+                        return source.rowMapper().apply(row);
+                    };
+        }
         return new Prepared(
                 new PageQuery(
-                        sql,
-                        parameters,
-                        source.rowMapper(),
-                        source.orderBy(),
-                        source.summaryColumns()),
+                        sql, parameters, rowMapper, source.orderBy(), source.summaryColumns()),
                 date,
                 states);
     }
